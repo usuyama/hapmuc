@@ -50,7 +50,7 @@ namespace MutationCall
         typedef map<int, AlignedVariant>::const_iterator It;
         std::ofstream ofs(fname.c_str(), std::ios::out | std::ios::app);
         ofs << "-------- window[" << leftPos << "-" << rightPos <<"] ---------------" << endl;
-        ofs << "#tumor " << endl;
+        ofs << "#tumor " << lb.lower_bound << endl;
         for (size_t th=0;th<tumorHapFreqs.size();th++) {
             const Haplotype & hap=haps[th];
             ofs << "hap[" << th << "] ";

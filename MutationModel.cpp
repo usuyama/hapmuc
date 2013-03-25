@@ -262,7 +262,7 @@ namespace MutationModel {
         size_t nrn=normal_reads.size();
         
         vector<double> rlt(nh*nrt,0.0); // read given haplotype likelihoods
-        vector<double> rln(nh*nrt,0.0); // read given haplotype likelihoods
+        vector<double> rln(nh*nrn,0.0); // read given haplotype likelihoods
         vector<double> zt(nh*nrt,0.0); // expectations of read-haplotype indicator variables
         vector<double> zn(nh*nrn,0.0); // expectations of read-haplotype indicator variables
         vector<double> pit(nh); // haplotype frequencies
@@ -394,7 +394,7 @@ namespace MutationModel {
         }
         
         cout << "==================results====================" << endl;
-        cout << "[" << "] " << lb.lower_bound;
+        cout << "lb= " << lb.lower_bound << endl;
         
         for (size_t th=0;th<nh;th++) {
             const Haplotype & hap=haps[th];

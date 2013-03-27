@@ -134,7 +134,7 @@ namespace MutationModel {
         log_rho_n[1] = l_e_pin[1] + l_e_ep[1];
         log_rho_n[2] = l_e_pin[0] + l_e_ep[0];
         log_rho_n[3] = l_e_pin[1] + l_e_ep[0];
-        for(int i=0;i<nrt;i++) {
+        for(int i=0;i<nrn;i++) {
             for(int k=0;k<4;k++) e_log_p_Zn += zn[i*4+k] * log_rho_n[k];
         }
         double e_log_p_pit=cal_e_log_dir(l_e_pit, params.a0);
@@ -147,7 +147,10 @@ namespace MutationModel {
         double e_log_q_pit=cal_e_log_dir(l_e_pit, ahat);
         double e_log_q_pin=cal_e_log_dir(l_e_pin, chat);
         double e_log_q_ep=cal_e_log_dir(l_e_ep, bhat);
-        lb.lower_bound = e_log_p_Xt + e_log_p_Xn + e_log_p_Zt + e_log_p_Zn + e_log_p_pin + e_log_p_pit + e_log_p_ep - e_log_q_Zt - e_log_q_Zn - e_log_q_pit - e_log_q_pin - e_log_q_ep;
+        cout << "lb: ";
+        cout << e_log_p_Xt<< " " <<e_log_p_Xn<< " " <<e_log_p_Zt<< " " <<e_log_p_Zn<< " " <<e_log_p_pit<< " " <<e_log_p_pin << " " << e_log_p_ep << endl;
+        cout  <<e_log_q_Zt<< " " <<e_log_q_Zn<< " " <<e_log_q_pit<< " " <<e_log_q_pin<< " " <<e_log_q_ep << endl;
+        lb.lower_bound = e_log_p_Xt + e_log_p_Xn + e_log_p_Zt + e_log_p_Zn + e_log_p_pin +e_log_p_pit + e_log_p_ep - e_log_q_Zt - e_log_q_Zn - e_log_q_pit - e_log_q_pin - e_log_q_ep;
     }
     
     template <class X> void print_vec(vector<X> vec) {
@@ -162,13 +165,19 @@ namespace MutationModel {
         if(print_z) {
             cout << "###zt###" << endl;
             for (int r=0;r<nrt;r++) {
-                cout << tumor_reads[r].seq_name << " zt[" << r << "]:";
+#ifndef MMTEST
+                cout << tumor_reads[r].seq_name;
+#endif
+                cout << " zt[" << r << "]:";
                 for (int h=0;h<nh;h++) cout << " " << zt[r*nh+h];
                 cout << endl;
             }
             cout << "###zn###" << endl;
             for (int r=0;r<nrn;r++) {
-                cout << normal_reads[r].seq_name << " zn[" << r << "]:";
+#ifndef MMTEST
+                cout << normal_reads[r].seq_name;
+#endif
+                cout << " zn[" << r << "]:";
                 for (int h=0;h<nh;h++) cout << " " << zn[r*nh+h];
                 cout << endl;
             }
@@ -205,7 +214,7 @@ namespace MutationModel {
         return newVec;
     }
     
-     vector<double> make_newrho(vector<double> &rl, vector<double> &l_e_pi, vector<double> &l_e_ep, int b) {
+     vector<double> make_newrho(const vector<double> &rl, vector<double> &l_e_pi, vector<double> &l_e_ep, int b) {
          vector<double> new_rho(4, 0.0);
          if (l_e_pi.size()==3) {
              new_rho[0] = rl[b+0] + l_e_pi[0];
@@ -244,7 +253,7 @@ namespace MutationModel {
         }
     }
     
-    void estimate(const vector<Haplotype> & haps, const vector<Read> & tumor_reads, const vector<Read> & normal_reads, const vector<vector<MLAlignment> > & tumor_liks, const vector<vector<MLAlignment> > & normal_liks, vector<double> & tumorHapFreqs, vector<double> & normalHapFreqs, vector <HapEstResult > & tumorPosteriors, vector <HapEstResult > & normalPosteriors, uint32_t candPos, uint32_t leftPos,   uint32_t rightPos, OutputData & glfData, int index, const AlignedCandidates & candidateVariants, lower_bound_t & best_lower_bound, map<AlignedVariant, double> & tumorVariantPosteriors, 
+    void estimate(const vector<Haplotype> & haps, const vector<Read> & tumor_reads, const vector<Read> & normal_reads, const vector<double> & rlt, const vector<double> & rln, vector<double> & tumorHapFreqs, vector<double> & normalHapFreqs, vector <HapEstResult > & tumorPosteriors, vector <HapEstResult > & normalPosteriors, uint32_t candPos, uint32_t leftPos,   uint32_t rightPos, int index, const AlignedCandidates & candidateVariants, lower_bound_t & best_lower_bound, map<AlignedVariant, double> & tumorVariantPosteriors, 
                   map<AlignedVariant, double> & normalVariantPosteriors, Parameters params, string est_type)
     {
         //est_type=mutation or non-mutation
@@ -255,29 +264,20 @@ namespace MutationModel {
         cout << endl;
         normalHapFreqs.clear();
         tumorHapFreqs.clear();
+#ifndef MMTEST
         if(haps.size() != 4) { cout << "error: only for 4 haps" << endl; return; }
-        vector<lower_bound_t> lower_bounds;
+#endif
         size_t nh=4;
-        size_t nrt=tumor_reads.size();
-        size_t nrn=normal_reads.size();
+        size_t nrt=rlt.size()/4;
+        size_t nrn=rln.size()/4;
         
-        vector<double> rlt(nh*nrt,0.0); // read given haplotype likelihoods
-        vector<double> rln(nh*nrn,0.0); // read given haplotype likelihoods
         vector<double> zt(nh*nrt,0.0); // expectations of read-haplotype indicator variables
         vector<double> zn(nh*nrn,0.0); // expectations of read-haplotype indicator variables
-        vector<double> pit(nh); // haplotype frequencies
-        vector<double> pin(nh); // haplotype frequencies
         vector<double> nkt(nh, 0.0), nkn(nh, 0.0);
         
         normalHapFreqs=nkn;tumorHapFreqs=nkt; 
-        int idx=0;
-        for (size_t r=0;r<nrt;r++) {
-            for (size_t h=0;h<nh;h++) { rlt[idx]= tumor_liks[h][r].ll;idx++; }
-        }
-        idx=0;
-        for (size_t r=0;r<nrn;r++) {
-            for (size_t h=0;h<nh;h++) { rln[idx]= normal_liks[h][r].ll;idx++; }
-        }
+       
+#ifndef MMTEST
         // filter reads
         std::set< PAV > allVariants;
         map<int, std::set<PAV> > allVariantsByPos; 
@@ -302,7 +302,7 @@ namespace MutationModel {
             }
             cout << endl;
         }
-        
+
         cout << "#log haplotype and read likelihood" << endl;
         cout << "##tumor" << endl;
         for (size_t r=0;r<nrt;r++) {
@@ -316,9 +316,9 @@ namespace MutationModel {
             for (size_t h=0;h<nh;h++) cout << " " << rln[r*nh+h];
             cout << endl;
         }
-        
+
         // create matrix of which variant is active in which set
-        idx=0;
+        int idx=0;
         int nv=int(allVariants.size());
         vector<int> hapHasVar(nh*nv,0);
         
@@ -335,11 +335,11 @@ namespace MutationModel {
             cout << " [" << pav.first << " " << pav.second.getString() << "]";
         }
         cout << endl;
-        
+#endif
         // check haplotypes
         // run EM for this set of active variants
         bool converged=false;
-        double tol=params.EMtol;double eOld=-HUGE_VAL, eNew;
+        double tol=0.000001;double eOld=-HUGE_VAL, eNew;
         // initialize frequencies
         vector<double> ahat;
         if (est_type=="mutation") {
@@ -349,7 +349,10 @@ namespace MutationModel {
         }
         vector<double> bhat(params.b0);
         vector<double> chat(params.c0);
-  
+        cout << "init:" << endl;
+        cout << "ahat:";print_vec(ahat);
+        cout << endl << "bhat:";print_vec(bhat);
+        cout << endl << "chat:";print_vec(chat);
         double llNew, llOld=-HUGE_VAL;
         int iter=0;
         lower_bound_t lb;
@@ -373,6 +376,7 @@ namespace MutationModel {
             llNew=lb.lower_bound;
             converged=(fabs(llOld-llNew))<tol || iter > 500;
             cout << "### iter: " << iter << " llOld: " << llOld << " llNew: " << llNew << endl;            
+
             print_posteriors(rlt, rln, ahat, bhat, chat, zt, zn, lb, params);
             print_params(tumor_reads, normal_reads, rlt, rln, ahat, bhat, chat, zt, zn, lb, params);
             cout << endl;
@@ -395,7 +399,7 @@ namespace MutationModel {
         
         cout << "==================results====================" << endl;
         cout << "lb= " << lb.lower_bound << endl;
-        
+#ifndef MMTEST    
         for (size_t th=0;th<nh;th++) {
             const Haplotype & hap=haps[th];
             cout << "hap[" << th << "] " << hap.seq << endl;
@@ -404,7 +408,7 @@ namespace MutationModel {
         }
         
         cout << endl;
-        
+
         // compute marginal posteriors for the individual variants
         idx=-1;
         cout << "push posteriors" << endl;
@@ -426,6 +430,7 @@ namespace MutationModel {
                 normalPosteriors.push_back(HapEstResult(pav.second, pav.first, -1.0, normal_freq, totnf, totnr, av->info, nkn[0], nkn[1], nkn[2], nkn[3]));
             }
         }
+#endif
         best_lower_bound = lb;
     }
 }

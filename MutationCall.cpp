@@ -182,15 +182,27 @@ namespace MutationCall
         double hap2_bf = calc_hap2_bf(filteredNormalReads, filteredTumorReads, filteredMergedReads, pos, leftPos, rightPos, candidateVariants, glfData, params, refSeq, refSeqForAlign, 1.0, 1.0, 1.0);
         if(haps.size()==4) {
             cout << "************ hap4 **************" << endl << "haps: " << haps.size() <<  endl;
-            MutationModel::estimate(haps, filteredTumorReads, filteredNormalReads, tumor_liks, normal_liks, tumorHapFreqs, normalHapFreqs, tumor_her, normal_her, pos, leftPos, rightPos, glfData, index, candidateVariants, mm_lb, tumor_vpp, normal_vpp, params, "mutation");
+            int nrt = filteredTumorReads.size(), nrn=filteredNormalReads.size();
+            vector<double> rlt(nrt*4), rln(nrn*4);
+            int idx=0;
+            for (size_t r=0;r<nrt;r++) {
+                for (size_t h=0;h<4;h++) { rlt[idx]= tumor_liks[h][r].ll;idx++; }
+            }
+            idx=0;
+            for (size_t r=0;r<nrn;r++) {
+                for (size_t h=0;h<4;h++) { rln[idx]= normal_liks[h][r].ll;idx++; }
+            }
+            MutationModel::estimate(haps, filteredTumorReads, filteredNormalReads, rlt, rln, tumorHapFreqs, normalHapFreqs, tumor_her, normal_her, pos, leftPos, rightPos, index, candidateVariants, mm_lb, tumor_vpp, normal_vpp, params, "mutation");
             output_mm(haps, (params.fileName+".mm.txt"), leftPos, rightPos, 0.0, mm_lb, normalHapFreqs, tumorHapFreqs);
-            MutationModel::estimate(haps, filteredTumorReads, filteredNormalReads, tumor_liks, normal_liks, non_tumorHapFreqs, non_normalHapFreqs, non_tumor_her, non_normal_her, pos, leftPos, rightPos, glfData, index, candidateVariants, nmm_lb, non_tumor_vpp, non_normal_vpp, params, "non-mutation");
+            MutationModel::estimate(haps, filteredTumorReads, filteredNormalReads, rlt, rln, non_tumorHapFreqs, non_normalHapFreqs, non_tumor_her, non_normal_her, pos, leftPos, rightPos, index, candidateVariants, nmm_lb, non_tumor_vpp, non_normal_vpp, params, "non-mutation");
             output_mm(haps, (params.fileName+".non-mm.txt"), leftPos, rightPos, 0.0, nmm_lb, non_normalHapFreqs, non_tumorHapFreqs);
-            bf2=mm_lb.lower_bound - nmm_lb.lower_bound;
+            bf2= mm_lb.lower_bound - nmm_lb.lower_bound;
         }
         cout <<  "centerPos=" << candidateVariants.centerPos << endl;
         candidateVariants.printAll();
+        cout.flush();
         for(int i=0;i<tumor_her.size();i++) {
+            cout << i;
             HapEstResult &n_result = normal_her[i];
             HapEstResult &t_result = tumor_her[i];
             string chr = params.tid;

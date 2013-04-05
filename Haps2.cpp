@@ -214,6 +214,7 @@ namespace Haps2 {
     
     bool getHaplotypes(vector<Haplotype> &haps, const vector<Read> & normal_reads, const vector<Read> & tumor_reads, uint32_t pos, uint32_t & leftPos, uint32_t & rightPos, const AlignedCandidates & candidateVariants, Parameters params, string refSeq, string refSeqForAlign, vector<AlignedVariant> & close_somatic, vector<AlignedVariant>& close_germline, vector<vector<MLAlignment> > & normal_liks, vector<vector<MLAlignment> > & tumor_liks, OutputData & glfData, int index)
     {
+        cout << "Haps2::getHaplotypes" << endl;
         typedef pair<int, AlignedVariant> PAV;
         cout << "== target variant ==" << endl;
         BOOST_FOREACH(AlignedVariant v, candidateVariants.variants) {
@@ -391,19 +392,23 @@ namespace Haps2 {
                 swap(tumor_liks[0], tumor_liks[1]);
                 cout << "tumor hap order change!" << endl;
             }
-            //h4の追加
-            int h4_i = 0;
-            for(int i=0;i < 4;i++) {
-                if(used_hap[i] == 0) {
-                    h4_i = i;
-                    break;
+            if(merged_haps.size()>3) {
+                //h4の追加
+                int h4_i = 0;
+                for(int i=0;i < 4;i++) {
+                    if(used_hap[i] == 0) {
+                        h4_i = i;
+                        break;
+                    }
                 }
+                cout << merged_haps.size() << " " << haps.size() << endl;
+                cout << "h4:" << h4_i << endl;
+                haps.push_back(merged_haps[h4_i]);
+                //tumor_liks.push_back(tmp_liks[h4_i]);
             }
-            cout << "h4:" << h4_i << endl;
-            haps.push_back(merged_haps[h4_i]);
-            //tumor_liks.push_back(tmp_liks[h4_i]);
         }
         cout << "tumor hap decided" << endl;
+        cout.flush();
         Haps::computeLikelihoods(haps, normal_reads, normal_liks, leftPos, rightPos, onHap, params);
         Haps::computeLikelihoods(haps, tumor_reads, tumor_liks, leftPos, rightPos, onHap, params);
         cout << "end Haps2" << endl;

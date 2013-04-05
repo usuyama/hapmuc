@@ -167,6 +167,7 @@ namespace MutationCall
         map <int, vector<tuple<AlignedVariant, double, double> > > posteriors, non_posteriors;
         vector<HapEstResult> normal_her, non_normal_her;
         vector<HapEstResult> tumor_her, non_tumor_her;
+        vector<HapEstResult> tumor_her_hap2, normal_her_hap2, merged_her_hap2;
         
         lower_bound_t mm_lb, nmm_lb;
         map<AlignedVariant, double> normal_vpp, non_normal_vpp;
@@ -179,28 +180,32 @@ namespace MutationCall
         cout << "(normal):" << filteredNormalReads.size() << " " << normal_liks[0].size() << endl;
         cout << "(tumor):" << filteredTumorReads.size() << " " << tumor_liks[0].size() << endl;
         double bf2;
-        double hap2_bf = calc_hap2_bf(filteredNormalReads, filteredTumorReads, filteredMergedReads, pos, leftPos, rightPos, candidateVariants, glfData, params, refSeq, refSeqForAlign, 1.0, 1.0, 1.0);
+        double hap2_bf = calc_bf(haps, normal_liks, tumor_liks, filteredNormalReads, filteredTumorReads, filteredMergedReads, pos, leftPos, rightPos, candidateVariants, glfData, params, refSeq, refSeqForAlign, 1.0, 1.0, 1.0, normal_her_hap2, tumor_her_hap2, merged_her_hap2);
         if(haps.size()==4) {
             cout << "************ hap4 **************" << endl << "haps: " << haps.size() <<  endl;
             int nrt = filteredTumorReads.size(), nrn=filteredNormalReads.size();
             vector<double> rlt(nrt*4), rln(nrn*4);
             int idx=0;
             for (size_t r=0;r<nrt;r++) {
-                for (size_t h=0;h<4;h++) { rlt[idx]= tumor_liks[h][r].ll;idx++; }
+                for (size_t h=0;h<4;h++) { rlt[idx] = tumor_liks[h][r].ll;idx++; }
             }
             idx=0;
             for (size_t r=0;r<nrn;r++) {
-                for (size_t h=0;h<4;h++) { rln[idx]= normal_liks[h][r].ll;idx++; }
+                for (size_t h=0;h<4;h++) { rln[idx] = normal_liks[h][r].ll;idx++; }
             }
             MutationModel::estimate(haps, filteredTumorReads, filteredNormalReads, rlt, rln, tumorHapFreqs, normalHapFreqs, tumor_her, normal_her, pos, leftPos, rightPos, index, candidateVariants, mm_lb, tumor_vpp, normal_vpp, params, "mutation");
             output_mm(haps, (params.fileName+".mm.txt"), leftPos, rightPos, 0.0, mm_lb, normalHapFreqs, tumorHapFreqs);
             MutationModel::estimate(haps, filteredTumorReads, filteredNormalReads, rlt, rln, non_tumorHapFreqs, non_normalHapFreqs, non_tumor_her, non_normal_her, pos, leftPos, rightPos, index, candidateVariants, nmm_lb, non_tumor_vpp, non_normal_vpp, params, "non-mutation");
             output_mm(haps, (params.fileName+".non-mm.txt"), leftPos, rightPos, 0.0, nmm_lb, non_normalHapFreqs, non_tumorHapFreqs);
-            bf2= mm_lb.lower_bound - nmm_lb.lower_bound;
+            bf2 = mm_lb.lower_bound - nmm_lb.lower_bound;
         }
         cout <<  "centerPos=" << candidateVariants.centerPos << endl;
         candidateVariants.printAll();
         cout.flush();
+        if(tumor_her.empty()) {            
+            tumor_her.swap(tumor_her_hap2);
+            normal_her.swap(normal_her_hap2);
+        }
         for(int i=0;i<tumor_her.size();i++) {
             cout << i;
             HapEstResult &n_result = normal_her[i];
@@ -242,9 +247,36 @@ namespace MutationCall
         }
     }
     
+    double calc_bf(const vector<Haplotype> &haps, const vector<vector<MLAlignment> > &normal_liks, const vector<vector<MLAlignment> > tumor_liks, const vector<Read> & normalReads, const vector<Read> & tumorReads, const vector<Read> & mergedReads, uint32_t pos, uint32_t leftPos, uint32_t rightPos, const AlignedCandidates & candidateVariants, OutputData & glfData, Parameters params, string refSeq, string refSeqForAlign, double a0, double b0, double free_a0, vector<HapEstResult> &normal_her, vector<HapEstResult> &tumor_her, vector<HapEstResult> &merged_her) {
+        cout << "********** calc_bf ***********" << endl;
+        vector<vector<MLAlignment> > liks;
+        liks.insert(liks.end(), normal_liks.begin(), normal_liks.end());
+        for(int i = 0;i < haps.size();i++) {
+            liks[i].insert(liks[i].end(), tumor_liks[i].begin(), tumor_liks[i].end());
+        }
+        vector<double> mergedHapFreqs, normalHapFreqs, tumorHapFreqs;
+        map <int, vector<tuple<AlignedVariant, double, double> > > posteriors;
+        lower_bound_t normal_lb;
+        lower_bound_t tumor_lb;
+        lower_bound_t merged_lb;
+        map<AlignedVariant, double> merged_vpp;
+        map<AlignedVariant, double> normal_vpp;
+        map<AlignedVariant, double> tumor_vpp;
+        cout << "************ [filteredNormalReads] EM hap **************" << endl;
+        EMBasic::estimate(haps, normalReads, normal_liks, normalHapFreqs, normal_her, pos, leftPos, rightPos, glfData, 1, candidateVariants, normal_lb, normal_vpp,  0.1, "all", params);        
+        cout << "************ [filteredTumorReads] EM hap **************" << endl;
+        EMBasic::estimate(haps, tumorReads, tumor_liks, tumorHapFreqs, tumor_her, pos, leftPos, rightPos, glfData, 1, candidateVariants, tumor_lb, tumor_vpp, 0.1, "all", params);
+        cout << "************ [filteredMergedReads] EM hap **************" << endl;
+        EMBasic::estimate(haps, mergedReads, liks, mergedHapFreqs, merged_her, pos, leftPos, rightPos, glfData, 1, candidateVariants, merged_lb, merged_vpp,  0.1, "all", params);
+        double bf = normal_lb.lower_bound + tumor_lb.lower_bound - merged_lb.lower_bound;
+        outputLowerBounds(haps, (params.fileName+".basic_haplotypes.txt"), leftPos, rightPos, bf, normal_lb, tumor_lb, merged_lb, normalHapFreqs, tumorHapFreqs, mergedHapFreqs);
+        return bf;
+    }
+
     
     
-    double calc_hap2_bf(const vector<Read> & normalReads, const vector<Read> & tumorReads, const vector<Read> & mergedReads, uint32_t pos, uint32_t leftPos, uint32_t rightPos, const AlignedCandidates & candidateVariants, OutputData & glfData, Parameters params, string refSeq, string refSeqForAlign, double a0, double b0, double free_a0) {
+    
+    double calc_hap2_bf(const vector<Read> & normalReads, const vector<Read> & tumorReads, const vector<Read> & mergedReads, uint32_t pos, uint32_t leftPos, uint32_t rightPos, const AlignedCandidates & candidateVariants, OutputData & glfData, Parameters params, string refSeq, string refSeqForAlign, double a0, double b0, double free_a0, vector<HapEstResult> &normal_her, vector<HapEstResult> &tumor_her, vector<HapEstResult> &merged_her) {
         cout << "********** calc_hap2_bf ***********" << endl;
         vector<Haplotype> haps;
         vector<vector<MLAlignment> > liks;
@@ -257,10 +289,6 @@ namespace MutationCall
         }
         vector<double> mergedHapFreqs, normalHapFreqs, tumorHapFreqs;
         map <int, vector<tuple<AlignedVariant, double, double> > > posteriors;
-        
-        vector<HapEstResult> normal_her;
-        vector<HapEstResult> tumor_her;
-        vector<HapEstResult> merged_her;
         
         lower_bound_t normal_lb;
         lower_bound_t tumor_lb;
@@ -280,7 +308,7 @@ namespace MutationCall
         return bf;
     }
     
-    void outputLowerBounds(vector<Haplotype> &haps, string fname, uint32_t leftPos, uint32_t rightPos, double bf, lower_bound_t& normal_lb, lower_bound_t &tumor_lb, lower_bound_t &merged_lb, vector<double> normalHapFreqs, vector<double> tumorHapFreqs, vector<double> mergedHapFreqs) {
+    void outputLowerBounds(const vector<Haplotype> &haps, string fname, uint32_t leftPos, uint32_t rightPos, double bf, lower_bound_t& normal_lb, lower_bound_t &tumor_lb, lower_bound_t &merged_lb, vector<double> normalHapFreqs, vector<double> tumorHapFreqs, vector<double> mergedHapFreqs) {
         typedef map<int, AlignedVariant>::const_iterator It;
         std::ofstream ofs(fname.c_str(), std::ios::out | std::ios::app);
         ofs << "-------- window[" << leftPos << "-" << rightPos <<"] ---------------" << endl;

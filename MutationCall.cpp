@@ -139,30 +139,11 @@ namespace MutationCall
         
         filteredTumorReads.insert(filteredTumorReads.end(), tumorReads.begin(), tumorReads.end());
         filteredNormalReads.insert(filteredNormalReads.end(), normalReads.begin(), normalReads.end());
-               
+        
         // NOTE leftPos will be the left position of the reference sequence each haplotype will be aligned to
         vector<vector<MLAlignment> > normal_liks, normal_liks2;
         vector<vector<MLAlignment> > tumor_liks, tumor_liks2;
-        bool flag = Haps2::getHaplotypes(haps, normalReads, tumorReads, pos, leftPos, rightPos, candidateVariants, params, refSeq, refSeqForAlign, close_somatic, close_germline, normal_liks, tumor_liks, glfData, index);
-        cout << " test" << endl;
-        cout.flush();
-        Haps2::filter_reads(filteredNormalReads, normal_liks);
-        Haps2::filter_reads(filteredTumorReads, tumor_liks);
-        cout.flush();
-        filteredMergedReads.insert(filteredMergedReads.end(), filteredNormalReads.begin(), filteredNormalReads.end());
-        filteredMergedReads.insert(filteredMergedReads.end(), filteredTumorReads.begin(), filteredTumorReads.end());
-        
-        liks.insert(liks.end(), normal_liks.begin(), normal_liks.end());
-        for(int i = 0;i < haps.size();i++) {
-            liks[i].insert(liks[i].end(), tumor_liks[i].begin(), tumor_liks[i].end());
-        }
-        cout << "candidate_var@pos: " << pos ;
-        BOOST_FOREACH(AlignedVariant v, candidateVariants.variants) {
-            cout << " " << v.getStartHap() << "," << v.getString();
-        }
-        cout << endl;
         int refSeqPos=leftPos;
-        cout.flush();
         vector<double> normalHapFreqs, non_normalHapFreqs, tumorHapFreqs, non_tumorHapFreqs;
         map <int, vector<tuple<AlignedVariant, double, double> > > posteriors, non_posteriors;
         vector<HapEstResult> normal_her, non_normal_her;
@@ -174,34 +155,47 @@ namespace MutationCall
         map<AlignedVariant, double> tumor_vpp, non_tumor_vpp;
         int normal_count = (int)filteredNormalReads.size();
         int tumor_count = (int)filteredTumorReads.size();
-        cout << "normal_count, tumor_count = " << normal_count << ", " << tumor_count << endl;
-        
-        cout << "(merged):" << filteredMergedReads.size() << " " << liks[0].size() << endl;
-        cout << "(normal):" << filteredNormalReads.size() << " " << normal_liks[0].size() << endl;
-        cout << "(tumor):" << filteredTumorReads.size() << " " << tumor_liks[0].size() << endl;
         double bf2;
-        double hap2_bf = calc_bf(haps, normal_liks, tumor_liks, filteredNormalReads, filteredTumorReads, filteredMergedReads, pos, leftPos, rightPos, candidateVariants, glfData, params, refSeq, refSeqForAlign, 1.0, 1.0, 1.0, normal_her_hap2, tumor_her_hap2, merged_her_hap2);
-        if(haps.size()==4) {
-            cout << "************ hap4 **************" << endl << "haps: " << haps.size() <<  endl;
-            int nrt = filteredTumorReads.size(), nrn=filteredNormalReads.size();
-            vector<double> rlt(nrt*4), rln(nrn*4);
-            int idx=0;
-            for (size_t r=0;r<nrt;r++) {
-                for (size_t h=0;h<4;h++) { rlt[idx] = tumor_liks[h][r].ll;idx++; }
-            }
-            idx=0;
-            for (size_t r=0;r<nrn;r++) {
-                for (size_t h=0;h<4;h++) { rln[idx] = normal_liks[h][r].ll;idx++; }
-            }
-            MutationModel::estimate(haps, filteredTumorReads, filteredNormalReads, rlt, rln, tumorHapFreqs, normalHapFreqs, tumor_her, normal_her, pos, leftPos, rightPos, index, candidateVariants, mm_lb, tumor_vpp, normal_vpp, params, "mutation");
-            output_mm(haps, (params.fileName+".mm.txt"), leftPos, rightPos, 0.0, mm_lb, normalHapFreqs, tumorHapFreqs);
-            MutationModel::estimate(haps, filteredTumorReads, filteredNormalReads, rlt, rln, non_tumorHapFreqs, non_normalHapFreqs, non_tumor_her, non_normal_her, pos, leftPos, rightPos, index, candidateVariants, nmm_lb, non_tumor_vpp, non_normal_vpp, params, "non-mutation");
-            output_mm(haps, (params.fileName+".non-mm.txt"), leftPos, rightPos, 0.0, nmm_lb, non_normalHapFreqs, non_tumorHapFreqs);
-            bf2 = mm_lb.lower_bound - nmm_lb.lower_bound;
-        }
         cout <<  "centerPos=" << candidateVariants.centerPos << endl;
         candidateVariants.printAll();
         cout.flush();
+        filteredMergedReads.insert(filteredMergedReads.end(), filteredNormalReads.begin(), filteredNormalReads.end());
+        filteredMergedReads.insert(filteredMergedReads.end(), filteredTumorReads.begin(), filteredTumorReads.end());
+        double hap2_bf = calc_hap2_bf(filteredNormalReads, filteredTumorReads, filteredMergedReads, pos, leftPos, rightPos, candidateVariants, glfData, params, refSeq, refSeqForAlign, 1.0, 1.0, 1.0, normal_her_hap2, tumor_her_hap2, merged_her_hap2);
+        if (close_somatic.size() == 0 && close_germline.size() == 1) {
+            bool flag = Haps2::getHaplotypes(haps, filteredNormalReads, filteredTumorReads, pos, leftPos, rightPos, candidateVariants, params, refSeq, refSeqForAlign, close_somatic, close_germline, normal_liks, tumor_liks, glfData, index);
+            //Haps2::filter_reads(filteredNormalReads, normal_liks);
+            //Haps2::filter_reads(filteredTumorReads, tumor_liks);
+            //filteredMergedReads.clear();
+            //filteredMergedReads.insert(filteredMergedReads.end(), filteredNormalReads.begin(), filteredNormalReads.end());
+            //filteredMergedReads.insert(filteredMergedReads.end(), filteredTumorReads.begin(), filteredTumorReads.end());
+            liks.insert(liks.end(), normal_liks.begin(), normal_liks.end());
+            for(int i = 0;i < haps.size();i++) {
+                liks[i].insert(liks[i].end(), tumor_liks[i].begin(), tumor_liks[i].end());
+            }
+            cout << "candidate_var@pos: " << pos ;
+            BOOST_FOREACH(AlignedVariant v, candidateVariants.variants) {
+                cout << " " << v.getStartHap() << "," << v.getString();
+            }
+            if(haps.size()==4) {
+                cout << "************ hap4 **************" << endl << "haps: " << haps.size() <<  endl;
+                int nrt = filteredTumorReads.size(), nrn=filteredNormalReads.size();
+                vector<double> rlt(nrt*4), rln(nrn*4);
+                int idx=0;
+                for (size_t r=0;r<nrt;r++) {
+                    for (size_t h=0;h<4;h++) { rlt[idx] = tumor_liks[h][r].ll;idx++; }
+                }
+                idx=0;
+                for (size_t r=0;r<nrn;r++) {
+                    for (size_t h=0;h<4;h++) { rln[idx] = normal_liks[h][r].ll;idx++; }
+                }
+                MutationModel::estimate(haps, filteredTumorReads, filteredNormalReads, rlt, rln, tumorHapFreqs, normalHapFreqs, tumor_her, normal_her, pos, leftPos, rightPos, index, candidateVariants, mm_lb, tumor_vpp, normal_vpp, params, "mutation");
+                output_mm(haps, (params.fileName+".mm.txt"), leftPos, rightPos, 0.0, mm_lb, normalHapFreqs, tumorHapFreqs);
+                MutationModel::estimate(haps, filteredTumorReads, filteredNormalReads, rlt, rln, non_tumorHapFreqs, non_normalHapFreqs, non_tumor_her, non_normal_her, pos, leftPos, rightPos, index, candidateVariants, nmm_lb, non_tumor_vpp, non_normal_vpp, params, "non-mutation");
+                output_mm(haps, (params.fileName+".non-mm.txt"), leftPos, rightPos, 0.0, nmm_lb, non_normalHapFreqs, non_tumorHapFreqs);
+                bf2 = mm_lb.lower_bound - nmm_lb.lower_bound;
+            }
+        }
         if(tumor_her.empty()) {            
             tumor_her.swap(tumor_her_hap2);
             normal_her.swap(normal_her_hap2);
@@ -298,7 +292,6 @@ namespace MutationCall
         map<AlignedVariant, double> tumor_vpp;
         cout << "************ [filteredNormalReads] EM hap2 **************" << endl;
         EMfor2::estimate_basic(haps, normalReads, normal_liks, normalHapFreqs, normal_her, pos, leftPos, rightPos, glfData, 1, candidateVariants, normal_lb, normal_vpp, params, 1.0, 1.0);
-        
         cout << "************ [filteredTumorReads] EM hap2 **************" << endl;
         EMfor2::estimate_basic(haps, tumorReads, tumor_liks, tumorHapFreqs, tumor_her, pos, leftPos, rightPos, glfData, 1, candidateVariants, tumor_lb, tumor_vpp, params, 1.0, 1.0);
         cout << "************ [filteredMergedReads] EM hap2 **************" << endl;

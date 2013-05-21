@@ -45,7 +45,6 @@
 
 namespace MutationCall
 {
-    
     void output_mm(vector<Haplotype> &haps, string fname, uint32_t leftPos, uint32_t rightPos, double bf, lower_bound_t& lb, vector<double> normalHapFreqs, vector<double> tumorHapFreqs) {
         typedef map<int, AlignedVariant>::const_iterator It;
         std::ofstream ofs(fname.c_str(), std::ios::out | std::ios::app);
@@ -130,8 +129,6 @@ namespace MutationCall
         vector<vector<MLAlignment> > liks;
         vector<HapPairLik> likPairs;
         
-        // get the haplotypes
-        // changes leftPos and rightPos to haplotype blocks in HDIterator
         vector<Read> filteredNormalReads;
         vector<Read> filteredTumorReads;
         vector<Read> filteredMergedReads;
@@ -162,18 +159,35 @@ namespace MutationCall
         filteredMergedReads.insert(filteredMergedReads.end(), filteredNormalReads.begin(), filteredNormalReads.end());
         filteredMergedReads.insert(filteredMergedReads.end(), filteredTumorReads.begin(), filteredTumorReads.end());
         double hap2_bf = calc_hap2_bf(filteredNormalReads, filteredTumorReads, filteredMergedReads, pos, leftPos, rightPos, candidateVariants, glfData, params, refSeq, refSeqForAlign, 1.0, 1.0, 1.0, normal_her_hap2, tumor_her_hap2, merged_her_hap2);
-        if (close_somatic.size() == 0 && close_germline.size() == 1) {
-            bool flag = Haps2::getHaplotypes(haps, filteredNormalReads, filteredTumorReads, pos, leftPos, rightPos, candidateVariants, params, refSeq, refSeqForAlign, close_somatic, close_germline, normal_liks, tumor_liks, glfData, index);
+        if (close_germline.size() != 0) {
+            //close_somaticは空
+            //close_germlineは、targetに最も近いものを採用する
+            cout << "choose closest germline snp" << endl;
+            vector<AlignedVariant> new_close_somatic;
+            vector<AlignedVariant> new_close_germline;
+            int target_pos = candidateVariants.variants[0].getStartHap();
+            cout << "target_pos " << target_pos << endl;
+            int min_dis= 100000, min_index=-1;
+            for(int i=0;i<close_germline.size();i++) {
+                int dist = abs(close_germline[i].getStartHap() - target_pos);
+                if(min_dis > dist) {
+                    min_index = i;min_dis = dist;
+                }
+            }
+            cout << "min " << min_dis << " " << min_index << endl;
+            new_close_germline.push_back(close_germline[min_index]);
+            bool flag = Haps2::getHaplotypes(haps, filteredNormalReads, filteredTumorReads, pos, leftPos, rightPos, candidateVariants, params, refSeq, refSeqForAlign, new_close_somatic, new_close_germline, normal_liks, tumor_liks, glfData, index);
             //Haps2::filter_reads(filteredNormalReads, normal_liks);
             //Haps2::filter_reads(filteredTumorReads, tumor_liks);
             //filteredMergedReads.clear();
             //filteredMergedReads.insert(filteredMergedReads.end(), filteredNormalReads.begin(), filteredNormalReads.end());
             //filteredMergedReads.insert(filteredMergedReads.end(), filteredTumorReads.begin(), filteredTumorReads.end());
+            liks.clear();
             liks.insert(liks.end(), normal_liks.begin(), normal_liks.end());
             for(int i = 0;i < haps.size();i++) {
                 liks[i].insert(liks[i].end(), tumor_liks[i].begin(), tumor_liks[i].end());
             }
-            cout << "candidate_var@pos: " << pos ;
+            cout << "candidate_var@pos: " << pos << endl;
             BOOST_FOREACH(AlignedVariant v, candidateVariants.variants) {
                 cout << " " << v.getStartHap() << "," << v.getString();
             }
@@ -194,6 +208,7 @@ namespace MutationCall
                 MutationModel::estimate(haps, filteredTumorReads, filteredNormalReads, rlt, rln, non_tumorHapFreqs, non_normalHapFreqs, non_tumor_her, non_normal_her, pos, leftPos, rightPos, index, candidateVariants, nmm_lb, non_tumor_vpp, non_normal_vpp, params, "non-mutation");
                 output_mm(haps, (params.fileName+".non-mm.txt"), leftPos, rightPos, 0.0, nmm_lb, non_normalHapFreqs, non_tumorHapFreqs);
                 bf2 = mm_lb.lower_bound - nmm_lb.lower_bound;
+                cout << "**** hap4 done ***" << endl;
             }
         }
         if(tumor_her.empty()) {            
@@ -269,7 +284,7 @@ namespace MutationCall
 
     
     
-    
+        
     double calc_hap2_bf(const vector<Read> & normalReads, const vector<Read> & tumorReads, const vector<Read> & mergedReads, uint32_t pos, uint32_t leftPos, uint32_t rightPos, const AlignedCandidates & candidateVariants, OutputData & glfData, Parameters params, string refSeq, string refSeqForAlign, double a0, double b0, double free_a0, vector<HapEstResult> &normal_her, vector<HapEstResult> &tumor_her, vector<HapEstResult> &merged_her) {
         cout << "********** calc_hap2_bf ***********" << endl;
         vector<Haplotype> haps;

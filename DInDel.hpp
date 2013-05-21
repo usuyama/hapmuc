@@ -206,6 +206,7 @@ public:
         
         EMtol=1e-4;
     }
+    
     OutputData makeOutputData(ostream & out)
     {
         OutputData oData(out);
@@ -263,7 +264,7 @@ public:
         oData("indidx")("msq")("num_cover_forward")("num_cover_reverse");
         oData("glf");
         return oData;
-    }
+    }   
     
     
     void print()
@@ -294,9 +295,6 @@ public:
         
         cout << "\tcheckAllCIGARs: " << checkAllCIGARs << endl;
         cout << "\tchangeINStoN: " << changeINStoN << endl;
-        
-        
-        
         
         cout << endl;
         cout << "\tquiet: " << quiet << endl;

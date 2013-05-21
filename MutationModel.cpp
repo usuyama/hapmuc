@@ -92,6 +92,10 @@ namespace MutationModel {
         cout << endl;
     }
     
+    template <class X> void print_vec(vector<X> vec) {
+        BOOST_FOREACH(X x, vec) { cout << x << " "; }
+    }
+    
     double cal_e_log_dir(vector<double> log_theta, vector<double> param) {
         //E[log p(theta|param)] : Dir
         //- sum(lgamma(param)) + lgamma(sum(param)) + sum((param-1) * log_theta)
@@ -100,8 +104,18 @@ namespace MutationModel {
         double lgam_sum_param=lgamma(sum_vec(param));
         double sum_par_lt=0.0;
         for(int i=0;i<param.size();i++) sum_par_lt+=(param[i]-1)*log_theta[i];
+        if(log_theta.size() != param.size()) {
+            cout << "--- cal_e_log_dir ---" << endl;
+            print_vec(log_theta);cout << endl;
+            print_vec(param);cout << endl;
+            cout << sum_lgam_param << " " << lgam_sum_param << " " << sum_par_lt << endl;
+            throw string("cal_e_log_dir");
+        }    
         return sum_lgam_param + lgam_sum_param + sum_par_lt;
     }
+    
+    
+
     
     void compute_lower_bound(const vector<double> & rlt, const vector<double> & rln, vector<double> &ahat, vector<double> &bhat, vector<double> &chat, vector<double> & zt, vector<double> & zn, lower_bound_t & lb, Parameters params) {
         int nh = 4; //number of haps 
@@ -137,7 +151,7 @@ namespace MutationModel {
         for(int i=0;i<nrn;i++) {
             for(int k=0;k<4;k++) e_log_p_Zn += zn[i*4+k] * log_rho_n[k];
         }
-        double e_log_p_pit=cal_e_log_dir(l_e_pit, params.a0);
+        double e_log_p_pit = (ahat.size()==2) ? cal_e_log_dir(l_e_pit, params.c0) : cal_e_log_dir(l_e_pit, params.a0);
         double e_log_p_pin=cal_e_log_dir(l_e_pin, params.c0);
         double e_log_p_ep=cal_e_log_dir(l_e_ep, params.b0);
         
@@ -147,15 +161,15 @@ namespace MutationModel {
         double e_log_q_pit=cal_e_log_dir(l_e_pit, ahat);
         double e_log_q_pin=cal_e_log_dir(l_e_pin, chat);
         double e_log_q_ep=cal_e_log_dir(l_e_ep, bhat);
+        cout << "error";
+        print_vec(l_e_pit);cout << endl;
+        print_vec(ahat);cout << endl;
         cout << "lb: ";
         cout << e_log_p_Xt<< " " <<e_log_p_Xn<< " " <<e_log_p_Zt<< " " <<e_log_p_Zn<< " " <<e_log_p_pit<< " " <<e_log_p_pin << " " << e_log_p_ep << endl;
         cout  <<e_log_q_Zt<< " " <<e_log_q_Zn<< " " <<e_log_q_pit<< " " <<e_log_q_pin<< " " <<e_log_q_ep << endl;
         lb.lower_bound = e_log_p_Xt + e_log_p_Xn + e_log_p_Zt + e_log_p_Zn + e_log_p_pin +e_log_p_pit + e_log_p_ep - e_log_q_Zt - e_log_q_Zn - e_log_q_pit - e_log_q_pin - e_log_q_ep;
     }
-    
-    template <class X> void print_vec(vector<X> vec) {
-        BOOST_FOREACH(X x, vec) { cout << x << " "; }
-    }
+   
     
     void print_params(const vector<Read> & tumor_reads, const vector<Read> & normal_reads, const vector<double> & rlt, const vector<double> & rln, vector<double> &ahat, vector<double> &bhat, vector<double> &chat, vector<double> & zt, vector<double> & zn, lower_bound_t & lb, Parameters params, bool print_z=false) {
         int nh = 4; //number of haps 

@@ -1,0 +1,10 @@
+new
+load /nshare1/home/usuyama/codes/hapmuc_sc/hapmuc_testcases/3/tumor.bam
+collapse
+load /nshare1/home/usuyama/codes/hapmuc_sc/hapmuc_testcases/3/normal.bam
+collapse
+snapshotDirectory /nshare1/home/usuyama/codes/hapmuc_sc/hapmuc_testcases/3/pics
+genome hg19
+  goto chr3:10192819-10193118
+  collapse
+  snapshot codes.ng.chr3:10192818-10193118.png

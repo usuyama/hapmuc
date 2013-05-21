@@ -1,0 +1,1 @@
+msg index analysis_type tid lpos rpos center_position realigned_position was_candidate_in_window ref_all nref_all num_reads post_prob_variant qual est_freq logZ hapfreqs indidx msq numOffAll num_indel num_cover_forward num_cover_reverse num_unmapped_realigned var_coverage_forward var_coverage_reverse nBQT nmmBQT mLogBQ nMMLeft nMMRight glf

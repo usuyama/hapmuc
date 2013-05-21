@@ -1,0 +1,2 @@
+chr start end ref obs ref_count_tumor obs_count_tumor ref_count_normal obs_count_normal missrate_tumor strandrate_tumor missrate_normal strandrate_normal TN1 TN2 TN3 TN4 NN1 NN2 NN3 NN4 fisher hap2_bf bf2
+chr3	10193033	10193033	C	A	30	16	41	0	0.34782608695652173	0.5	0	-	12.7975	39.7824	24.164	0.256103	40.2606	44.3117	0.210404	0.21725	5.034293568859365	7.84044	17.3562

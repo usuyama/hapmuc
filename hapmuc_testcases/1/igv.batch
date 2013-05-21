@@ -1,0 +1,8 @@
+snapshotDirectory tmp/igvss
+new
+load /Users/usuyama/thesis/hapmuc_testcases/1/tumor.sort.bam
+load /Users/usuyama/thesis/hapmuc_testcases/1/normal.sort.bam
+genome hg19
+goto chr3:10192561-10193361
+collapse
+snapshot thesis_hapmuc_testcases_1_chr3:10192561-10193361.png

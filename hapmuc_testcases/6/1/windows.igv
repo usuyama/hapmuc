@@ -1,0 +1,10 @@
+new
+load /home/usuyama/hapmuc_sim3/1_1_1/sm/tp0.8/1/tumor.bam
+collapse
+load /home/usuyama/hapmuc_sim3/1_1_1/sm/tp0.8/1/normal.bam
+collapse
+snapshotDirectory /home/usuyama/hapmuc_sim3/1_1_1/sm/tp0.8/1/pics
+genome hg19
+  goto chr1:1339-1638
+  collapse
+  snapshot 1_1_1.ng.chr1:1338-1638.png

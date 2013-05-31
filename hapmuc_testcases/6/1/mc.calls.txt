@@ -1,0 +1,1 @@
+chr start end ref obs ref_count_tumor obs_count_tumor ref_count_normal obs_count_normal missrate_tumor strandrate_tumor missrate_normal strandrate_normal TN1 TN2 TN3 TN4 NN1 NN2 NN3 NN4 fisher hap2_bf bf2

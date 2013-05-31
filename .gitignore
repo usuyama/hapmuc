@@ -1,3 +1,6 @@
 *.o
 *.pyc
 *.py
+.DS_Store
+.RData
+.Rhistory

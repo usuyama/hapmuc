@@ -6,37 +6,37 @@
 //  Copyright 2012 Univ. of Tokyo. All rights reserved.
 //
 
-#include <stdlib.h>
+//#include <stdlib.h>
 #include <iostream>
-#include <iomanip>
-#include <string>
-#include <sstream>
-#include <fstream>
-#include <set>
-#include <algorithm>
-#include <boost/program_options.hpp>
-#include <boost/assign.hpp>
-#include <boost/math/special_functions/digamma.hpp>
-#include <seqan/align.h>
-#include <seqan/graph_align.h>
-#include "foreach.hpp"
-#include "bam.h"
-#include "DInDel.hpp"
-#include "Haplotype.hpp"
-#include "HaplotypeDistribution.hpp"
-#include "ObservationModelFB.hpp"
-#include "Utils.hpp"
-#include "faidx.h"
-#include "GetCandidates.hpp"
-#include "ObservationModelSeqAn.hpp"
-#include "VariantFile.hpp"
-#include "Faster.hpp"
-#include <ext/hash_map>
-#include <exception>
-#include <math.h>
-#include <sys/stat.h>
-#include <sys/types.h>
-#include <boost/algorithm/string.hpp>
+//#include <iomanip>
+//#include <string>
+//#include <sstream>
+//#include <fstream>
+//#include <set>
+//#include <algorithm>
+//#include <boost/program_options.hpp>
+//#include <boost/assign.hpp>
+//#include <boost/math/special_functions/digamma.hpp>
+//#include <seqan/align.h>
+//#include <seqan/graph_align.h>
+//#include "foreach.hpp"
+//#include "bam.h"
+#include "HapMuC.hpp"
+//#include "Haplotype.hpp"
+//#include "HaplotypeDistribution.hpp"
+//#include "ObservationModelFB.hpp"
+//#include "Utils.hpp"
+//#include "faidx.h"
+//#include "GetCandidates.hpp"
+//#include "ObservationModelSeqAn.hpp"
+//#include "VariantFile.hpp"
+//#include "Faster.hpp"
+//#include <ext/hash_map>
+//#include <exception>
+//#include <math.h>
+//#include <sys/stat.h>
+//#include <sys/types.h>
+//#include <boost/algorithm/string.hpp>
 #include "Haps2.hpp"
 #include "EMfor2.hpp"
 #include "MutationCall.hpp"
@@ -282,8 +282,6 @@ namespace MutationCall
         return bf;
     }
 
-    
-    
         
     double calc_hap2_bf(const vector<Read> & normalReads, const vector<Read> & tumorReads, const vector<Read> & mergedReads, uint32_t pos, uint32_t leftPos, uint32_t rightPos, const AlignedCandidates & candidateVariants, OutputData & glfData, Parameters params, string refSeq, string refSeqForAlign, double a0, double b0, double free_a0, vector<HapEstResult> &normal_her, vector<HapEstResult> &tumor_her, vector<HapEstResult> &merged_her) {
         cout << "********** calc_hap2_bf ***********" << endl;

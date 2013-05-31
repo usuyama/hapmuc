@@ -8,7 +8,7 @@
 
 #ifndef MUTATION_CALL_HPP_
 #define MUTATION_CALL_HPP_
-
+#include "HapMuC.hpp"
 #include <iostream>
 namespace MutationCall {
     

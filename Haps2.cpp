@@ -18,7 +18,7 @@
 #include <seqan/graph_align.h>
 #include "foreach.hpp"
 #include "bam.h"
-#include "DInDel.hpp"
+#include "HapMuC.hpp"
 #include "Haplotype.hpp"
 #include "HaplotypeDistribution.hpp"
 #include "ObservationModelFB.hpp"
@@ -214,6 +214,7 @@ namespace Haps2 {
     
     bool getHaplotypes(vector<Haplotype> &haps, const vector<Read> & normal_reads, const vector<Read> & tumor_reads, uint32_t pos, uint32_t & leftPos, uint32_t & rightPos, const AlignedCandidates & candidateVariants, Parameters params, string refSeq, string refSeqForAlign, vector<AlignedVariant> & close_somatic, vector<AlignedVariant>& close_germline, vector<vector<MLAlignment> > & normal_liks, vector<vector<MLAlignment> > & tumor_liks, OutputData & glfData, int index)
     {
+        //h1,h2,h3,h4を生成する
         cout << "Haps2::getHaplotypes" << endl;
         typedef pair<int, AlignedVariant> PAV;
         cout << "== target variant ==" << endl;
@@ -439,6 +440,7 @@ namespace Haps2 {
     }
     
     bool getHaplotypesBasic(vector<Haplotype> &haps, const vector<Read> & normal_reads, const vector<Read> & tumor_reads, uint32_t pos, uint32_t & leftPos, uint32_t & rightPos, const AlignedCandidates & candidateVariants, Parameters params, string refSeq, string refSeqForAlign, vector<vector<MLAlignment> > & normal_liks, vector<vector<MLAlignment> > & tumor_liks, OutputData & glfData, int index) {
+        //2本だけ生成する
         typedef pair<int, AlignedVariant> PAV;
         vector<vector<AlignedVariant> > tmp_avs;
         vector<AlignedVariant> somatic_var;

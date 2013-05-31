@@ -8,7 +8,7 @@
 #ifndef MM_HPP_
 #define MM_HPP_
 #include "Read.hpp"
-#include "DInDel.hpp"
+#include "HapMuC.hpp"
 #include "VariantFile.hpp"
 #include "OutputData.hpp"
 namespace MutationModel {

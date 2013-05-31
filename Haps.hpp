@@ -22,7 +22,6 @@
 #include <seqan/graph_align.h>
 #include "foreach.hpp"
 #include "bam.h"
-#include "DInDel.hpp"
 #include "Haplotype.hpp"
 #include "HaplotypeDistribution.hpp"
 #include "ObservationModelFB.hpp"

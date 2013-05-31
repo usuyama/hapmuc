@@ -12,8 +12,8 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#ifndef DINDEL_HPP_
-#define DINDEL_HPP_
+#ifndef HAPMUC_HPP_
+#define HAPMUC_HPP_
 #include <stdlib.h>
 #include <iostream>
 #include <iomanip>
@@ -269,7 +269,7 @@ public:
     
     void print()
     {
-        cout << "DetInDel parameters: " << endl;
+        cout << "HapMuC parameters: " << endl;
         cout << "\ttid: " << tid << " width: " << width << " maxHap: " << maxHap << " maxReads: " << maxReads << " skipMaxHap: " << skipMaxHap << endl;
         cout << "\toutputFilename: " << fileName << endl;
         cout << "\tmapQualThreshold: " << mapQualThreshold << endl;
@@ -337,95 +337,24 @@ public:
     ObservationModelParameters obsParams;
 };
 
-class DetInDel
+class HapMuC
 {
 public:
-	//DetInDel(const string & bfName, const string & tid, const string &outputFileName, const string & modelType) : params(tid, outputFileName, modelType) { fai=NULL; };
-	static int fetchFuncFindInDel(const bam1_t *b, void *data);
-	void findInDels(uint32_t start, uint32_t end, bool report);
-	void detectIndels(const string & variantsFileName);
-	void callVariants(const string & variantsFile);
-	void findInDelsPositionsFile(const string & fileName);
 	string getRefSeq(uint32_t lpos, uint32_t rpos);
     string get_var_symbol(string ref, string obs);
-    vector<AlignedVariant> parse_close_vars(string s);
     AlignedCandidates getCandidateVariants(string line, vector<AlignedVariant> &close_somatic, vector<AlignedVariant> &close_germline);
     void mutationCall(const string & variantsFileName); 
-    double computeBayesFactors(int index, const vector<Read> & normalReads, const vector<Read> & tumorReads, uint32_t pos, uint32_t leftPos, uint32_t rightPos, const AlignedCandidates & candidateVariants, OutputData & oData, OutputData & glfData);
-    void selectHaplotypesAndReads(vector<Haplotype> & haps, vector<Read> & reads, vector<vector<MLAlignment> > & liks, uint32_t candPos, uint32_t leftPos, uint32_t rightPos, const AlignedCandidates & candidateVariants, OutputData & glfData, int & normal_count, int & tumor_count); 
-    void filterReads(vector<Read> & mergedReads, vector<vector<MLAlignment> > & mergedLiks, int & normal_count, int & tumor_count);
-	void empiricalDistributionMethod(int index, const vector<Read> & reads, uint32_t pos, uint32_t leftPos, uint32_t rightPos, const AlignedCandidates & candidateVariants, OutputData & oData, OutputData & glfData);
-	void fastMethod(const vector<Read> & reads, uint32_t pos, uint32_t leftPos, uint32_t rightPos, ostream & output);
-	bool getHaplotypes(vector<Haplotype> & haps, const vector<Read> & reads, uint32_t pos, uint32_t & leftPos, uint32_t & rightPos, const AlignedCandidates & candidateVariants);
-	const vector<MyBam *> & getMyBams() const { return myBams; }
-	
-
-	void addLibrary ( const string & name, const Library & lib)
-	{
-		libraries[name.c_str()]=lib;
-	}
-	void addLibrary ( const string & fileName)
-	{
-		libraries.addFromFile(fileName);
-	}
-
+	void addLibrary ( const string & name, const Library & lib) { libraries[name.c_str()]=lib; }
+	void addLibrary ( const string & fileName) { libraries.addFromFile(fileName); }
 
 protected:
 	void outputHapsAndFreqs(ostream *output, const string & prefix, const vector<Haplotype> & haps, const vector<double> & freqs, uint32_t leftPos);
-	//void getReads(uint32_t leftPos, uint32_t rightPos, vector<Read> & reads);
-	void getReads(uint32_t leftPos, uint32_t rightPos, vector<Read> & reads, uint32_t & oldLeftPos, uint32_t  & oldRightFetchReadPos, vector<Read *> & readBuffer, bool reset);
-    
-	double getMaxHap(Haplotype & h1, Haplotype &h2, HapPairLik & hpl, const vector<Haplotype> & haps, vector<HapPairLik> & likPairs);
-	void outputMaxHap(ostream *output, const string & prefix, const vector<Haplotype> & haps, vector<HapPairLik> & likPairs);
-	void outputTopHaps(ostream *output, const string & prefix, const vector<Haplotype> & haps, vector<HapPairLik> & likPairs, int n);
-	bool alignHaplotypes(vector<Haplotype> & haps, uint32_t pos, uint32_t & leftPos, uint32_t & rightPos,  map<int, set<AlignedVariant> > & variants);
-	bool generateHaplotypes(vector<Haplotype> & haps, uint32_t pos, uint32_t & leftPos, uint32_t & rightPos,  const map<int, set<Variant> > & variants);
-	double getHaplotypePrior(const Haplotype & h1, const Haplotype & h2, int leftPos, const AlignedCandidates & candidateVariants);
-	void computeLikelihoods(const vector<Haplotype> &haps, const vector<Read> & reads, vector<vector<MLAlignment> > & liks, uint32_t leftPos, uint32_t rightPos, vector<int> & onHap);
-	void computeHapPosition(const Haplotype & hap, const Read & read, vector<int> & alPos, int leftPos);
-	void computeLikelihoodsFaster(const vector<Haplotype> &haps, const vector<Read> & reads, vector<vector<MLAlignment> > & liks, uint32_t leftPos, uint32_t rightPos, vector<int> & onHap);
-    double computeModelEvidence(const vector<Haplotype> & haps, const vector<Read> & reads, const vector<vector<MLAlignment> > & liks, const vector<double> & hapFreqs);
-	void computePairLikelihoods(const vector<Haplotype> & haps, const vector<Read> & reads, const vector<vector<MLAlignment> > & liks, vector<HapPairLik> & likPairs, bool usePrior, const AlignedCandidates & candidateVariants, int leftPos);
-	void statisticsHaplotypePair(const vector<Haplotype> & haps, const vector<Read> & reads, const vector<vector<MLAlignment> > & liks, HapPairLik & hpl,OutputData::Line & line);
-
-	void estimateHaplotypeFrequencies(const vector<Haplotype> & haps, const vector<Read> & reads, const vector<vector<MLAlignment> > & liks, vector<double> & hapFreqs);
-	void estimateHaplotypeFrequenciesPosterior(const vector<Haplotype> & haps, const vector<Read> & reads, const vector<vector<MLAlignment> > & liks, vector<double> & hapFreqs, map <int, vector<tuple<AlignedVariant, double,double> > > & posteriors, uint32_t pos, uint32_t leftPos, ostream & glfOutput);
-    
-    void estimateLowerBoundAndPosterior(const vector<Haplotype> & haps, const vector<Read> & reads, const vector<vector<MLAlignment> > & liks, vector<double> & hapFreqs, vector <HapEstResult > & posteriors,  uint32_t candPos, uint32_t leftPos, uint32_t rightPos, OutputData & glfData, int index, const AlignedCandidates & candidateVariants, lower_bound_t &best_lower_bound, map <AlignedVariant, double> & variantPosteriors, double a0, string program);
-    
-    
-	void estimateHaplotypeFrequenciesBayesEM(const vector<Haplotype> & haps, const vector<Read> & reads, const vector<vector<MLAlignment> > & liks, vector<double> & hapFreqs, vector <HapEstResult > & posteriors,  uint32_t candPos, uint32_t leftPos,   uint32_t rightPos, OutputData & glfData, int index, const AlignedCandidates & candidateVariants,string program);
-    
-    void outputParams(int iter, int leftPos, const vector<int> & compatible, const vector<double> & resp, const vector<double> & ak, const vector<double> & ln_p_x_given_h, const vector<double> & lpi) ;
-	
-	void computeLowerBound(const vector<double> & resp, const double a0, const vector<double> & ak, const vector<double> & ln_p_x_given_h, const vector<double> & lpi, const vector<int> & compatible, lower_bound_t &lb);
-    
-    void computeAnotherLowerBound(const vector<double> & resp, const double a0, const vector<double> & ak, const vector<double> & ln_p_x_given_h, const vector<double> & lpi, const vector<int> & compatible, lower_bound_t &lb);
-  
-                            
-                            
-	void diploidGLF(const vector<Haplotype> & haps, const vector<Read> & reads, const vector<vector<MLAlignment> > & liks, vector<double> & hapFreqs, vector <HapEstResult > & posteriors,  uint32_t candPos, uint32_t leftPos,  uint32_t rightPos, OutputData & glfData, int index, const AlignedCandidates & candidateVariants, string program);
-
- 
+	void outputParams(int iter, int leftPos, const vector<int> & compatible, const vector<double> & resp, const vector<double> & ak, const vector<double> & ln_p_x_given_h, const vector<double> & lpi) ;
 	void debug(const pair<Haplotype, Haplotype> & hp, const vector<Read> & reads,  uint32_t leftPos, uint32_t rightPos);
 	void debug(const pair<Haplotype, Haplotype> & hp1, const pair<Haplotype, Haplotype> & hp2, const vector<Read> & reads,  uint32_t leftPos, uint32_t rightPos);
-	void analyzeDifference(const pair<Haplotype, Haplotype> & hp1, const vector<Read> & reads,  uint32_t leftPos, uint32_t rightPos);
-	void showAlignments(const pair<Haplotype, Haplotype> & hp1, const vector<Read> & reads,  uint32_t leftPos, uint32_t rightPos);
-	void showAlignmentsPerHaplotype(const vector<Haplotype> & haps, const vector<Read> & reads, const vector<vector<MLAlignment> > & liks, uint32_t candPos, uint32_t leftPos);
-
-	double getPairPrior(const AlignedVariant & av1, const AlignedVariant & av2, int leftPos,const AlignedCandidates & candidateVariants);
-    
-    
-
 	void filterHaplotypes(const vector<Haplotype> & haps, const vector<Read> & reads, const vector<vector<MLAlignment> > & liks,  vector<int> & filtered,  map<pair<int, AlignedVariant>, VariantCoverage> & varCoverage, bool doFilter);
-
-	//MyBam myBam;
-
-	//MyBam myBam;
 	vector<MyBam *> myBams;
 	vector<string> myBamsFileNames;
-    
-    void computeLowerBoundsVB(const vector<Haplotype> & haps, const vector<Read> & reads, const vector<vector<MLAlignment> > & liks, vector<double> & hapFreqs, vector <HapEstResult > & posteriors,  uint32_t candPos, uint32_t leftPos,   uint32_t rightPos, OutputData & glfData, int index, const AlignedCandidates & candidateVariants,string program);
     void getReadsFromBams(vector<MyBam *> & Bams, uint32_t leftPos, uint32_t rightPos, vector<Read> & reads, uint32_t & oldLeftPos, uint32_t  & oldRightFetchReadPos, vector<Read *> & readBuffer, const bool reset);
     
     vector<MyBam *> tumorBams;
@@ -433,8 +362,9 @@ protected:
     vector<MyBam *> normalBams;
     vector<string> normalBamsFileNames;
     
+    vector<AlignedVariant> parse_close_vars(string s);
+    
 	LibraryCollection libraries;
-
 
 	class CIGAR : public vector<pair<int,int> >
 	{
@@ -461,9 +391,9 @@ public:
 
 	Parameters params;
 
-	DetInDel(const string & bfName, const Parameters & _params, int multipleFiles);
-    DetInDel(const string & normalBF, const string & tumorBF, const Parameters & _params);
-	~DetInDel();
+	HapMuC(const string & bfName, const Parameters & _params, int multipleFiles);
+    HapMuC(const string & normalBF, const string & tumorBF, const Parameters & _params);
+	~HapMuC();
 
 
 	map<uint32_t, InDel> indels;
@@ -488,9 +418,9 @@ class FFData
 {
 public:
 	uint32_t start, end;
-	DetInDel *det;
+	HapMuC *det;
 	map<string, int> unmappedMate;
 	map<int, int > insHisto, delHisto;
 };
 
-#endif /*DINDEL_HPP_*/
+#endif /*HapMuC_HPP_*/

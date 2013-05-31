@@ -207,22 +207,6 @@ public:
         EMtol=1e-4;
     }
     
-    OutputData makeOutputData(ostream & out)
-    {
-        OutputData oData(out);
-        oData("msg")("index");
-        oData("analysis_type");
-        oData("tid")("lpos")("rpos")("center_position")("realigned_position");
-        oData("ref_all")("num_reads")("num_hqreads");
-        oData("post_prob_variant")("est_freq")("was_candidate_in_window");
-        
-        oData("num_mapped_to_first")("num_mapped_to_second");
-        oData("num_off_hap")("loglik_hap_pair")("loglik_next_hap_pair");
-        oData("first_var_cover_forward")("first_var_cover_reverse")("second_var_cover_forward")("second_var_cover_reverse");
-        oData("first_called_all")("second_called_all")("loglik_called_genotype")("loglik_ref_ref")("alt_genotypes");
-        return oData;
-    }
-    
     OutputData makeGLFOutputData(ostream & out)
     {
         OutputData oData(out);
@@ -251,20 +235,7 @@ public:
         oData("hap2_bf")("bf2");
         return oData;
     }
-    
-    OutputData makeGLFv2OutputData(ostream & out)
-    {
-        OutputData oData(out);
-        oData("msg")("index");
-        oData("analysis_type");
-        oData("tid")("candidate_position")("realigned_position");
-        oData("ref_all")("nref_all")("num_reads");
-        oData("post_prob_variant")("est_freq");
-        
-        oData("indidx")("msq")("num_cover_forward")("num_cover_reverse");
-        oData("glf");
-        return oData;
-    }   
+      
     
     
     void print()

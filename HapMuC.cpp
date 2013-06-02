@@ -18,16 +18,13 @@
 #include "ObservationModelFB.hpp"
 #include "Utils.hpp"
 #include "faidx.h"
-#include "GetCandidates.hpp"
 #include "ObservationModelSeqAn.hpp"
 #include "VariantFile.hpp"
-#include "Faster.hpp"
 #include <ext/hash_map>
 #include <exception>
 #include <math.h>
 #include <sys/stat.h>
 #include <sys/types.h>
-#include "fisher_test.cpp"
 #include <boost/algorithm/string.hpp>
 #include "MutationCall.hpp"
 using namespace boost;
@@ -611,7 +608,7 @@ void HapMuC::mutationCall(const string & variantsFileName)
             uint32_t re=rightPos+params.minReadOverlap;
             string refSeq=getRefSeq(rs+1, re+1);
             string refSeqForAlign=getRefSeq(leftPos+1, rightPos+1);
-            MutationCall::computeBayesFactors(index, normalReads, tumorReads, pos, leftPos, rightPos, candidateVariants, oData, glfData, params, refSeq, refSeqForAlign, close_somatic_vars, close_germline_vars);
+            MutationCall::computeBayesFactors(normalReads, tumorReads, pos, leftPos, rightPos, candidateVariants, oData, params, refSeq, refSeqForAlign, close_somatic_vars, close_germline_vars);
             cout << "after read size: n, t =" << normalReads.size() << " " << tumorReads.size() << endl;
             
 		}

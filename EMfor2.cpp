@@ -26,10 +26,8 @@
 #include "ObservationModelFB.hpp"
 #include "Utils.hpp"
 #include "faidx.h"
-#include "GetCandidates.hpp"
 #include "ObservationModelSeqAn.hpp"
 #include "VariantFile.hpp"
-#include "Faster.hpp"
 #include <ext/hash_map>
 #include <exception>
 #include <math.h>
@@ -71,7 +69,7 @@ namespace EMfor2 {
     }
     
 
-    void estimate_basic(const vector<Haplotype> & haps, const vector<Read> & reads, const vector<vector<MLAlignment> > & liks, vector<double> & hapFreqs, vector <HapEstResult > & posteriors,  uint32_t candPos, uint32_t leftPos,   uint32_t rightPos, OutputData & glfData, int index, const AlignedCandidates & candidateVariants, lower_bound_t & best_lower_bound, map<AlignedVariant, double> & variantPosteriors, Parameters params, double a0, double b0)
+    void estimate_basic(const vector<Haplotype> & haps, const vector<Read> & reads, const vector<vector<MLAlignment> > & liks, vector<double> & hapFreqs, vector <HapEstResult > & posteriors,  uint32_t candPos, uint32_t leftPos, uint32_t rightPos, const AlignedCandidates & candidateVariants, lower_bound_t & best_lower_bound, map<AlignedVariant, double> & variantPosteriors, Parameters params, double a0, double b0)
     {
         cout << "EMfor2" << endl;
         hapFreqs.clear();

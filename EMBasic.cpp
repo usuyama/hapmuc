@@ -26,10 +26,8 @@
 #include "ObservationModelFB.hpp"
 #include "Utils.hpp"
 #include "faidx.h"
-#include "GetCandidates.hpp"
 #include "ObservationModelSeqAn.hpp"
 #include "VariantFile.hpp"
-#include "Faster.hpp"
 #include <ext/hash_map>
 #include <exception>
 #include <math.h>
@@ -119,7 +117,7 @@ namespace EMBasic {
         cout << "########" << endl << endl;
     }
     
-    void estimate(const vector<Haplotype> & haps, const vector<Read> & reads, const vector<vector<MLAlignment> > & liks, vector<double> & hapFreqs, vector <HapEstResult > & posteriors,  uint32_t candPos, uint32_t leftPos,   uint32_t rightPos, OutputData & glfData, int index, const AlignedCandidates & candidateVariants, lower_bound_t & best_lower_bound, map<AlignedVariant, double> & variantPosteriors, double a0, string program, Parameters params)
+    void estimate(const vector<Haplotype> & haps, const vector<Read> & reads, const vector<vector<MLAlignment> > & liks, vector<double> & hapFreqs, vector <HapEstResult > & posteriors, uint32_t candPos, uint32_t leftPos, uint32_t rightPos, const AlignedCandidates & candidateVariants, lower_bound_t & best_lower_bound, map<AlignedVariant, double> & variantPosteriors, double a0, string program, Parameters params)
     {
         cout << "EMBasic::estimate" << endl;
         cout.flush();

@@ -23,10 +23,8 @@
 #include "HaplotypeDistribution.hpp"
 #include "ObservationModelFB.hpp"
 #include "Utils.hpp"
-#include "GetCandidates.hpp"
 #include "ObservationModelSeqAn.hpp"
 #include "VariantFile.hpp"
-#include "Faster.hpp"
 #include <ext/hash_map>
 #include <exception>
 #include <math.h>
@@ -212,8 +210,10 @@ namespace Haps2 {
         return tav;
     }
     
-    bool getHaplotypes(vector<Haplotype> &haps, const vector<Read> & normal_reads, const vector<Read> & tumor_reads, uint32_t pos, uint32_t & leftPos, uint32_t & rightPos, const AlignedCandidates & candidateVariants, Parameters params, string refSeq, string refSeqForAlign, vector<AlignedVariant> & close_somatic, vector<AlignedVariant>& close_germline, vector<vector<MLAlignment> > & normal_liks, vector<vector<MLAlignment> > & tumor_liks, OutputData & glfData, int index)
+    bool getHaplotypes(vector<Haplotype> &haps, const vector<Read> & normal_reads, const vector<Read> & tumor_reads, uint32_t pos, uint32_t & leftPos, uint32_t & rightPos, const AlignedCandidates & candidateVariants, Parameters params, string refSeq, string refSeqForAlign, vector<AlignedVariant> & close_somatic, vector<AlignedVariant>& close_germline, vector<vector<MLAlignment> > & normal_liks, vector<vector<MLAlignment> > & tumor_liks)
     {
+        //TODO: 無駄な計算が多い。単純にSM1つ、close GV１つから４本ハプロタイプ生成して、likを計算する手順にしたほうが速くなる。
+        //TODO: そうすれば、２本で計算する場合(hap2)で計算したalign likも再利用できるはず。
         //h1,h2,h3,h4を生成する
         cout << "Haps2::getHaplotypes" << endl;
         typedef pair<int, AlignedVariant> PAV;
@@ -263,7 +263,7 @@ namespace Haps2 {
             cout << "no close germline vars: only ref hap in normal" << endl;
         } else {
             Haps::computeLikelihoods(normal_haps, normal_reads, normal_liks, leftPos, rightPos, onHap, params);
-            EMBasic::estimate(normal_haps, normal_reads, normal_liks, normal_hap_freqs, normal_her, pos, leftPos, rightPos, glfData, index, candidateVariants, normal_lb, normal_vpp, 0.001, "all", params);
+            EMBasic::estimate(normal_haps, normal_reads, normal_liks, normal_hap_freqs, normal_her, pos, leftPos, rightPos, candidateVariants, normal_lb, normal_vpp, 0.001, "all", params);
             int i = 0;
             for(int k=0;k < normal_haps.size();k++) {
                 if(normal_hap_freqs[k]>0.12) { 
@@ -328,7 +328,7 @@ namespace Haps2 {
         vector<int> on_hap_tumor(tumor_reads.size(),1); // which reads were mapped inside the haplotype window given an artificially high mapping quality
         Haps::computeLikelihoods(merged_haps, tumor_reads, tumor_liks, leftPos, rightPos, on_hap_tumor, params);
         vector<double> tumor_hap_freqs;vector<HapEstResult> tumor_her;map<AlignedVariant, double> tumor_vpp;lower_bound_t tumor_lb;
-        EMBasic::estimate(merged_haps, tumor_reads, tumor_liks, tumor_hap_freqs, tumor_her, pos, leftPos, rightPos, glfData, index, candidateVariants, tumor_lb, tumor_vpp, 0.001, "all", params);
+        EMBasic::estimate(merged_haps, tumor_reads, tumor_liks, tumor_hap_freqs, tumor_her, pos, leftPos, rightPos, candidateVariants, tumor_lb, tumor_vpp, 0.001, "all", params);
         freq_pairs.clear();
         //find top tumor hap
         tmp_haps.clear();
@@ -439,7 +439,7 @@ namespace Haps2 {
         return true;
     }
     
-    bool getHaplotypesBasic(vector<Haplotype> &haps, const vector<Read> & normal_reads, const vector<Read> & tumor_reads, uint32_t pos, uint32_t & leftPos, uint32_t & rightPos, const AlignedCandidates & candidateVariants, Parameters params, string refSeq, string refSeqForAlign, vector<vector<MLAlignment> > & normal_liks, vector<vector<MLAlignment> > & tumor_liks, OutputData & glfData, int index) {
+    bool getHaplotypesBasic(vector<Haplotype> &haps, const vector<Read> & normal_reads, const vector<Read> & tumor_reads, uint32_t pos, uint32_t & leftPos, uint32_t & rightPos, const AlignedCandidates & candidateVariants, Parameters params, string refSeq, string refSeqForAlign, vector<vector<MLAlignment> > & normal_liks, vector<vector<MLAlignment> > & tumor_liks) {
         //2本だけ生成する
         typedef pair<int, AlignedVariant> PAV;
         vector<vector<AlignedVariant> > tmp_avs;

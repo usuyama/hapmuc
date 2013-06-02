@@ -1,40 +1,26 @@
-/*    
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
 #ifndef HAPMUC_HPP_
 #define HAPMUC_HPP_
-#include <stdlib.h>
-#include <iostream>
-#include <iomanip>
-#include <string>
-#include <boost/tuple/tuple.hpp>
+//#include <stdlib.h>
+//#include <iostream>
+//#include <iomanip>
+//#include <string>
+//#include <boost/tuple/tuple.hpp>
 #include <ext/hash_map>
-
-#include "MyBam.hpp"
-#include "faidx.h"
-#include "Haplotype.hpp"
+//#include "MyBam.hpp"
+//#include "faidx.h"
+//#include "Haplotype.hpp"
 #include "ObservationModel.hpp"
-#include "HaplotypeDistribution.hpp"
-#include "ObservationModelFB.hpp"
+//#include "HaplotypeDistribution.hpp"
+//#include "ObservationModelFB.hpp"
 //#include "Fast.hpp"
-#include "MLAlignment.hpp"
+//#include "MLAlignment.hpp"
 #include "Read.hpp"
 #include "StringHash.hpp"
 
 #include "OutputData.hpp"
 #include "Library.hpp"
 #include "VariantFile.hpp"
+#include "Variant.hpp"
 
 const int SHIFTSTRAND = 1000000; // used to keep track of forward and reverse matches in ::filterHaplotypes
 
@@ -72,15 +58,6 @@ public:
     }
 };
 
-#include <iostream>
-#include <string>
-#include <map>
-using namespace std;
-
-#include <sstream>
-#include <fstream>
-#include <utility>
-#include <string.h>
 
 template <class T>
 inline std::string to_string (const T& t)

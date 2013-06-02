@@ -18,10 +18,8 @@
 #include "ObservationModelFB.hpp"
 #include "Utils.hpp"
 #include "faidx.h"
-#include "GetCandidates.hpp"
 #include "ObservationModelSeqAn.hpp"
 #include "VariantFile.hpp"
-#include "Faster.hpp"
 #include <ext/hash_map>
 #include <exception>
 #include <math.h>
@@ -267,8 +265,7 @@ namespace MutationModel {
         }
     }
     
-    void estimate(const vector<Haplotype> & haps, const vector<Read> & tumor_reads, const vector<Read> & normal_reads, const vector<double> & rlt, const vector<double> & rln, vector<double> & tumorHapFreqs, vector<double> & normalHapFreqs, vector <HapEstResult > & tumorPosteriors, vector <HapEstResult > & normalPosteriors, uint32_t candPos, uint32_t leftPos,   uint32_t rightPos, int index, const AlignedCandidates & candidateVariants, lower_bound_t & best_lower_bound, map<AlignedVariant, double> & tumorVariantPosteriors, 
-                  map<AlignedVariant, double> & normalVariantPosteriors, Parameters params, string est_type)
+    void estimate(const vector<Haplotype> & haps, const vector<Read> & tumor_reads, const vector<Read> & normal_reads, const vector<double> & rlt, const vector<double> & rln, vector<double> & tumorHapFreqs, vector<double> & normalHapFreqs, vector <HapEstResult > & tumorPosteriors, vector <HapEstResult > & normalPosteriors, uint32_t candPos, uint32_t leftPos,   uint32_t rightPos, const AlignedCandidates & candidateVariants, lower_bound_t & best_lower_bound, Parameters params, string est_type)
     {
         //est_type=mutation or non-mutation
         cout << "MutationModel: " << est_type << endl;

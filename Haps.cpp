@@ -1,11 +1,3 @@
-//
-//  PrepareHaps.cpp
-//  hapmuc2
-//
-//  Created by 直人 臼山 on 10/10/12.
-//  Copyright 2012 Univ. of Tokyo. All rights reserved.
-//
-
 #ifndef HAPS_CPP_
 #define HAPS_CPP_
 
@@ -23,16 +15,13 @@
 #include <seqan/graph_align.h>
 #include "foreach.hpp"
 #include "bam.h"
-
 #include "Haplotype.hpp"
 #include "HaplotypeDistribution.hpp"
 #include "ObservationModelFB.hpp"
 #include "Utils.hpp"
 #include "faidx.h"
-#include "GetCandidates.hpp"
 #include "ObservationModelSeqAn.hpp"
 #include "VariantFile.hpp"
-#include "Faster.hpp"
 #include <ext/hash_map>
 #include <exception>
 #include <math.h>
@@ -271,7 +260,7 @@ namespace Haps {
     }
 
 
-    void selectHaplotypesAndReads(vector<Haplotype> & haps, vector<Read> & reads, vector<vector<MLAlignment> > & liks, uint32_t pos, uint32_t leftPos, uint32_t rightPos, const AlignedCandidates & candidateVariants, OutputData & glfData, int & normal_count, int & tumor_count, Parameters params) {
+    void selectHaplotypesAndReads(vector<Haplotype> & haps, vector<Read> & reads, vector<vector<MLAlignment> > & liks, uint32_t pos, uint32_t leftPos, uint32_t rightPos, const AlignedCandidates & candidateVariants, int & normal_count, int & tumor_count, Parameters params) {
         cout << "############ select haplotypes ##############" << endl;
         //filter duplicate haps
         int i = 0;
@@ -344,7 +333,7 @@ namespace Haps {
         filter_th.push_back(0.01);
         for(int i=0;i < 1;i=i++) {
             cout << "#### filter haps[" << i  << " ] ###" << endl;
-            EMBasic::estimate(haps, reads, liks, hapFreqs, her, pos, leftPos, rightPos, glfData, 1, candidateVariants, lb, vpp, 0.1, "all", params);
+            EMBasic::estimate(haps, reads, liks, hapFreqs, her, pos, leftPos, rightPos, candidateVariants, lb, vpp, 0.1, "all", params);
             vector<Haplotype> tmp_haps;
             vector<vector<MLAlignment> > tmp_liks;
             int passed = 1;

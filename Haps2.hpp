@@ -13,7 +13,7 @@
 #include "MLAlignment.hpp"
 #include "Haplotype.hpp"
 #include "Variant.hpp"
-#include "HapMuc.hpp"
+#include "HapMuC.hpp"
 #include <map>
 #include <string>
 

@@ -687,13 +687,6 @@ void getParameters(po::variables_map & vm, Parameters & params)
     
 	params.priorSNP=vm["priorSNP"].as<double>();
 	params.priorIndel=vm["priorIndel"].as<double>();
-    params.a0[0]=vm["a0"].as<double>();
-    params.a0[1]=vm["a1"].as<double>();
-    params.a0[2]=vm["a2"].as<double>();
-    params.b0[0]=vm["b0"].as<double>();
-    params.b0[1]=vm["b1"].as<double>();
-    params.c0[0]=vm["c0"].as<double>();
-    params.c0[1]=vm["c1"].as<double>();
 	params.bayesType=vm["bayesType"].as<string>();
 
 	if (vm.count("ref")) {
@@ -814,14 +807,7 @@ int main(int argc, char *argv[])
 	("changeINStoN", "change sequence of inserted sequence to 'N', so that no penalty is incurred if a read mismatches the inserted sequence");
 	po::options_description pooled_analysis("parameters for --pooled option");
 	pooled_analysis.add_options()
-	("bayesa0", po::value<double>()->default_value(0.001), "Dirichlet a0 parameter haplotype frequency prior")
-    ("a0", po::value<double>()->default_value(1.0), "beta a0 prior for normal model")
-    ("a1", po::value<double>()->default_value(1.0), "beta a0 prior for normal model")
-    ("a2", po::value<double>()->default_value(1.0), "beta a0 prior for normal model")
-    ("b0", po::value<double>()->default_value(1.0), "beta b0 prior for normal model")
-    ("b1", po::value<double>()->default_value(1.0), "beta b0 prior for normal model")
-    ("c0", po::value<double>()->default_value(1.0), "beta b0 prior for normal model")
-    ("c1", po::value<double>()->default_value(1.0), "beta b0 prior for normal model")
+	("bayesa0", po::value<double>()->default_value(0.1), "Dirichlet a0 parameter haplotype frequency prior")
 	("bayesType",po::value<string>()->default_value("singlevariant"), "Bayesian EM program type (all or singlevariant or priorpersite)");
     
     

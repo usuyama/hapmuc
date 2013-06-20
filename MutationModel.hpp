@@ -12,7 +12,7 @@
 #include "VariantFile.hpp"
 #include "OutputData.hpp"
 namespace MutationModel {
-    void estimate(const vector<Haplotype> & haps, const vector<Read> & tumor_reads, const vector<Read> & normal_reads, const vector<double> & rlt, const vector<double> & rln, vector<double> & tumorHapFreqs, vector<double> & normalHapFreqs, vector <HapEstResult > & tumorPosteriors, vector <HapEstResult > & normalPosteriors, uint32_t candPos, uint32_t leftPos,   uint32_t rightPos, const AlignedCandidates & candidateVariants, lower_bound_t & best_lower_bound, Parameters params, string est_time);
+    void estimate(const vector<Haplotype> & haps, const vector<Read> & tumor_reads, const vector<Read> & normal_reads, const vector<double> & rlt, const vector<double> & rln, vector<double> & tumorHapFreqs, vector<double> & normalHapFreqs, vector <HapEstResult > & tumorPosteriors, vector <HapEstResult > & normalPosteriors, uint32_t candPos, uint32_t leftPos,   uint32_t rightPos, const AlignedCandidates & candidateVariants, lower_bound_t & best_lower_bound, Hap3Param params, string est_time, string log_prefix);
     //normalHapFreqs, tumorHapFreqs: frequencies of 4 haplotypes
     //*Posteriors: variantごとに推定されたsupported read数など
     //best_lower_bound: estimated marginal likelihood

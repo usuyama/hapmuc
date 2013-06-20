@@ -11,7 +11,7 @@
 #include <vector>
 #include <map>
 #include "Variant.hpp"
-#include "HapMuc.hpp" //for params
+#include "HapMuC.hpp" //for params
 #include "Read.hpp"
 #include "Haplotype.hpp"
 #include "MLAlignment.hpp"

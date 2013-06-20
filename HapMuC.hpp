@@ -21,7 +21,8 @@
 #include "Library.hpp"
 #include "VariantFile.hpp"
 #include "Variant.hpp"
-
+#include <boost/assign/std/vector.hpp>
+using namespace boost::assign;
 const int SHIFTSTRAND = 1000000; // used to keep track of forward and reverse matches in ::filterHaplotypes
 
 using namespace std;
@@ -126,6 +127,19 @@ public:
     }
 };
 
+class Hap3Param {
+public:
+    typedef vector<double> vd;
+    vd mut_a0, mut_b0, mut_c0;
+    vd err_a0, err_b0, err_c0;
+    Hap3Param() {};
+    ~Hap3Param() {};
+    void clear_all() {
+        mut_a0.clear();mut_b0.clear();mut_c0.clear();
+        err_a0.clear();err_b0.clear();err_c0.clear();
+    }
+};
+
 class Parameters {
 public:
     Parameters(const string & _tid, string _fileName, const string & modelType) : obsParams(modelType)
@@ -134,9 +148,10 @@ public:
         fileName=_fileName;
         setDefaultValues();
     }
+    
     void setDefaultValues()
     {
-        bayesa0=0.001;
+        bayesa0=0.1;
         width=30;
         maxHap=100;
         skipMaxHap=1000;
@@ -173,13 +188,26 @@ public:
         printCallsOnly=true;
         outputPooledLikelihoods=false;
         filterHaplotypes = false;
-        vector<double> tmpa(3,1.0), tmpb(2,1.0), tmpc(2,1.0);
-        a0 = tmpa;b0 = tmpb;c0 = tmpc;
         outputGLF=true;
         outputRealignedBAM=false;
         processRealignedBAM="no";
         changeINStoN = false;
-        
+        hap3_params.clear_all();
+        hap2_params.clear_all();
+        hap3_params.mut_a0 += 1.0,1.0,1.0;
+        cout << "test" << endl;
+        cout << hap3_params.mut_a0[0] << endl;
+        hap3_params.mut_b0 += 0.1,10.0;
+        hap3_params.mut_c0 += 1.0,1.0;
+        hap3_params.err_a0 += 1.0,1.0;
+        hap3_params.err_b0 += 1.0,10.0;
+        hap3_params.err_c0 += 1.0,1.0;
+        hap2_params.mut_a0 += 1.0,1.0,1.0;
+        hap2_params.mut_b0 += 0.1,10.0;
+        hap2_params.mut_c0 += 1.0,1.0;
+        hap2_params.err_a0 += 1.0,1.0;
+        hap2_params.err_b0 += 1.0,10.0;
+        hap2_params.err_c0 += 1.0,1.0;
         
         EMtol=1e-4;
     }
@@ -272,6 +300,7 @@ public:
         cout << "Observation model parameters: " << endl;
         obsParams.print();
     }
+    
     int noIndelWindow, numOutputTopHap, checkAllCIGARs, minReadOverlap, maxHapReadProd;
     uint32_t width, maxHap, maxReads, skipMaxHap, glfNumHap,  maxReadLength, minCount, fastWidth, fastWidthOverlap;
     double checkBaseQualThreshold;
@@ -281,7 +310,7 @@ public:
     bool outputRealignedBAM, outputGLF, varFileIsOneBased, changeINStoN;
     double analyzeLowFreqDiffThreshold;
     double meanInsert, stdInsert;
-    vector<double> a0, b0, c0;
+    Hap3Param hap3_params, hap2_params;
     ObservationModelParameters obsParams;
 };
 

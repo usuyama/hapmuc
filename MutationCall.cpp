@@ -40,12 +40,19 @@
 #include "MutationCall.hpp"
 #include "EMBasic.hpp"
 #include "MutationModel.hpp"
+#include <boost/lexical_cast.hpp>
+#include <stdlib.h>
 
 namespace MutationCall
 {
-    void output_liktable(string id, const vector<double> & liks, Parameters params) {
+    string itos(int num) {
+        std::string str = boost::lexical_cast<std::string>(num);
+        return(str);
+    }
+    
+    void output_liktable(int index, string id, const vector<double> & liks, Parameters params) {
         //hap size=4
-        std::ofstream ofs((params.fileName+"."+id+".liks").c_str(), std::ios::out | std::ios::app);
+        std::ofstream ofs((params.fileName+"logs/"+itos(index)+"."+id+".liks").c_str(), std::ios::out | std::ios::app);
         int nr = liks.size() / 4;
         for(int i=0;i<nr;i++) {
             ofs << liks[i*4];
@@ -132,7 +139,7 @@ namespace MutationCall
 
     }
                     
-    void computeBayesFactors(const vector<Read> & normalReads, const vector<Read> & tumorReads, uint32_t pos, uint32_t leftPos, uint32_t rightPos, const AlignedCandidates & candidateVariants, OutputData & oData, Parameters params, string refSeq, string refSeqForAlign, vector<AlignedVariant> & close_somatic, vector<AlignedVariant>& close_germline)
+    void computeBayesFactors(const vector<Read> & normalReads, const vector<Read> & tumorReads, uint32_t pos, uint32_t leftPos, uint32_t rightPos, const AlignedCandidates & candidateVariants, OutputData & oData, Parameters params, string refSeq, string refSeqForAlign, vector<AlignedVariant> & close_somatic, vector<AlignedVariant>& close_germline, int index)
     {
         cout << "computeBayesFactor" << endl;
         vector<Haplotype> haps;
@@ -167,7 +174,7 @@ namespace MutationCall
         cout.flush();
         filteredMergedReads.insert(filteredMergedReads.end(), filteredNormalReads.begin(), filteredNormalReads.end());
         filteredMergedReads.insert(filteredMergedReads.end(), filteredTumorReads.begin(), filteredTumorReads.end());
-        double hap2_bf = calc_hap2_bf_with_hap3(filteredNormalReads, filteredTumorReads, pos, leftPos, rightPos, candidateVariants, params, refSeq, refSeqForAlign, 1.0, 1.0, 1.0, normal_her_hap2, tumor_her_hap2, merged_her_hap2);
+        double hap2_bf = calc_hap2_bf_with_hap3(filteredNormalReads, filteredTumorReads, pos, leftPos, rightPos, candidateVariants, params, refSeq, refSeqForAlign, 1.0, 1.0, 1.0, normal_her_hap2, tumor_her_hap2, merged_her_hap2, index);
         if (close_germline.size() != 0) {
             //close_somaticは空
             //close_germlineは、targetに最も近いものを採用する
@@ -201,7 +208,7 @@ namespace MutationCall
                 cout << " " << v.getStartHap() << "," << v.getString();
             }*/
             if(haps.size()==4) {
-                cout << "************ hap4 **************" << endl << "haps: " << haps.size() <<  endl;
+                //cout << "************ hap4 **************" << endl << "haps: " << haps.size() <<  endl;
                 int nrt = filteredTumorReads.size(), nrn=filteredNormalReads.size();
                 vector<double> rlt(nrt*4), rln(nrn*4);
                 int idx=0;
@@ -212,14 +219,14 @@ namespace MutationCall
                 for (size_t r=0;r<nrn;r++) {
                     for (size_t h=0;h<4;h++) { rln[idx] = normal_liks[h][r].ll;idx++; }
                 }
-                output_liktable("hap3_tumor", rlt, params);
-                output_liktable("hap3_normal", rln, params);
-                MutationModel::estimate(haps, filteredTumorReads, filteredNormalReads, rlt, rln, tumorHapFreqs, normalHapFreqs, tumor_her, normal_her, pos, leftPos, rightPos, candidateVariants, mm_lb, params.hap3_params, "mutation", params.fileName+".hap3.mutation");
-                output_mm(haps, (params.fileName+".mm.txt"), leftPos, rightPos, 0.0, mm_lb, normalHapFreqs, tumorHapFreqs);
-                MutationModel::estimate(haps, filteredTumorReads, filteredNormalReads, rlt, rln, non_tumorHapFreqs, non_normalHapFreqs, non_tumor_her, non_normal_her, pos, leftPos, rightPos, candidateVariants, nmm_lb, params.hap3_params, "non-mutation",params.fileName+".hap3.err");
-                output_mm(haps, (params.fileName+".non-mm.txt"), leftPos, rightPos, 0.0, nmm_lb, non_normalHapFreqs, non_tumorHapFreqs);
+                output_liktable(index, "hap3_tumor", rlt, params);
+                output_liktable(index, "hap3_normal", rln, params);
+                MutationModel::estimate(haps, filteredTumorReads, filteredNormalReads, rlt, rln, tumorHapFreqs, normalHapFreqs, tumor_her, normal_her, pos, leftPos, rightPos, candidateVariants, mm_lb, params.hap3_params, "mutation", params.fileName+"logs/"+itos(index)+".hap3.mutation");
+               // output_mm(haps, (params.fileName+".mm.txt"), leftPos, rightPos, 0.0, mm_lb, normalHapFreqs, tumorHapFreqs);
+                MutationModel::estimate(haps, filteredTumorReads, filteredNormalReads, rlt, rln, non_tumorHapFreqs, non_normalHapFreqs, non_tumor_her, non_normal_her, pos, leftPos, rightPos, candidateVariants, nmm_lb, params.hap3_params, "error",params.fileName+"logs/"+itos(index)+".hap3.err");
+               // output_mm(haps, (params.fileName+".non-mm.txt"), leftPos, rightPos, 0.0, nmm_lb, non_normalHapFreqs, non_tumorHapFreqs);
                 bf2 = mm_lb.lower_bound - nmm_lb.lower_bound;
-                cout << "**** hap4 done ***" << endl;
+                //cout << "**** hap4 done ***" << endl;
             }
         }
         if(tumor_her.empty()) {            
@@ -227,7 +234,7 @@ namespace MutationCall
             normal_her.swap(normal_her_hap2);
         }
         for(int i=0;i<tumor_her.size();i++) {
-            cout << i;
+           // cout << i;
             HapEstResult &n_result = normal_her[i];
             HapEstResult &t_result = tumor_her[i];
             string chr = params.tid;
@@ -294,7 +301,7 @@ namespace MutationCall
     }
     
     
-    double calc_hap2_bf_with_hap3(const vector<Read> & normalReads, const vector<Read> & tumorReads, uint32_t pos, uint32_t leftPos, uint32_t rightPos, const AlignedCandidates & candidateVariants, Parameters params, string refSeq, string refSeqForAlign, double a0, double b0, double free_a0, vector<HapEstResult> &normal_her, vector<HapEstResult> &tumor_her, vector<HapEstResult> &merged_her) {
+    double calc_hap2_bf_with_hap3(const vector<Read> & normalReads, const vector<Read> & tumorReads, uint32_t pos, uint32_t leftPos, uint32_t rightPos, const AlignedCandidates & candidateVariants, Parameters params, string refSeq, string refSeqForAlign, double a0, double b0, double free_a0, vector<HapEstResult> &normal_her, vector<HapEstResult> &tumor_her, vector<HapEstResult> &merged_her, int index) {
         cout << "********** calc_hap2_bf_with_hap3 ***********" << endl;
         // hap1とhap2、hap3とhap4は同じとする。 (つまり、届く範囲にhetero germline snpはない場合)
         vector<Haplotype> haps;
@@ -317,8 +324,8 @@ namespace MutationCall
                 rln[idx] = normal_liks[h][r].ll;idx++;
             }
         }
-        output_liktable("hap2_tumor", rlt, params);
-        output_liktable("hap2_normal", rln, params);
+        output_liktable(index, "hap2_tumor", rlt, params);
+        output_liktable(index, "hap2_normal", rln, params);
         //4本用意する
         vector<Haplotype>::iterator it = haps.begin();
         haps.insert(it, haps[0]);
@@ -327,10 +334,10 @@ namespace MutationCall
         vector<double> normalHapFreqs, tumorHapFreqs, non_tumorHapFreqs, non_normalHapFreqs;
         vector<HapEstResult> non_tumor_her, non_normal_her;
         lower_bound_t mm_lb, nmm_lb;
-        MutationModel::estimate(haps, tumorReads, normalReads, rlt, rln, tumorHapFreqs, normalHapFreqs, tumor_her, normal_her, pos, leftPos, rightPos, candidateVariants, mm_lb, params.hap2_params, "mutation", params.fileName+".hap2.mutation");
-        output_mm(haps, (params.fileName+".mm.txt"), leftPos, rightPos, 0.0, mm_lb, normalHapFreqs, tumorHapFreqs);
-        MutationModel::estimate(haps, tumorReads, normalReads, rlt, rln, non_tumorHapFreqs, non_normalHapFreqs, non_tumor_her, non_normal_her, pos, leftPos, rightPos, candidateVariants, nmm_lb, params.hap2_params, "non-mutation",params.fileName+".hap2.err");
-        output_mm(haps, (params.fileName+".non-mm.txt"), leftPos, rightPos, 0.0, nmm_lb, non_normalHapFreqs, non_tumorHapFreqs);
+        MutationModel::estimate(haps, tumorReads, normalReads, rlt, rln, tumorHapFreqs, normalHapFreqs, tumor_her, normal_her, pos, leftPos, rightPos, candidateVariants, mm_lb, params.hap2_params, "mutation", params.fileName+"logs/"+itos(index)+".hap2.mutation");
+        //output_mm(haps, (params.fileName+".mm.txt"), leftPos, rightPos, 0.0, mm_lb, normalHapFreqs, tumorHapFreqs);
+        MutationModel::estimate(haps, tumorReads, normalReads, rlt, rln, non_tumorHapFreqs, non_normalHapFreqs, non_tumor_her, non_normal_her, pos, leftPos, rightPos, candidateVariants, nmm_lb, params.hap2_params, "error",params.fileName+"logs/"+itos(index)+".hap2.err");
+        //output_mm(haps, (params.fileName+".non-mm.txt"), leftPos, rightPos, 0.0, nmm_lb, non_normalHapFreqs, non_tumorHapFreqs);
         double bf = mm_lb.lower_bound - nmm_lb.lower_bound;
         return bf;
     }

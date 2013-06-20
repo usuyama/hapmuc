@@ -558,7 +558,7 @@ void HapMuC::mutationCall(const string & variantsFileName)
     
 	// NOTE ReadBuffer should be reset on first usage or on chromosome change!
 	bool resetReadBuffer = true;
-    
+    system(("mkdir -p " + params.fileName + "logs").c_str());
 	while(getline(varfile, line)) {
         vector<AlignedVariant> close_somatic_vars, close_germline_vars;
 		AlignedCandidates candidateVariants = getCandidateVariants(line, close_somatic_vars, close_germline_vars);
@@ -608,7 +608,7 @@ void HapMuC::mutationCall(const string & variantsFileName)
             uint32_t re=rightPos+params.minReadOverlap;
             string refSeq=getRefSeq(rs+1, re+1);
             string refSeqForAlign=getRefSeq(leftPos+1, rightPos+1);
-            MutationCall::computeBayesFactors(normalReads, tumorReads, pos, leftPos, rightPos, candidateVariants, oData, params, refSeq, refSeqForAlign, close_somatic_vars, close_germline_vars);
+            MutationCall::computeBayesFactors(normalReads, tumorReads, pos, leftPos, rightPos, candidateVariants, oData, params, refSeq, refSeqForAlign, close_somatic_vars, close_germline_vars, index);
             cout << "after read size: n, t =" << normalReads.size() << " " << tumorReads.size() << endl;
             
 		}

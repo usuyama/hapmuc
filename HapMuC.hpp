@@ -155,7 +155,7 @@ public:
         width=30;
         maxHap=100;
         skipMaxHap=1000;
-        maxReads=500;
+        maxReads=10000;
         mapQualThreshold=0.995;
         glfNumHap=5;
         inferenceMethod="empirical";

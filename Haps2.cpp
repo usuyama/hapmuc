@@ -156,44 +156,48 @@ namespace Haps2 {
         return rm_dup_seqs(haps);
     }
     
-    
-    vector<Haplotype> getAdditionalHaps(string refSeq, string refSeqForAlign, uint32_t & leftPos, uint32_t & rightPos, vector<AlignedVariant> variants, vector<vector<AlignedVariant> > current, Parameters params) {
-        vector<string> seqs = getAdditionalCombSeq(refSeqForAlign, leftPos, rightPos, variants, current, params);
-        sort( seqs.begin(), seqs.end() );
-        seqs.erase( unique( seqs.begin(), seqs.end() ), seqs.end() );
-        vector<Haplotype> haps;
-        BOOST_FOREACH(string s, seqs) {
-            Haplotype h;
-            h.seq = s;
-            h.freq=1.0;
-            h.nfreq=1.0;
-            h.type=Haplotype::Normal;
-            haps.push_back(h);
-        }
-        map<int, std::set<AlignedVariant> > var_map;
-        alignHaplotypes(haps, leftPos, rightPos, var_map, params, refSeqForAlign);
-        // remove duplicate reference-haplotypes of different length
-        vector<Haplotype> tmp_haps;
-		bool foundRef = false;
-		for (size_t th=0;th<haps.size();th++) {
-			const Haplotype & hap=haps[th];
-			int num_indels =  hap.countIndels();
-			int num_snps = hap.countSNPs();
-			if (num_indels == 0 && num_snps == 0) {
-				if (!foundRef) {
-					tmp_haps.push_back(Haplotype(haps[th]));
-					foundRef = true;
-				}
-			} else {
-				tmp_haps.push_back(Haplotype(haps[th]));
+
+	bool getAdditionalHaps(vector<Haplotype> &haps, string refSeq, string refSeqForAlign, uint32_t & leftPos, uint32_t & rightPos, vector<AlignedVariant> variants, vector<vector<AlignedVariant> > current, Parameters params) {
+			cout << "getAdditionalHaps" << endl;
+			haps.clear();
+			vector<string> seqs = getAdditionalCombSeq(refSeqForAlign, leftPos, rightPos, variants, current, params);
+			sort( seqs.begin(), seqs.end() );
+			seqs.erase( unique( seqs.begin(), seqs.end() ), seqs.end() );
+			vector<Haplotype> tmp_haps;
+			BOOST_FOREACH(string s, seqs) {
+					cout << s << endl;
+					Haplotype h;
+					h.seq = s;
+					h.freq=1.0;
+					h.nfreq=1.0;
+					h.type=Haplotype::Normal;
+					tmp_haps.push_back(h);
 			}
-		}
-        haps.swap(tmp_haps);
-        BOOST_FOREACH(Haplotype h, haps) {
-            cout << h.seq << endl;
-        }
-        return haps;
-    }
+			map<int, std::set<AlignedVariant> > var_map;
+			alignHaplotypes(tmp_haps, leftPos, rightPos, var_map, params, refSeqForAlign);
+			// remove duplicate reference-haplotypes of different length
+			bool foundRef = false;
+			for (size_t th=0;th<tmp_haps.size();th++) {
+					const Haplotype & hap=tmp_haps[th];
+					int num_indels =  hap.countIndels();
+					int num_snps = hap.countSNPs();
+					cout << th << " #indels" << num_indels << " #snps" << num_snps << endl;
+					if (num_indels == 0 && num_snps == 0) {
+							if (!foundRef) {
+									haps.push_back(Haplotype(tmp_haps[th]));
+									foundRef = true;
+							}
+					} else {
+							haps.push_back(Haplotype(tmp_haps[th]));
+					}
+			}
+			BOOST_FOREACH(Haplotype h, haps) {
+				cout << h.seq << endl;
+			}
+			cout << haps.size() << endl;
+			cout << "getAdditionalHaps fin" << endl;
+			return true;
+	}
     
     vector<AlignedVariant> get_hap_vars(Haplotype h, int leftPos) {
         vector<AlignedVariant> tav;
@@ -248,7 +252,9 @@ namespace Haps2 {
             }
         }
         vector<vector<AlignedVariant> > tmp_avs;
-        vector<Haplotype> normal_haps = getAdditionalHaps(refSeq, refSeqForAlign, leftPos, rightPos, close_germline, tmp_avs, params);
+        vector<Haplotype> normal_haps;
+		getAdditionalHaps(normal_haps, refSeq, refSeqForAlign, leftPos, rightPos, close_germline, tmp_avs, params);
+		cout << normal_haps.size() << endl;
         vector<Haplotype> tmp_haps;
         vector<vector<MLAlignment> > tmp_liks;
         if(normal_haps.size() > params.skipMaxHap) {
@@ -259,11 +265,12 @@ namespace Haps2 {
         vector<int> onHap(normal_reads.size(),1); // which reads were mapped inside the haplotype window given an artificially high mapping quality
         vector<double> normal_hap_freqs;vector<HapEstResult> normal_her;map<AlignedVariant, double> normal_vpp;lower_bound_t normal_lb;
         vector<HapFreqPair> freq_pairs;
-        if(normal_haps.size() == 1) {
+        if(normal_haps.size() < 2) {
             cout << "no close germline vars: only ref hap in normal" << endl;
+			throw(string("#normal_haps < 2 in getHaplotypes"));
         } else {
             Haps::computeLikelihoods(normal_haps, normal_reads, normal_liks, leftPos, rightPos, onHap, params);
-            EMBasic::estimate(normal_haps, normal_reads, normal_liks, normal_hap_freqs, normal_her, pos, leftPos, rightPos, candidateVariants, normal_lb, normal_vpp, 0.001, "all", params);
+            EMBasic::estimate(normal_haps, normal_reads, normal_liks, normal_hap_freqs, normal_her, pos, leftPos, rightPos, candidateVariants, normal_lb, normal_vpp, 0.1, "all", params);
             int i = 0;
             for(int k=0;k < normal_haps.size();k++) {
                 if(normal_hap_freqs[k]>0.12) { 
@@ -320,7 +327,8 @@ namespace Haps2 {
         cout << "normal hap decided" << endl;
         vector<AlignedVariant> somatic_vars(close_somatic);
         somatic_vars.push_back(candidateVariants.variants[0]);
-        vector<Haplotype> merged_haps = getAdditionalHaps(refSeq, refSeqForAlign, leftPos, rightPos, somatic_vars, normal_vars, params);
+        vector<Haplotype> merged_haps;
+		getAdditionalHaps(merged_haps, refSeq, refSeqForAlign, leftPos, rightPos, somatic_vars, normal_vars, params);
         if(merged_haps.size() > params.skipMaxHap) {
             cerr << "tid: " << params.tid << " pos: " << pos << " too many haplotypes [(" << merged_haps.size() << ")]" << endl;
             throw string("too many merged candidate haplotypes");
@@ -441,13 +449,18 @@ namespace Haps2 {
     
     bool getHaplotypesBasic(vector<Haplotype> &haps, const vector<Read> & normal_reads, const vector<Read> & tumor_reads, uint32_t pos, uint32_t & leftPos, uint32_t & rightPos, const AlignedCandidates & candidateVariants, Parameters params, string refSeq, string refSeqForAlign, vector<vector<MLAlignment> > & normal_liks, vector<vector<MLAlignment> > & tumor_liks) {
         //2本だけ生成する
+		cout << "getHaplotypesBasic" << endl;
         typedef pair<int, AlignedVariant> PAV;
         vector<vector<AlignedVariant> > tmp_avs;
         vector<AlignedVariant> somatic_var;
         typedef map<int, AlignedVariant>::const_iterator It;
         somatic_var.push_back(candidateVariants.variants[0]);
-        haps = getAdditionalHaps(refSeq, refSeqForAlign, leftPos, rightPos, somatic_var, tmp_avs, params);
+        getAdditionalHaps(haps, refSeq, refSeqForAlign, leftPos, rightPos, somatic_var, tmp_avs, params);
+		if(haps.size() < 2) {
+				throw(string("#haps < 2 in getHaplotypesBasic"));
+		}
         //後半にtumor hapがあるかチェック
+		cout << haps.size() << endl;
         Haplotype &fhap = haps[0];
         bool check = true;
         for (It it=fhap.indels.begin();it!=fhap.indels.end();it++) {
@@ -544,12 +557,18 @@ namespace Haps2 {
             //			cout << "hap " << h << endl;om.printAlignment(20);
             //			cout << string(20,' ') << haps[h].align << endl;
             //	}
-            
-            for (map<int, AlignedVariant>::const_iterator it=haps[h].indels.begin(); it!=haps[h].indels.end();it++) variants[it->first].insert(it->second);
-            for (map<int, AlignedVariant>::const_iterator it=haps[h].snps.begin(); it!=haps[h].snps.end();it++) variants[it->first].insert(it->second);
-            if (!hasStartEndIndel) {
+           	cout << hasStartEndIndel << "hasStartEndIndel" << endl; 
+            for (map<int, AlignedVariant>::const_iterator it=haps[h].indels.begin(); it!=haps[h].indels.end();it++) {
+					variants[it->first].insert(it->second);
+					cout << it->second.getString() << endl;
+			}
+            for (map<int, AlignedVariant>::const_iterator it=haps[h].snps.begin(); it!=haps[h].snps.end();it++) {
+					variants[it->first].insert(it->second);
+					cout << it->second.getString() << endl;
+			}
+        //    if (!hasStartEndIndel) {
                 tmp_haps.push_back(haps[h]);
-            }
+        //    }
             
             
         }

@@ -633,18 +633,40 @@ void HapMuC::mutationCall(const string & variantsFileName)
         
 		if (skipped) {
 			cerr << "skipped " << params.tid << " " << pos << " reason: " << message << endl;
-			//OutputData::Line line(oData);
-			//line.set("msg", message);
-			//line.set("index", index);
-			//oData.output(line);
-            
-			OutputData::Line gline(glfData);
-			gline.set("msg", message);
-			gline.set("index", index);
-			gline.set("tid", params.tid);
-			gline.set("lpos", leftPos);
-			gline.set("rpos", rightPos);
-			glfData.output(gline);
+			OutputData::Line line(oData);
+			VariantInfo v = candidateVariants.variants[0].info;
+			line.set("chr", params.tid);
+			line.set("start", v.start);
+			line.set("end", v.end); 
+			line.set("ref", v.ref);
+			line.set("obs", v.obs);
+			line.set("ref_count_tumor", v.ref_count_tumor);
+			line.set("obs_count_tumor", v.obs_count_tumor);
+			line.set("ref_count_normal", v.ref_count_normal);
+			line.set("obs_count_normal", v.obs_count_normal);
+			line.set("missrate_tumor", v.missrate_tumor);
+			line.set("strandrate_tumor", v.strandrate_tumor);
+			line.set("missrate_normal", v.missrate_normal);
+			line.set("strandrate_normal", v.strandrate_normal);
+			line.set("fisher", v.fisher_score);
+			line.set("NN1", "-");
+			line.set("NN2", "-");
+			line.set("NN3", "-");
+			line.set("NN4", "-");
+			line.set("TN1", "-");
+			line.set("TN2", "-");
+			line.set("TN3", "-");
+			line.set("TN4", "-");
+			line.set("hap2_bf", "-");
+			line.set("bf2", "-");
+				
+			//OutputData::Line gline(glfData);
+			//gline.set("msg", message);
+			//gline.set("index", index);
+			//gline.set("tid", params.tid);
+			//gline.set("lpos", leftPos);
+			//gline.set("rpos", rightPos);
+			//glfData.output(gline);
             
 			// reset read buffer: all reads will be fetched again
 			resetReadBuffer = true;

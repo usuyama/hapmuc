@@ -69,6 +69,7 @@ namespace MutationModel {
             BOOST_FOREACH(double x, ar) { cout << x << " "; }
             cout << endl;
             cout << "sum: " << sum << endl;
+            cout.flush();
             throw;
         }
         return ans;

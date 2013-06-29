@@ -516,6 +516,7 @@ namespace EMBasic {
                     ak[h]=nk[h]+a0; // a0 is Dirichlet prior parameter
                     ahat+=ak[h];
                 }
+                try {
                 double dahat=boost::math::digamma(ahat);
                 
                 for (size_t h=0;h<nh;h++) {
@@ -531,6 +532,18 @@ namespace EMBasic {
                     //	cout << " " << pi[h];
                     //	zp+=exp(pi[h]);
                 }
+                    
+                } catch (std::exception& e) {
+                    string message = string("error_exception_").append(e.what());
+                    cout << message << endl;
+                    cout << "EMBasic digamma" << endl;
+                    BOOST_FOREACH(double x, ak) { cout << x << " "; }
+                    cout << endl;
+                    cout << "ahat: " << ahat << endl;
+                    cout.flush();
+                    throw;
+                }
+
                 //cout << " zp: " << zp << endl;
                 
                 

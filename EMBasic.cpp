@@ -127,7 +127,7 @@ namespace EMBasic {
         vector<lower_bound_t> lower_bounds;
         size_t nh=haps.size();
         size_t nr=reads.size();
-        
+        cout << "nh, nr" << nh << " " << nr << endl;
         vector<double> rl(nh*nr,0.0); // read given haplotype likelihoods
         vector<double> z(nh*nr,0.0); // expectations of read-haplotype indicator variables
         vector<double> pi(nh); // haplotype frequencies
@@ -152,7 +152,6 @@ namespace EMBasic {
                 if (reads[r].isUnmapped()) numUnmappedRealigned++;
             }
         }
-        cout << "EMBasic:test2" << endl;
         
         // filter reads
         vector<int> filtered(nh, 0);
@@ -536,7 +535,7 @@ namespace EMBasic {
                 } catch (std::exception& e) {
                     string message = string("error_exception_").append(e.what());
                     cout << message << endl;
-                    cout << "EMBasic digamma" << endl;
+                    cout << "EMBasic digamma" << endl << "ak: ";
                     BOOST_FOREACH(double x, ak) { cout << x << " "; }
                     cout << endl;
                     cout << "ahat: " << ahat << endl;

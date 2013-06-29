@@ -135,8 +135,10 @@ public:
 		freq=_freq;
 		addComb = _addComb;
 	}
-
-
+    
+    string print() const {
+        cout << getStartHap()<< getType() <<  getString() << endl;
+    }
 
 	bool isCovered(int pad, int firstBase, int lastBase) const
 	{

@@ -156,22 +156,37 @@ namespace Haps2 {
         return rm_dup_seqs(haps);
     }
     
-
-	bool getAdditionalHaps(vector<Haplotype> &haps, string refSeq, string refSeqForAlign, uint32_t & leftPos, uint32_t & rightPos, vector<AlignedVariant> variants, vector<vector<AlignedVariant> > current, Parameters params) {
-			cout << "getAdditionalHaps" << endl;
-			haps.clear();
-			vector<string> seqs = getAdditionalCombSeq(refSeqForAlign, leftPos, rightPos, variants, current, params);
-			sort( seqs.begin(), seqs.end() );
-			seqs.erase( unique( seqs.begin(), seqs.end() ), seqs.end() );
-			vector<Haplotype> tmp_haps;
-			BOOST_FOREACH(string s, seqs) {
-					cout << s << endl;
-					Haplotype h;
-					h.seq = s;
-					h.freq=1.0;
-					h.nfreq=1.0;
-					h.type=Haplotype::Normal;
-					tmp_haps.push_back(h);
+    vector<Haplotype> getAdditionalHaps(string refSeq, string refSeqForAlign, uint32_t & leftPos, uint32_t & rightPos, vector<AlignedVariant> variants, vector<vector<AlignedVariant> > current, Parameters params) {
+        vector<string> seqs = getAdditionalCombSeq(refSeqForAlign, leftPos, rightPos, variants, current, params);
+        sort( seqs.begin(), seqs.end() );
+        seqs.erase( unique( seqs.begin(), seqs.end() ), seqs.end() );
+        vector<Haplotype> haps;
+        BOOST_FOREACH(string s, seqs) {
+            Haplotype h;
+            h.seq = s;
+            h.freq=1.0;
+            h.nfreq=1.0;
+            h.type=Haplotype::Normal;
+            haps.push_back(h);
+        }
+        map<int, std::set<AlignedVariant> > var_map;
+        alignHaplotypes(haps, leftPos, rightPos, var_map, params, refSeqForAlign);
+        // remove duplicate reference-haplotypes of different length
+        cout << "test in getAdditionalHaps" << endl;
+        vector<Haplotype> tmp_haps;
+		bool foundRef = false;
+		for (size_t th=0;th<haps.size();th++) {
+			const Haplotype & hap=haps[th];
+			int num_indels =  hap.countIndels();
+			int num_snps = hap.countSNPs();
+            cout << th << " " << num_indels << " " << num_snps << endl;
+			if (num_indels == 0 && num_snps == 0) {
+				if (!foundRef) {
+					tmp_haps.push_back(Haplotype(haps[th]));
+					foundRef = true;
+				}
+			} else {
+				tmp_haps.push_back(Haplotype(haps[th]));
 			}
 			map<int, std::set<AlignedVariant> > var_map;
 			alignHaplotypes(tmp_haps, leftPos, rightPos, var_map, params, refSeqForAlign);
@@ -283,7 +298,6 @@ namespace Haps2 {
             }
             normal_haps.swap(tmp_haps);
             normal_liks.swap(tmp_liks);
-            cout << "test3" << endl;
             if(freq_pairs.size() > 1) {
                 cout << "two normal haps" << endl;
                 tmp_haps.clear();tmp_liks.clear();
@@ -554,21 +568,23 @@ namespace Haps2 {
             int hs = ml.hpos.size()-1;
             if (hs>0 && ml.hpos[hs] == MLAlignment::RO) hasStartEndIndel = true;
             //if (params.showCandHap) {
-            //			cout << "hap " << h << endl;om.printAlignment(20);
-            //			cout << string(20,' ') << haps[h].align << endl;
+            //      cout << "hap " << h << endl;om.printAlignment(20);
+            //		cout << string(20,' ') << haps[h].align << endl;
             //	}
-           	cout << hasStartEndIndel << "hasStartEndIndel" << endl; 
+            cout << "hap" << h << " " << haps[h].seq << endl;
+            cout << "hasStartEndIndel: " << hasStartEndIndel << endl;
+            
             for (map<int, AlignedVariant>::const_iterator it=haps[h].indels.begin(); it!=haps[h].indels.end();it++) {
-					variants[it->first].insert(it->second);
-					cout << it->second.getString() << endl;
-			}
+                variants[it->first].insert(it->second);
+                it->second.print();
+            }
             for (map<int, AlignedVariant>::const_iterator it=haps[h].snps.begin(); it!=haps[h].snps.end();it++) {
-					variants[it->first].insert(it->second);
-					cout << it->second.getString() << endl;
-			}
-        //    if (!hasStartEndIndel) {
+                variants[it->first].insert(it->second);
+                it->second.print();
+            }
+           // if (!hasStartEndIndel) {
                 tmp_haps.push_back(haps[h]);
-        //    }
+            //}
             
             
         }

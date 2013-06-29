@@ -127,7 +127,10 @@ namespace EMBasic {
         vector<lower_bound_t> lower_bounds;
         size_t nh=haps.size();
         size_t nr=reads.size();
-        cout << "nh, nr" << nh << " " << nr << endl;
+        cout << "nh, nr:" << nh << " " << nr << endl;
+        if (nh == 0) {
+            throw(string("num hap = 0 in EMBasic::estimate"));
+        } 
         vector<double> rl(nh*nr,0.0); // read given haplotype likelihoods
         vector<double> z(nh*nr,0.0); // expectations of read-haplotype indicator variables
         vector<double> pi(nh); // haplotype frequencies

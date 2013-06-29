@@ -57,9 +57,19 @@ namespace MutationModel {
     vector<double> cal_dir_exp(vector<double> ar) {
         double sum = sum_vec(ar);
         vector<double> ans(ar.size(), 0.0);
-        double dig_sum = boost::math::digamma(sum);
-        for(int i=0;i< ar.size();i++) {
-            ans[i]=boost::math::digamma(ar[i]) - dig_sum;
+        try {
+            double dig_sum = boost::math::digamma(sum);
+            for(int i=0;i< ar.size();i++) {
+                ans[i]=boost::math::digamma(ar[i]) - dig_sum;
+            }
+        } catch (std::exception& e) {
+            string message = string("error_exception_").append(e.what());
+            cout << message << endl;
+            cout << "cal_dir_exp" << endl;
+            BOOST_FOREACH(double x, ar) { cout << x << " "; }
+            cout << endl;
+            cout << "sum: " << sum << endl;
+            throw;
         }
         return ans;
     }

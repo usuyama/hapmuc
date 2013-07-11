@@ -191,6 +191,8 @@ namespace MutationCall
 				cout.flush();
 				double hap2_bf = -100;
 				bool hap2_flag = true, hap3_flag = true;
+            string closest_germline = "-";
+            int distance = -1;
 				try {
 						hap2_bf = calc_hap2_bf_with_hap3(normalReads, tumorReads, pos, leftPos, rightPos, candidateVariants, params, refSeq, refSeqForAlign, 1.0, 1.0, 1.0, normal_her_hap2, tumor_her_hap2, merged_her_hap2, index);
 				} catch (string s) {
@@ -217,6 +219,10 @@ namespace MutationCall
 										}
 								}
 								cout << "min " << min_dis << " " << min_index << endl;
+                            stringstream ss;
+                            ss << close_germline[min_index].getStartHap() << ":" << close_germline[min_index].getString();
+                            closest_germline = ss.str();
+                            distance = min_dis;
 								new_close_germline.push_back(close_germline[min_index]);
 								bool flag = Haps2::getHaplotypes(haps, normalReads, tumorReads, pos, leftPos, rightPos, candidateVariants, params, refSeq, refSeqForAlign, new_close_somatic, new_close_germline, normal_liks, tumor_liks);
 								if(haps.size()==4) {
@@ -312,6 +318,13 @@ namespace MutationCall
 						} else {
 								line.set("bf2", "-");
 						}
+                    if(closest_germline == "-") {
+                        line.set("closest_germline", "-");
+                        line.set("distance", "-");
+                    } else {
+                        line.set("closest_germline", closest_germline);
+                        line.set("distance", distance);
+                    }
 						oData.output(line);
 				}
 		}

@@ -238,6 +238,7 @@ public:
         oData("NN1")("NN2")("NN3")("NN4");
         oData("fisher");
         oData("hap2_bf")("bf2");
+        oData("closest_germline")("distance");
         return oData;
     }
       

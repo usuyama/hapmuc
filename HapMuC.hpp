@@ -154,8 +154,8 @@ public:
         bayesa0=0.1;
         width=30;
         maxHap=100;
-        skipMaxHap=1000;
-        maxReads=10000;
+        skipMaxHap=100;
+        maxReads=2000;
         mapQualThreshold=0.995;
         glfNumHap=5;
         inferenceMethod="empirical";

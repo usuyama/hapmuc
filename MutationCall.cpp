@@ -283,14 +283,25 @@ namespace MutationCall
 						line.set("missrate_normal", v.missrate_normal);
 						line.set("strandrate_normal", v.strandrate_normal);
 						line.set("fisher", v.fisher_score);
-						line.set("NN1", n_result.N1);
-						line.set("NN2", n_result.N2);
-						line.set("NN3", n_result.N3);
-						line.set("NN4", n_result.N4);
-						line.set("TN1", t_result.N1);
-						line.set("TN2", t_result.N2);
-						line.set("TN3", t_result.N3);
-						line.set("TN4", t_result.N4);
+						if(hap2_flag==false && hap3_flag==false) {
+								line.set("NN1", "-");
+								line.set("NN2", "-");
+								line.set("NN3", "-");
+								line.set("NN4", "-");
+								line.set("TN1", "-");
+								line.set("TN2", "-");
+								line.set("TN3", "-");
+								line.set("TN4", "-");
+						} else {
+								line.set("NN1", n_result.N1);
+								line.set("NN2", n_result.N2);
+								line.set("NN3", n_result.N3);
+								line.set("NN4", n_result.N4);
+								line.set("TN1", t_result.N1);
+								line.set("TN2", t_result.N2);
+								line.set("TN3", t_result.N3);
+								line.set("TN4", t_result.N4);
+						}
 						if(hap2_flag) {
 								line.set("hap2_bf", hap2_bf);
 						} else {

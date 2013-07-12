@@ -169,6 +169,11 @@ namespace MutationCall
 				vector<vector<MLAlignment> > liks;
 				vector<HapPairLik> likPairs;
 
+            cout << "check for long indel" << endl;
+            if(candidateVariants.variants[0].getString().length() > 20) { // TODO: magic number
+                throw string("too long indel." + candidateVariants.variants[0].getString());
+            }
+            
 				typedef map<int, AlignedVariant>::const_iterator It;
 
 				// NOTE leftPos will be the left position of the reference sequence each haplotype will be aligned to

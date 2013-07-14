@@ -659,8 +659,8 @@ void HapMuC::mutationCall(const string & variantsFileName)
 			line.set("TN4", "-");
 			line.set("hap2_bf", "-");
 			line.set("bf2", "-");
-			oData.output(line);
-				
+            line.set("closest_germline", "-");
+            line.set("distance", "-");
 			//OutputData::Line gline(glfData);
 			//gline.set("msg", message);
 			//gline.set("index", index);

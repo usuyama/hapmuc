@@ -164,7 +164,7 @@ namespace MutationCall
 
 		void computeBayesFactors(const vector<Read> & normalReads, const vector<Read> & tumorReads, uint32_t pos, uint32_t leftPos, uint32_t rightPos, const AlignedCandidates & candidateVariants, OutputData & oData, Parameters params, string refSeq, string refSeqForAlign, vector<AlignedVariant> & close_somatic, vector<AlignedVariant>& close_germline, int index)
 		{
-				cout << "computeBayesFactor" << endl;
+				cout << "computeBayesFactor: " << index << endl;
 				vector<Haplotype> haps;
 				vector<vector<MLAlignment> > liks;
 				vector<HapPairLik> likPairs;
@@ -257,7 +257,10 @@ namespace MutationCall
 										//output_mm(haps, (params.fileName+".non-mm.txt"), leftPos, rightPos, 0.0, nmm_lb, non_normalHapFreqs, non_tumorHapFreqs);
 										bf2 = mm_lb.lower_bound - nmm_lb.lower_bound;
 										//cout << "**** hap4 done ***" << endl;
-								}
+								} else {
+                                    hap3_flag = false;
+                                    cout << "error_" << "haps.size() != 4 in hap3" << endl;
+                                }
 						}
 				} catch (string s) {
 						cout << "error_" << s << endl;
@@ -271,8 +274,42 @@ namespace MutationCall
 						tumor_her.swap(tumor_her_hap2);
 						normal_her.swap(normal_her_hap2);
 				}
+            cout << "output" << endl;
+            if(tumor_her.empty()) {
+                const VariantInfo &v = candidateVariants.variants[0].info;
+                int pos = v.start;
+                int end = v.end;
+                OutputData::Line line(oData);
+                line.set("chr", params.tid);
+                line.set("start", pos);
+                line.set("end", end); 
+                line.set("ref", v.ref);
+                line.set("obs", v.obs);
+                line.set("ref_count_tumor", v.ref_count_tumor);
+                line.set("obs_count_tumor", v.obs_count_tumor);
+                line.set("ref_count_normal", v.ref_count_normal);
+                line.set("obs_count_normal", v.obs_count_normal);
+                line.set("missrate_tumor", v.missrate_tumor);
+                line.set("strandrate_tumor", v.strandrate_tumor);
+                line.set("missrate_normal", v.missrate_normal);
+                line.set("strandrate_normal", v.strandrate_normal);
+                line.set("fisher", v.fisher_score);
+                line.set("NN1", "-");
+                line.set("NN2", "-");
+                line.set("NN3", "-");
+                line.set("NN4", "-");
+                line.set("TN1", "-");
+                line.set("TN2", "-");
+                line.set("TN3", "-");
+                line.set("TN4", "-");
+                line.set("hap2_bf", "-");
+                line.set("bf2", "-");
+                line.set("closest_germline", "-");
+                line.set("distance", "-");
+                oData.output(line);
+            } else {
 				for(int i=0;i<tumor_her.size();i++) {
-						// cout << i;
+						cout << i;
 						HapEstResult &n_result = normal_her[i];
 						HapEstResult &t_result = tumor_her[i];
 						string chr = params.tid;
@@ -318,7 +355,7 @@ namespace MutationCall
 						} else {
 								line.set("hap2_bf", "-");
 						}
-						if(haps.size()==4 && hap3_flag){
+						if(hap3_flag){
 								line.set("bf2", bf2);
 						} else {
 								line.set("bf2", "-");
@@ -332,6 +369,7 @@ namespace MutationCall
                     }
 						oData.output(line);
 				}
+            }
 		}
 
 		double calc_bf(const vector<Haplotype> &haps, const vector<vector<MLAlignment> > &normal_liks, const vector<vector<MLAlignment> > tumor_liks, const vector<Read> & normalReads, const vector<Read> & tumorReads, const vector<Read> & mergedReads, uint32_t pos, uint32_t leftPos, uint32_t rightPos, const AlignedCandidates & candidateVariants, Parameters params, string refSeq, string refSeqForAlign, double a0, double b0, double free_a0, vector<HapEstResult> &normal_her, vector<HapEstResult> &tumor_her, vector<HapEstResult> &merged_her) {

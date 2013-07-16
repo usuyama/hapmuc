@@ -207,8 +207,9 @@ void HapMuC::getReadsFromBams(vector<MyBam *> & Bams, uint32_t leftPos, uint32_t
 	}
     
 	// add new reads to readBuffer
-    
+            cout << "check getReads" << endl;
 	for (size_t r=0;r<newReads.size();r++) {
+        cout << newReads[r].seq_name << endl;
 		if (newReads[r].getBam()->core.pos>=leftFetchReadPos) {
 			// only store reads that do not overlap with the boundary;
 			// reads overlapping with boundary will have been picked up before.

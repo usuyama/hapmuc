@@ -76,7 +76,7 @@ namespace MutationCall
 						cout << max << " " << min << endl;
 						if((max-min)<0.001) {
 								//filter this read
-								cout << "filter read: " << i << " " << max << " " << min << endl;
+								cout << "filter read: " << reads[i].seq_name << " " << i << " " << max << " " << min << endl;
 								reads.erase(reads.begin()+i);
 								liks.erase(liks.begin()+i*4, liks.begin()+i*4+4);
 								i--;

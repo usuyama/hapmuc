@@ -61,7 +61,7 @@ namespace Haps2 {
                 if(l > max) max = l;
                 if(l < min) min = l;
             }
-            cout << i << ": max, min " << max << ", " << min << endl;
+            cout << reads[i].seq_name << " " << i << ": max, min " << max << ", " << min << endl;
             if(max - min < 0.001) {
                 // we couldnt distinguish sources of reads
                 reads.erase(reads.begin()+i);

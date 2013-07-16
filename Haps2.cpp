@@ -62,7 +62,7 @@ namespace Haps2 {
                 if(l < min) min = l;
             }
             cout << i << ": max, min " << max << ", " << min << endl;
-            if(max - min < 0.01) {
+            if(max - min < 0.001) {
                 // we couldnt distinguish sources of reads
                 reads.erase(reads.begin()+i);
                 for(int k = 0;k < nh;k++)
@@ -330,7 +330,7 @@ namespace Haps2 {
         vector<int> on_hap_tumor(tumor_reads.size(),1); // which reads were mapped inside the haplotype window given an artificially high mapping quality
         Haps::computeLikelihoods(merged_haps, tumor_reads, tumor_liks, leftPos, rightPos, on_hap_tumor, params);
         vector<double> tumor_hap_freqs;vector<HapEstResult> tumor_her;map<AlignedVariant, double> tumor_vpp;lower_bound_t tumor_lb;
-        EMBasic::estimate(merged_haps, tumor_reads, tumor_liks, tumor_hap_freqs, tumor_her, pos, leftPos, rightPos, candidateVariants, tumor_lb, tumor_vpp, 0.001, "all", params);
+        EMBasic::estimate(merged_haps, tumor_reads, tumor_liks, tumor_hap_freqs, tumor_her, pos, leftPos, rightPos, candidateVariants, tumor_lb, tumor_vpp, 1.0, "all", params);
         freq_pairs.clear();
         //find top tumor hap
         tmp_haps.clear();

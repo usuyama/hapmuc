@@ -74,7 +74,7 @@ namespace MutationCall
 								if(liks[i*4+j]<min) min = liks[i*4+j];
 						}
 						cout << max << " " << min << endl;
-						if((max-min)<0.1) {
+						if((max-min)<0.001) {
 								//filter this read
 								cout << "filter read: " << i << " " << max << " " << min << endl;
 								reads.erase(reads.begin()+i);
@@ -121,8 +121,8 @@ namespace MutationCall
 				vector<HapEstResult> tumor_her, normal_her;
 				map<AlignedVariant, double> normal_vpp, tumor_vpp;
 				lower_bound_t normal_lb, tumor_lb;
-				EMBasic::estimate(haps, tumor_reads, tumor_liks, tumor_hap_freqs, tumor_her, pos, leftPos, rightPos, candidateVariants, tumor_lb, tumor_vpp, 0.01, "all", params);
-				EMBasic::estimate(haps, normal_reads, normal_liks, normal_hap_freqs, normal_her, pos, leftPos, rightPos, candidateVariants, normal_lb, normal_vpp, 0.01, "all", params);
+				EMBasic::estimate(haps, tumor_reads, tumor_liks, tumor_hap_freqs, tumor_her, pos, leftPos, rightPos, candidateVariants, tumor_lb, tumor_vpp, 1.0, "all", params);
+				EMBasic::estimate(haps, normal_reads, normal_liks, normal_hap_freqs, normal_her, pos, leftPos, rightPos, candidateVariants, normal_lb, normal_vpp, 1.0, "all", params);
 				std::ofstream ofs(fname.c_str(), std::ios::out | std::ios::app);
 				ofs << pos << "\t";
 				if(haps.size() == 2) {
@@ -387,9 +387,9 @@ namespace MutationCall
 				map<AlignedVariant, double> merged_vpp;
 				map<AlignedVariant, double> normal_vpp;
 				map<AlignedVariant, double> tumor_vpp;
-				EMBasic::estimate(haps, normalReads, normal_liks, normalHapFreqs, normal_her, pos, leftPos, rightPos, candidateVariants, normal_lb, normal_vpp,  0.1, "all", params);        
-				EMBasic::estimate(haps, tumorReads, tumor_liks, tumorHapFreqs, tumor_her, pos, leftPos, rightPos, candidateVariants, tumor_lb, tumor_vpp, 0.1, "all", params);
-				EMBasic::estimate(haps, mergedReads, liks, mergedHapFreqs, merged_her, pos, leftPos, rightPos, candidateVariants, merged_lb, merged_vpp,  0.1, "all", params);
+				EMBasic::estimate(haps, normalReads, normal_liks, normalHapFreqs, normal_her, pos, leftPos, rightPos, candidateVariants, normal_lb, normal_vpp,  1.0, "all", params);        
+				EMBasic::estimate(haps, tumorReads, tumor_liks, tumorHapFreqs, tumor_her, pos, leftPos, rightPos, candidateVariants, tumor_lb, tumor_vpp, 1.0, "all", params);
+				EMBasic::estimate(haps, mergedReads, liks, mergedHapFreqs, merged_her, pos, leftPos, rightPos, candidateVariants, merged_lb, merged_vpp,  1.0, "all", params);
 				double bf = normal_lb.lower_bound + tumor_lb.lower_bound - merged_lb.lower_bound;
 				outputLowerBounds(haps, (params.fileName+".basic_haplotypes.txt"), leftPos, rightPos, bf, normal_lb, tumor_lb, merged_lb, normalHapFreqs, tumorHapFreqs, mergedHapFreqs);
 				return bf;

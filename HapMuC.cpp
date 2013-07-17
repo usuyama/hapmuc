@@ -207,9 +207,9 @@ void HapMuC::getReadsFromBams(vector<MyBam *> & Bams, uint32_t leftPos, uint32_t
 	}
     
 	// add new reads to readBuffer
-            cout << "check getReads" << endl;
+	//cout << "check getReads" << endl;
 	for (size_t r=0;r<newReads.size();r++) {
-        cout << newReads[r].seq_name << endl;
+       // cout << newReads[r].seq_name << endl;
 		if (newReads[r].getBam()->core.pos>=leftFetchReadPos) {
 			// only store reads that do not overlap with the boundary;
 			// reads overlapping with boundary will have been picked up before.
@@ -227,7 +227,7 @@ void HapMuC::getReadsFromBams(vector<MyBam *> & Bams, uint32_t leftPos, uint32_t
 		for (size_t r=0;r<tmpReads.size();r++) {
 			if (tmpReads[r].getBam()->core.pos>=leftMostReadPos) {
 				string qname = string(bam1_qname(tmpReads[r].getBam()));
-				cout << "glp: "  << leftPos << " qname: " << qname << " pos: " << tmpReads[r].pos << " end: " << tmpReads[r].getEndPos() << endl;
+	//			cout << "glp: "  << leftPos << " qname: " << qname << " pos: " << tmpReads[r].pos << " end: " << tmpReads[r].getEndPos() << endl;
 			}
 		}
 	}
@@ -261,23 +261,21 @@ void HapMuC::getReadsFromBams(vector<MyBam *> & Bams, uint32_t leftPos, uint32_t
     
     
 	// copy readBuffer to reads
-    
 	for (size_t r=0;r<readBuffer.size();r++) {
 		reads.push_back(Read(*readBuffer[r]));
 	}
     
     
 	// get query names
-    
 	vector<int> unmapped;
 	for (size_t r=0; r<reads.size();r++) {
 		if (reads[r].isUnmapped())  {
 			unmapped.push_back(r);
 			unmapped_name_to_idx[ string(bam1_qname(reads[r].getBam())) ].push_back(r);
-            //	 cout << " __reads[" << r  << "]: " << bam1_qname(reads[r].getBam()) << " UNMAPPED" << endl;
+      //cout << " __reads[" << r  << "]: " << bam1_qname(reads[r].getBam()) << " UNMAPPED" << endl;
 		} else {
 			mapped_name_to_idx[ string(bam1_qname(reads[r].getBam())) ].push_back(r);
-            //	cout << " __reads[" << r  << "]: " << bam1_qname(reads[r].getBam()) << " pos: " << reads[r].pos << " " << reads[r].getBam()->core.pos << " mpos: " << reads[r].getBam()->core.mpos << " mu: " << reads[r].mateIsUnmapped() << endl;
+      //cout << " __reads[" << r  << "]: " << bam1_qname(reads[r].getBam()) << " pos: " << reads[r].pos << " " << reads[r].getBam()->core.pos << " mpos: " << reads[r].getBam()->core.mpos << " mu: " << reads[r].mateIsUnmapped() << endl;
 		}
 	}
     
@@ -301,8 +299,9 @@ void HapMuC::getReadsFromBams(vector<MyBam *> & Bams, uint32_t leftPos, uint32_t
 	double minMapQual = params.mapQualThreshold;
 	if (minMapQual<0.0) minMapQual=0.0;
 	for (int r=0;r<int(reads.size());r++) {
-		//cout << "***" << endl;
+		//cout << "*** " << reads[r].seq_name << endl;
 		//cout << "reads.mapQual " << reads[r].mapQual <<  " bq: " << reads[r].getBam()->core.qual << endl;
+		string qname = string(bam1_qname(reads[r].getBam()));
 		bool filter = false;
 		int tf = 0;
 		if (reads[r].size()>params.maxReadLength) filter=true;
@@ -310,15 +309,15 @@ void HapMuC::getReadsFromBams(vector<MyBam *> & Bams, uint32_t leftPos, uint32_t
 		if (reads[r].getEndPos()<leftMostReadPos || reads[r].pos>rightMostReadPos) filter=true;
         
 		if (!reads[r].isUnmapped()) {
-            //		cout << "mapped" << endl;
+     //      cout << "mapped" << endl;
 			if (reads[r].pos+int(reads[r].size())<int(leftPos)+params.minReadOverlap || reads[r].pos>int(rightPos)-params.minReadOverlap) {
-                //		cout << " { " << reads[r].pos+reads[r].size() << " " << leftPos+params.minReadOverlap << " " << reads[r].pos << " " << rightPos-params.minReadOverlap << " } " << endl;
+		//			cout << " { " << reads[r].pos+reads[r].size() << " " << leftPos+params.minReadOverlap << " " << reads[r].pos << " " << rightPos-params.minReadOverlap << " } " << endl;
 				filter=true;
 				tf = 1;
 			} else if (reads[r].mateIsUnmapped() == false ){
 				if (reads[r].getBam()->core.mtid != reads[r].getBam()->core.tid) {
 					// filter = true;
-					// cout << "TIDERR: reads[" << r << "]: " << bam1_qname(reads[r].getBam()) << " matePos: " << reads[r].matePos << " mateLen: " << reads[r].mateLen << endl;
+					 cout << "TIDERR: reads[" << r << "]: " << bam1_qname(reads[r].getBam()) << " matePos: " << reads[r].matePos << " mateLen: " << reads[r].mateLen << endl;
 					numTIDmismatch++;
 				} else {
 					// find mate of mapped read
@@ -349,7 +348,7 @@ void HapMuC::getReadsFromBams(vector<MyBam *> & Bams, uint32_t leftPos, uint32_t
 							numOrphan++;
 							tf = 2;
 						}
-						//cout << "mapped read: " << r << " " << qname << " pos: " << reads[r].pos << " " << reads[r].getBam()->core.mtid << " " <<  reads[r].getBam()->core.mpos << " mateunmap: " << reads[r].mateIsUnmapped() << endl;
+		//				cout << "mapped read: " << r << " " << qname << " pos: " << reads[r].pos << " " << reads[r].getBam()->core.mtid << " " <<  reads[r].getBam()->core.mpos << " mateunmap: " << reads[r].mateIsUnmapped() << endl;
 					}
 				}
 			} else if (reads[r].mateIsUnmapped() == true) {
@@ -374,10 +373,10 @@ void HapMuC::getReadsFromBams(vector<MyBam *> & Bams, uint32_t leftPos, uint32_t
 			if (filter == false) numInRegion++;
             
 		} else {
-            //		cout << " unmapped" << endl;
+     //      cout << " unmapped" << endl;
 			// read is unmapped
 			if (params.mapUnmappedReads) {
-                //			cout << " unmapped " << qname << " ; ";
+      //          	cout << " unmapped " << qname << " ; ";
                 
 				// lookup mapped read
 				hash_it = mapped_name_to_idx.find(string(bam1_qname(reads[r].getBam())));
@@ -396,7 +395,7 @@ void HapMuC::getReadsFromBams(vector<MyBam *> & Bams, uint32_t leftPos, uint32_t
 					int minInsert = 0;
 					uint32_t rpos = reads[idx].pos;
                     
-                    //				cout << "idx: " << idx << " unmapped: " << reads[idx].isUnmapped() << " rpos: " << rpos << " isreverse: " << reads[idx].isReverse() << endl;
+       //            			cout << "idx: " << idx << " unmapped: " << reads[idx].isUnmapped() << " rpos: " << rpos << " isreverse: " << reads[idx].isReverse() << endl;
 					if (reads[idx].isReverse()) {
 						range_l = rpos-maxInsert;
 						range_r = rpos-minInsert;
@@ -405,7 +404,7 @@ void HapMuC::getReadsFromBams(vector<MyBam *> & Bams, uint32_t leftPos, uint32_t
 						range_r = rpos+maxInsert;
 					}
                     
-                    //				cout << "insert: " << insert << " std: " << std << " range_l : " << range_l << " range_r: " << range_r << " leftPos: " << leftPos << "  rightPos: " << rightPos << endl;
+                   	//cout << "insert: " << insert << " std: " << std << " range_l : " << range_l << " range_r: " << range_r << " leftPos: " << leftPos << "  rightPos: " << rightPos << endl;
                     
 					if (range_r>leftPos && range_l<rightPos) {
 						numInRegion++;
@@ -429,7 +428,7 @@ void HapMuC::getReadsFromBams(vector<MyBam *> & Bams, uint32_t leftPos, uint32_t
 		}
 		if (filter == true) reads[r].mapQual = -1.0;
         
-        //		cout << "reads[" << r << "]: " << bam1_qname(reads[r].getBam()) << " matePos: " << reads[r].matePos << " mateLen: " << reads[r].mateLen << " Filter: " << tf << " filter: " << filter <<  " mq: " << reads[r].mapQual << endl;
+    //cout << "reads[" << r << "]: " << bam1_qname(reads[r].getBam()) << " matePos: " << reads[r].matePos << " mateLen: " << reads[r].mateLen << " Filter: " << tf << " filter: " << filter <<  " mq: " << reads[r].mapQual << endl;
 	}
     
     

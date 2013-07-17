@@ -39,13 +39,13 @@
 namespace EMBasic {
     void computeLowerBound(const vector<double> & resp, const double a0, const vector<double> & ak, const vector<double> & ln_p_x_given_h, const vector<double> & lpi, const vector<int> & compatible, lower_bound_t & lb) {
         cout << endl << "###computeLowerBound###" << endl;
-        int nh = ak.size(); //number of haps 
+        int nh = ak.size(); //number of haps
         int nr = resp.size() / nh; //number of reads
         cout << "nh, nr = " << nh << ", " << nr << endl;
         cout << "###compatible" << endl;
         for(int i=0;i < nh;i++) cout << " " << compatible[i];
         cout << endl;
-        cout << "lpi = "; 
+        cout << "lpi = ";
         for(int i=0;i < nh;i++) cout << " " << lpi[i];
         cout << endl << "a0=" << a0 << ", a = ";
         for(int i=0;i < nh;i++) cout << " " << ak[i];
@@ -64,7 +64,7 @@ namespace EMBasic {
         for(int i=0;i < nr;i++) {
             for(int j=0;j < nh;j++) {
                 if(!compatible[j]) continue;
-                tmp += resp[i*nh+j] * lpi[j]; 
+                tmp += resp[i*nh+j] * lpi[j];
             }
         }
         lb.ln_p_z_given_pi = tmp;
@@ -89,7 +89,7 @@ namespace EMBasic {
         for(int i=0;i < nr;i++) {
             for(int j=0;j < nh;j++) {
                 if(!compatible[j]) continue;
-                double t = resp[i*nh+j] * log(resp[i*nh+j]); 
+                double t = resp[i*nh+j] * log(resp[i*nh+j]);
                 if(!isnan(t)) tmp += t; //check NaN
             }
         }
@@ -116,28 +116,28 @@ namespace EMBasic {
         //
         cout << "########" << endl << endl;
     }
-    
+
     void estimate(const vector<Haplotype> & haps, const vector<Read> & reads, const vector<vector<MLAlignment> > & liks, vector<double> & hapFreqs, vector <HapEstResult > & posteriors, uint32_t candPos, uint32_t leftPos, uint32_t rightPos, const AlignedCandidates & candidateVariants, lower_bound_t & best_lower_bound, map<AlignedVariant, double> & variantPosteriors, double a0, string program, Parameters params)
     {
         cout << "EMBasic::estimate" << endl;
         cout.flush();
         // estimate haplotype frequencies using EM
         hapFreqs.clear();
-        
+
         vector<lower_bound_t> lower_bounds;
         size_t nh=haps.size();
         size_t nr=reads.size();
         cout << "nh, nr:" << nh << " " << nr << endl;
         if (nh == 0) {
             throw(string("num hap = 0 in EMBasic::estimate"));
-        } 
+        }
         vector<double> rl(nh*nr,0.0); // read given haplotype likelihoods
         vector<double> z(nh*nr,0.0); // expectations of read-haplotype indicator variables
         vector<double> pi(nh); // haplotype frequencies
         vector<double> lpi(nh); // expectation of log frequencies
         vector<double> nk(nh,0.0), ak(nh,0.0); // counts for each haplotype
-        
-        hapFreqs=nk;    
+
+        hapFreqs=nk;
         int numUnmappedRealigned=0;
         int idx=0;
         int numReadOffAllHaps=0;
@@ -155,18 +155,18 @@ namespace EMBasic {
                 if (reads[r].isUnmapped()) numUnmappedRealigned++;
             }
         }
-        
+
         // filter reads
         vector<int> filtered(nh, 0);
-        
+
         typedef pair<int, AlignedVariant> PAV;
-        
+
         std::set< PAV > allVariants;
         map<int, std::set<PAV> > allVariantsByPos; //
-        
+
         typedef map<int, AlignedVariant>::const_iterator It;
         typedef map<int, std::set<PAV> >::const_iterator PIt;
-        
+
         for (size_t th=0;th<nh;th++) {
             const Haplotype & hap=haps[th];
             for (It it=hap.indels.begin();it!=hap.indels.end();it++) {
@@ -176,12 +176,13 @@ namespace EMBasic {
                 }
             }
         }
-        
-        cout << "#read list" << endl;
+
+/*        cout << "#read list" << endl;
         for (size_t r=0;r<nr;r++) {
             cout << "r[" << r << "] " << reads[r].seq.seq << endl;
         }
-        
+        */
+
         cout << "#haplotype list" << endl;
         for (size_t th=0;th<nh;th++) {
             const Haplotype & hap=haps[th];
@@ -193,7 +194,7 @@ namespace EMBasic {
             }
             cout << endl;
         }
-        
+
         cout << "#log haplotype and read likelihood" << endl;
         for (size_t r=0;r<nr;r++) {
             cout << reads[r].seq_name << " rl[" << r << "]:";
@@ -202,10 +203,10 @@ namespace EMBasic {
             }
             cout << endl;
         }
-        
+
         // set active variants, and divide into snps and indels
         vector< std::set< PAV > >  activeVariants, activeSNPs, activeIndels;
-        
+
         int nav=0;
         int PRID=-1;
         if (program=="all") {
@@ -217,7 +218,7 @@ namespace EMBasic {
                     indels.insert(pav);
                 }
             }
-            
+
             // both (double prior)
             activeVariants.push_back(allVariants);
             activeIndels.push_back(indels);
@@ -228,10 +229,10 @@ namespace EMBasic {
             std::set < std::set<PAV> > ssPAV;
             for (size_t h=0;h<haps.size();h++) if (filtered[h]==0) {
                 const Haplotype & hap=haps[h];
-                
-                
+
+
                 //cout << "hap[" << h << "].seq: " << hap.seq << endl;
-                
+
                 //cout << "vars:";
                 std::set<PAV> act;
                 for (It it=hap.indels.begin();it!=hap.indels.end();it++) {
@@ -249,7 +250,7 @@ namespace EMBasic {
                 act.insert(pav);
             }
             ssPAV.insert(act);
-            
+
             nav=0;
             BOOST_FOREACH(std::set<PAV> s, ssPAV) {
                 std::set<PAV> snps, indels;
@@ -260,35 +261,35 @@ namespace EMBasic {
                         indels.insert(pav);
                     }
                 }
-                
+
                 // both (double prior)
                 activeVariants.push_back(s);
                 activeIndels.push_back(indels);
                 activeSNPs.push_back(snps);
                 nav++;
             }
-            
+
             PRID=2;
         } else if (program == "priorpersite") {
             nav = 0;
-            
+
             // add reference haplotype
             activeVariants.push_back(std::set<PAV>());
             activeIndels.push_back(std::set<PAV>());
             activeSNPs.push_back(std::set<PAV>());
-            
-            
-            
+
+
+
             for (map<int, std::set<PAV> >::const_iterator site_it = allVariantsByPos.begin();site_it!=allVariantsByPos.end();site_it++) {
                 std::set<PAV> snps, indels;
                 BOOST_FOREACH(PAV pav, site_it->second) {
                     if (pav.second.isSNP()) snps.insert(pav);
                     else if (pav.second.isIndel()) indels.insert(pav);
                 }
-                
+
                 int maxStateSnp = (snps.size()==0)?1:2;
                 int maxStateIndel = (indels.size()==0)?1:2;
-                
+
                 int prevNumActive = activeVariants.size();
                 int sSnp = 1, sIndel = 1;
                 //for (int sSnp = 0;sSnp<maxStateSnp;sSnp++) {
@@ -296,7 +297,7 @@ namespace EMBasic {
                 //
                 //		if (sSnp == 1 || sIndel == 1) {
                 // extend previous activeVariants
-                
+
                 for (int pna = 0;pna<prevNumActive;pna++) {
                     std::set<PAV> av = activeVariants[pna];
                     std::set<PAV> aIndels = activeIndels[pna];
@@ -309,37 +310,37 @@ namespace EMBasic {
                         av.insert(indels.begin(),indels.end());
                         aIndels.insert(indels.begin(),indels.end());
                     }
-                    
+
                     activeVariants.push_back(av);
                     activeIndels.push_back(aIndels);
                     activeSNPs.push_back(aSNPs);
                 }
-                
+
                 //		}
                 //		}
                 //	}
-                
+
             }
             nav = activeVariants.size();
-            
+
             PRID = 3;
-            
+
         } else {
             cerr << "Unknown EM option" << endl;
             exit(1);
         }
-        
+
         vector<int> compatible(nh,0);
         vector<double> logliks(nav,0.0);
         vector<double> logpriors(nav, 0.0);
         vector<double> post(nav,0.0);
         vector<double> freqs(nav*nh,0.0);
-        
+
         // create matrix of which variant is active in which set
         idx=0;
         int nv=int(allVariants.size());
         vector<int> active(nav*nv,0), hapHasVar(nh*nv,0);
-        
+
         //cout << "active: " << endl;
         BOOST_FOREACH(PAV pav, allVariants) {
             //  cout << pav.first << " " << pav.second.getString() << " ";
@@ -354,20 +355,20 @@ namespace EMBasic {
             }
             for(int i=0;i<nv;i++) {
                 for(int j=0;j<nh;j++) {
-                    //      cout << "[" << active[i*nv+idx] << " " << hapHasVar[j*nv+idx] << "]"; 
+                    //      cout << "[" << active[i*nv+idx] << " " << hapHasVar[j*nv+idx] << "]";
                 }
                 //cout << endl;
             }
             idx++;
         }
-        
-        
+
+
         cout << "allVariants: ";
         BOOST_FOREACH(PAV pav, allVariants) {
             cout << " [" << pav.first << " " << pav.second.getString() << "]";
         }
         cout << endl;
-        
+
         vector<vector<int> > compatibles;
         vector<vector<double> > aks;
         cout << "#subsets" << endl;
@@ -391,27 +392,27 @@ namespace EMBasic {
             compatibles.push_back(compatible);
             cout << endl;
         }
-        
-        
-        
+
+
+
         double logz=-HUGE_VAL;
-        
+
         for (int th=0;th<nav;th++) {
-            
+
             // set active variants
-            
+
             double logprior=0.0;
-            
+
             map <int, int> sites;
             BOOST_FOREACH(PAV pav, activeSNPs[th]) {
                 sites[pav.first]=1;
-                
+
                 const AlignedVariant & avar = pav.second;
                 const AlignedVariant *av = candidateVariants.findVariant(avar.getStartHap()+leftPos, avar.getType(), avar.getString());
                 int type = pav.second.getType();
-                
+
                 double lnf = 0.0;
-                
+
                 if (type==Variant::SNP) lnf = log(params.priorSNP); else if (type==Variant::DEL || type==Variant::INS) lnf = log(params.priorIndel);
                 if (av==NULL) {
                     logprior += lnf;
@@ -419,16 +420,16 @@ namespace EMBasic {
                     double prior = av->getFreq();
                     if (prior<0.0) logprior += lnf; else logprior+=log(prior);
                 }
-                
+
             }
             BOOST_FOREACH(PAV pav, activeIndels[th]) {
-                
+
                 const AlignedVariant & avar = pav.second;
                 const AlignedVariant *av = candidateVariants.findVariant(avar.getStartHap()+leftPos, avar.getType(), avar.getString());
                 int type = pav.second.getType();
-                
+
                 double lnf = 0.0;
-                
+
                 if (type==Variant::SNP) lnf = log(params.priorSNP); else if (type==Variant::DEL || type==Variant::INS) lnf = log(params.priorIndel);
                 if (av==NULL) {
                     logprior += lnf;
@@ -436,23 +437,23 @@ namespace EMBasic {
                     double prior = av->getFreq();
                     if (prior<0.0) logprior += lnf; else logprior+=log(prior);
                 }
-                
+
                 sites[pav.first]=2;
             }
-            
-            
+
+
             /*
              for (map<int,int>::const_iterator it=sites.begin();it!=sites.end();it++) {
              if (it->second==2) logprior+=log(params.priorIndel); else if (it->second==1) logprior+=log(params.priorSNP);
              }
              */
-            
+
             logpriors[th]=logprior;
-            
+
             //		cout << "Number of indels: " << ni << " number of SNPs: " << ns << endl;
-            
+
             // check haplotypes
-            
+
             int numah=0; // number of haplotypes for which frequencies will be estimated
             for (size_t h=0;h<nh;h++) {
                 compatible[h]=1;
@@ -469,27 +470,27 @@ namespace EMBasic {
                 }
                 if (compatible[h]) numah++;
             }
-            
-            
+
+
             // run EM for this set of active variants
             bool converged=false;
             double tol=params.EMtol;
-            
+
             double eOld=-HUGE_VAL, eNew;
-            
+
             // initialize frequencies
             for (size_t h=0;h<nh;h++) if (compatible[h]) lpi[h]=log(1.0/double(numah)); else lpi[h]=-100;
-            
-            
+
+
             double loglik, llNew, llOld=-HUGE_VAL;
             int iter=0;
             while (!converged) {
                 //cout << endl << "EM[" << iter << "]:" << endl;
                 // compute expectation of indicator variables
                 for (size_t h=0;h<nh;h++) nk[h]=0.0;
-                
+
                 loglik=0.0;
-                
+
                 int idx=0;
                 for (size_t r=0;r<nr;r++) {
                     double lognorm=-HUGE_VAL;
@@ -508,11 +509,11 @@ namespace EMBasic {
                         idx++;
                     }
                     loglik+=lognorm;
-                    
+
                 }
                 // compute frequencies
                 //cout << "pi: ";
-                
+
                 double ahat=0.0;
                 for (size_t h=0;h<nh;h++) if (compatible[h]) {
                     ak[h]=nk[h]+a0; // a0 is Dirichlet prior parameter
@@ -520,9 +521,9 @@ namespace EMBasic {
                 }
                 try {
                 double dahat=boost::math::digamma(ahat);
-                
+
                 for (size_t h=0;h<nh;h++) {
-                    
+
                     // do variational bayes
                     if (compatible[h]) {
                         lpi[h]=boost::math::digamma(ak[h])-dahat;
@@ -534,7 +535,7 @@ namespace EMBasic {
                     //	cout << " " << pi[h];
                     //	zp+=exp(pi[h]);
                 }
-                    
+
                 } catch (std::exception& e) {
                     string message = string("error_exception_").append(e.what());
                     cout << message << endl;
@@ -547,8 +548,8 @@ namespace EMBasic {
                 }
 
                 //cout << " zp: " << zp << endl;
-                
-                
+
+
                 idx=0;
                 eNew=0.0;
                 for (size_t r=0;r<nr;r++) {
@@ -575,30 +576,30 @@ namespace EMBasic {
                     cout << "ERROR: nr: " << nr << " eOld: " << eOld << " eNew: " << eNew << " diff: " << eOld-eNew << endl;
                     cerr << "ERROR: nr: " << nr << " llOld: " << llOld << " eNew: " << llNew << " diff: " << llOld-llNew << endl;
                     cout << "ERROR: nr: " << nr << " llOld: " << llOld << " eNew: " << llNew << " diff: " << llOld-llNew << endl;
-                    
+
                     //throw string("EM Error in estimateHapFreqs");
                     //iter=100;
-                    
+
                 }
                 converged=(fabs(eOld-eNew))<tol || iter > 500;
                 //cout << "iter: " << iter << " eOld: " << eOld << " eNew: " << eNew << endl;
-                
+
                 eOld=eNew;
                 llOld=llNew;
                 iter++;
-                
-                
+
+
             }
             cout << "----------------finished[" << iter << "]---------------" << endl;
             cout << "###compatible" << endl;
             for(int i=0;i < nh;i++) cout << " " << compatible[i];
             cout << endl;
-            cout << "lpi = "; 
+            cout << "lpi = ";
             for(int i=0;i < nh;i++) cout << " " << lpi[i];
             cout << endl << "a0=" << a0 << ", a = ";
             for(int i=0;i < nh;i++) cout << " " << ak[i];
             aks.push_back(ak);
-            
+
             cout << endl;
             lower_bound_t lb;
             computeLowerBound(z, a0, ak, rl, lpi, compatible, lb);
@@ -612,7 +613,7 @@ namespace EMBasic {
             lb.compatible = compatible;
             lb.ln_prior = logprior;
             lower_bounds.push_back(lb);
-            
+
             for (int r=0;r<nr;r++) {
                 cout << reads[r].seq_name << " z[" << r << "]:";
                 for (int h=0;h<nh;h++) {
@@ -620,14 +621,14 @@ namespace EMBasic {
                 }
                 cout << endl;
             }
-            
+
             // check sum
-            
+
             double zc=0.0;
             for (size_t y=0;y<nh;y++) {
                 zc+=exp(pi[y]);
             }
-            
+
             if (0) {
                 cout << "th: " << th << endl;
                 for (size_t y=0;y<nh;y++) {
@@ -635,32 +636,32 @@ namespace EMBasic {
                 }
                 cout << endl << endl;
             }
-            
+
             logliks[th]=loglik;
             logz=addLogs(logz, lower_bounds[th].lower_bound+logprior);
             for (size_t h=0;h<nh;h++) { freqs[th*nh+h]=exp(pi[h])/zc; }
             for (size_t h=0;h<nh;h++) { cout << " " << freqs[th*nh+h]; } cout << endl;
-            
+
             cout << "lower_bound: " << lower_bounds[th].lower_bound << " loglik: " << loglik << " " << logliks[th] << " logprior: " << logprior << endl << endl;
-            
+
         }
-        
-        
+
+
         for (int a=0;a<nav;a++) {
             post[a]=exp(lower_bounds[a].lower_bound+logpriors[a]-logz);
             cout << "post[" << a << "]: " << post[a] << endl;
         }
-        
+
         for (size_t h=0;h<nh;h++) {
             hapFreqs[h]=0.0;
         }
-        
+
         for (int th=0;th<nav;th++) for (size_t h=0;h<nh;h++) {
             hapFreqs[h]+=exp(lower_bounds[th].lower_bound+logpriors[th]-logz)*freqs[th*nh+h];
         }
-        
+
         cout << "==================results====================" << endl;
-        
+
         for (int a=0;a<nav;a++) {
             cout << "[" << a << "] " << lower_bounds[a].lower_bound << " " << logpriors[a] << ";";
             for(int j=0;j<nh;j++) {
@@ -672,7 +673,7 @@ namespace EMBasic {
             }
             cout << endl;
         }
-        
+
         for (size_t th=0;th<nh;th++) {
             const Haplotype & hap=haps[th];
             cout << "hap[" << th << "] " << hap.seq << endl;
@@ -684,19 +685,19 @@ namespace EMBasic {
             }
             cout << endl;
         }
-        
+
         cout << endl;
-        
+
         // compute marginal posteriors for the individual variants
         vector< std::set<int> > readidx(2); //TODO
         for (int r=0;r<int(nr);r++) readidx[reads[r].poolID].insert(r);
-        
+
         vector<double> prior(nh*nh,0.0);
-        
+
         idx=-1;
         BOOST_FOREACH(PAV pav, allVariants) {
             idx++;
-            
+
             double logp=-HUGE_VAL;
             double freq=0.0;
             for (int th=0;th<nav;th++) {
@@ -704,13 +705,13 @@ namespace EMBasic {
                     logp=addLogs(logp, lower_bounds[th].lower_bound+logpriors[th]);
                 }
             }
-            
+
             for (size_t h=0;h<nh;h++) {
                 if (hapHasVar[h*nv+idx]) {
                     freq+=hapFreqs[h];
                 }
             }
-            
+
             logp-=logz;
             bool doGLF=false; //(candPos==leftPos+pav.first)?true:false;
             const AlignedVariant & avar = pav.second;
@@ -726,7 +727,7 @@ namespace EMBasic {
                 }
             }
         }
-        
+
         //select best model
         double best = -HUGE_VAL;
         lower_bound_t lb;
@@ -737,12 +738,12 @@ namespace EMBasic {
             }
         }
         best_lower_bound = lb;
-        
-        
+
+
         stringstream os; os << params.fileName << "." << params.tid << "." << candPos;
         /* debug HMM */
         string oprefix = os.str();
-        
+
         // string fname = oprefix;
         // fname.append(".hapvars");
         // ofstream of(fname.c_str());
@@ -750,7 +751,7 @@ namespace EMBasic {
          throw string("Cannot open file ").append(fname).append(" for writing .hapvars file");
          }
          // output all likelihoods
-         
+
          for (size_t r=0;r<nr;r++) {
          of << r << " " << bam1_qname(reads[r].getBam()) << " " << log(1.0-reads[r].mapQual) << " " << reads[r].poolID;
          for (size_t h=0;h<nh;h++) {
@@ -773,8 +774,8 @@ namespace EMBasic {
          throw string("Cannot open file ").append(fname).append(" for writing .liks file");
          }
          */
-        
-        /* 
+
+        /*
          for (size_t r=0;r<nr;r++) {
          cout << "###" << endl;
          cout << "read: " << bam1_qname(reads[r].getBam()) << " mpos: " << reads[r].matePos << endl;
@@ -782,9 +783,9 @@ namespace EMBasic {
          // compute maximum alignment likelihood
          double lq = 0.0;
          for (size_t b=0;b<reads[r].size();b++) lq += log(reads[r].qual[b]);
-         
+
          cout << "Max alignment loglik: " << lq << endl;
-         
+
          double maxll = -HUGE_VAL;
          std::set <int> mlhaps;
          for (int h=nh-1;h>=0;h--) if (liks[h][r]>maxll) { maxll = liks[h][r]; }
@@ -797,8 +798,8 @@ namespace EMBasic {
          }
          }
          */
-        
+
         //of.close();
     }
-    
+
 }

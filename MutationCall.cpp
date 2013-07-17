@@ -73,8 +73,8 @@ namespace MutationCall
 								if(liks[i*4+j]>max) max = liks[i*4+j];
 								if(liks[i*4+j]<min) min = liks[i*4+j];
 						}
-						cout << max << " " << min << endl;
-						if((max-min)<0.001) {
+				//		cout << max << " " << min << endl;
+						if((max-min)<0.0001) {
 								//filter this read
 								cout << "filter read: " << reads[i].seq_name << " " << i << " " << max << " " << min << endl;
 								reads.erase(reads.begin()+i);
@@ -173,7 +173,7 @@ namespace MutationCall
             if(candidateVariants.variants[0].getString().length() > 20) { // TODO: magic number
                 throw string("too long indel." + candidateVariants.variants[0].getString());
             }
-            
+
 				typedef map<int, AlignedVariant>::const_iterator It;
 
 				// NOTE leftPos will be the left position of the reference sequence each haplotype will be aligned to
@@ -270,7 +270,7 @@ namespace MutationCall
 						cout << "error_" << message << endl;
 						hap3_flag = false;
 				}
-				if(tumor_her.empty()) {            
+				if(tumor_her.empty()) {
 						tumor_her.swap(tumor_her_hap2);
 						normal_her.swap(normal_her_hap2);
 				}
@@ -282,7 +282,7 @@ namespace MutationCall
                 OutputData::Line line(oData);
                 line.set("chr", params.tid);
                 line.set("start", pos);
-                line.set("end", end); 
+                line.set("end", end);
                 line.set("ref", v.ref);
                 line.set("obs", v.obs);
                 line.set("ref_count_tumor", v.ref_count_tumor);
@@ -319,7 +319,7 @@ namespace MutationCall
 						OutputData::Line line(oData);
 						line.set("chr", params.tid);
 						line.set("start", pos);
-						line.set("end", end); 
+						line.set("end", end);
 						line.set("ref", v.ref);
 						line.set("obs", v.obs);
 						line.set("ref_count_tumor", v.ref_count_tumor);
@@ -387,7 +387,7 @@ namespace MutationCall
 				map<AlignedVariant, double> merged_vpp;
 				map<AlignedVariant, double> normal_vpp;
 				map<AlignedVariant, double> tumor_vpp;
-				EMBasic::estimate(haps, normalReads, normal_liks, normalHapFreqs, normal_her, pos, leftPos, rightPos, candidateVariants, normal_lb, normal_vpp,  1.0, "all", params);        
+				EMBasic::estimate(haps, normalReads, normal_liks, normalHapFreqs, normal_her, pos, leftPos, rightPos, candidateVariants, normal_lb, normal_vpp,  1.0, "all", params);
 				EMBasic::estimate(haps, tumorReads, tumor_liks, tumorHapFreqs, tumor_her, pos, leftPos, rightPos, candidateVariants, tumor_lb, tumor_vpp, 1.0, "all", params);
 				EMBasic::estimate(haps, mergedReads, liks, mergedHapFreqs, merged_her, pos, leftPos, rightPos, candidateVariants, merged_lb, merged_vpp,  1.0, "all", params);
 				double bf = normal_lb.lower_bound + tumor_lb.lower_bound - merged_lb.lower_bound;
@@ -406,14 +406,14 @@ namespace MutationCall
 				vector<double> rlt(nrt*4), rln(nrn*4);
 				int idx=0;
 				for (size_t r=0;r<nrt;r++) {
-						for (size_t h=0;h<2;h++) { 
+						for (size_t h=0;h<2;h++) {
 								rlt[idx] = tumor_liks[h][r].ll;idx++;
 								rlt[idx] = tumor_liks[h][r].ll;idx++;
 						}
 				}
 				idx=0;
 				for (size_t r=0;r<nrn;r++) {
-						for (size_t h=0;h<2;h++) { 
+						for (size_t h=0;h<2;h++) {
 								rln[idx] = normal_liks[h][r].ll;idx++;
 								rln[idx] = normal_liks[h][r].ll;idx++;
 						}
@@ -510,7 +510,7 @@ namespace MutationCall
 								}
 						}
 						ofs << endl;
-				}      
+				}
 		}
 
 }

@@ -385,7 +385,7 @@ public:
 	{
 		FetchReadData *ptr=(FetchReadData *) data;
 
-		if (!( (b->core.flag & BAM_FDUP) || (b->core.flag & BAM_FQCFAIL) )) {
+//		if (!( (b->core.flag & BAM_FDUP) || (b->core.flag & BAM_FQCFAIL) )) { //TODO: usuyama FLAG filter
 			try {
 				ptr->reads->push_back(Read(b, *(ptr->libraries), ptr->poolID, (*(ptr->myBams))[ptr->poolID]->bh));
 				ptr->numReads++;
@@ -401,7 +401,7 @@ public:
 				ptr->reads->push_back(Read(b, *(ptr->libraries), ptr->poolID, (*(ptr->myBams))[ptr->poolID]->bh, string("single_end")));
 				ptr->numReads++;
 			}
-		}
+//		}
 		if (ptr->numReads > ptr->maxNumReads) {
 			throw string("Too many reads in region");
 		}

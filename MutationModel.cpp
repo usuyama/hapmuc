@@ -187,8 +187,8 @@ namespace MutationModel {
     }
     
     void output_params(vector<double> &ahat, vector<double> &bhat, vector<double> &chat, vector<double> & zt, vector<double> & zn, lower_bound_t & lb, string fname_prefix) {
-         std::ofstream zt_ofs((fname_prefix+".zt").c_str(), std::ios::out);
-        std::ofstream zn_ofs((fname_prefix+".zn").c_str(), std::ios::out);
+         std::ofstream zt_ofs((fname_prefix+".zt").c_str(), std::ios::out|std::ios::trunc);
+         std::ofstream zn_ofs((fname_prefix+".zn").c_str(), std::ios::out|std::ios::trunc);
         int nrt = zt.size()/4;
         int nrn = zn.size()/4;
         for(int i=0;i<nrt;i++) {

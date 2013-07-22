@@ -65,7 +65,7 @@ namespace MutationCall
 
 
   void filter_reads(vector<Read> &reads, vector<double> &liks) {
-    cout << "filter_reads: " << index << endl;
+    cout << "filter_reads: " << endl;
     //h1とh3で差がでないreadを消す。
     for(int i=0;i<reads.size();i++) {
       double max=-DBL_MAX, min=DBL_MAX;

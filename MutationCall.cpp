@@ -53,13 +53,46 @@ namespace MutationCall
 
   void output_liktable(int index, string id, const vector<double> & liks, Parameters params) {
     //hap size=4
-    std::ofstream ofs((params.fileName+"logs/"+itos(index)+"."+id+".liks").c_str(), std::ios::out | std::ios::app);
+    std::ofstream ofs((params.fileName+"logs/"+itos(index)+"."+id+".liks").c_str(), std::ios::out);
     int nr = liks.size() / 4;
     for(int i=0;i<nr;i++) {
       ofs << liks[i*4];
       for(int j=1;j<4;j++)
         ofs << "\t" << liks[i*4+j];
       ofs << endl;
+    }
+  }
+
+  void output_alignments(int index, string id, const vector<Read> & reads, const vector<vector<MLAlignment> > & liks, Parameters params) {
+    cout << "output_alignments" << endl;
+    std::ofstream ofs((params.fileName+"logs/"+itos(index)+"."+id+".alignments").c_str(), std::ios::out);
+    int nr = reads.size();
+    int nh = liks.size();
+    typedef map<int, AlignedVariant>::const_iterator It;
+    for(size_t i=0;i<nr;i++) {
+      ofs << reads[i].seq_name;
+      for(size_t j=0;j<nh;j++)  ofs << "\t" << liks[j][i].ll;
+      ofs << endl;
+      for(size_t j=0;j<nh;j++)  ofs << "\t" << liks[j][i].align << endl;
+      for(size_t j=0;j<nh;j++) {
+        const MLAlignment &tmp = liks[j][i];
+        ofs << "#" << j << "\t" << "relPos: " << liks[j][i].relPos << " offHap: " << (int)liks[j][i].offHap;
+        ofs << " firstBase:" << tmp.firstBase << " lastBase:" << tmp.lastBase << " numMismatch:" << tmp.numMismatch << " numIndels:" << tmp.numIndels << " ";
+        for (map<int, AlignedVariant>::const_iterator it=tmp.indels.begin(); it!=tmp.indels.end();it++) {
+          ofs << "[" << it->second.getString() << " " << (it->first) << "]";
+        }
+        ofs << " ";
+        for (map<int, AlignedVariant>::const_iterator it=tmp.snps.begin(); it!=tmp.snps.end();it++) {
+          ofs << "[" << it->second.getString() << " " << (it->first) << "]";
+        }
+        ofs << endl;
+        /*
+        for (It it=tmp.indels.begin();it!=tmp.indels.end();it++) {
+          if (!it->second.isRef() && !(it->second.isSNP() && it->second.getString()[3]=='D')) {
+            ofs << "[" << it->second.getString() << " " << (it->first) << "]";
+          }
+        }*/
+      }
     }
   }
 
@@ -243,6 +276,8 @@ namespace MutationCall
           for (size_t r=0;r<nrn;r++) {
             for (size_t h=0;h<4;h++) { rln[idx] = normal_liks[h][r].ll;idx++; }
           }
+          output_alignments(index, "hap3_tumor", tumorReads, tumor_liks, params);
+          output_alignments(index, "hap3_normal", normalReads, normal_liks, params);
           vector<Read> f_normal_reads, f_tumor_reads;
           f_normal_reads.insert(f_normal_reads.end(), normalReads.begin(), normalReads.end());
           f_tumor_reads.insert(f_tumor_reads.end(), tumorReads.begin(), tumorReads.end());
@@ -426,6 +461,8 @@ namespace MutationCall
         rln[idx] = normal_liks[h][r].ll;idx++;
       }
     }
+    output_alignments(index, "hap2_tumor", tumorReads, tumor_liks, params);
+    output_alignments(index, "hap2_normal", normalReads, normal_liks, params);
     vector<Read> f_normal_reads, f_tumor_reads;
     f_normal_reads.insert(f_normal_reads.end(), normalReads.begin(), normalReads.end());
     f_tumor_reads.insert(f_tumor_reads.end(), tumorReads.begin(), tumorReads.end());

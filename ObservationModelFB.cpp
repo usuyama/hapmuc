@@ -1,4 +1,4 @@
-/*    
+/*
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
@@ -243,11 +243,11 @@ void ObservationModelFB::setupReadObservationPotentials()
             double penalty = -0.1;
             obs_b_ins[0]=eq + penalty; // left of haplotype
 			obs_b_ins[hapSize+1]=eq + penalty; // right of haplotype
-            
+
 			obs_b_noins[0]=eq + penalty; // left of haplotype
 			obs_b_noins[hapSize+1]=eq + penalty; // right of haplotype
-            
-            
+
+
 			for (int y=0;y<hapSize;y++) {
 				// given an insertion in the read assume match to prevent favoring of the insertion based on low base qualities
 				obs_b_ins[y+1]=eq;
@@ -1100,12 +1100,16 @@ void ObservationModelFBMax::calcLikelihoodFromLastSlice()
 	vector<double> priorRMQ, priorHMQ;
 	computeBMidPrior(priorRMQ, read.mapQual);
 	computeBMidPrior(priorHMQ, 1.0-1e-10);
-    //cout << "bMid, numS = " << bMid << ", " << numS << ", " << endl;
+#ifdef NDEBUG
+    cout << "bMid, numS = " << bMid << ", " << numS << ", " << endl;
+#endif
 	int y=0;
 	for (int x=0;x<2*numS;x++, y++) {
-        // cout << "[ " << x << " " << y << "] " << alpha_l[y] << ", " << obs_l[y] << ", " << beta_l[y] << ", " << priorRMQ[y] << ", " << priorHMQ[y];
 		double v=alpha_l[y]+obs_l[y]+beta_l[y]+priorRMQ[y];
-        // cout << ", " << v << endl;
+#ifdef NDEBUG
+     cout << "[ " << x << " " << y << "] " << alpha_l[y] << ", " << obs_l[y] << ", " << beta_l[y] << ", " << priorRMQ[y] << ", " << priorHMQ[y];
+     cout << ", " << v << endl;
+#endif
 		if (v>logLikelihood+EPS) {
 			logLikelihood=v;
 			mapStateRMQ=x;
@@ -1125,8 +1129,10 @@ void ObservationModelFBMax::calcLikelihoodFromLastSlice()
 
 
 	}
-	//cout << "read: " << bam1_qname(this->read.getBam()) << " read.pos: " << read.pos << " matePos: " << this->read.matePos << " lib: " <<  " prior[" << bMid << ":" << mapState[bMid] << "]: " << priorRMQ[mapStateRMQ] << endl;
-	//cout << "lib: " << this->read.getLibraryName() << endl;
+#ifdef NDEBUG
+	cout << "read: " << bam1_qname(this->read.getBam()) << " read.pos: " << read.pos << " matePos: " << this->read.matePos << " lib: " <<  " prior[" << bMid << ":" << mapState[bMid] << "]: " << priorRMQ[mapStateRMQ] << endl;
+	cout << "lib: " << this->read.getLibraryName() << endl;
+#endif
 	ml.ll=logLikelihood;
 	if ((mapState[bMid]%numS)==0 || (mapState[bMid]%numS)==ROState) {
 		ml.offHapHMQ=true;
@@ -1139,8 +1145,10 @@ void ObservationModelFBMax::calcLikelihoodFromLastSlice()
 	}else {
 		ml.offHap=false;
 	}
-   // cout << "mapStateRMQ, numS, mapState[bMid] = " << mapStateRMQ << ", " << numS << ", " << mapState[bMid] << endl;
-   // cout << "offHapHMQ, offHap = "<< ml.offHapHMQ << "," << ml.offHap << endl;
+#ifdef NDEBUG
+    cout << "mapStateRMQ, numS, mapState[bMid] = " << mapStateRMQ << ", " << numS << ", " << mapState[bMid] << endl;
+    cout << "offHapHMQ, offHap = "<< ml.offHapHMQ << "," << ml.offHap << endl;
+#endif
 
 	ml.llOff=likOffHap[0];
 	ml.llOn=likOffHap[1];
@@ -1488,7 +1496,7 @@ void ObservationModelFBMax::printAlignment(size_t hapScrPos)
 	// count how many bases in the read are left of the haplotype
 	calcLikelihood();
 
-	
+
 
 
 	string leftHap, rightHap;

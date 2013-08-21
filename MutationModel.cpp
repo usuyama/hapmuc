@@ -32,7 +32,7 @@ namespace MutationModel {
     typedef pair<int, AlignedVariant> PAV;
     typedef map<int, AlignedVariant>::const_iterator It;
     typedef map<int, std::set<PAV> >::const_iterator PIt;
-    
+
     double sum_kth_col(vector<double> ar, int k) {
         //i番目のリード, k番目のhap;i行k列 -> i*4+k
         double sum=0.0;
@@ -40,19 +40,19 @@ namespace MutationModel {
         for(int i=0;i<nr;i++) sum+=ar[i*4+k];
         return sum;
     }
-    
+
     vector<double> sum_each_col(vector<double> ar) {
         vector<double> ans(4, 0.0);
         for(int h=0;h<4;h++) ans[h] = sum_kth_col(ar, h);
         return ans;
     }
-    
+
     double sum_vec(vector<double> ar) {
         double sum = 0.0;
         for(int i = 0;i < ar.size();i++) sum += ar[i];
         return sum;
     }
-    
+
     //l_e_pit <- digamma(new_al) - digammma(sum(new_al))のための関数
     vector<double> cal_dir_exp(vector<double> ar) {
         double sum = sum_vec(ar);
@@ -74,7 +74,7 @@ namespace MutationModel {
         }
         return ans;
     }
-    
+
     vector<double> norm_vec(vector<double> ar) {
         double sum = sum_vec(ar);
         vector<double> ans(ar.size(), 0.0);
@@ -83,7 +83,7 @@ namespace MutationModel {
         }
         return ans;
     }
-    
+
     vector<double> exp_vec(vector<double> ar) {
         vector<double> ans(ar.size(), 0.0);
         for(int i = 0;i<ar.size();i++) {
@@ -91,20 +91,24 @@ namespace MutationModel {
         }
         return ans;
     }
-    
+
     void print_var_in_hap(Haplotype hap, std::ofstream &log) {
+#ifdef LOGDEBUG
         for (It it=hap.indels.begin();it!=hap.indels.end();it++) {
             if (!it->second.isRef() && !(it->second.isSNP() && it->second.getString()[3]=='D')) {
                 log << "[" << it->second.getString() << " " << (it->first) << "]";
             }
         }
         log << endl;
+#endif
     }
-    
+
     template <class X> void print_vec(vector<X> vec, std::ofstream &log) {
+#ifdef LOGDEBUG
         BOOST_FOREACH(X x, vec) { log << x << " "; }
+#endif
     }
-    
+
     double cal_e_log_dir(vector<double> log_theta, vector<double> param, std::ofstream &log) {
         //E[log p(theta|param)] : Dir
         //- sum(lgamma(param)) + lgamma(sum(param)) + sum((param-1) * log_theta)
@@ -119,15 +123,15 @@ namespace MutationModel {
             print_vec(param, log);log << endl;
             log << sum_lgam_param << " " << lgam_sum_param << " " << sum_par_lt << endl;
             throw string("cal_e_log_dir");
-        }    
+        }
         return sum_lgam_param + lgam_sum_param + sum_par_lt;
     }
-    
-    
 
-    
+
+
+
     void compute_lower_bound(const vector<double> & rlt, const vector<double> & rln, vector<double> &ahat, vector<double> &bhat, vector<double> &chat, vector<double> & zt, vector<double> & zn, lower_bound_t & lb, Hap3Param params, std::ofstream &logofs) {
-        int nh = 4; //number of haps 
+        int nh = 4; //number of haps
         int nrt = rlt.size() / nh; //number of reads of tumor
         int nrn = rln.size() / nh; //number of reads of normal
         vector<double> l_e_pit = cal_dir_exp(ahat);
@@ -180,13 +184,16 @@ namespace MutationModel {
 //        print_vec(l_e_pit);cout << endl;
 //        print_vec(ahat);cout << endl;
         lb.lower_bound = e_log_p_Xt + e_log_p_Xn + e_log_p_Zt + e_log_p_Zn + e_log_p_pin + e_log_p_pit + e_log_p_ep - e_log_q_Zt - e_log_q_Zn - e_log_q_pit - e_log_q_pin - e_log_q_ep;
+#ifdef LOGDEBUG
         logofs << "lb: " << lb.lower_bound << endl;
         logofs << e_log_p_Xt<< " " <<e_log_p_Xn<< " " <<e_log_p_Zt<< " " <<e_log_p_Zn<< " " <<e_log_p_pit<< " " <<e_log_p_pin << " " << e_log_p_ep << endl;
         logofs  <<e_log_q_Zt<< " " <<e_log_q_Zn<< " " <<e_log_q_pit<< " " <<e_log_q_pin<< " " <<e_log_q_ep << endl;
-        
+#endif
+
     }
-    
+
     void output_params(vector<double> &ahat, vector<double> &bhat, vector<double> &chat, vector<double> & zt, vector<double> & zn, lower_bound_t & lb, string fname_prefix) {
+#ifdef LOGDEBUG
          std::ofstream zt_ofs((fname_prefix+".zt").c_str(), std::ios::out|std::ios::trunc);
          std::ofstream zn_ofs((fname_prefix+".zn").c_str(), std::ios::out|std::ios::trunc);
         int nrt = zt.size()/4;
@@ -205,11 +212,13 @@ namespace MutationModel {
             }
             zn_ofs << "\n";
         }
+#endif
     }
-   
-    
+
+
     void print_params(const vector<Read> & tumor_reads, const vector<Read> & normal_reads, const vector<double> & rlt, const vector<double> & rln, vector<double> &ahat, vector<double> &bhat, vector<double> &chat, vector<double> & zt, vector<double> & zn, lower_bound_t & lb, Hap3Param params, std::ofstream &log, bool print_z=false) {
-        int nh = 4; //number of haps 
+#ifdef LOGDEBUG
+        int nh = 4; //number of haps
         int nrt = rlt.size() / nh; //number of reads of tumor
         int nrn = rln.size() / nh; //number of reads of normal
         log << "##print params" << endl;
@@ -237,11 +246,13 @@ namespace MutationModel {
         log << endl << "bhat: ";print_vec(bhat, log);
         log << endl << "chat: ";print_vec(chat, log);
         log << endl;
+#endif
     }
-    
+
     void print_posteriors(const vector<double> & rlt, const vector<double> & rln, vector<double> &ahat, vector<double> &bhat, vector<double> &chat, vector<double> & zt, vector<double> & zn, lower_bound_t & lb, Hap3Param params, std::ofstream &log) {
+#ifdef LOGDEBUG
         log << "##print posteriors" << endl;
-        int nh = 4; //number of haps 
+        int nh = 4; //number of haps
         int nrt = rlt.size() / nh; //number of reads of tumor
         int nrn = rln.size() / nh; //number of reads of normal
         vector<double> l_e_pit = cal_dir_exp(ahat);
@@ -255,8 +266,9 @@ namespace MutationModel {
         log << endl << "nkt: ";print_vec(nkt, log);
         log << endl << "nkn: ";print_vec(nkn, log);
         log << endl;
+#endif
     }
-    
+
     vector<double> copyVecFast(const vector<double>& original)
     {
         vector<double> newVec;
@@ -264,7 +276,7 @@ namespace MutationModel {
         copy(original.begin(),original.end(),back_inserter(newVec));
         return newVec;
     }
-    
+
      vector<double> make_newrho(const vector<double> &rl, vector<double> &l_e_pi, vector<double> &l_e_ep, int b) {
          vector<double> new_rho(4, 0.0);
          if (l_e_pi.size()==3) {
@@ -280,33 +292,34 @@ namespace MutationModel {
          }
          return new_rho;
     }
-    
+
     void update_hat(vector<double> nkt, vector<double>nkn, vector<double> &ahat, vector<double> &bhat, vector<double> &chat, Hap3Param params) {
         if (ahat.size()==3) {
             ahat[0]=nkt[0]+params.mut_a0[0];
             ahat[1]=nkt[1]+nkt[3]+params.mut_a0[1];
             ahat[2]=nkt[2]+params.mut_a0[2];
-            
+
             bhat[0]=nkt[3]+nkn[2]+nkn[3]+params.mut_b0[0];
             bhat[1]=nkt[1]+nkn[0]+nkn[1]+params.mut_b0[1];
-            
+
             chat[0]=nkn[0]+nkn[2]+params.mut_c0[0];
             chat[1]=nkn[1]+nkn[3]+params.mut_c0[1];
         } else {
             ahat[0]=nkt[0]+nkt[2]+params.err_a0[0];
             ahat[1]=nkt[1]+nkt[3]+params.err_a0[1];
-            
+
             bhat[0]=nkt[2]+nkt[3]+nkn[2]+nkn[3]+params.err_b0[0];
             bhat[1]=nkt[0]+nkt[1]+nkn[0]+nkn[1]+params.err_b0[1];
-            
+
             chat[0]=nkn[0]+nkn[2]+params.err_c0[0];
             chat[1]=nkn[1]+nkn[3]+params.err_c0[1];
         }
     }
-    
+
     void estimate(const vector<Haplotype> & haps, const vector<Read> & tumor_reads, const vector<Read> & normal_reads, const vector<double> & rlt, const vector<double> & rln, vector<double> & tumorHapFreqs, vector<double> & normalHapFreqs, vector <HapEstResult > & tumorPosteriors, vector <HapEstResult > & normalPosteriors, uint32_t candPos, uint32_t leftPos,   uint32_t rightPos, const AlignedCandidates & candidateVariants, lower_bound_t & best_lower_bound, Hap3Param params, string est_type, string log_prefix)
     {
         std::ofstream log((log_prefix+".log").c_str(), std::ios::out | std::ios::app);
+#ifdef LOGDEBUG
         //est_type=mutation or non-mutation
         log << "MutationModel: " << est_type << endl;
         log << "mut a0:";print_vec(params.mut_a0, log);
@@ -316,6 +329,7 @@ namespace MutationModel {
         log << endl << "err b0:";print_vec(params.err_b0, log);
         log << endl << "err c0:";print_vec(params.err_c0, log);
         log << endl;
+#endif
         normalHapFreqs.clear();
         tumorHapFreqs.clear();
 #ifndef MMTEST
@@ -324,18 +338,18 @@ namespace MutationModel {
         size_t nh=4;
         size_t nrt=rlt.size()/4;
         size_t nrn=rln.size()/4;
-        
+
         vector<double> zt(nh*nrt,0.0); // expectations of read-haplotype indicator variables
         vector<double> zn(nh*nrn,0.0); // expectations of read-haplotype indicator variables
         vector<double> nkt(nh, 0.0), nkn(nh, 0.0);
-        
-        normalHapFreqs=nkn;tumorHapFreqs=nkt; 
-       
+
+        normalHapFreqs=nkn;tumorHapFreqs=nkt;
+
 #ifndef MMTEST
         //filter reads
         std::set< PAV > allVariants;
-        map<int, std::set<PAV> > allVariantsByPos; 
-        
+        map<int, std::set<PAV> > allVariantsByPos;
+
         for (size_t th=0;th<nh;th++) {
             const Haplotype & hap=haps[th];
             for (It it=hap.indels.begin();it!=hap.indels.end();it++) {
@@ -345,6 +359,7 @@ namespace MutationModel {
                 }
             }
         }
+#ifdef LOGDEBUG
         log << "#haplotype list" << endl;
         for (size_t th=0;th<nh;th++) {
             const Haplotype & hap=haps[th];
@@ -356,6 +371,7 @@ namespace MutationModel {
             }
             log << endl;
         }
+#endif
 /*
         cout << "#log haplotype and read likelihood" << endl;
         cout << "##tumor" << endl;
@@ -375,9 +391,8 @@ namespace MutationModel {
         int idx=0;
         int nv=int(allVariants.size());
         vector<int> hapHasVar(nh*nv,0);
-        
+
         BOOST_FOREACH(PAV pav, allVariants) {
-            log << pav.first << " " << pav.second.getString() << " ";
             for (size_t h=0;h<nh;h++) {
                 It it=haps[h].indels.find(pav.first);
                 if (it!=haps[h].indels.end() && it->second.getString()==pav.second.getString()) hapHasVar[h*nv+idx]=1;
@@ -405,10 +420,13 @@ namespace MutationModel {
             BOOST_FOREACH(double x, params.err_b0) { bhat.push_back(x); }
             BOOST_FOREACH(double x, params.err_c0) { chat.push_back(x); }
         }
+
+#ifdef LOGDEBUG
         log << "init:" << endl;
         log << "ahat:";print_vec(ahat, log);
         log << endl << "bhat:";print_vec(bhat, log);
         log << endl << "chat:";print_vec(chat, log);
+#endif
         double llNew, llOld=-HUGE_VAL;
         int iter=0;
         lower_bound_t lb;
@@ -431,15 +449,19 @@ namespace MutationModel {
             compute_lower_bound(rlt, rln, ahat, bhat, chat, zt, zn, lb, params, log);
             llNew=lb.lower_bound;
             converged=(fabs(llOld-llNew))<tol || iter > 500;
-            log << "### iter: " << iter << " llOld: " << llOld << " llNew: " << llNew << endl;            
+#ifdef LOGDEBUG
+            log << "### iter: " << iter << " llOld: " << llOld << " llNew: " << llNew << endl;
 
             print_posteriors(rlt, rln, ahat, bhat, chat, zt, zn, lb, params, log);
             print_params(tumor_reads, normal_reads, rlt, rln, ahat, bhat, chat, zt, zn, lb, params, log);
             log << endl;
+#endif
             llOld=llNew;
             iter++;
         }
+#ifdef LOGDEBUG
         log << "----------------finished[" << iter << "]---------------" << endl;
+#endif
         print_posteriors(rlt, rln, ahat, bhat, chat, zt, zn, lb, params, log);
         print_params(tumor_reads, normal_reads, rlt, rln, ahat, bhat, chat, zt, zn, lb, params, log);
 
@@ -453,17 +475,21 @@ namespace MutationModel {
             normalHapFreqs[h]=nkn[h]/(double)nrn;
         }
         output_params(ahat, bhat, chat, zt, zn, lb, log_prefix);
+#ifdef LOGDEBUG
         log << "==================results====================" << endl;
         log << "lb= " << lb.lower_bound << endl;
-#ifndef MMTEST    
+#endif
+#ifndef MMTEST
+#ifdef LOGDEBUG
         for (size_t th=0;th<nh;th++) {
             const Haplotype & hap=haps[th];
             log << "hap[" << th << "] " << hap.seq << endl;
             log << tumorHapFreqs[th] << " " << normalHapFreqs[th];
             print_var_in_hap(hap,log);
         }
-        
+
         log << endl;
+#endif
 
         // compute marginal posteriors for the individual variants
         idx=-1;

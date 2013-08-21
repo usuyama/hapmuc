@@ -428,7 +428,9 @@ void HapMuC::getReadsFromBams(vector<MyBam *> & Bams, uint32_t leftPos, uint32_t
 		}
 		if (filter == true) reads[r].mapQual = -1.0;
 
+#ifdef LOGDEBUG
     cout << "reads[" << r << "]: " << bam1_qname(reads[r].getBam()) << " matePos: " << reads[r].matePos << " mateLen: " << reads[r].mateLen << " Filter: " << tf << " filter: " << filter <<  " mq: " << reads[r].mapQual << endl;
+#endif
 	}
 
 
@@ -534,9 +536,9 @@ void HapMuC::mutationCall(const string & variantsFileName)
     ofstream glfOutput;
     string callsFile=params.fileName; callsFile.append(".calls.txt");
 	string glfFile=params.fileName; glfFile.append(".glf.txt");
-    std::ofstream ofs((params.fileName+".haplotypes.txt").c_str());
-    ofs << "haplotypes" << endl;
-    std::ofstream ofs_lb((params.fileName+".lower_bounds.txt").c_str());
+   // std::ofstream ofs((params.fileName+".haplotypes.txt").c_str());
+    //ofs << "haplotypes" << endl;
+    //std::ofstream ofs_lb((params.fileName+".lower_bounds.txt").c_str());
 	OutputData oData=params.makeMutationData(output);
     output.open(callsFile.c_str());
     if (!output.is_open()) {

@@ -195,6 +195,7 @@ namespace EMBasic {
             cout << endl;
         }
 
+#ifdef LOGDEBUG
         cout << "#log haplotype and read likelihood" << endl;
         for (size_t r=0;r<nr;r++) {
             cout << reads[r].seq_name << " rl[" << r << "]:";
@@ -203,6 +204,7 @@ namespace EMBasic {
             }
             cout << endl;
         }
+#endif
 
         // set active variants, and divide into snps and indels
         vector< std::set< PAV > >  activeVariants, activeSNPs, activeIndels;
@@ -614,6 +616,7 @@ namespace EMBasic {
             lb.ln_prior = logprior;
             lower_bounds.push_back(lb);
 
+#ifdef LOGDEBUG
             for (int r=0;r<nr;r++) {
                 cout << reads[r].seq_name << " z[" << r << "]:";
                 for (int h=0;h<nh;h++) {
@@ -621,6 +624,7 @@ namespace EMBasic {
                 }
                 cout << endl;
             }
+#endif
 
             // check sum
 

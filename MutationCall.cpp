@@ -412,7 +412,7 @@ namespace MutationCall
           line.set("bf2", bf2);
         } else {
           if(haps_size_error) {
-            line.set("bf2", -100);
+            line.set("bf2", "-");
           } else {
             line.set("bf2", "-");
           }

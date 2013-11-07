@@ -1,12 +1,12 @@
 .PHONY: all clean test
-SAMTOOLDIR=../samtools-0.1.18/
+SAMTOOLDIR=<insert samtools root dir>
 SEQANDIR=seqan_library/
-BOOST=/Users/usuyama/bin/boost_1_45_0/
+BOOST=<insert boost ver 1.45 root dir>
 BOOSTLIB=${BOOST}stage/lib/
 
 CXX= g++
-CPPFLAGS= -g -DNDEBUG -D_IOLIB=2 -DMINREADS=2 -DHAPMUC# -DMMTEST #for mutation_model_test
-CXXFLAGS= -g -I$(SAMTOOLDIR) -I$(SEQANDIR) -I${BOOST} -I./ -Wno-deprecated  -O3
+CPPFLAGS= -D_IOLIB=2 -DMINREADS=2 -DHAPMUC # -g -DNDEBUG -DMMTEST #for mutation_model_test
+CXXFLAGS= -I$(SAMTOOLDIR) -I$(SEQANDIR) -I${BOOST} -I./ -Wno-deprecated  -O3
 LDFLAGS= -L$(SAMTOOLDIR) -lbam -lz -L${BOOSTLIB} -lboost_program_options
 SRCSDINDEL=HapMuC.cpp Utils.cpp MutationModel.cpp HapBlock.cpp HaplotypeDistribution.cpp ObservationModelFB.cpp Haps.cpp Haps2.cpp EMBasic.cpp EMfor2.cpp MutationCall.cpp
 OBJSDINDEL=$(SRCSDINDEL:%.cpp=%.o)

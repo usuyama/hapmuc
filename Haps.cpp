@@ -31,6 +31,7 @@
 #include "MutationCall.hpp"
 #include "Haps.hpp"
 #include "EMBasic.hpp"
+#include "log.h"
 
 using namespace seqan;
 
@@ -40,7 +41,7 @@ namespace Haps {
     bool getHaplotypes(vector<Haplotype> &haps, const vector<Read> & reads,uint32_t pos, uint32_t & leftPos, uint32_t & rightPos, const AlignedCandidates & candidateVariants, Parameters params, string refSeq, string refSeqForAlign)
     {
         
-        cout << "getHaplotypes" << endl;
+        LOG(logDEBUG) << "getHaplotypes" << endl;
         uint32_t rs=(int(leftPos)>params.minReadOverlap)?(leftPos-params.minReadOverlap):0;
         uint32_t re=rightPos+params.minReadOverlap;
         HaplotypeDistribution hd(pos, refSeq, rs);
@@ -64,11 +65,11 @@ namespace Haps {
          //indelVariants.insert(indelVariants.begin(), variants.begin(), variants.end());
          */
         if (!params.quiet) {
-            cout << "candidate_var@pos: " << pos ;
+            LOG(logDEBUG) << "candidate_var@pos: " << pos ;
             BOOST_FOREACH(AlignedVariant v, candidateVariants.variants) {
-                cout << " " << v.getStartHap() << "," << v.getString();
+                LOG(logDEBUG) << " " << v.getStartHap() << "," << v.getString();
             }
-            cout << endl;
+            LOG(logDEBUG) << endl;
         }
         
         
@@ -96,8 +97,8 @@ namespace Haps {
             
             //	if (params.showHapDist) {
             /*
-             cout << endl << "Empirical distribution: " << endl;
-             cout << hdi << endl; 
+             LOG(logDEBUG) << endl << "Empirical distribution: " << endl;
+             LOG(logDEBUG) << hdi << endl; 
              */
             //	}
             
@@ -105,32 +106,32 @@ namespace Haps {
             rightPos=hdi.end();
             typedef map<int, AlignedVariant>::const_iterator It;
             
-            cout << "#haplotype list[debug]" << endl;
+            LOG(logDEBUG) << "#haplotype list[debug]" << endl;
             for (size_t th=0;th<haps.size();th++) {
                 const Haplotype & hap=haps[th];
-                cout << "hap[" << th << "] " << hap.seq << endl;
+                LOG(logDEBUG) << "hap[" << th << "] " << hap.seq << endl;
                 for (It it=hap.indels.begin();it!=hap.indels.end();it++) {
                     if (!it->second.isRef() && !(it->second.isSNP() && it->second.getString()[3]=='D')) {
-                        cout << "[" << it->second.getString() << " " << (it->first) << "]";
+                        LOG(logDEBUG) << "[" << it->second.getString() << " " << (it->first) << "]";
                     }
                 }
-                cout << endl;
+                LOG(logDEBUG) << endl;
             }
             
             
             map<int, std::set<AlignedVariant> > variants;
             alignHaplotypes(haps,pos, leftPos, rightPos, variants, params, refSeqForAlign);
             
-            cout << "#haplotype list[debug2]" << endl;
+            LOG(logDEBUG) << "#haplotype list[debug2]" << endl;
             for (size_t th=0;th<haps.size();th++) {
                 const Haplotype & hap=haps[th];
-                cout << "hap[" << th << "] " << hap.seq << endl;
+                LOG(logDEBUG) << "hap[" << th << "] " << hap.seq << endl;
                 for (It it=hap.indels.begin();it!=hap.indels.end();it++) {
                     if (!it->second.isRef() && !(it->second.isSNP() && it->second.getString()[3]=='D')) {
-                        cout << "[" << it->second.getString() << " " << (it->first) << "]";
+                        LOG(logDEBUG) << "[" << it->second.getString() << " " << (it->first) << "]";
                     }
                 }
-                cout << endl;
+                LOG(logDEBUG) << endl;
             }
             
             // remove duplicate reference-haplotypes of different length
@@ -153,7 +154,7 @@ namespace Haps {
             
             // if (params.showCandHap) {
             for (size_t i=0;i<haps.size();i++) {
-                // cout << "PRE FILTER hdi[" << i << "]:" << haps[i] << endl;
+                // LOG(logDEBUG) << "PRE FILTER hdi[" << i << "]:" << haps[i] << endl;
             }
             //}
             
@@ -164,7 +165,7 @@ namespace Haps {
             int nh=0;
             //if (params.showCandHap) {
 			for (size_t i=0;i<haps.size();i++) {
-                //		cout << "POSTFILTER hdi[" << nh++ << "]:" << haps[i] << endl;
+                //		LOG(logDEBUG) << "POSTFILTER hdi[" << nh++ << "]:" << haps[i] << endl;
 			}
             //}
         }
@@ -182,7 +183,7 @@ namespace Haps {
     
     void computeLikelihoods(const vector<Haplotype> &haps, const vector<Read> & reads, vector<vector<MLAlignment> > & liks, uint32_t leftPos, uint32_t rightPos, vector<int> & onHap, Parameters params)
     {
-        cout << "### Computing likelihoods for all reads and haplotypes.\n";
+        LOG(logDEBUG) << "### Computing likelihoods for all reads and haplotypes.\n";
         onHap = vector<int>(reads.size(),0); // records whether a read was aligned onto at least one haplotype
         
         typedef map<size_t, vector<size_t> >::const_iterator hapsCIt;
@@ -195,37 +196,37 @@ namespace Haps {
                 liks[hidx][r]=oms.calcLikelihood();
                 if (!liks[hidx][r].offHapHMQ) onHap[r]=1;
                 /*
-                 cout << "---" << endl;
-                 cout <<  "read: " << bam1_qname(reads[r].getBam()) << ", hidx: " << hidx << " mpos: " << reads[r].matePos << endl;
-                 cout << "isUnmapped: " << reads[r].isUnmapped() << endl;
-                 cout << string(50,' ') << haps[hidx].seq << endl;
+                 LOG(logDEBUG) << "---" << endl;
+                 LOG(logDEBUG) <<  "read: " << bam1_qname(reads[r].getBam()) << ", hidx: " << hidx << " mpos: " << reads[r].matePos << endl;
+                 LOG(logDEBUG) << "isUnmapped: " << reads[r].isUnmapped() << endl;
+                 LOG(logDEBUG) << string(50,' ') << haps[hidx].seq << endl;
                  oms.printAlignment(50);*/
                 if (liks[hidx][r].ll>0.1) {
-                    cout << "warning" << endl;
+                    LOG(logDEBUG) << "warning" << endl;
                     ObservationModelFBMaxErr om(hap, reads[r], leftPos, params.obsParams);
                     liks[hidx][r]=om.calcLikelihood();
-                    cout << string(25,' ') << hap.seq << endl;
+                    LOG(logDEBUG) << string(25,' ') << hap.seq << endl;
                     om.printAlignment(25);
-                    cout << "hidx: " << hidx << " r: " << r << endl;
-                    cout << bam1_qname(reads[r].getBam()) << endl;
+                    LOG(logDEBUG) << "hidx: " << hidx << " r: " << r << endl;
+                    LOG(logDEBUG) << bam1_qname(reads[r].getBam()) << endl;
                     cerr << "Likelihood>0" << endl;
                     exit(1);
                 }
                 if (isnan(liks[hidx][r]) || isinf(liks[hidx][r])) {
-                    cout << "NAN/Inf error" << endl;
+                    LOG(logDEBUG) << "NAN/Inf error" << endl;
                     throw string("Nan detected");
                 }
             }
         }
-        cout << "computeLikelihoods done" << endl;
+        LOG(logDEBUG) << "computeLikelihoods done" << endl;
     }
     
     void filterReads(vector<Read> & mergedReads, vector<vector<MLAlignment> > & mergedLiks, int & normal_count, int & tumor_count) {
-        cout << "filterReads" << endl;
+        LOG(logDEBUG) << "filterReads" << endl;
         int numhap = (int)mergedLiks.size();
         if(numhap < 2) return;
         for(int i = 0;i < mergedReads.size();) {
-            cout << "read " << i << " " << mergedReads[i].seq_name;
+            LOG(logDEBUG) << "read " << i << " " << mergedReads[i].seq_name;
             double max = -HUGE_VAL;
             double min = 0.0;
             int max_overlap = 0;
@@ -236,9 +237,9 @@ namespace Haps {
                 int overlap = mergedLiks[k][i].lastBase - mergedLiks[k][i].firstBase;
                 if(max_overlap < overlap) max_overlap = overlap;
             }
-            cout << " " << max << " " << min << " " << max_overlap;
+            LOG(logDEBUG) << " " << max << " " << min << " " << max_overlap;
             if(max_overlap < 25 || (max - min) < 0.5) {
-                cout << " filter reads!";
+                LOG(logDEBUG) << " filter reads!";
                 if(i < normal_count)
                     normal_count--;
                 else                
@@ -254,21 +255,21 @@ namespace Haps {
             } else {
                 i++;
             }
-            cout << endl;
+            LOG(logDEBUG) << endl;
         }
-        cout << mergedReads.size() << " " << normal_count << " " << tumor_count << endl;
+        LOG(logDEBUG) << mergedReads.size() << " " << normal_count << " " << tumor_count << endl;
     }
 
 
     void selectHaplotypesAndReads(vector<Haplotype> & haps, vector<Read> & reads, vector<vector<MLAlignment> > & liks, uint32_t pos, uint32_t leftPos, uint32_t rightPos, const AlignedCandidates & candidateVariants, int & normal_count, int & tumor_count, Parameters params) {
-        cout << "############ select haplotypes ##############" << endl;
+        LOG(logDEBUG) << "############ select haplotypes ##############" << endl;
         //filter duplicate haps
         int i = 0;
         while(i < haps.size() - 1) {
             string seq = haps[i].seq;
             for(int j = i + 1;j < haps.size();j++) {
                 if(seq == haps[j].seq) {
-                    //      cout << i << " " << j << endl;
+                    //      LOG(logDEBUG) << i << " " << j << endl;
                     haps.erase(haps.begin()+j);
                     break;
                 }
@@ -284,18 +285,18 @@ namespace Haps {
         while(i < haps.size()) {
             Haplotype hap = haps[i];
             bool flag = false;
-            //cout << "i, margin, len " << i << ", " << margin << ", " << hap.seq.length();
+            //LOG(logDEBUG) << "i, margin, len " << i << ", " << margin << ", " << hap.seq.length();
             for (It it=hap.indels.begin();it!=hap.indels.end();it++) {
                 if (!it->second.isRef() && !(it->second.isSNP() && it->second.getString()[3]=='D')) {
-                    //   cout << "[" << it->second.getString() << " " << (it->first) << "]";
+                    //   LOG(logDEBUG) << "[" << it->second.getString() << " " << (it->first) << "]";
                     if(it->first < margin || it->first > hap.seq.length() - margin) {
                         flag = true;
                     }
                 }
             }
-            // cout << endl;
+            // LOG(logDEBUG) << endl;
             if(flag) {
-                //   cout << "filter " << i << endl;
+                //   LOG(logDEBUG) << "filter " << i << endl;
                 haps.erase(haps.begin()+i);
             } else {
                 i++;
@@ -319,7 +320,7 @@ namespace Haps {
         haps = tmp_haps;
         liks = tmp_liks;
         
-        cout << "############ vb for filter haplotypes ##############" << endl;
+        LOG(logDEBUG) << "############ vb for filter haplotypes ##############" << endl;
         vector<double> hapFreqs;
         map <int, vector<tuple<AlignedVariant, double, double> > > posteriors;
         lower_bound_t lb;
@@ -332,7 +333,7 @@ namespace Haps {
         filter_th.push_back(0.01);
         filter_th.push_back(0.01);
         for(int i=0;i < 1;i=i++) {
-            cout << "#### filter haps[" << i  << " ] ###" << endl;
+            LOG(logDEBUG) << "#### filter haps[" << i  << " ] ###" << endl;
             EMBasic::estimate(haps, reads, liks, hapFreqs, her, pos, leftPos, rightPos, candidateVariants, lb, vpp, 0.1, "all", params);
             vector<Haplotype> tmp_haps;
             vector<vector<MLAlignment> > tmp_liks;
@@ -351,14 +352,14 @@ namespace Haps {
             filterReads(reads, liks, normal_count, tumor_count);
             if(haps.size() < 3 && i > 2) return;
         }
-        cout << endl;
-        cout << "############ select haplotypes done ##############" << endl;
+        LOG(logDEBUG) << endl;
+        LOG(logDEBUG) << "############ select haplotypes done ##############" << endl;
     }
 
     
     bool alignHaplotypes(vector<Haplotype> & haps,  uint32_t pos, uint32_t & leftPos, uint32_t & rightPos, map<int, std::set<AlignedVariant> > & variants, Parameters params, string refSeq)
     {
-        cout << "alignHaplotypes" << endl;
+        LOG(logDEBUG) << "alignHaplotypes" << endl;
         uint32_t start=leftPos;
         uint32_t end=rightPos+1;
         
@@ -419,8 +420,8 @@ namespace Haps {
             int hs = ml.hpos.size()-1;
             if (hs>0 && ml.hpos[hs] == MLAlignment::RO) hasStartEndIndel = true;
             //if (params.showCandHap) {
-            //			cout << "hap " << h << endl;om.printAlignment(20);
-            //			cout << string(20,' ') << haps[h].align << endl;
+            //			LOG(logDEBUG) << "hap " << h << endl;om.printAlignment(20);
+            //			LOG(logDEBUG) << string(20,' ') << haps[h].align << endl;
             //	}
             
             for (map<int, AlignedVariant>::const_iterator it=haps[h].indels.begin(); it!=haps[h].indels.end();it++) variants[it->first].insert(it->second);
@@ -434,16 +435,16 @@ namespace Haps {
         
         haps.swap(tmp_haps);
         typedef map<int, AlignedVariant>::const_iterator It;
-        /*   cout << "#haplotype list[debug4]" << endl;
+        /*   LOG(logDEBUG) << "#haplotype list[debug4]" << endl;
          for (size_t th=0;th<haps.size();th++) {
          const Haplotype & hap=haps[th];
-         cout << "hap[" << th << "] " << hap.seq << endl;
+         LOG(logDEBUG) << "hap[" << th << "] " << hap.seq << endl;
          for (It it=hap.indels.begin();it!=hap.indels.end();it++) {
          if (!it->second.isRef() && !(it->second.isSNP() && it->second.getString()[3]=='D')) {
-         cout << "[" << it->second.getString() << " " << (it->first) << "]";
+         LOG(logDEBUG) << "[" << it->second.getString() << " " << (it->first) << "]";
          }
          }
-         cout << endl;
+         LOG(logDEBUG) << endl;
          }*/
         
         
@@ -452,25 +453,25 @@ namespace Haps {
             for (size_t h=0;h<haps.size();h++) haps[h].addRefVariant(it->first);
         }
         
-        /*  cout << "#haplotype list[debug5]" << endl;
+        /*  LOG(logDEBUG) << "#haplotype list[debug5]" << endl;
          for (size_t th=0;th<haps.size();th++) {
          const Haplotype & hap=haps[th];
-         cout << "hap[" << th << "] " << hap.seq << endl;
+         LOG(logDEBUG) << "hap[" << th << "] " << hap.seq << endl;
          for (It it=hap.indels.begin();it!=hap.indels.end();it++) {
          if (!it->second.isRef() && !(it->second.isSNP() && it->second.getString()[3]=='D')) {
-         cout << "[" << it->second.getString() << " " << (it->first) << "]";
+         LOG(logDEBUG) << "[" << it->second.getString() << " " << (it->first) << "]";
          }
          }
-         cout << endl;
+         LOG(logDEBUG) << endl;
          }*/
         
         if (!params.quiet) {
             for (map<int, std::set<AlignedVariant> >::const_iterator it=variants.begin();it!=variants.end();it++) {
-                cout << "aligned_var@pos " << pos << " " << leftPos+it->first;
+                LOG(logDEBUG) << "aligned_var@pos " << pos << " " << leftPos+it->first;
                 BOOST_FOREACH(AlignedVariant av, it->second) {
-                    cout << " " << av.getString();
+                    LOG(logDEBUG) << " " << av.getString();
                 }
-                cout << endl;
+                LOG(logDEBUG) << endl;
             }
         }
         
@@ -506,7 +507,7 @@ namespace Haps {
                     selReads.insert(int(r));
                     sel = 1;
                 }
-                if (debugfh) cout << "sel: " << "h: " << h << " " << bam1_qname(reads[r].getBam()) << " mpos: " << reads[r].matePos << " selected: " << sel << endl;
+                if (debugfh) LOG(logDEBUG) << "sel: " << "h: " << h << " " << bam1_qname(reads[r].getBam()) << " mpos: " << reads[r].matePos << " selected: " << sel << endl;
                 
             }
             
@@ -533,7 +534,7 @@ namespace Haps {
                     int len = right-left+1;
                     bool covered = false;
                     int numdelcovered = 0;
-                    //cout << "left: " << left << " right: " << right << " len: " << len << endl;
+                    //LOG(logDEBUG) << "left: " << left << " right: " << right << " len: " << len << endl;
                     if (av.getType() == Variant::DEL) {
                         // see if there is at least one read spanning the interval with at most one mismatch
                         BOOST_FOREACH(int r, selReads) {
@@ -560,7 +561,7 @@ namespace Haps {
                                 numdelcovered++;
                                 hVarCoverage[pav][h+strand*numHaps].insert(r);
                             }
-                            //cout << "RC" << bam1_qname(reads[r].getBam()) << " cov: " << cov << endl;
+                            //LOG(logDEBUG) << "RC" << bam1_qname(reads[r].getBam()) << " cov: " << cov << endl;
                         }
                         
                         if (numdelcovered>=1) {
@@ -605,7 +606,7 @@ namespace Haps {
                                     if (thisReadCovered[x]==0) {
                                         thisread_covered = false;
                                     }
-                                    if (debugfh) cout << " " << hapBaseCovered[x];
+                                    if (debugfh) LOG(logDEBUG) << " " << hapBaseCovered[x];
                                 }
                                 if (thisread_covered) {
                                     hVarCoverage[pav][h+strand*numHaps].insert(r);
@@ -613,7 +614,7 @@ namespace Haps {
                             }
                             
                             
-                            if (0) cout << " hap " << h << " var: " << av.getString() << " len: " << len << " " << bam1_qname(reads[r].getBam()) << " nmm: " << nmm << " c.size(): " << c.size() << " mpos: " << reads[r].matePos << " covered: " << thisread_covered << endl;
+                            if (0) LOG(logDEBUG) << " hap " << h << " var: " << av.getString() << " len: " << len << " " << bam1_qname(reads[r].getBam()) << " nmm: " << nmm << " c.size(): " << c.size() << " mpos: " << reads[r].matePos << " covered: " << thisread_covered << endl;
                             if (thisread_covered) covered=true;
                             
                             
@@ -624,7 +625,7 @@ namespace Haps {
                         allCovered = false;
                         break;
                     }
-                    if (debugfh) cout << "hap" << h << " var: " << av.getString() << " COVERED:" << covered << endl;
+                    if (debugfh) LOG(logDEBUG) << "hap" << h << " var: " << av.getString() << " COVERED:" << covered << endl;
                     
                 }
                 
@@ -635,10 +636,10 @@ namespace Haps {
                     filtered[h]=1;
                 }
             }
-            //cout << "Haplotype[" << h << "]: filtered " << filtered[h] << endl;
+            //LOG(logDEBUG) << "Haplotype[" << h << "]: filtered " << filtered[h] << endl;
             
         }
-        cout << "Filtered " << numFiltered << " haplotypes." << endl;
+        LOG(logDEBUG) << "Filtered " << numFiltered << " haplotypes." << endl;
         // determine coverage of each variant
         for (map<PAV, vector <std::set<int> > >::const_iterator it = hVarCoverage.begin();it != hVarCoverage.end(); it++) {
             const PAV & pav = it->first;

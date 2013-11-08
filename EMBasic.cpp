@@ -35,21 +35,22 @@
 #include <sys/types.h>
 #include <boost/algorithm/string.hpp>
 #include "EMBasic.hpp"
+#include "log.h"
 
 namespace EMBasic {
     void computeLowerBound(const vector<double> & resp, const double a0, const vector<double> & ak, const vector<double> & ln_p_x_given_h, const vector<double> & lpi, const vector<int> & compatible, lower_bound_t & lb) {
-        cout << endl << "###computeLowerBound###" << endl;
+        LOG(logDEBUG) << endl << "###computeLowerBound###" << endl;
         int nh = ak.size(); //number of haps
         int nr = resp.size() / nh; //number of reads
-        cout << "nh, nr = " << nh << ", " << nr << endl;
-        cout << "###compatible" << endl;
-        for(int i=0;i < nh;i++) cout << " " << compatible[i];
-        cout << endl;
-        cout << "lpi = ";
-        for(int i=0;i < nh;i++) cout << " " << lpi[i];
-        cout << endl << "a0=" << a0 << ", a = ";
-        for(int i=0;i < nh;i++) cout << " " << ak[i];
-        cout << endl;
+        LOG(logDEBUG) << "nh, nr = " << nh << ", " << nr << endl;
+        LOG(logDEBUG) << "###compatible" << endl;
+        for(int i=0;i < nh;i++) LOG(logDEBUG) << " " << compatible[i];
+        LOG(logDEBUG) << endl;
+        LOG(logDEBUG) << "lpi = ";
+        for(int i=0;i < nh;i++) LOG(logDEBUG) << " " << lpi[i];
+        LOG(logDEBUG) << endl << "a0=" << a0 << ", a = ";
+        for(int i=0;i < nh;i++) LOG(logDEBUG) << " " << ak[i];
+        LOG(logDEBUG) << endl;
         //ln_p_x_given_z
         double tmp = 0.0;
         for(int i=0;i < nr;i++) {
@@ -82,7 +83,7 @@ namespace EMBasic {
         for(size_t h=0;h<nh;h++) if (compatible[h]) {
             tmp += (a0 - 1.0) * lpi[h];
         }
-        cout << "ln_C(a0) + tmp = " << ln_C << " + " << tmp << endl;
+        LOG(logDEBUG) << "ln_C(a0) + tmp = " << ln_C << " + " << tmp << endl;
         lb.ln_p_pi = ln_C + tmp;
         //ln_q_z
         tmp = 0.0;
@@ -108,26 +109,26 @@ namespace EMBasic {
         for(size_t h=0;h<nh;h++) if (compatible[h]) {
             tmp += (ak[h] - 1.0) * lpi[h];
         }
-        cout << "ln_C(a) + tmp = " << ln_C << " + " << tmp << endl;
+        LOG(logDEBUG) << "ln_C(a) + tmp = " << ln_C << " + " << tmp << endl;
         lb.ln_q_pi = ln_C + tmp;
         //
         lb.lower_bound = lb.ln_p_x_given_z + lb.ln_p_z_given_pi + lb.ln_p_pi - lb.ln_q_z - lb.ln_q_pi;
         printf("lower_bound=%lf, ln_p_x_given_z=%lf, ln_p_z_given_pi=%lf, ln_p_pi=%lf, ln_q_z=%lf, ln_q_pi=%lf\n", lb.lower_bound, lb.ln_p_x_given_z, lb.ln_p_z_given_pi, lb.ln_p_pi, lb.ln_q_z, lb.ln_q_pi);
         //
-        cout << "########" << endl << endl;
+        LOG(logDEBUG) << "########" << endl << endl;
     }
 
     void estimate(const vector<Haplotype> & haps, const vector<Read> & reads, const vector<vector<MLAlignment> > & liks, vector<double> & hapFreqs, vector <HapEstResult > & posteriors, uint32_t candPos, uint32_t leftPos, uint32_t rightPos, const AlignedCandidates & candidateVariants, lower_bound_t & best_lower_bound, map<AlignedVariant, double> & variantPosteriors, double a0, string program, Parameters params)
     {
-        cout << "EMBasic::estimate" << endl;
-        cout.flush();
+        LOG(logDEBUG) << "EMBasic::estimate" << endl;
+        LOG(logDEBUG).flush();
         // estimate haplotype frequencies using EM
         hapFreqs.clear();
 
         vector<lower_bound_t> lower_bounds;
         size_t nh=haps.size();
         size_t nr=reads.size();
-        cout << "nh, nr:" << nh << " " << nr << endl;
+        LOG(logDEBUG) << "nh, nr:" << nh << " " << nr << endl;
         if (nh == 0) {
             throw(string("num hap = 0 in EMBasic::estimate"));
         }
@@ -177,32 +178,32 @@ namespace EMBasic {
             }
         }
 
-/*        cout << "#read list" << endl;
+/*        LOG(logDEBUG) << "#read list" << endl;
         for (size_t r=0;r<nr;r++) {
-            cout << "r[" << r << "] " << reads[r].seq.seq << endl;
+            LOG(logDEBUG) << "r[" << r << "] " << reads[r].seq.seq << endl;
         }
         */
 
-        cout << "#haplotype list" << endl;
+        LOG(logDEBUG) << "#haplotype list" << endl;
         for (size_t th=0;th<nh;th++) {
             const Haplotype & hap=haps[th];
-            cout << "hap[" << th << "] " << hap.seq << endl;
+            LOG(logDEBUG) << "hap[" << th << "] " << hap.seq << endl;
             for (It it=hap.indels.begin();it!=hap.indels.end();it++) {
                 if (!it->second.isRef() && !(it->second.isSNP() && it->second.getString()[3]=='D')) {
-                    cout << "[" << it->second.getString() << " " << (it->first) << "]";
+                    LOG(logDEBUG) << "[" << it->second.getString() << " " << (it->first) << "]";
                 }
             }
-            cout << endl;
+            LOG(logDEBUG) << endl;
         }
 
 #ifdef LOGDEBUG
-        cout << "#log haplotype and read likelihood" << endl;
+        LOG(logDEBUG) << "#log haplotype and read likelihood" << endl;
         for (size_t r=0;r<nr;r++) {
-            cout << reads[r].seq_name << " rl[" << r << "]:";
+            LOG(logDEBUG) << reads[r].seq_name << " rl[" << r << "]:";
             for (size_t h=0;h<nh;h++) {
-                cout << " " << rl[r*nh+h];
+                LOG(logDEBUG) << " " << rl[r*nh+h];
             }
-            cout << endl;
+            LOG(logDEBUG) << endl;
         }
 #endif
 
@@ -233,17 +234,17 @@ namespace EMBasic {
                 const Haplotype & hap=haps[h];
 
 
-                //cout << "hap[" << h << "].seq: " << hap.seq << endl;
+                //LOG(logDEBUG) << "hap[" << h << "].seq: " << hap.seq << endl;
 
-                //cout << "vars:";
+                //LOG(logDEBUG) << "vars:";
                 std::set<PAV> act;
                 for (It it=hap.indels.begin();it!=hap.indels.end();it++) {
                     if (!it->second.isRef() && !(it->second.isSNP() && it->second.getString()[3]=='D')) {
                         act.insert(PAV(it->first, it->second));
-                        //		cout << "[" << it->first << "," << it->second.getString() << "]";
+                        //		LOG(logDEBUG) << "[" << it->first << "," << it->second.getString() << "]";
                     }
                 }
-                //cout << endl;
+                //LOG(logDEBUG) << endl;
                 ssPAV.insert(act);
             }
             //make fullset
@@ -343,39 +344,39 @@ namespace EMBasic {
         int nv=int(allVariants.size());
         vector<int> active(nav*nv,0), hapHasVar(nh*nv,0);
 
-        //cout << "active: " << endl;
+        //LOG(logDEBUG) << "active: " << endl;
         BOOST_FOREACH(PAV pav, allVariants) {
-            //  cout << pav.first << " " << pav.second.getString() << " ";
+            //  LOG(logDEBUG) << pav.first << " " << pav.second.getString() << " ";
             for (int a=0;a<nav;a++) {
                 if (activeVariants[a].find(pav)!=activeVariants[a].end()) active[a*nv+idx]=1;
-                //    cout << " " << active[a*nv+idx];
+                //    LOG(logDEBUG) << " " << active[a*nv+idx];
             }
-            cout << endl;
+            LOG(logDEBUG) << endl;
             for (size_t h=0;h<nh;h++) {
                 It it=haps[h].indels.find(pav.first);
                 if (it!=haps[h].indels.end() && it->second.getString()==pav.second.getString()) hapHasVar[h*nv+idx]=1;
             }
             for(int i=0;i<nv;i++) {
                 for(int j=0;j<nh;j++) {
-                    //      cout << "[" << active[i*nv+idx] << " " << hapHasVar[j*nv+idx] << "]";
+                    //      LOG(logDEBUG) << "[" << active[i*nv+idx] << " " << hapHasVar[j*nv+idx] << "]";
                 }
-                //cout << endl;
+                //LOG(logDEBUG) << endl;
             }
             idx++;
         }
 
 
-        cout << "allVariants: ";
+        LOG(logDEBUG) << "allVariants: ";
         BOOST_FOREACH(PAV pav, allVariants) {
-            cout << " [" << pav.first << " " << pav.second.getString() << "]";
+            LOG(logDEBUG) << " [" << pav.first << " " << pav.second.getString() << "]";
         }
-        cout << endl;
+        LOG(logDEBUG) << endl;
 
         vector<vector<int> > compatibles;
         vector<vector<double> > aks;
-        cout << "#subsets" << endl;
+        LOG(logDEBUG) << "#subsets" << endl;
         for (int th=0;th<nav;th++) {
-            cout << "[" << th << "] ";
+            LOG(logDEBUG) << "[" << th << "] ";
             for (size_t h=0;h<nh;h++) {
                 compatible[h]=1;
                 if (filtered[h]!=0) {
@@ -389,10 +390,10 @@ namespace EMBasic {
                         }
                     }
                 }
-                cout << " " << compatible[h];
+                LOG(logDEBUG) << " " << compatible[h];
             }
             compatibles.push_back(compatible);
-            cout << endl;
+            LOG(logDEBUG) << endl;
         }
 
 
@@ -452,7 +453,7 @@ namespace EMBasic {
 
             logpriors[th]=logprior;
 
-            //		cout << "Number of indels: " << ni << " number of SNPs: " << ns << endl;
+            //		LOG(logDEBUG) << "Number of indels: " << ni << " number of SNPs: " << ns << endl;
 
             // check haplotypes
 
@@ -487,7 +488,7 @@ namespace EMBasic {
             double loglik, llNew, llOld=-HUGE_VAL;
             int iter=0;
             while (!converged) {
-                //cout << endl << "EM[" << iter << "]:" << endl;
+                //LOG(logDEBUG) << endl << "EM[" << iter << "]:" << endl;
                 // compute expectation of indicator variables
                 for (size_t h=0;h<nh;h++) nk[h]=0.0;
 
@@ -514,7 +515,7 @@ namespace EMBasic {
 
                 }
                 // compute frequencies
-                //cout << "pi: ";
+                //LOG(logDEBUG) << "pi: ";
 
                 double ahat=0.0;
                 for (size_t h=0;h<nh;h++) if (compatible[h]) {
@@ -534,22 +535,22 @@ namespace EMBasic {
                         lpi[h]=-100;
                         pi[h]=-100;
                     }
-                    //	cout << " " << pi[h];
+                    //	LOG(logDEBUG) << " " << pi[h];
                     //	zp+=exp(pi[h]);
                 }
 
                 } catch (std::exception& e) {
                     string message = string("error_exception_").append(e.what());
-                    cout << message << endl;
-                    cout << "EMBasic digamma" << endl << "ak: ";
-                    BOOST_FOREACH(double x, ak) { cout << x << " "; }
-                    cout << endl;
-                    cout << "ahat: " << ahat << endl;
-                    cout.flush();
+                    LOG(logDEBUG) << message << endl;
+                    LOG(logDEBUG) << "EMBasic digamma" << endl << "ak: ";
+                    BOOST_FOREACH(double x, ak) { LOG(logDEBUG) << x << " "; }
+                    LOG(logDEBUG) << endl;
+                    LOG(logDEBUG) << "ahat: " << ahat << endl;
+                    LOG(logDEBUG).flush();
                     throw;
                 }
 
-                //cout << " zp: " << zp << endl;
+                //LOG(logDEBUG) << " zp: " << zp << endl;
 
 
                 idx=0;
@@ -561,30 +562,30 @@ namespace EMBasic {
                         idx++;
                     }
                 }
-                //cout << "eOld: " << eOld << " " << " eNew: " << eNew; for (size_t h=0;h<nh;h++) { cout << " " << pi[h]; } cout << endl;
+                //LOG(logDEBUG) << "eOld: " << eOld << " " << " eNew: " << eNew; for (size_t h=0;h<nh;h++) { LOG(logDEBUG) << " " << pi[h]; } LOG(logDEBUG) << endl;
                 /*
                  for (size_t r=0;r<nr;r++) {
-                 cout << "z[" << r << "]:";
+                 LOG(logDEBUG) << "z[" << r << "]:";
                  for (size_t h=0;h<nh;h++) {
-                 cout << " " << z[r*nh+h];
+                 LOG(logDEBUG) << " " << z[r*nh+h];
                  }
-                 cout << endl;
+                 LOG(logDEBUG) << endl;
                  }
                  */
                 llNew=loglik;
-                //cout << "loglik: " << loglik << endl;
+                //LOG(logDEBUG) << "loglik: " << loglik << endl;
                 if (0 && llOld>llNew+1e-5)  {
                     cerr << "ERROR: nr: " << nr << " eOld: " << eOld << " eNew: " << eNew << " diff: " << eOld-eNew << endl;
-                    cout << "ERROR: nr: " << nr << " eOld: " << eOld << " eNew: " << eNew << " diff: " << eOld-eNew << endl;
+                    LOG(logDEBUG) << "ERROR: nr: " << nr << " eOld: " << eOld << " eNew: " << eNew << " diff: " << eOld-eNew << endl;
                     cerr << "ERROR: nr: " << nr << " llOld: " << llOld << " eNew: " << llNew << " diff: " << llOld-llNew << endl;
-                    cout << "ERROR: nr: " << nr << " llOld: " << llOld << " eNew: " << llNew << " diff: " << llOld-llNew << endl;
+                    LOG(logDEBUG) << "ERROR: nr: " << nr << " llOld: " << llOld << " eNew: " << llNew << " diff: " << llOld-llNew << endl;
 
                     //throw string("EM Error in estimateHapFreqs");
                     //iter=100;
 
                 }
                 converged=(fabs(eOld-eNew))<tol || iter > 500;
-                //cout << "iter: " << iter << " eOld: " << eOld << " eNew: " << eNew << endl;
+                //LOG(logDEBUG) << "iter: " << iter << " eOld: " << eOld << " eNew: " << eNew << endl;
 
                 eOld=eNew;
                 llOld=llNew;
@@ -592,24 +593,24 @@ namespace EMBasic {
 
 
             }
-            cout << "----------------finished[" << iter << "]---------------" << endl;
-            cout << "###compatible" << endl;
-            for(int i=0;i < nh;i++) cout << " " << compatible[i];
-            cout << endl;
-            cout << "lpi = ";
-            for(int i=0;i < nh;i++) cout << " " << lpi[i];
-            cout << endl << "a0=" << a0 << ", a = ";
-            for(int i=0;i < nh;i++) cout << " " << ak[i];
+            LOG(logDEBUG) << "----------------finished[" << iter << "]---------------" << endl;
+            LOG(logDEBUG) << "###compatible" << endl;
+            for(int i=0;i < nh;i++) LOG(logDEBUG) << " " << compatible[i];
+            LOG(logDEBUG) << endl;
+            LOG(logDEBUG) << "lpi = ";
+            for(int i=0;i < nh;i++) LOG(logDEBUG) << " " << lpi[i];
+            LOG(logDEBUG) << endl << "a0=" << a0 << ", a = ";
+            for(int i=0;i < nh;i++) LOG(logDEBUG) << " " << ak[i];
             aks.push_back(ak);
 
-            cout << endl;
+            LOG(logDEBUG) << endl;
             lower_bound_t lb;
             computeLowerBound(z, a0, ak, rl, lpi, compatible, lb);
             //  lower_bound_t another_lb;
             //  computeAnotherLowerBound(z, a0, ak, rl, lpi, compatible, another_lb);
             /*  if(abs(lb.lower_bound - another_lb.lower_bound) > 0.01) {
-             cout << "error: " << "another lower bound"  << another_lb.lower_bound << endl;
-             cout << "normal lower bound" << lb.lower_bound << endl;
+             LOG(logDEBUG) << "error: " << "another lower bound"  << another_lb.lower_bound << endl;
+             LOG(logDEBUG) << "normal lower bound" << lb.lower_bound << endl;
              throw 20;
              }*/
             lb.compatible = compatible;
@@ -618,11 +619,11 @@ namespace EMBasic {
 
 #ifdef LOGDEBUG
             for (int r=0;r<nr;r++) {
-                cout << reads[r].seq_name << " z[" << r << "]:";
+                LOG(logDEBUG) << reads[r].seq_name << " z[" << r << "]:";
                 for (int h=0;h<nh;h++) {
-                    cout << " " << z[r*nh+h];
+                    LOG(logDEBUG) << " " << z[r*nh+h];
                 }
-                cout << endl;
+                LOG(logDEBUG) << endl;
             }
 #endif
 
@@ -634,26 +635,26 @@ namespace EMBasic {
             }
 
             if (0) {
-                cout << "th: " << th << endl;
+                LOG(logDEBUG) << "th: " << th << endl;
                 for (size_t y=0;y<nh;y++) {
-                    cout << "[" << y << "," << exp(pi[y]) << "]";
+                    LOG(logDEBUG) << "[" << y << "," << exp(pi[y]) << "]";
                 }
-                cout << endl << endl;
+                LOG(logDEBUG) << endl << endl;
             }
 
             logliks[th]=loglik;
             logz=addLogs(logz, lower_bounds[th].lower_bound+logprior);
             for (size_t h=0;h<nh;h++) { freqs[th*nh+h]=exp(pi[h])/zc; }
-            for (size_t h=0;h<nh;h++) { cout << " " << freqs[th*nh+h]; } cout << endl;
+            for (size_t h=0;h<nh;h++) { LOG(logDEBUG) << " " << freqs[th*nh+h]; } LOG(logDEBUG) << endl;
 
-            cout << "lower_bound: " << lower_bounds[th].lower_bound << " loglik: " << loglik << " " << logliks[th] << " logprior: " << logprior << endl << endl;
+            LOG(logDEBUG) << "lower_bound: " << lower_bounds[th].lower_bound << " loglik: " << loglik << " " << logliks[th] << " logprior: " << logprior << endl << endl;
 
         }
 
 
         for (int a=0;a<nav;a++) {
             post[a]=exp(lower_bounds[a].lower_bound+logpriors[a]-logz);
-            cout << "post[" << a << "]: " << post[a] << endl;
+            LOG(logDEBUG) << "post[" << a << "]: " << post[a] << endl;
         }
 
         for (size_t h=0;h<nh;h++) {
@@ -664,33 +665,33 @@ namespace EMBasic {
             hapFreqs[h]+=exp(lower_bounds[th].lower_bound+logpriors[th]-logz)*freqs[th*nh+h];
         }
 
-        cout << "==================results====================" << endl;
+        LOG(logDEBUG) << "==================results====================" << endl;
 
         for (int a=0;a<nav;a++) {
-            cout << "[" << a << "] " << lower_bounds[a].lower_bound << " " << logpriors[a] << ";";
+            LOG(logDEBUG) << "[" << a << "] " << lower_bounds[a].lower_bound << " " << logpriors[a] << ";";
             for(int j=0;j<nh;j++) {
-                cout << " " << compatibles[a][j];
+                LOG(logDEBUG) << " " << compatibles[a][j];
             }
-            cout << "; (freqs)";
+            LOG(logDEBUG) << "; (freqs)";
             for(int j=0;j<nh;j++) {
-                cout << " " << freqs[a*nh+j];
+                LOG(logDEBUG) << " " << freqs[a*nh+j];
             }
-            cout << endl;
+            LOG(logDEBUG) << endl;
         }
 
         for (size_t th=0;th<nh;th++) {
             const Haplotype & hap=haps[th];
-            cout << "hap[" << th << "] " << hap.seq << endl;
-            cout << hapFreqs[th] << " ";
+            LOG(logDEBUG) << "hap[" << th << "] " << hap.seq << endl;
+            LOG(logDEBUG) << hapFreqs[th] << " ";
             for (It it=hap.indels.begin();it!=hap.indels.end();it++) {
                 if (!it->second.isRef() && !(it->second.isSNP() && it->second.getString()[3]=='D')) {
-                    cout << "[" << it->second.getString() << " " << (it->first) << "]";
+                    LOG(logDEBUG) << "[" << it->second.getString() << " " << (it->first) << "]";
                 }
             }
-            cout << endl;
+            LOG(logDEBUG) << endl;
         }
 
-        cout << endl;
+        LOG(logDEBUG) << endl;
 
         // compute marginal posteriors for the individual variants
         vector< std::set<int> > readidx(2); //TODO
@@ -772,7 +773,7 @@ namespace EMBasic {
         /*
          fname = oprefix;
          fname.append(".alignments");
-         cout << "fname: " << fname << endl;*/
+         LOG(logDEBUG) << "fname: " << fname << endl;*/
         // of.open(fname.c_str());
         /*if (!of.is_open()) {
          throw string("Cannot open file ").append(fname).append(" for writing .liks file");
@@ -781,23 +782,23 @@ namespace EMBasic {
 
         /*
          for (size_t r=0;r<nr;r++) {
-         cout << "###" << endl;
-         cout << "read: " << bam1_qname(reads[r].getBam()) << " mpos: " << reads[r].matePos << endl;
-         cout << "isUnmapped: " << reads[r].isUnmapped() << endl;
+         LOG(logDEBUG) << "###" << endl;
+         LOG(logDEBUG) << "read: " << bam1_qname(reads[r].getBam()) << " mpos: " << reads[r].matePos << endl;
+         LOG(logDEBUG) << "isUnmapped: " << reads[r].isUnmapped() << endl;
          // compute maximum alignment likelihood
          double lq = 0.0;
          for (size_t b=0;b<reads[r].size();b++) lq += log(reads[r].qual[b]);
 
-         cout << "Max alignment loglik: " << lq << endl;
+         LOG(logDEBUG) << "Max alignment loglik: " << lq << endl;
 
          double maxll = -HUGE_VAL;
          std::set <int> mlhaps;
          for (int h=nh-1;h>=0;h--) if (liks[h][r]>maxll) { maxll = liks[h][r]; }
          for (int h=nh-1;h>=0;h--) mlhaps.insert(h); //if (fabs(liks[h][r]-maxll)<0.01) mlhaps.insert(h);
          BOOST_FOREACH(int hidx, mlhaps) {
-         cout << "r: " << r << " hidx: " << hidx << " maxll:" << maxll << endl;
+         LOG(logDEBUG) << "r: " << r << " hidx: " << hidx << " maxll:" << maxll << endl;
          ObservationModelFBMaxErr obs(haps[hidx], reads[r], leftPos, params.obsParams);
-         cout << string(50,' ') << haps[hidx].seq << endl;
+         LOG(logDEBUG) << string(50,' ') << haps[hidx].seq << endl;
          obs.printAlignment(50);
          }
          }

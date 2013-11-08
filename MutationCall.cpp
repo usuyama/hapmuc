@@ -43,6 +43,7 @@
 #include <boost/lexical_cast.hpp>
 #include <stdlib.h>
 #include <float.h>
+#include <log.h>
 
 namespace MutationCall
 {
@@ -53,7 +54,9 @@ namespace MutationCall
 
   void output_liktable(int index, string id, const vector<double> & liks, Parameters params) {
     //hap size=4
-#ifdef LOGDEBUG
+#ifndef LOGDEBUG
+      return;
+#endif
     std::ofstream ofs((params.fileName+"logs/"+itos(index)+"."+id+".liks").c_str(), std::ios::out);
     int nr = liks.size() / 4;
     for(int i=0;i<nr;i++) {
@@ -62,12 +65,12 @@ namespace MutationCall
         ofs << "\t" << liks[i*4+j];
       ofs << endl;
     }
-#endif
   }
 
   void output_alignments(int index, string id, const vector<Read> & reads, const vector<vector<MLAlignment> > & liks, Parameters params) {
-#ifdef LOGDEBUG
-    cout << "output_alignments" << endl;
+#ifndef LOGDEBUG
+      return;
+#endif
     std::ofstream ofs((params.fileName+"logs/"+itos(index)+"."+id+".alignments").c_str(), std::ios::out);
     int nr = reads.size();
     int nh = liks.size();
@@ -89,20 +92,14 @@ namespace MutationCall
           ofs << "[" << it->second.getString() << " " << (it->first) << "]";
         }
         ofs << endl;
-        /*
-        for (It it=tmp.indels.begin();it!=tmp.indels.end();it++) {
-          if (!it->second.isRef() && !(it->second.isSNP() && it->second.getString()[3]=='D')) {
-            ofs << "[" << it->second.getString() << " " << (it->first) << "]";
-          }
-        }*/
+
       }
     }
-#endif
   }
 
 
   void filter_reads(vector<Read> &reads, vector<double> &liks) {
-    cout << "filter_reads: " << endl;
+    LOG(logDEBUG) << "filter_reads: " << endl;
     //h1とh3で差がでないreadを消す。
     for(int i=0;i<reads.size();i++) {
       double max=-DBL_MAX, min=DBL_MAX;
@@ -110,12 +107,8 @@ namespace MutationCall
         if(liks[i*4+j*2]>max) max = liks[i*4+j*2];
         if(liks[i*4+j*2]<min) min = liks[i*4+j*2];
       }
-      //		cout << max << " " << min << endl;
       if((max-min)<0.0001) {
-        //filter this read
-#ifdef LOGDEBUG
-        cout << "filter read: " << reads[i].seq_name << " " << i << " " << max << " " << min << endl;
-#endif
+        LOG(logDEBUG) << "filter read: " << reads[i].seq_name << " " << i << " " << max << " " << min << endl;
         reads.erase(reads.begin()+i);
         liks.erase(liks.begin()+i*4, liks.begin()+i*4+4);
         i--;
@@ -125,7 +118,9 @@ namespace MutationCall
 
 
   void output_mm(vector<Haplotype> &haps, string fname, uint32_t leftPos, uint32_t rightPos, double bf, lower_bound_t& lb, vector<double> normalHapFreqs, vector<double> tumorHapFreqs) {
-#ifdef LOGDEBUG
+#ifndef LOGDEBUG
+      return;
+#endif
     typedef map<int, AlignedVariant>::const_iterator It;
     std::ofstream ofs(fname.c_str(), std::ios::out | std::ios::app);
     ofs << "-------- window[" << leftPos << "-" << rightPos <<"] ---------------" << endl;
@@ -153,12 +148,13 @@ namespace MutationCall
       }
       ofs << endl;
     }
-#endif
   }
 
 
   void print_freqs(vector<Haplotype> &haps, string fname, uint32_t leftPos, uint32_t pos, uint32_t rightPos, const vector<Read> & normal_reads, const vector<Read> & tumor_reads, const AlignedCandidates & candidateVariants, const vector<vector<MLAlignment> > & normal_liks, const vector<vector<MLAlignment> > & tumor_liks, Parameters params) {
-#ifdef LOGDEBUG
+#ifndef LOGDEBUG
+      return;
+#endif
     vector<double> tumor_hap_freqs, normal_hap_freqs;
     vector<HapEstResult> tumor_her, normal_her;
     map<AlignedVariant, double> normal_vpp, tumor_vpp;
@@ -201,18 +197,17 @@ namespace MutationCall
       }
       ofs2 << endl;
     }
-#endif
   }
 
   void computeBayesFactors(const vector<Read> & normalReads, const vector<Read> & tumorReads, uint32_t pos, uint32_t leftPos, uint32_t rightPos, const AlignedCandidates & candidateVariants, OutputData & oData, Parameters params, string refSeq, string refSeqForAlign, vector<AlignedVariant> & close_somatic, vector<AlignedVariant>& close_germline, int index)
   {
-    cout << "computeBayesFactor: " << index << endl;
+    LOG(logDEBUG) << "computeBayesFactor: " << index << endl;
     vector<Haplotype> haps;
     vector<vector<MLAlignment> > liks;
     vector<HapPairLik> likPairs;
 
-    cout << "check for long indel" << endl;
-    if(candidateVariants.variants[0].getString().length() > 20) { // TODO: magic number
+    LOG(logDEBUG) << "check for long indel" << endl;
+    if(candidateVariants.variants[0].getString().length() > 50) { // TODO: magic number
       throw string("too long indel." + candidateVariants.variants[0].getString());
     }
 
@@ -233,9 +228,8 @@ namespace MutationCall
     int normal_count = (int)normalReads.size();
     int tumor_count = (int)tumorReads.size();
     double bf2;
-    cout <<  "centerPos=" << candidateVariants.centerPos << endl;
+    LOG(logDEBUG) <<  "centerPos=" << candidateVariants.centerPos << endl;
     candidateVariants.printAll();
-    cout.flush();
     double hap2_bf = -100;
     bool hap2_flag = true, hap3_flag = true;
     bool haps_size_error = false;
@@ -244,7 +238,7 @@ namespace MutationCall
     try {
       hap2_bf = calc_hap2_bf_with_hap3(normalReads, tumorReads, pos, leftPos, rightPos, candidateVariants, params, refSeq, refSeqForAlign, 1.0, 1.0, 1.0, normal_her_hap2, tumor_her_hap2, merged_her_hap2, index);
     } catch (string s) {
-      cout << "error_" << s << endl;
+      LOG(logERROR) << "error_" << s << endl;
       hap2_flag = false;
     } catch (std::exception& e) {
       string message = string("error_exception_").append(e.what());
@@ -254,11 +248,11 @@ namespace MutationCall
       if (close_germline.size() != 0) {
         //close_somaticは空
         //close_germlineは、targetに最も近いものを採用する
-        cout << "choose closest germline snp" << endl;
+        LOG(logDEBUG) << "choose closest germline snp" << endl;
         vector<AlignedVariant> new_close_somatic;
         vector<AlignedVariant> new_close_germline;
         int target_pos = candidateVariants.variants[0].getStartHap();
-        cout << "target_pos " << target_pos << endl;
+        LOG(logDEBUG) << "target_pos " << target_pos << endl;
         int min_dis= 100000, min_index=-1;
         for(int i=0;i<close_germline.size();i++) {
           int dist = abs(close_germline[i].getStartHap() - target_pos);
@@ -266,7 +260,7 @@ namespace MutationCall
             min_index = i;min_dis = dist;
           }
         }
-        cout << "min " << min_dis << " " << min_index << endl;
+          LOG(logDEBUG) << "min " << min_dis << " " << min_index << endl;
         stringstream ss;
         ss << close_germline[min_index].getStartHap() << ":" << close_germline[min_index].getString();
         closest_germline = ss.str();
@@ -274,7 +268,7 @@ namespace MutationCall
         new_close_germline.push_back(close_germline[min_index]);
         bool flag = Haps2::getHaplotypes(haps, normalReads, tumorReads, pos, leftPos, rightPos, candidateVariants, params, refSeq, refSeqForAlign, new_close_somatic, new_close_germline, normal_liks, tumor_liks);
         if(haps.size()==4) {
-          cout << "************ hap4 **************" << endl << "haps: " << haps.size() <<  endl;
+            LOG(logDEBUG) << "************ hap4 **************" << endl << "haps: " << haps.size() << endl;
           int nrt = tumorReads.size(), nrn=normalReads.size();
           vector<double> rlt(nrt*4), rln(nrn*4);
           int idx=0;
@@ -286,48 +280,45 @@ namespace MutationCall
             for (size_t h=0;h<4;h++) { rln[idx] = normal_liks[h][r].ll;idx++; }
           }
 
-#ifdef LOGDEBUG
           output_alignments(index, "hap3_tumor", tumorReads, tumor_liks, params);
           output_alignments(index, "hap3_normal", normalReads, normal_liks, params);
-#endif
+
           vector<Read> f_normal_reads, f_tumor_reads;
           f_normal_reads.insert(f_normal_reads.end(), normalReads.begin(), normalReads.end());
           f_tumor_reads.insert(f_tumor_reads.end(), tumorReads.begin(), tumorReads.end());
-          cout << "before" << f_normal_reads.size() << f_tumor_reads.size() << rln.size() << rlt.size() << endl;
+          LOG(logDEBUG) << "before" << f_normal_reads.size() << f_tumor_reads.size() << rln.size() << rlt.size() << endl;
           filter_reads(f_normal_reads, rln);
           filter_reads(f_tumor_reads, rlt);
-          cout << "after" << f_normal_reads.size() << f_tumor_reads.size() << rln.size() << rlt.size() << endl;
-#ifdef LOGDEBUG
+          LOG(logDEBUG) << "after" << f_normal_reads.size() << f_tumor_reads.size() << rln.size() << rlt.size() << endl;
+
           output_liktable(index, "hap3_tumor", rlt, params);
           output_liktable(index, "hap3_normal", rln, params);
-#endif
+
           MutationModel::estimate(haps, f_tumor_reads, f_normal_reads, rlt, rln, tumorHapFreqs, normalHapFreqs, tumor_her, normal_her, pos, leftPos, rightPos, candidateVariants, mm_lb, params.hap3_params, "mutation", params.fileName+"logs/"+itos(index)+".hap3.mutation");
-          //output_mm(haps, (params.fileName+".mm.txt"), leftPos, rightPos, 0.0, mm_lb, normalHapFreqs, tumorHapFreqs);
           MutationModel::estimate(haps, f_tumor_reads, f_normal_reads, rlt, rln, non_tumorHapFreqs, non_normalHapFreqs, non_tumor_her, non_normal_her, pos, leftPos, rightPos, candidateVariants, nmm_lb, params.hap3_params, "error",params.fileName+"logs/"+itos(index)+".hap3.err");
-          //output_mm(haps, (params.fileName+".non-mm.txt"), leftPos, rightPos, 0.0, nmm_lb, non_normalHapFreqs, non_tumorHapFreqs);
           bf2 = mm_lb.lower_bound - nmm_lb.lower_bound;
-          //cout << "**** hap4 done ***" << endl;
+          LOG(logDEBUG) << "**** hap4 done ***" << endl;
         } else {
           hap3_flag = false;
           haps_size_error = true;
-          cout << "error_" << "haps.size() != 4 in hap3" << endl;
+          LOG(logERROR) << "error_" << "haps.size() != 4 in hap3" << endl;
         }
       } else {
         hap3_flag = false;
       }
     } catch (string s) {
-      cout << "error_" << s << endl;
+        LOG(logERROR) << "error_" << s << endl;
       hap3_flag = false;
     } catch (std::exception& e) {
       string message = string("error_exception_").append(e.what());
-      cout << "error_" << message << endl;
+      LOG(logERROR) << "error_" << message << endl;
       hap3_flag = false;
     }
     if(tumor_her.empty()) {
       tumor_her.swap(tumor_her_hap2);
       normal_her.swap(normal_her_hap2);
     }
-    cout << "output" << endl;
+    LOG(logDEBUG) << "output" << endl;
     if(tumor_her.empty()) {
       const VariantInfo &v = candidateVariants.variants[0].info;
       int pos = v.start;
@@ -362,7 +353,7 @@ namespace MutationCall
       oData.output(line);
     } else {
       for(int i=0;i<tumor_her.size();i++) {
-        cout << i;
+        LOG(logDEBUG) << i << endl;
         HapEstResult &n_result = normal_her[i];
         HapEstResult &t_result = tumor_her[i];
         string chr = params.tid;
@@ -431,7 +422,7 @@ namespace MutationCall
 
   double calc_bf(const vector<Haplotype> &haps, const vector<vector<MLAlignment> > &normal_liks, const vector<vector<MLAlignment> > tumor_liks, const vector<Read> & normalReads, const vector<Read> & tumorReads, const vector<Read> & mergedReads, uint32_t pos, uint32_t leftPos, uint32_t rightPos, const AlignedCandidates & candidateVariants, Parameters params, string refSeq, string refSeqForAlign, double a0, double b0, double free_a0, vector<HapEstResult> &normal_her, vector<HapEstResult> &tumor_her, vector<HapEstResult> &merged_her) {
     // algorithm of undergrad-thesis
-    cout << "********** calc_bf ***********" << endl;
+    LOG(logDEBUG) << "********** calc_bf ***********" << endl;
     vector<vector<MLAlignment> > liks;
     liks.insert(liks.end(), normal_liks.begin(), normal_liks.end());
     for(int i = 0;i < haps.size();i++) {
@@ -448,14 +439,13 @@ namespace MutationCall
     EMBasic::estimate(haps, tumorReads, tumor_liks, tumorHapFreqs, tumor_her, pos, leftPos, rightPos, candidateVariants, tumor_lb, tumor_vpp, 1.0, "all", params);
     EMBasic::estimate(haps, mergedReads, liks, mergedHapFreqs, merged_her, pos, leftPos, rightPos, candidateVariants, merged_lb, merged_vpp,  1.0, "all", params);
     double bf = normal_lb.lower_bound + tumor_lb.lower_bound - merged_lb.lower_bound;
-#ifdef LOGDEBUG
     outputLowerBounds(haps, (params.fileName+".basic_haplotypes.txt"), leftPos, rightPos, bf, normal_lb, tumor_lb, merged_lb, normalHapFreqs, tumorHapFreqs, mergedHapFreqs);
-#endif
+
     return bf;
   }
 
   double calc_hap2_bf_with_hap3(const vector<Read> & normalReads, const vector<Read> & tumorReads, uint32_t pos, uint32_t leftPos, uint32_t rightPos, const AlignedCandidates & candidateVariants, Parameters params, string refSeq, string refSeqForAlign, double a0, double b0, double free_a0, vector<HapEstResult> &normal_her, vector<HapEstResult> &tumor_her, vector<HapEstResult> &merged_her, int index) {
-    cout << "********** calc_hap2_bf_with_hap3 ***********" << endl;
+    LOG(logDEBUG) << "********** calc_hap2_bf_with_hap3 ***********" << endl;
     // hap1とhap2、hap3とhap4は同じとする。 (つまり、届く範囲にhetero germline snpはない場合)
     vector<Haplotype> haps;
     vector<vector<MLAlignment> > normal_liks;
@@ -503,13 +493,14 @@ namespace MutationCall
     MutationModel::estimate(haps, tumorReads, normalReads, rlt, rln, non_tumorHapFreqs, non_normalHapFreqs, non_tumor_her, non_normal_her, pos, leftPos, rightPos, candidateVariants, nmm_lb, params.hap2_params, "error",params.fileName+"logs/"+itos(index)+".hap2.err");
     //output_mm(haps, (params.fileName+".non-mm.txt"), leftPos, rightPos, 0.0, nmm_lb, non_normalHapFreqs, non_tumorHapFreqs);
     double bf = mm_lb.lower_bound - nmm_lb.lower_bound;
+    LOG(logDEBUG) << "********** calc_hap2_bf_with_hap3 done ***********" << endl;
     return bf;
   }
 
 
 
   double calc_hap2_bf(const vector<Read> & normalReads, const vector<Read> & tumorReads, const vector<Read> & mergedReads, uint32_t pos, uint32_t leftPos, uint32_t rightPos, const AlignedCandidates & candidateVariants, Parameters params, string refSeq, string refSeqForAlign, double a0, double b0, double free_a0, vector<HapEstResult> &normal_her, vector<HapEstResult> &tumor_her, vector<HapEstResult> &merged_her) {
-    cout << "********** calc_hap2_bf ***********" << endl;
+    LOG(logDEBUG) << "********** calc_hap2_bf ***********" << endl;
     vector<Haplotype> haps;
     vector<vector<MLAlignment> > liks;
     vector<vector<MLAlignment> > normal_liks;
@@ -531,14 +522,14 @@ namespace MutationCall
     EMfor2::estimate_basic(haps, tumorReads, tumor_liks, tumorHapFreqs, tumor_her, pos, leftPos, rightPos, candidateVariants, tumor_lb, tumor_vpp, params, 1.0, 1.0);
     EMfor2::estimate_basic(haps, mergedReads, liks, mergedHapFreqs, merged_her, pos, leftPos, rightPos, candidateVariants, merged_lb, merged_vpp, params, 1.0, 1.0);
     double bf = normal_lb.lower_bound + tumor_lb.lower_bound - merged_lb.lower_bound;
-#ifdef LOGDEBUG
     outputLowerBounds(haps, (params.fileName+".hap2_haplotypes.txt"), leftPos, rightPos, bf, normal_lb, tumor_lb, merged_lb, normalHapFreqs, tumorHapFreqs, mergedHapFreqs);
-#endif
     return bf;
   }
 
   void outputLowerBounds(const vector<Haplotype> &haps, string fname, uint32_t leftPos, uint32_t rightPos, double bf, lower_bound_t& normal_lb, lower_bound_t &tumor_lb, lower_bound_t &merged_lb, vector<double> normalHapFreqs, vector<double> tumorHapFreqs, vector<double> mergedHapFreqs) {
-#ifdef LOGDEBUG
+#ifndef LOGDEBUG
+      return;
+#endif
     typedef map<int, AlignedVariant>::const_iterator It;
     std::ofstream ofs(fname.c_str(), std::ios::out | std::ios::app);
     ofs << "-------- window[" << leftPos << "-" << rightPos <<"] ---------------" << endl;
@@ -579,7 +570,6 @@ namespace MutationCall
       }
       ofs << endl;
     }
-#endif
   }
 
 }

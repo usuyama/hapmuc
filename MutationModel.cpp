@@ -27,6 +27,7 @@
 #include <sys/types.h>
 #include <boost/algorithm/string.hpp>
 #include "MutationModel.hpp"
+#include "log.h"
 
 namespace MutationModel {
     typedef pair<int, AlignedVariant> PAV;
@@ -64,12 +65,12 @@ namespace MutationModel {
             }
         } catch (std::exception& e) {
             string message = string("error_exception_").append(e.what());
-            cout << message << endl;
-            cout << "cal_dir_exp" << endl;
-            BOOST_FOREACH(double x, ar) { cout << x << " "; }
-            cout << endl;
-            cout << "sum: " << sum << endl;
-            cout.flush();
+            LOG(logDEBUG) << message << endl;
+            LOG(logDEBUG) << "cal_dir_exp" << endl;
+            BOOST_FOREACH(double x, ar) { LOG(logDEBUG) << x << " "; }
+            LOG(logDEBUG) << endl;
+            LOG(logDEBUG) << "sum: " << sum << endl;
+            LOG(logDEBUG).flush();
             throw;
         }
         return ans;
@@ -93,14 +94,15 @@ namespace MutationModel {
     }
 
     void print_var_in_hap(Haplotype hap, std::ofstream &log) {
-#ifdef LOGDEBUG
+#ifndef LOGDEBUG
+        return;
+#endif
         for (It it=hap.indels.begin();it!=hap.indels.end();it++) {
             if (!it->second.isRef() && !(it->second.isSNP() && it->second.getString()[3]=='D')) {
                 log << "[" << it->second.getString() << " " << (it->first) << "]";
             }
         }
         log << endl;
-#endif
     }
 
     template <class X> void print_vec(vector<X> vec, std::ofstream &log) {
@@ -126,9 +128,6 @@ namespace MutationModel {
         }
         return sum_lgam_param + lgam_sum_param + sum_par_lt;
     }
-
-
-
 
     void compute_lower_bound(const vector<double> & rlt, const vector<double> & rln, vector<double> &ahat, vector<double> &bhat, vector<double> &chat, vector<double> & zt, vector<double> & zn, lower_bound_t & lb, Hap3Param params, std::ofstream &logofs) {
         int nh = 4; //number of haps
@@ -180,9 +179,6 @@ namespace MutationModel {
         double e_log_q_pit=cal_e_log_dir(l_e_pit, ahat, logofs);
         double e_log_q_pin=cal_e_log_dir(l_e_pin, chat, logofs);
         double e_log_q_ep=cal_e_log_dir(l_e_ep, bhat, logofs);
-        //cout << "error";
-//        print_vec(l_e_pit);cout << endl;
-//        print_vec(ahat);cout << endl;
         lb.lower_bound = e_log_p_Xt + e_log_p_Xn + e_log_p_Zt + e_log_p_Zn + e_log_p_pin + e_log_p_pit + e_log_p_ep - e_log_q_Zt - e_log_q_Zn - e_log_q_pit - e_log_q_pin - e_log_q_ep;
 #ifdef LOGDEBUG
         logofs << "lb: " << lb.lower_bound << endl;
@@ -318,8 +314,9 @@ namespace MutationModel {
 
     void estimate(const vector<Haplotype> & haps, const vector<Read> & tumor_reads, const vector<Read> & normal_reads, const vector<double> & rlt, const vector<double> & rln, vector<double> & tumorHapFreqs, vector<double> & normalHapFreqs, vector <HapEstResult > & tumorPosteriors, vector <HapEstResult > & normalPosteriors, uint32_t candPos, uint32_t leftPos,   uint32_t rightPos, const AlignedCandidates & candidateVariants, lower_bound_t & best_lower_bound, Hap3Param params, string est_type, string log_prefix)
     {
-        std::ofstream log((log_prefix+".log").c_str(), std::ios::out | std::ios::app);
+        std::ofstream log;
 #ifdef LOGDEBUG
+        log.open((log_prefix+".log").c_str(), std::ios::out | std::ios::app);
         //est_type=mutation or non-mutation
         log << "MutationModel: " << est_type << endl;
         log << "mut a0:";print_vec(params.mut_a0, log);
@@ -333,7 +330,7 @@ namespace MutationModel {
         normalHapFreqs.clear();
         tumorHapFreqs.clear();
 #ifndef MMTEST
-        if(haps.size() != 4) { cout << "error: only for 4 haps" << endl; return; }
+        if(haps.size() != 4) { LOG(logDEBUG) << "error: only for 4 haps" << endl; return; }
 #endif
         size_t nh=4;
         size_t nrt=rlt.size()/4;
@@ -372,21 +369,6 @@ namespace MutationModel {
             log << endl;
         }
 #endif
-/*
-        cout << "#log haplotype and read likelihood" << endl;
-        cout << "##tumor" << endl;
-        for (size_t r=0;r<nrt;r++) {
-            cout << tumor_reads[r].seq_name << " rl[" << r << "]:";
-            for (size_t h=0;h<nh;h++) cout << " " << rlt[r*nh+h];
-            cout << endl;
-        }
-        cout << "##normal" << endl;
-        for (size_t r=0;r<nrn;r++) {
-            cout << normal_reads[r].seq_name << " rl[" << r << "]:";
-            for (size_t h=0;h<nh;h++) cout << " " << rln[r*nh+h];
-            cout << endl;
-        }*/
-
         // create matrix of which variant is active in which set
         int idx=0;
         int nv=int(allVariants.size());
@@ -399,11 +381,6 @@ namespace MutationModel {
             }
             idx++;
         }
-       /* cout << "allVariants: ";
-        BOOST_FOREACH(PAV pav, allVariants) {
-            cout << " [" << pav.first << " " << pav.second.getString() << "]";
-        }
-        cout << endl;*/
 #endif
         // check haplotypes
         // run EM for this set of active variants
@@ -506,7 +483,7 @@ namespace MutationModel {
             const AlignedVariant & avar = pav.second;
             const AlignedVariant *av = candidateVariants.findVariant(avar.getStartHap()+leftPos, avar.getType(), avar.getString());
             int totnf=0, totnr=0;
-            //cout << pav.first << " " << pav.second.getString() << endl;
+            //LOG(logDEBUG) << pav.first << " " << pav.second.getString() << endl;
             if(av!=NULL) {
                 tumorPosteriors.push_back(HapEstResult(pav.second, pav.first, -1.0, tumor_freq, totnf, totnr, av->info, nkt[0], nkt[1], nkt[2], nkt[3]));
                 normalPosteriors.push_back(HapEstResult(pav.second, pav.first, -1.0, normal_freq, totnf, totnr, av->info, nkn[0], nkn[1], nkn[2], nkn[3]));

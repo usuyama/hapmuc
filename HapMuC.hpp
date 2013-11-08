@@ -157,7 +157,6 @@ public:
         skipMaxHap=100;
         maxReads=2000;
         mapQualThreshold=0.995;
-        glfNumHap=5;
         inferenceMethod="empirical";
         minReadOverlap=5;
         minCount=2;
@@ -188,15 +187,12 @@ public:
         printCallsOnly=true;
         outputPooledLikelihoods=false;
         filterHaplotypes = false;
-        outputGLF=true;
         outputRealignedBAM=false;
         processRealignedBAM="no";
         changeINStoN = false;
         hap3_params.clear_all();
         hap2_params.clear_all();
         hap3_params.mut_a0 += 1.0,1.0,1.0;
-        cout << "test" << endl;
-        cout << hap3_params.mut_a0[0] << endl;
         hap3_params.mut_b0 += 0.1,10.0;
         hap3_params.mut_c0 += 1.0,1.0;
         hap3_params.err_a0 += 1.0,1.0;
@@ -211,23 +207,7 @@ public:
         
         EMtol=1e-4;
     }
-    
-    OutputData makeGLFOutputData(ostream & out)
-    {
-        OutputData oData(out);
-        oData("msg")("index");
-        oData("analysis_type");
-        oData("tid")("lpos")("rpos")("center_position")("realigned_position")("was_candidate_in_window");
-        oData("ref_all")("nref_all")("num_reads");
-        oData("post_prob_variant")("qual")("est_freq")("logZ")("hapfreqs");
         
-        oData("indidx")("msq")("numOffAll")("num_indel")("num_cover_forward")("num_cover_reverse")("num_unmapped_realigned");
-        oData("var_coverage_forward")("var_coverage_reverse");
-        oData("nBQT")("nmmBQT")("mLogBQ")("nMMLeft")("nMMRight");
-        oData("glf");
-        return oData;
-    }
-    
     OutputData makeMutationData(ostream & out) {
         OutputData oData(out);
         oData("chr")("start")("end");
@@ -252,7 +232,6 @@ public:
         cout << "\tmapQualThreshold: " << mapQualThreshold << endl;
         //cout << "\tscaleError: " << scaleErr << endl;
         cout << "\tinferenceMethod: " << inferenceMethod << endl;
-        //cout << "\tglfNumHap: " << glfNumHap << endl;
         cout << "\tanalyzeLowFreq: " << analyzeLowFreq << endl;
         cout << "\tanalyzeLowFreqDiffThreshold: " << analyzeLowFreqDiffThreshold << endl;
         cout << "\tshowHapDist: " << showHapDist << endl;
@@ -303,12 +282,12 @@ public:
     }
     
     int noIndelWindow, numOutputTopHap, checkAllCIGARs, minReadOverlap, maxHapReadProd;
-    uint32_t width, maxHap, maxReads, skipMaxHap, glfNumHap,  maxReadLength, minCount, fastWidth, fastWidthOverlap;
+    uint32_t width, maxHap, maxReads, skipMaxHap, maxReadLength, minCount, fastWidth, fastWidthOverlap;
     double checkBaseQualThreshold;
     double mapQualThreshold, scaleErr, priorIndel, priorSNP, EMtol, bayesa0;
     string fileName, inferenceMethod, refFileName, tid, filterReadAux, bayesType, processRealignedBAM;
     bool analyzeLowFreq, showHapDist, showCandHap, showReads, showHapAlignments, alignAgainstReference, mapUnmappedReads, quiet, estimateHapFreqs, doDiploid, computeML, computeMAP, slower,printCallsOnly, outputPooledLikelihoods, filterHaplotypes;
-    bool outputRealignedBAM, outputGLF, varFileIsOneBased, changeINStoN;
+    bool outputRealignedBAM, varFileIsOneBased, changeINStoN;
     double analyzeLowFreqDiffThreshold;
     double meanInsert, stdInsert;
     Hap3Param hap3_params, hap2_params;

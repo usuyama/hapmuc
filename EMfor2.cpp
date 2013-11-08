@@ -35,16 +35,17 @@
 #include <sys/types.h>
 #include <boost/algorithm/string.hpp>
 #include "EMfor2.hpp"
+#include "log.h"
 
 namespace EMfor2 {
     void computeLowerBound(const vector<double> & resp, const double a0, const double b0, const double ahat, const double bhat, const vector<double> & ln_p_x_given_h, const vector<double> & lpi, lower_bound_t & lb) {
-        cout << endl << "###computeAnotherLowerBound###" << endl;
+        LOG(logDEBUG) << endl << "###computeAnotherLowerBound###" << endl;
         int nh = 2; //number of haps 
         int nr = resp.size() / nh; //number of reads
-        cout << "lpi = "; 
-        for(int i=0;i < nh;i++) cout << " " << lpi[i];
-        cout << endl << "a0=" << a0 << ", b0 = " << b0 << ", ahat = " << ahat << ", bhat = " << bhat << endl;
-        cout << endl;
+        LOG(logDEBUG) << "lpi = "; 
+        for(int i=0;i < nh;i++) LOG(logDEBUG) << " " << lpi[i];
+        LOG(logDEBUG) << endl << "a0=" << a0 << ", b0 = " << b0 << ", ahat = " << ahat << ", bhat = " << bhat << endl;
+        LOG(logDEBUG) << endl;
         //ln_p_x_given_z
         double tmp = 0.0;
         for(int i=0;i < nr;i++) {
@@ -65,15 +66,15 @@ namespace EMfor2 {
         double ln_c_Bhat = lbeta(ahat, bhat);
         double ln_c_B0 = lbeta(a0, b0);
         lb.lower_bound = lb.ln_p_z_given_pi + entropy + ln_c_Bhat - ln_c_B0;
-        cout << "another lb=" << lb.lower_bound << ", lb.ln_p_z_given_pi=" << lb.ln_p_z_given_pi << ", entropy=" << entropy << ", ln_c_Bhat(" << ln_c_Bhat << ") - ln_c_B0(" << ln_c_B0 << ")=" << ln_c_Bhat - ln_c_B0 << endl;
+        LOG(logDEBUG) << "another lb=" << lb.lower_bound << ", lb.ln_p_z_given_pi=" << lb.ln_p_z_given_pi << ", entropy=" << entropy << ", ln_c_Bhat(" << ln_c_Bhat << ") - ln_c_B0(" << ln_c_B0 << ")=" << ln_c_Bhat - ln_c_B0 << endl;
     }
     
 
     void estimate_basic(const vector<Haplotype> & haps, const vector<Read> & reads, const vector<vector<MLAlignment> > & liks, vector<double> & hapFreqs, vector <HapEstResult > & posteriors,  uint32_t candPos, uint32_t leftPos, uint32_t rightPos, const AlignedCandidates & candidateVariants, lower_bound_t & best_lower_bound, map<AlignedVariant, double> & variantPosteriors, Parameters params, double a0, double b0)
     {
-        cout << "EMfor2" << endl;
+        LOG(logDEBUG) << "EMfor2" << endl;
         hapFreqs.clear();
-        if(haps.size() != 2) { cout <<"error: only for 2 haps" << endl; return; }
+        if(haps.size() != 2) { LOG(logDEBUG) <<"error: only for 2 haps" << endl; return; }
         vector<lower_bound_t> lower_bounds;
         size_t nh=2;
         size_t nr=reads.size();
@@ -126,30 +127,30 @@ namespace EMfor2 {
             }
         }
         /*
-        cout << "#read list" << endl;
+        LOG(logDEBUG) << "#read list" << endl;
         for (size_t r=0;r<nr;r++) {
-            cout << "r[" << r << "] " << reads[r].seq.seq << endl;
+            LOG(logDEBUG) << "r[" << r << "] " << reads[r].seq.seq << endl;
         }*/
         
-        cout << "#haplotype list" << endl;
+        LOG(logDEBUG) << "#haplotype list" << endl;
         for (size_t th=0;th<nh;th++) {
             const Haplotype & hap=haps[th];
-            cout << "hap[" << th << "] " << hap.seq << endl;
+            LOG(logDEBUG) << "hap[" << th << "] " << hap.seq << endl;
             for (It it=hap.indels.begin();it!=hap.indels.end();it++) {
                 if (!it->second.isRef() && !(it->second.isSNP() && it->second.getString()[3]=='D')) {
-                    cout << "[" << it->second.getString() << " " << (it->first) << "]";
+                    LOG(logDEBUG) << "[" << it->second.getString() << " " << (it->first) << "]";
                 }
             }
-            cout << endl;
+            LOG(logDEBUG) << endl;
         }
         
-        cout << "#log haplotype and read likelihood" << endl;
+        LOG(logDEBUG) << "#log haplotype and read likelihood" << endl;
         for (size_t r=0;r<nr;r++) {
-            cout << reads[r].seq_name << " rl[" << r << "]:";
+            LOG(logDEBUG) << reads[r].seq_name << " rl[" << r << "]:";
             for (size_t h=0;h<nh;h++) {
-                cout << " " << rl[r*nh+h];
+                LOG(logDEBUG) << " " << rl[r*nh+h];
             }
-            cout << endl;
+            LOG(logDEBUG) << endl;
         }
         
         
@@ -164,7 +165,7 @@ namespace EMfor2 {
         vector<int> hapHasVar(nh*nv,0);
         
         BOOST_FOREACH(PAV pav, allVariants) {
-            cout << pav.first << " " << pav.second.getString() << " ";
+            LOG(logDEBUG) << pav.first << " " << pav.second.getString() << " ";
             for (size_t h=0;h<nh;h++) {
                 It it=haps[h].indels.find(pav.first);
                 if (it!=haps[h].indels.end() && it->second.getString()==pav.second.getString()) hapHasVar[h*nv+idx]=1;
@@ -173,13 +174,13 @@ namespace EMfor2 {
         }
         
         
-        cout << "allVariants: ";
+        LOG(logDEBUG) << "allVariants: ";
         BOOST_FOREACH(PAV pav, allVariants) {
-            cout << " [" << pav.first << " " << pav.second.getString() << "]";
+            LOG(logDEBUG) << " [" << pav.first << " " << pav.second.getString() << "]";
         }
-        cout << endl;
+        LOG(logDEBUG) << endl;
         double logz=-HUGE_VAL;
-        //		cout << "Number of indels: " << ni << " number of SNPs: " << ns << endl;
+        //		LOG(logDEBUG) << "Number of indels: " << ni << " number of SNPs: " << ns << endl;
         
         // check haplotypes
         // run EM for this set of active variants
@@ -197,7 +198,7 @@ namespace EMfor2 {
         double loglik, llNew, llOld=-HUGE_VAL;
         int iter=0;
         while (!converged) {
-            cout << endl << "EM[" << iter << "]:" << endl;
+            LOG(logDEBUG) << endl << "EM[" << iter << "]:" << endl;
             // compute expectation of indicator variables
             for (size_t h=0;h<nh;h++) nk[h]=0.0;
             
@@ -224,7 +225,7 @@ namespace EMfor2 {
                 
             }
             // compute frequencies
-            cout << "pi: ";
+            LOG(logDEBUG) << "pi: ";
             ahat = nk[1] + a0;
             bhat = nk[0] + b0;
             ave_ep = ahat / (ahat + bhat);
@@ -239,31 +240,31 @@ namespace EMfor2 {
                     idx++;
                 }
             }
-            cout << "eOld: " << eOld << " " << " eNew: " << eNew; for (size_t h=0;h<nh;h++) { cout << " " << pi[h]; } cout << endl;
-            cout << "a0:" << a0 << " b0:" << b0 << " ahat:" << ahat << " bhat:" << bhat << endl;
+            LOG(logDEBUG) << "eOld: " << eOld << " " << " eNew: " << eNew; for (size_t h=0;h<nh;h++) { LOG(logDEBUG) << " " << pi[h]; } LOG(logDEBUG) << endl;
+            LOG(logDEBUG) << "a0:" << a0 << " b0:" << b0 << " ahat:" << ahat << " bhat:" << bhat << endl;
             /*
              for (size_t r=0;r<nr;r++) {
-             cout << "z[" << r << "]:";
+             LOG(logDEBUG) << "z[" << r << "]:";
              for (size_t h=0;h<nh;h++) {
-             cout << " " << z[r*nh+h];
+             LOG(logDEBUG) << " " << z[r*nh+h];
              }
-             cout << endl;
+             LOG(logDEBUG) << endl;
              }
             */
             llNew=loglik;
-            cout << "loglik: " << loglik << endl;
+            LOG(logDEBUG) << "loglik: " << loglik << endl;
             if (0 && llOld>llNew+1e-10)  {
                 cerr << "ERROR: nr: " << nr << " eOld: " << eOld << " eNew: " << eNew << " diff: " << eOld-eNew << endl;
-                cout << "ERROR: nr: " << nr << " eOld: " << eOld << " eNew: " << eNew << " diff: " << eOld-eNew << endl;
+                LOG(logDEBUG) << "ERROR: nr: " << nr << " eOld: " << eOld << " eNew: " << eNew << " diff: " << eOld-eNew << endl;
                 cerr << "ERROR: nr: " << nr << " llOld: " << llOld << " eNew: " << llNew << " diff: " << llOld-llNew << endl;
-                cout << "ERROR: nr: " << nr << " llOld: " << llOld << " eNew: " << llNew << " diff: " << llOld-llNew << endl;
+                LOG(logDEBUG) << "ERROR: nr: " << nr << " llOld: " << llOld << " eNew: " << llNew << " diff: " << llOld-llNew << endl;
                 
                 //throw string("EM Error in estimateHapFreqs");
                 //iter=100;
                 
             }
             converged=(fabs(eOld-eNew))<tol || iter > 500;
-            cout << "iter: " << iter << " eOld: " << eOld << " eNew: " << eNew << endl;
+            LOG(logDEBUG) << "iter: " << iter << " eOld: " << eOld << " eNew: " << eNew << endl;
             
             eOld=eNew;
             llOld=llNew;
@@ -271,18 +272,18 @@ namespace EMfor2 {
             
             
         }
-        cout << "----------------finished[" << iter << "]---------------" << endl;
-        cout << "lpi = "; 
-        for(int i=0;i < nh;i++) cout << " " << lpi[i];
+        LOG(logDEBUG) << "----------------finished[" << iter << "]---------------" << endl;
+        LOG(logDEBUG) << "lpi = "; 
+        for(int i=0;i < nh;i++) LOG(logDEBUG) << " " << lpi[i];
         
-        cout << endl;
+        LOG(logDEBUG) << endl;
         lower_bound_t lb;
         computeLowerBound(z, a0, b0, ahat, bhat, rl, lpi, lb);
         //  lower_bound_t another_lb;
         //  computeAnotherLowerBound(z, a0, ak, rl, lpi, compatible, another_lb);
         /*  if(abs(lb.lower_bound - another_lb.lower_bound) > 0.01) {
-         cout << "error: " << "another lower bound"  << another_lb.lower_bound << endl;
-         cout << "normal lower bound" << lb.lower_bound << endl;
+         LOG(logDEBUG) << "error: " << "another lower bound"  << another_lb.lower_bound << endl;
+         LOG(logDEBUG) << "normal lower bound" << lb.lower_bound << endl;
          throw 20;
          }*/
         vector<int> tmp_vec; //nonsense
@@ -290,62 +291,62 @@ namespace EMfor2 {
         lb.ln_prior = logprior;
         
         for (int r=0;r<nr;r++) {
-            cout << reads[r].seq_name << " z[" << r << "]:";
+            LOG(logDEBUG) << reads[r].seq_name << " z[" << r << "]:";
             for (int h=0;h<nh;h++) {
-                cout << " " << z[r*nh+h];
+                LOG(logDEBUG) << " " << z[r*nh+h];
             }
-            cout << endl;
+            LOG(logDEBUG) << endl;
         }
         
         // check sum
         
         double zc=0.0;
         for (size_t h=0;h<nh;h++) { freqs[h]=pi[h]; }
-        for (size_t h=0;h<nh;h++) { cout << " " << freqs[h]; } cout << endl;
+        for (size_t h=0;h<nh;h++) { LOG(logDEBUG) << " " << freqs[h]; } LOG(logDEBUG) << endl;
         
-        cout << "lower_bound: " << lb.lower_bound << " loglik: " << loglik << " " << loglik << " logprior: " << logprior << endl << endl;
+        LOG(logDEBUG) << "lower_bound: " << lb.lower_bound << " loglik: " << loglik << " " << loglik << " logprior: " << logprior << endl << endl;
         post=exp(lb.lower_bound+logprior-logz);
-        cout << "post["  << "]: " << post << endl;
+        LOG(logDEBUG) << "post["  << "]: " << post << endl;
         
         for (size_t h=0;h<nh;h++) {
             hapFreqs[h]+=freqs[h];
         }
         
-        cout << "==================results====================" << endl;
+        LOG(logDEBUG) << "==================results====================" << endl;
         
-        cout << "[" << "] " << lb.lower_bound << " " << logprior << ";";
+        LOG(logDEBUG) << "[" << "] " << lb.lower_bound << " " << logprior << ";";
         
-        cout << "; (freqs)";
+        LOG(logDEBUG) << "; (freqs)";
         for(int j=0;j<nh;j++) {
-            cout << " " << freqs[j];
+            LOG(logDEBUG) << " " << freqs[j];
         }
-        cout << endl;
+        LOG(logDEBUG) << endl;
         
         
         for (size_t th=0;th<nh;th++) {
             const Haplotype & hap=haps[th];
-            cout << "hap[" << th << "] " << hap.seq << endl;
-            cout << hapFreqs[th] << " ";
+            LOG(logDEBUG) << "hap[" << th << "] " << hap.seq << endl;
+            LOG(logDEBUG) << hapFreqs[th] << " ";
             for (It it=hap.indels.begin();it!=hap.indels.end();it++) {
                 if (!it->second.isRef() && !(it->second.isSNP() && it->second.getString()[3]=='D')) {
-                    cout << "[" << it->second.getString() << " " << (it->first) << "]";
+                    LOG(logDEBUG) << "[" << it->second.getString() << " " << (it->first) << "]";
                 }
             }
-            cout << endl;
+            LOG(logDEBUG) << endl;
         }
         
-        cout << endl;
+        LOG(logDEBUG) << endl;
         
         // compute marginal posteriors for the individual variants
         vector< std::set<int> > readidx(2); //TODO
         for (int r=0;r<int(nr);r++) readidx[reads[r].poolID].insert(r);
         idx=-1;
-        cout << "push posteriors" << endl;
+        LOG(logDEBUG) << "push posteriors" << endl;
         BOOST_FOREACH(PAV pav, allVariants) {
             idx++;
             double freq=0.0;
             for (size_t h=0;h<nh;h++) {
-                cout << hapHasVar[h*nv+idx] << " " << freq << endl;
+                LOG(logDEBUG) << hapHasVar[h*nv+idx] << " " << freq << endl;
                 if (hapHasVar[h*nv+idx]) {
                     freq+=hapFreqs[h];
                 }
@@ -354,7 +355,7 @@ namespace EMfor2 {
             const AlignedVariant & avar = pav.second;
             const AlignedVariant *av = candidateVariants.findVariant(avar.getStartHap()+leftPos, avar.getType(), avar.getString());
             int totnf=0, totnr=0;
-            cout << pav.first << " " << pav.second.getString() << endl;
+            LOG(logDEBUG) << pav.first << " " << pav.second.getString() << endl;
             if(av!=NULL) {
                 posteriors.push_back(HapEstResult(pav.second, pav.first, -1.0, freq, totnf, totnr, av->info, nk[0], nk[1], 0.0, 0.0));
             }

@@ -5,13 +5,13 @@ BOOST=<insert boost ver 1.45 root dir>
 BOOSTLIB=${BOOST}stage/lib/
 
 CXX= g++
-CPPFLAGS= -D_IOLIB=2 -DMINREADS=2 -DHAPMUC # -g -DNDEBUG -DMMTEST #for mutation_model_test
+CPPFLAGS= -D_IOLIB=2 -DMINREADS=2 -DHAPMUC # -DLOGDEBUG -g -DNDEBUG -DMMTEST #for mutation_model_test
 CXXFLAGS= -I$(SAMTOOLDIR) -I$(SEQANDIR) -I${BOOST} -I./ -Wno-deprecated  -O3
 LDFLAGS= -L$(SAMTOOLDIR) -lbam -lz -L${BOOSTLIB} -lboost_program_options
 SRCSDINDEL=HapMuC.cpp Utils.cpp MutationModel.cpp HapBlock.cpp HaplotypeDistribution.cpp ObservationModelFB.cpp Haps.cpp Haps2.cpp EMBasic.cpp EMfor2.cpp MutationCall.cpp
 OBJSDINDEL=$(SRCSDINDEL:%.cpp=%.o)
 all: hapmuc
-hapmuc:$(OBJSDINDEL) 
+hapmuc:$(OBJSDINDEL)
 	$(CXX) -o $@ $(CXXFLAGS) $(DINDELFLAGS) $(OBJSDINDEL) $(LDFLAGS)
 
 OBJSTEST=Utils.o MutationModel.o HapBlock.o HaplotypeDistribution.o ObservationModelFB.o Haps.o Haps2.o EMBasic.o EMfor2.o MutationCall.o mutation_model_test.o

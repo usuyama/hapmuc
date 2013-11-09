@@ -119,7 +119,11 @@ inline void Output2FILE::Output(const std::string& msg)
 
 
 #ifndef FILELOG_MAX_LEVEL
+#ifdef LOGDEBUG
 #define FILELOG_MAX_LEVEL logDEBUG
+#else
+#define FILELOG_MAX_LEVEL logINFO
+#endif
 #endif
 
 

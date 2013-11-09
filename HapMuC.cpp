@@ -795,11 +795,7 @@ int main(int argc, char *argv[])
         
         FILE* pFile = fopen((outputFile + ".log").c_str(), "w");
         Output2FILE::Stream() = pFile;
-#ifdef LOGDEBUG
-        FILELog::ReportingLevel() = FILELog::FromString("DEBUG");
-#else
-        FILELog::ReportingLevel() = FILELog::FromString("INFO");
-#endif
+      //  FILELog::ReportingLevel() = FILELog::FromString("DEBUG");
         string varFile = vm["varFile"].as<string>();
         string tumorBF = vm["tumorBamFile"].as<string>();
         string normalBF = vm["normalBamFile"].as<string>();

@@ -450,10 +450,10 @@ namespace Haps2 {
             LOG(logDEBUG) << "hap[" << th << "] " << hap.seq << endl;
             for (It it=hap.indels.begin();it!=hap.indels.end();it++) {
                 if (!it->second.isRef() && !(it->second.isSNP() && it->second.getString()[3]=='D')) {
-                    LOG(logDEBUG) << "[" << it->second.getString() << " " << (it->first) << "]";
+                    LOGP(logDEBUG) << "[" << it->second.getString() << " " << (it->first) << "]";
                 }
             }
-            LOG(logDEBUG) << endl;
+            LOGP(logDEBUG) << endl;
         }
         LOG(logDEBUG) << "#tumor haplotype list" << endl;
         for (size_t th=0;th<haps.size();th++) {
@@ -461,10 +461,10 @@ namespace Haps2 {
             LOG(logDEBUG) << "hap[" << th << "] " << hap.seq << endl;
             for (It it=hap.indels.begin();it!=hap.indels.end();it++) {
                 if (!it->second.isRef() && !(it->second.isSNP() && it->second.getString()[3]=='D')) {
-                    LOG(logDEBUG) << "[" << it->second.getString() << " " << (it->first) << "]";
+                    LOGP(logDEBUG) << "[" << it->second.getString() << " " << (it->first) << "]";
                 }
             }
-            LOG(logDEBUG) << endl;
+            LOGP(logDEBUG) << endl;
         }
         LOG(logDEBUG) << "Haps2::getHaplotypes done" << endl;
         return true;

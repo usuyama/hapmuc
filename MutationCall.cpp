@@ -286,10 +286,10 @@ namespace MutationCall
           vector<Read> f_normal_reads, f_tumor_reads;
           f_normal_reads.insert(f_normal_reads.end(), normalReads.begin(), normalReads.end());
           f_tumor_reads.insert(f_tumor_reads.end(), tumorReads.begin(), tumorReads.end());
-          LOG(logDEBUG) << "before" << f_normal_reads.size() << f_tumor_reads.size() << rln.size() << rlt.size() << endl;
+          LOG(logDEBUG) << "before " << f_normal_reads.size() << " " << f_tumor_reads.size() << " " << rln.size()  << " " << rlt.size() << endl;
           filter_reads(f_normal_reads, rln);
           filter_reads(f_tumor_reads, rlt);
-          LOG(logDEBUG) << "after" << f_normal_reads.size() << f_tumor_reads.size() << rln.size() << rlt.size() << endl;
+          LOG(logDEBUG) << "after " << f_normal_reads.size() << " " << f_tumor_reads.size() << " " << rln.size() << " " << rlt.size() << endl;
 
           output_liktable(index, "hap3_tumor", rlt, params);
           output_liktable(index, "hap3_normal", rln, params);

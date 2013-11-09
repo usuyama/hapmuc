@@ -347,7 +347,7 @@ namespace Haps2 {
         }
 
         vector<int> on_hap_tumor(tumor_reads.size(),1); // which reads were mapped inside the haplotype window given an artificially high mapping quality
-        Haps::computeLikelihoods(merged_haps, tumor_reads, tumor_liks, leftPos, rightPos, on_hap_tumor, params);
+        Haps::computeLikelihoodsFaster(merged_haps, tumor_reads, tumor_liks, leftPos, rightPos, on_hap_tumor, params);
         vector<double> tumor_hap_freqs;vector<HapEstResult> tumor_her;map<AlignedVariant, double> tumor_vpp;lower_bound_t tumor_lb;
         EMBasic::estimate(merged_haps, tumor_reads, tumor_liks, tumor_hap_freqs, tumor_her, pos, leftPos, rightPos, candidateVariants, tumor_lb, tumor_vpp, 0.01, "all", params);
         freq_pairs.clear();
@@ -441,7 +441,7 @@ namespace Haps2 {
         }
         LOG(logDEBUG) << "tumor hap decided" << endl;
         LOG(logDEBUG).flush();
-        Haps::computeLikelihoods(haps, normal_reads, normal_liks, leftPos, rightPos, onHap, params);
+        Haps::computeLikelihoodsFaster(haps, normal_reads, normal_liks, leftPos, rightPos, onHap, params);
      //   Haps::computeLikelihoods(haps, tumor_reads, tumor_liks, leftPos, rightPos, onHap, params);
         LOG(logDEBUG) << "end Haps2" << endl;
         LOG(logDEBUG) << "#normal haplotype list" << endl;
@@ -495,9 +495,9 @@ namespace Haps2 {
             std::reverse(haps.begin(), haps.end());
         }
         vector<int> on_hap_tumor(tumor_reads.size(),1); // which reads were mapped inside the haplotype window given an artificially high mapping quality
-        Haps::computeLikelihoods(haps, tumor_reads, tumor_liks, leftPos, rightPos, on_hap_tumor, params);
+        Haps::computeLikelihoodsFaster(haps, tumor_reads, tumor_liks, leftPos, rightPos, on_hap_tumor, params);
         vector<int> onHap(normal_reads.size(),1); // which reads were mapped inside the haplotype window given an artificially high mapping quality
-        Haps::computeLikelihoods(haps, normal_reads, normal_liks, leftPos, rightPos, onHap, params);
+        Haps::computeLikelihoodsFaster(haps, normal_reads, normal_liks, leftPos, rightPos, onHap, params);
         LOG(logDEBUG) << "#basic haplotypes for comparison" << endl;
         for (size_t th=0;th<haps.size();th++) {
             const Haplotype & hap=haps[th];

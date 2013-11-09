@@ -136,6 +136,7 @@ void HapMuC::getReadsFromBams(vector<MyBam *> & Bams, uint32_t leftPos, uint32_t
 	int numUnknownLib = 0;
 	string_hash <int> unknownLib;
 	const int LEFTPAD = 200;
+    maxDev = 250;
 	// note the idea is to get only consider reads starting at position leftMostReadPos (and not ones merely overlapping)
 	// LEFTPAD should take care of overlap effects (note that leftMostReadPos is already generous, based on library insert size)
     

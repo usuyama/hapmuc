@@ -42,7 +42,7 @@ public:
 	Library(int type)
 	{
 		if (type == 0) {
-			maxins = 2000;
+			maxins = 800;
 			vector<double> counts = vector<double>(maxins, 1.0);
 			calcProb(counts);
 		} else throw string("Library type not recognized.");

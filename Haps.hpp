@@ -23,7 +23,6 @@ namespace Haps {
     void filterHaplotypes(const vector<Haplotype> & haps, const vector<Read> & reads, const vector<vector<MLAlignment> > & liks,  vector<int> & filtered, map<pair<int, AlignedVariant>, VariantCoverage> & varCoverage, bool doFilter, Parameters params);
     bool getHaplotypes(vector<Haplotype> &haps, const vector<Read> & reads,uint32_t pos, uint32_t & leftPos, uint32_t & rightPos, const AlignedCandidates & candidateVariants, Parameters params, string refSeq, string refSeqForAlign);
     void computeLikelihoods(const vector<Haplotype> &haps, const vector<Read> & reads, vector<vector<MLAlignment> > & liks, uint32_t leftPos, uint32_t rightPos, vector<int> & onHap, Parameters params);
-    void computeLikelihoodsFaster(const vector<Haplotype> &haps, const vector<Read> & reads, vector<vector<MLAlignment> > & liks, uint32_t leftPos, uint32_t rightPos, vector<int> & onHap, Parameters params);
     void filterReads(vector<Read> & mergedReads, vector<vector<MLAlignment> > & mergedLiks, int & normal_count, int & tumor_count);
     
 }

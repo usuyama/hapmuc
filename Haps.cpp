@@ -32,7 +32,6 @@
 #include "Haps.hpp"
 #include "EMBasic.hpp"
 #include "log.h"
-#include "Faster.hpp"
 
 using namespace seqan;
 
@@ -182,98 +181,6 @@ namespace Haps {
         return false;
     }
     
-    void computeHapPosition(const Haplotype & hap, const Read & read, vector<int> & alPos, int leftPos)
-    {
-        // get position on haplotype of read alignment to reference from the aligned position of first and last base in the read
-        
-        const bam1_t *b=read.getBam();
-        const bam1_core_t *c=&b->core;
-        uint32_t* cigar=bam1_cigar(b);
-        int k, end, start;
-        end = c->pos;
-        
-        int offs=0, l=0, lend; // offset due to SOFT_SKIP at beginning
-        // lend is base for which end is computed (there might be a SOFT_CLIP at the end of the read)
-        
-        bool al=false;
-        for (k = 0; k < (int) c->n_cigar; ++k) {
-            int op = cigar[k] & BAM_CIGAR_MASK;
-            
-            if (op == BAM_CMATCH || op == BAM_CINS || op == BAM_CREF_SKIP) al=true;
-            
-            if (!al && op == BAM_CSOFT_CLIP) offs += cigar[k] >> BAM_CIGAR_SHIFT;
-            
-            if (op == BAM_CMATCH || op == BAM_CINS || op == BAM_CSOFT_CLIP)
-                l += cigar[k] >> BAM_CIGAR_SHIFT;
-            
-            if (op == BAM_CMATCH || op == BAM_CDEL || op == BAM_CREF_SKIP) {
-                end += cigar[k] >> BAM_CIGAR_SHIFT;
-                lend=l;
-            }
-        }
-        
-        start=c->pos-leftPos; // make relative to alignment of haplotypes to reference
-        end-=leftPos;
-        
-        // lookup start and end in alignment of haplotype to reference
-        
-        for (int x=0;x<int(hap.ml.hpos.size());x++) if (hap.ml.hpos[x]==start) {
-            alPos.push_back(hap.ml.hpos[x]-offs);
-            break;
-        }
-        
-        for (int x=int(hap.ml.hpos.size())-1;x>=0;x--) if (hap.ml.hpos[x]==end) {
-            alPos.push_back(hap.ml.hpos[x]-lend);
-            break;
-        }
-        
-        
-    }
-    
-    void computeLikelihoodsFaster(const vector<Haplotype> &haps, const vector<Read> & reads, vector<vector<MLAlignment> > & liks, uint32_t leftPos, uint32_t rightPos, vector<int> & onHap, Parameters params)
-    {
-        liks.clear();
-        liks=vector<vector<MLAlignment> >(haps.size(),vector<MLAlignment>(reads.size()));
-        onHap = vector<int>(reads.size(),0); // records whether a read was aligned onto at least one haplotype
-        
-        const unsigned int kmer=4;
-        
-        for (size_t h=0;h<haps.size();h++) {
-            const Haplotype & hap = haps[h];
-            //cout << "Haplotype[" << h << "]: " << endl;
-            HapHash hash(kmer, hap);
-            for (size_t r=0;r<reads.size();r++) {
-                // given BWA alignment of read to reference, estimate a number of likely alignments to the haplotype
-                vector<int> alPos;
-                computeHapPosition(hap, reads[r], alPos, leftPos);
-                //  cout << "[" << r << ": " << alPos.size() ;
-                
-                ObservationModelS om(hap, reads[r], leftPos, params.obsParams);
-                
-                // align using guessed alignments and the haplotype hash
-                liks[h][r]=om.align(hash);
-                //  cout << "," << liks[h][r].ll << "] ";
-                if (!liks[h][r].offHapHMQ) onHap[r]=1; // if on-haplotype with artificial high mapping quality
-                
-                /*
-                 seqan::Score<int> score(-1, -460, -100,-960);
-                 ObservationModelSeqAn om2(hap, reads[r], leftPos, params.obsParams, score);
-                 om2.align();
-                 */
-                
-            }
-            //cout << "done" << endl;
-        }
-        
-        // check HMQ off-haplotype reads
-        
-        // realign a couple of high-mapping quality reads to obtain new candidate indels
-        // propose new set of candidate haplotypes by realigning all reads to the new set of candidate haplotypes
-        
-        
-        // --bamFiles /Users/caa/Documents/workspace/DInDelFastProb/bamfiles.txt --output test --region 12036338-12036340 --maxReadLength 60 --tid 17 --maxHap 8 --showEmpirical  --minReadOverlap 20 --width 60 --maxLengthIndel 10 --ref /Users/caa/data/human_b36_female.Y.fa --pError 0.0005  --maxRead 2000 --computeMAP
-    }
-    
     void computeLikelihoods(const vector<Haplotype> &haps, const vector<Read> & reads, vector<vector<MLAlignment> > & liks, uint32_t leftPos, uint32_t rightPos, vector<int> & onHap, Parameters params)
     {
         LOG(logDEBUG) << "### Computing likelihoods for all reads and haplotypes.\n";
@@ -400,7 +307,7 @@ namespace Haps {
         vector<int> onHap(reads.size(),1); // which reads were mapped inside the haplotype window given an artificially high mapping quality
         vector<int> filtered(haps.size(), 0);
         map<pair<int, AlignedVariant>, VariantCoverage> varCoverage;
-        computeLikelihoodsFaster(haps, reads, liks, leftPos, rightPos, onHap, params);
+        computeLikelihoods(haps, reads, liks, leftPos, rightPos, onHap, params);
         filterHaplotypes(haps, reads, liks, filtered, varCoverage, params.filterHaplotypes, params);
         vector<Haplotype> tmp_haps;
         vector<vector<MLAlignment> > tmp_liks;

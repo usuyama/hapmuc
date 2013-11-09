@@ -213,7 +213,7 @@ namespace MutationModel {
 
 
     void print_params(const vector<Read> & tumor_reads, const vector<Read> & normal_reads, const vector<double> & rlt, const vector<double> & rln, vector<double> &ahat, vector<double> &bhat, vector<double> &chat, vector<double> & zt, vector<double> & zn, lower_bound_t & lb, Hap3Param params, std::ofstream &log, bool print_z=false) {
-#ifdef LOGDEBUG
+#ifdef LOGMM
         int nh = 4; //number of haps
         int nrt = rlt.size() / nh; //number of reads of tumor
         int nrn = rln.size() / nh; //number of reads of normal
@@ -246,7 +246,7 @@ namespace MutationModel {
     }
 
     void print_posteriors(const vector<double> & rlt, const vector<double> & rln, vector<double> &ahat, vector<double> &bhat, vector<double> &chat, vector<double> & zt, vector<double> & zn, lower_bound_t & lb, Hap3Param params, std::ofstream &log) {
-#ifdef LOGDEBUG
+#ifdef LOGMM
         log << "##print posteriors" << endl;
         int nh = 4; //number of haps
         int nrt = rlt.size() / nh; //number of reads of tumor
@@ -430,7 +430,7 @@ namespace MutationModel {
             log << "### iter: " << iter << " llOld: " << llOld << " llNew: " << llNew << endl;
 
             print_posteriors(rlt, rln, ahat, bhat, chat, zt, zn, lb, params, log);
-            print_params(tumor_reads, normal_reads, rlt, rln, ahat, bhat, chat, zt, zn, lb, params, log);
+            print_params(tumor_reads, normal_reads, rlt, rln, ahat, bhat, chat, zt, zn, lb, params, log, true);
             log << endl;
 #endif
             llOld=llNew;
@@ -440,7 +440,7 @@ namespace MutationModel {
         log << "----------------finished[" << iter << "]---------------" << endl;
 #endif
         print_posteriors(rlt, rln, ahat, bhat, chat, zt, zn, lb, params, log);
-        print_params(tumor_reads, normal_reads, rlt, rln, ahat, bhat, chat, zt, zn, lb, params, log);
+        print_params(tumor_reads, normal_reads, rlt, rln, ahat, bhat, chat, zt, zn, lb, params, log, true);
 
         vector<int> tmp_vec; //nonsense
         lb.compatible = tmp_vec;

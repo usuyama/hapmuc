@@ -266,6 +266,7 @@ namespace MutationCall
                 }
                 if (min_index == -1) {
                     LOG(logWARNING) << "no germline SNP (!= indel); skip!" << endl;
+                    hap3_flag = false;
                 } else {
                     LOG(logDEBUG) << "min " << min_dis << " " << min_index << endl;
                     stringstream ss;

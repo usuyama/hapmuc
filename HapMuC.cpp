@@ -136,7 +136,7 @@ void HapMuC::getReadsFromBams(vector<MyBam *> & Bams, uint32_t leftPos, uint32_t
 	int numUnknownLib = 0;
 	string_hash <int> unknownLib;
 	const int LEFTPAD = 200;
-    maxDev = 250;
+
 	// note the idea is to get only consider reads starting at position leftMostReadPos (and not ones merely overlapping)
 	// LEFTPAD should take care of overlap effects (note that leftMostReadPos is already generous, based on library insert size)
     
@@ -190,7 +190,7 @@ void HapMuC::getReadsFromBams(vector<MyBam *> & Bams, uint32_t leftPos, uint32_t
     
 	vector<Read> newReads;
 	if (leftFetchReadPos<=rightFetchReadPos) {
-		LOG(logDEBUG) << "Fetching reads...." << endl;
+		LOG(logINFO) << "Fetching reads...." << endl;
 		for (size_t b=0;b<Bams.size();b++) {
 			Read::FetchReadData data(&newReads, int(b), &(this->libraries), &Bams, numReads, params.maxReads*100);
 			bam_fetch(Bams[b]->bf, Bams[b]->idx, Bams[b]->getTID(params.tid), leftFetchReadPos , rightFetchReadPos,&data , &Read::fetchFuncVectorPooled);
@@ -234,53 +234,58 @@ void HapMuC::getReadsFromBams(vector<MyBam *> & Bams, uint32_t leftPos, uint32_t
 	vector<Read> filteredReads;
 	double minMapQual = params.mapQualThreshold;
 	if (minMapQual<0.0) minMapQual=0.0;
-	for (int r=0;r<int(reads.size());r++) {
+	for (int r=0;r<int(reads.size());r++) {       
 		string qname = string(bam1_qname(reads[r].getBam()));
+        LOG(logDEBUGREADS) << "qname: " << qname << " ";
 		bool filter = false;
 		int tf = 0;
-        
+        LOGP(logDEBUGREADS) << "reads[r].pos: " << reads[r].pos << " reads[r].getEndPos(): " << reads[r].getEndPos() << endl;
 		if (reads[r].getEndPos()<leftMostReadPos || reads[r].pos>rightMostReadPos) filter=true;
-        
+        if (filter) LOG(logDEBUGREADS) << "filtered by pos ";
 		if (!reads[r].isUnmapped()) {
-			if (reads[r].pos+int(reads[r].size())<int(leftPos)+params.minReadOverlap || reads[r].pos>int(rightPos)-params.minReadOverlap) {
+            LOG(logDEBUGREADS) << endl << "is mapped" << endl;
+			if (reads[r].pos+int(reads[r].size())<=int(leftPos)+params.minReadOverlap || reads[r].pos>=int(rightPos)-params.minReadOverlap) {
+                LOG(logDEBUGREADS) << "filtered by minOverlap" << endl;
 				filter=true;
 				tf = 1;
 			} else if (reads[r].mateIsUnmapped() == false ){
+                LOG(logDEBUGREADS) << "mate is mapped" << endl;
 				if (reads[r].getBam()->core.mtid != reads[r].getBam()->core.tid) {
-                    LOG(logDEBUG) << "TIDERR: reads[" << r << "]: " << bam1_qname(reads[r].getBam()) << " matePos: " << reads[r].matePos << " mateLen: " << reads[r].mateLen << endl;
+                    LOG(logINFO) << "TIDERR: reads[" << r << "]: " << bam1_qname(reads[r].getBam()) << " matePos: " << reads[r].matePos << " mateLen: " << reads[r].mateLen << endl;
 					numTIDmismatch++;
 				} else {
-					// find mate of mapped read
-					// filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
-                    
-					// lookup mapped read
+                    LOG(logDEBUGREADS) << "lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)" << endl;
 					hash_it = mapped_name_to_idx.find(string(bam1_qname(reads[r].getBam())));
-					if (hash_it == mapped_name_to_idx.end()) { numOrphan++; filter=true; } else {
+					if (hash_it == mapped_name_to_idx.end()) { 
+                        LOG(logDEBUGREADS) << "the mate is not found" << endl;
+                        numOrphan++; filter=true; 
+                    } else {
 						if (hash_it->second.size()>2) LOG(logERROR) << "HUH? DUPLICATE READ LABELS???" << endl;
-						if (reads[r].mateIsUnmapped() == false) {
-							filter = true;
-						}
-                        
+						filter = true;
+                        LOG(logDEBUGREADS) << "found the mate" << endl;
 						BOOST_FOREACH(int idx, hash_it->second) {
 							if (idx != r) {
 								reads[r].mateLen = reads[idx].size();
 								reads[r].matePos = reads[idx].pos;
 								filter = false;
 								if (reads[r].matePos != reads[r].getBAMMatePos()) {
-									LOG(logERROR) << "matepos inconsistency!" << endl;
-									LOG(logDEBUG) << reads[r].matePos << " " << reads[r].getBAMMatePos() << endl;
+									LOG(logINFO) << "matepos inconsistency!" << endl;
+									LOG(logINFO) << reads[r].matePos << " " << reads[r].getBAMMatePos() << endl;
 									exit(1);
 								}
 							}
 						}
-                        
 						if (filter == true) {
+                            LOG(logINFO) << "filter this read because we could not find the mate read nearby" << endl;
 							numOrphan++;
 							tf = 2;
 						}
 					}
 				}
 			} else if (reads[r].mateIsUnmapped() == true) {
+                LOG(logDEBUGREADS) << "mate is UNmapped; filter" << endl;
+                filter = true;
+                /*
 				reads[r].matePos=reads[r].pos;
 				hash_it = unmapped_name_to_idx.find(string(bam1_qname(reads[r].getBam())));
 				if (hash_it == unmapped_name_to_idx.end()) { filter=true; } else {
@@ -294,6 +299,7 @@ void HapMuC::getReadsFromBams(vector<MyBam *> & Bams, uint32_t leftPos, uint32_t
 					}
                     
 				}
+                */
 				if (filter==true) {
 					numOrphan++;
 					tf = 3;
@@ -303,9 +309,11 @@ void HapMuC::getReadsFromBams(vector<MyBam *> & Bams, uint32_t leftPos, uint32_t
             
 		} else {
 			// read is unmapped
+            LOG(logDEBUGREADS) << endl << "is UNmapped; filter" << endl;
+            filter = true;
+            /*
 			if (params.mapUnmappedReads) {
-
-				// lookup mapped read
+				LOG(logDEBUGREADS) << "lookup mapped read" << endl;
 				hash_it = mapped_name_to_idx.find(string(bam1_qname(reads[r].getBam())));
 				int idx;
 				if (hash_it == mapped_name_to_idx.end()) { numOrphanUnmapped++; filter=true; tf = 4;} else {
@@ -346,11 +354,13 @@ void HapMuC::getReadsFromBams(vector<MyBam *> & Bams, uint32_t leftPos, uint32_t
 			} else {
 				filter = true;
 			}
-            
+            */
 		}
-		if (filter == true) reads[r].mapQual = -1.0;
-        
+        if(filter == false & reads[r].mapQual<minMapQual) {
+            LOG(logDEBUGREADS) << "filter by mapping quality: " << bam1_qname(reads[r].getBam()) << " mq: " << reads[r].mapQual << endl;
+        }
         LOG(logDEBUG) << "reads[" << r << "]: " << bam1_qname(reads[r].getBam()) << " matePos: " << reads[r].matePos << " mateLen: " << reads[r].mateLen << " Filter: " << tf << " filter: " << filter <<  " mq: " << reads[r].mapQual << endl;
+		if (filter == true) reads[r].mapQual = -1.0;
 	}
     
     
@@ -380,11 +390,11 @@ void HapMuC::getReadsFromBams(vector<MyBam *> & Bams, uint32_t leftPos, uint32_t
 			string match=params.filterReadAux.substr(1,params.filterReadAux.size());
 			Read::filterReads(reads, exclude, match);
 			size_t after=reads.size();
-			if (!params.quiet) LOG(logDEBUG) << "filterAux: " << before-after << " reads were filtered based on match string " << params.filterReadAux << endl;
+			if (!params.quiet) LOG(logINFO) << "filterAux: " << before-after << " reads were filtered based on match string " << params.filterReadAux << endl;
 		}
 	}
     
-	if (!params.quiet) LOG(logDEBUG) << "Number of reads: " << reads.size() << " out of " << oldNumReads << " # unmapped reads: " << nUnmapped << " numReadsUnknownLib: " << numUnknownLib << " numChrMismatch: " << numTIDmismatch << " numMappedWithoutMate: " << numOrphan << " numUnmappedWithoutMate: " << numOrphanUnmapped << endl;
+	if (!params.quiet) LOG(logINFO) << "Number of reads: " << reads.size() << " out of " << oldNumReads << " # unmapped reads: " << nUnmapped << " numReadsUnknownLib: " << numUnknownLib << " numChrMismatch: " << numTIDmismatch << " numMappedWithoutMate: " << numOrphan << " numUnmappedWithoutMate: " << numOrphanUnmapped << endl;
 	if (nMateposError) {
 		LOG(logERROR) << "The mate position of " << nMateposError << " reads was recorded as -1 in the BAM file" << endl;
 	}
@@ -433,14 +443,26 @@ AlignedCandidates HapMuC::getCandidateVariants(string line, vector<AlignedVarian
     VariantInfo vi;
     linestream >> vi.chr >> vi.start >> vi.end >> vi.ref >> vi.obs >> vi.ref_count_tumor >> vi.obs_count_tumor >> vi.ref_count_normal >> vi.obs_count_normal >> vi.missrate_tumor >> vi.strandrate_tumor >> vi.missrate_normal >> vi.strandrate_normal >> vi.fisher_score >> cand_somatic >> cand_germline;
     
-    leftPos = vi.start - 120;//window size
-    rightPos = vi.start + 120;
+    leftPos = vi.start - 0;//window size
+    rightPos = vi.start + 0;
     vector<AlignedVariant> variants;
     AlignedVariant variant(get_var_symbol(vi.ref, vi.obs), vi.start, -1, 0);
     variant.info = vi;
     variants.push_back(variant);
     close_somatic = parse_close_vars(cand_somatic);
     close_germline = parse_close_vars(cand_germline);
+    BOOST_FOREACH(AlignedVariant av, close_somatic) {
+        if(leftPos > av.getStartHap())
+            leftPos = av.getStartHap();
+        if(rightPos < av.getStartHap())
+            rightPos = av.getStartHap();
+    }
+    BOOST_FOREACH(AlignedVariant av, close_germline) {
+        if(leftPos > av.getStartHap())
+            leftPos = av.getStartHap();
+        if(rightPos < av.getStartHap())
+            rightPos = av.getStartHap();
+    }
     return AlignedCandidates(vi.chr, variants, leftPos, rightPos);
 }
 
@@ -476,14 +498,14 @@ void HapMuC::mutationCall(const string & variantsFileName)
         vector<AlignedVariant> close_somatic_vars, close_germline_vars;
 		AlignedCandidates candidateVariants = getCandidateVariants(line, close_somatic_vars, close_germline_vars);
 		if (candidateVariants.variants.size()==0) continue;
-        LOG(logDEBUG) << "for each candidate variants(size=" << candidateVariants.variants.size() << ")" << endl;
+        LOG(logINFO) << "for each candidate variants(size=" << candidateVariants.variants.size() << ")" << endl;
 		vector<Read> normalReads;
         vector<Read> tumorReads;
         vector<Read> mergedReads;
 		uint32_t pos, leftPos, rightPos;
 		// get lowest and highest position
-        leftPos = candidateVariants.leftPos;
-		rightPos = candidateVariants.rightPos;
+        leftPos = candidateVariants.leftPos - params.maxReadLength;
+		rightPos = candidateVariants.rightPos + params.maxReadLength;
         
 		pos = candidateVariants.centerPos;
 		params.tid=candidateVariants.tid;
@@ -516,7 +538,7 @@ void HapMuC::mutationCall(const string & variantsFileName)
             tumorReads.clear();
 			getReadsFromBams(normalBams, leftPos, rightPos, normalReads, oldLeftPosForN, oldRightFetchReadPosForN, normalReadBuf, resetReadBuffer);
             getReadsFromBams(tumorBams, leftPos, rightPos, tumorReads, oldLeftPosForT, oldRightFetchReadPosForT, tumorReadBuf, resetReadBuffer);
-            LOG(logDEBUG) << "read size: n, t =" << normalReads.size() << " " << tumorReads.size() << endl;
+            LOG(logINFO) << "read size: n, t =" << normalReads.size() << " " << tumorReads.size() << endl;
             
             uint32_t rs=(int(leftPos)>params.minReadOverlap)?(leftPos-params.minReadOverlap):0;
             uint32_t re=rightPos+params.minReadOverlap;
@@ -721,8 +743,8 @@ int main(int argc, char *argv[])
 	("capMapQualFast", po::value<double>()->default_value(45.0), "cap mapping quality in alignment using fast ungapped method\n (WARNING: setting it too high (>50) might result in significant overcalling!)")
 	("skipMaxHap", po::value<uint32_t>()->default_value(200), "skip computation if number of haplotypes exceeds this number")
 	//("numOutputTopHap", po::value<int>()->default_value(5), "number of haplotype pairs output to haplotype file")
-	("minReadOverlap", po::value<uint32_t>()->default_value(40),"minimum overlap between read and haplotype")
-	("maxReadLength", po::value<uint32_t>()->default_value(500),"maximum length of reads")
+	("minReadOverlap", po::value<uint32_t>()->default_value(100),"minimum overlap between read and haplotype")
+	("maxReadLength", po::value<uint32_t>()->default_value(100),"maximum length of reads")
 	("minCount", po::value<uint32_t>()->default_value(1), "minimum number of WS observations of indel")
 	("maxHapReadProd",po::value<uint32_t>()->default_value(10000000), "skip if product of number of reads and haplotypes exceeds this value")
 	("changeINStoN", "change sequence of inserted sequence to 'N', so that no penalty is incurred if a read mismatches the inserted sequence");

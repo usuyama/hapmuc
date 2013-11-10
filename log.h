@@ -7,7 +7,7 @@
 
 inline std::string NowTime();
 
-enum TLogLevel {logERROR, logWARNING, logINFO, logDEBUG};
+enum TLogLevel {logERROR, logWARNING, logINFO, logDEBUG, logDEBUGREADS};
 
 template <typename T>
 class Log
@@ -38,7 +38,7 @@ std::ostringstream& Log<T>::Get(TLogLevel level)
 {
 	os << "- " << NowTime();
 	os << " " << ToString(level) << ": ";
-	os << std::string(level > logDEBUG ? level - logDEBUG : 0, '\t');
+	os << std::string(level > logDEBUGREADS ? level - logDEBUGREADS : 0, '\t');
 	return os;
 }
 
@@ -57,21 +57,23 @@ Log<T>::~Log()
 template <typename T>
 TLogLevel& Log<T>::ReportingLevel()
 {
-	static TLogLevel reportingLevel = logDEBUG;
+	static TLogLevel reportingLevel = logDEBUGREADS;
 	return reportingLevel;
 }
 
 template <typename T>
 std::string Log<T>::ToString(TLogLevel level)
 {
-	static const char* const buffer[] = {"ERROR", "WARNING", "INFO", "DEBUG"};
+	static const char* const buffer[] = {"ERROR", "WARNING", "INFO", "DEBUG", "DEBUGREADS"};
 	return buffer[level];
 }
 
 template <typename T>
 TLogLevel Log<T>::FromString(const std::string& level)
 {
-	if (level == "DEBUG")
+	if (level == "DEBUGREADS")
+		return logDEBUGREADS;
+    if (level == "DEBUG")
 		return logDEBUG;
 	if (level == "INFO")
 		return logINFO;
@@ -118,15 +120,6 @@ inline void Output2FILE::Output(const std::string& msg)
 #endif // _WIN32
 
 
-#ifndef FILELOG_MAX_LEVEL
-#ifdef LOGDEBUG
-#define FILELOG_MAX_LEVEL logDEBUG
-#else
-#define FILELOG_MAX_LEVEL logINFO
-#endif
-#endif
-
-
 #if defined(WIN32) || defined(_WIN32) || defined(__WIN32__)
 
 #include <windows.h>
@@ -168,6 +161,16 @@ inline std::string NowTime()
 // define my loggers
 class FILELOG_DECLSPEC FILELog : public Log<Output2FILE> {};
 //typedef Log<Output2FILE> FILELog;
+
+#ifndef FILELOG_MAX_LEVEL
+#ifdef DEBUGREADS
+#define FILELOG_MAX_LEVEL logDEBUGREADS
+#elif LOGDEBUG
+#define FILELOG_MAX_LEVEL logDEBUG
+#else
+#define FILELOG_MAX_LEVEL logINFO
+#endif
+#endif
 
 #define LOG(level) \
 if (level > FILELOG_MAX_LEVEL) ;\

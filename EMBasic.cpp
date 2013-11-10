@@ -44,13 +44,13 @@ namespace EMBasic {
         int nr = resp.size() / nh; //number of reads
         LOG(logDEBUG) << "nh, nr = " << nh << ", " << nr << endl;
         LOG(logDEBUG) << "###compatible" << endl;
-        for(int i=0;i < nh;i++) LOG(logDEBUG) << " " << compatible[i];
-        LOG(logDEBUG) << endl;
+        for(int i=0;i < nh;i++) LOGP(logDEBUG) << " " << compatible[i];
+        LOGP(logDEBUG) << endl;
         LOG(logDEBUG) << "lpi = ";
-        for(int i=0;i < nh;i++) LOG(logDEBUG) << " " << lpi[i];
-        LOG(logDEBUG) << endl << "a0=" << a0 << ", a = ";
-        for(int i=0;i < nh;i++) LOG(logDEBUG) << " " << ak[i];
-        LOG(logDEBUG) << endl;
+        for(int i=0;i < nh;i++) LOGP(logDEBUG) << " " << lpi[i];
+        LOGP(logDEBUG) << endl << "a0=" << a0 << ", a = ";
+        for(int i=0;i < nh;i++) LOGP(logDEBUG) << " " << ak[i];
+        LOGP(logDEBUG) << endl;
         //ln_p_x_given_z
         double tmp = 0.0;
         for(int i=0;i < nr;i++) {
@@ -190,20 +190,20 @@ namespace EMBasic {
             LOG(logDEBUG) << "hap[" << th << "] " << hap.seq << endl;
             for (It it=hap.indels.begin();it!=hap.indels.end();it++) {
                 if (!it->second.isRef() && !(it->second.isSNP() && it->second.getString()[3]=='D')) {
-                    LOG(logDEBUG) << "[" << it->second.getString() << " " << (it->first) << "]";
+                    LOGP(logDEBUG) << "[" << it->second.getString() << " " << (it->first) << "]";
                 }
             }
-            LOG(logDEBUG) << endl;
+            LOGP(logDEBUG) << endl;
         }
 
 #ifdef LOGDEBUG
         LOG(logDEBUG) << "#log haplotype and read likelihood" << endl;
         for (size_t r=0;r<nr;r++) {
-            LOG(logDEBUG) << reads[r].seq_name << " rl[" << r << "]:";
+            LOGP(logDEBUG) << reads[r].seq_name << " rl[" << r << "]:";
             for (size_t h=0;h<nh;h++) {
-                LOG(logDEBUG) << " " << rl[r*nh+h];
+                LOGP(logDEBUG) << " " << rl[r*nh+h];
             }
-            LOG(logDEBUG) << endl;
+            LOGP(logDEBUG) << endl;
         }
 #endif
 
@@ -351,7 +351,7 @@ namespace EMBasic {
                 if (activeVariants[a].find(pav)!=activeVariants[a].end()) active[a*nv+idx]=1;
                 //    LOG(logDEBUG) << " " << active[a*nv+idx];
             }
-            LOG(logDEBUG) << endl;
+           // LOG(logDEBUG) << endl;
             for (size_t h=0;h<nh;h++) {
                 It it=haps[h].indels.find(pav.first);
                 if (it!=haps[h].indels.end() && it->second.getString()==pav.second.getString()) hapHasVar[h*nv+idx]=1;
@@ -368,15 +368,15 @@ namespace EMBasic {
 
         LOG(logDEBUG) << "allVariants: ";
         BOOST_FOREACH(PAV pav, allVariants) {
-            LOG(logDEBUG) << " [" << pav.first << " " << pav.second.getString() << "]";
+            LOGP(logDEBUG) << " [" << pav.first << " " << pav.second.getString() << "]";
         }
-        LOG(logDEBUG) << endl;
+        LOGP(logDEBUG) << endl;
 
         vector<vector<int> > compatibles;
         vector<vector<double> > aks;
         LOG(logDEBUG) << "#subsets" << endl;
         for (int th=0;th<nav;th++) {
-            LOG(logDEBUG) << "[" << th << "] ";
+            LOGP(logDEBUG) << "[" << th << "] ";
             for (size_t h=0;h<nh;h++) {
                 compatible[h]=1;
                 if (filtered[h]!=0) {
@@ -390,10 +390,10 @@ namespace EMBasic {
                         }
                     }
                 }
-                LOG(logDEBUG) << " " << compatible[h];
+                LOGP(logDEBUG) << " " << compatible[h];
             }
             compatibles.push_back(compatible);
-            LOG(logDEBUG) << endl;
+            LOGP(logDEBUG) << endl;
         }
 
 
@@ -542,11 +542,11 @@ namespace EMBasic {
                 } catch (std::exception& e) {
                     string message = string("error_exception_").append(e.what());
                     LOG(logDEBUG) << message << endl;
-                    LOG(logDEBUG) << "EMBasic digamma" << endl << "ak: ";
-                    BOOST_FOREACH(double x, ak) { LOG(logDEBUG) << x << " "; }
-                    LOG(logDEBUG) << endl;
-                    LOG(logDEBUG) << "ahat: " << ahat << endl;
-                    LOG(logDEBUG).flush();
+                    LOGP(logDEBUG) << "EMBasic digamma" << endl << "ak: ";
+                    BOOST_FOREACH(double x, ak) { LOGP(logDEBUG) << x << " "; }
+                    LOGP(logDEBUG) << endl;
+                    LOGP(logDEBUG) << "ahat: " << ahat << endl;
+                    LOGP(logDEBUG).flush();
                     throw;
                 }
 
@@ -595,12 +595,12 @@ namespace EMBasic {
             }
             LOG(logDEBUG) << "----------------finished[" << iter << "]---------------" << endl;
             LOG(logDEBUG) << "###compatible" << endl;
-            for(int i=0;i < nh;i++) LOG(logDEBUG) << " " << compatible[i];
-            LOG(logDEBUG) << endl;
+            for(int i=0;i < nh;i++) LOGP(logDEBUG) << " " << compatible[i];
+            LOGP(logDEBUG) << endl;
             LOG(logDEBUG) << "lpi = ";
-            for(int i=0;i < nh;i++) LOG(logDEBUG) << " " << lpi[i];
-            LOG(logDEBUG) << endl << "a0=" << a0 << ", a = ";
-            for(int i=0;i < nh;i++) LOG(logDEBUG) << " " << ak[i];
+            for(int i=0;i < nh;i++) LOGP(logDEBUG) << " " << lpi[i];
+            LOGP(logDEBUG) << endl << "a0=" << a0 << ", a = ";
+            for(int i=0;i < nh;i++) LOGP(logDEBUG) << " " << ak[i];
             aks.push_back(ak);
 
             LOG(logDEBUG) << endl;
@@ -621,9 +621,9 @@ namespace EMBasic {
             for (int r=0;r<nr;r++) {
                 LOG(logDEBUG) << reads[r].seq_name << " z[" << r << "]:";
                 for (int h=0;h<nh;h++) {
-                    LOG(logDEBUG) << " " << z[r*nh+h];
+                    LOGP(logDEBUG) << " " << z[r*nh+h];
                 }
-                LOG(logDEBUG) << endl;
+                LOGP(logDEBUG) << endl;
             }
 #endif
 
@@ -637,15 +637,15 @@ namespace EMBasic {
             if (0) {
                 LOG(logDEBUG) << "th: " << th << endl;
                 for (size_t y=0;y<nh;y++) {
-                    LOG(logDEBUG) << "[" << y << "," << exp(pi[y]) << "]";
+                    LOGP(logDEBUG) << "[" << y << "," << exp(pi[y]) << "]";
                 }
-                LOG(logDEBUG) << endl << endl;
+                LOGP(logDEBUG) << endl << endl;
             }
 
             logliks[th]=loglik;
             logz=addLogs(logz, lower_bounds[th].lower_bound+logprior);
             for (size_t h=0;h<nh;h++) { freqs[th*nh+h]=exp(pi[h])/zc; }
-            for (size_t h=0;h<nh;h++) { LOG(logDEBUG) << " " << freqs[th*nh+h]; } LOG(logDEBUG) << endl;
+            for (size_t h=0;h<nh;h++) { LOGP(logDEBUG) << " " << freqs[th*nh+h]; } LOGP(logDEBUG) << endl;
 
             LOG(logDEBUG) << "lower_bound: " << lower_bounds[th].lower_bound << " loglik: " << loglik << " " << logliks[th] << " logprior: " << logprior << endl << endl;
 
@@ -670,25 +670,25 @@ namespace EMBasic {
         for (int a=0;a<nav;a++) {
             LOG(logDEBUG) << "[" << a << "] " << lower_bounds[a].lower_bound << " " << logpriors[a] << ";";
             for(int j=0;j<nh;j++) {
-                LOG(logDEBUG) << " " << compatibles[a][j];
+                LOGP(logDEBUG) << " " << compatibles[a][j];
             }
-            LOG(logDEBUG) << "; (freqs)";
+            LOGP(logDEBUG) << "; (freqs)";
             for(int j=0;j<nh;j++) {
-                LOG(logDEBUG) << " " << freqs[a*nh+j];
+                LOGP(logDEBUG) << " " << freqs[a*nh+j];
             }
-            LOG(logDEBUG) << endl;
+            LOGP(logDEBUG) << endl;
         }
 
         for (size_t th=0;th<nh;th++) {
             const Haplotype & hap=haps[th];
             LOG(logDEBUG) << "hap[" << th << "] " << hap.seq << endl;
-            LOG(logDEBUG) << hapFreqs[th] << " ";
+            LOGP(logDEBUG) << hapFreqs[th] << " ";
             for (It it=hap.indels.begin();it!=hap.indels.end();it++) {
                 if (!it->second.isRef() && !(it->second.isSNP() && it->second.getString()[3]=='D')) {
-                    LOG(logDEBUG) << "[" << it->second.getString() << " " << (it->first) << "]";
+                    LOGP(logDEBUG) << "[" << it->second.getString() << " " << (it->first) << "]";
                 }
             }
-            LOG(logDEBUG) << endl;
+            LOGP(logDEBUG) << endl;
         }
 
         LOG(logDEBUG) << endl;

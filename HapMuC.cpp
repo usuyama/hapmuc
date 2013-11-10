@@ -101,9 +101,9 @@ string HapMuC::getRefSeq(uint32_t lpos, uint32_t rpos)
 
 void HapMuC::getReadsFromBams(vector<MyBam *> & Bams, uint32_t leftPos, uint32_t rightPos, vector<Read> & reads, uint32_t & oldLeftPos, uint32_t & oldRightFetchReadPos, vector<Read *> & readBuffer, const bool reset)
 {
-    LOG(logDEBUG) << "getReadsFromBams()";
+    LOG(logDEBUG) << "getReadsFromBams()" << endl;
     BOOST_FOREACH(MyBam * b, Bams) {
-        LOG(logDEBUG) << " " << b->fileName;
+        LOG(logDEBUG) << " " << b->fileName << endl;
     }
 	// filter using map quality
 	class SortFunc {
@@ -127,7 +127,6 @@ void HapMuC::getReadsFromBams(vector<MyBam *> & Bams, uint32_t leftPos, uint32_t
     
 	int maxDev = int (libraries.getMaxInsertSize());
     
-	//maxDev = 100;
 	//cerr << "CHANGE THIS CHANGE THIS" << endl;
     
 	string_hash< list<int> > mapped_name_to_idx, unmapped_name_to_idx; // query name to read idx

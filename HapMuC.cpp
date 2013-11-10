@@ -254,11 +254,11 @@ void HapMuC::getReadsFromBams(vector<MyBam *> & Bams, uint32_t leftPos, uint32_t
                 tf = 1;
             } else if (reads[r].mateIsUnmapped() == false ){
                 LOG(logDEBUGREADS) << "mate is mapped" << endl;
+                LOG(logDEBUGREADS) << "lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)" << endl;
                 if (reads[r].getBam()->core.mtid != reads[r].getBam()->core.tid) {
-                    LOG(logINFO) << "TIDERR: reads[" << r << "]: " << bam1_qname(reads[r].getBam()) << " matePos: " << reads[r].matePos << " mateLen: " << reads[r].mateLen << endl;
-                    numTIDmismatch++;
+                    LOG(logWARNING) << "TIDERR: reads[" << r << "]: " << bam1_qname(reads[r].getBam()) << " matePos: " << reads[r].matePos << " mateLen: " << reads[r].mateLen << endl;
+                    numTIDmismatch++; filter = true;
                 } else {
-                    LOG(logDEBUGREADS) << "lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)" << endl;
                     hash_it = mapped_name_to_idx.find(string(bam1_qname(reads[r].getBam())));
                     if (hash_it == mapped_name_to_idx.end()) {
                         LOG(logDEBUGREADS) << "the mate is not found" << endl;
@@ -280,7 +280,7 @@ void HapMuC::getReadsFromBams(vector<MyBam *> & Bams, uint32_t leftPos, uint32_t
                             }
                         }
                         if (filter == true) {
-                            LOG(logINFO) << "filter this read because we could not find the mate read nearby" << endl;
+                            LOG(logWARNING) << "filter: reads[" << r << "]: " << bam1_qname(reads[r].getBam()) << " because we could not find the mate read nearby" << endl;
                             numOrphan++;
                             tf = 2;
                         }
@@ -367,7 +367,7 @@ void HapMuC::getReadsFromBams(vector<MyBam *> & Bams, uint32_t leftPos, uint32_t
     int nUnmapped = 0;
     int nMateposError = 0;
     sort(reads.begin(), reads.end(), SortFunc::sortFunc);
-    LOG(logDEBUG) << "fetched reads" << endl;
+    LOG(logDEBUG) << "fetched reads:" << endl;
     size_t max; for (max=0;max<params.maxReads && max<reads.size();max++) if (!(reads[max].mapQual<minMapQual)) {
         if (reads[max].matePos==-1 && reads[max].isPaired() && !reads[max].mateIsUnmapped() ) {
             nMateposError++;

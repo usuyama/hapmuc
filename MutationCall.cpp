@@ -295,15 +295,17 @@ namespace MutationCall
                         f_normal_reads.insert(f_normal_reads.end(), normalReads.begin(), normalReads.end());
                         f_tumor_reads.insert(f_tumor_reads.end(), tumorReads.begin(), tumorReads.end());
                         LOG(logDEBUG) << "before " << f_normal_reads.size() << " " << f_tumor_reads.size() << " " << rln.size()  << " " << rlt.size() << endl;
+                        LOG(logINFO) << "filter uninformative reads. remaining ";
                         filter_reads(f_normal_reads, rln);
                         filter_reads(f_tumor_reads, rlt);
-                        LOG(logDEBUG) << "after " << f_normal_reads.size() << " " << f_tumor_reads.size() << " " << rln.size() << " " << rlt.size() << endl;
+                        LOGP(logINFO) << "tumor reads: " << f_tumor_reads.size() << " of " << nrt << ", normal reads: " << f_normal_reads.size() << " of " << nrn << endl;
+                        LOG(logDEBUG) << " " << rln.size() << " " << rlt.size() << endl;
 
                         output_liktable(index, "hap3_tumor", rlt, params);
                         output_liktable(index, "hap3_normal", rln, params);
-                        LOG(logINFO) << "calculating the marginal likelihood based on the MUTATION model..." << endl;
+                        LOG(logINFO) << "calculating the marginal likelihood based on the MUTATION model...";
                         MutationModel::estimate(haps, f_tumor_reads, f_normal_reads, rlt, rln, tumorHapFreqs, normalHapFreqs, tumor_her, normal_her, pos, leftPos, rightPos, candidateVariants, mm_lb, params.hap3_params, "mutation", params.fileName+"logs/"+itos(index)+".hap3.mutation");
-                        LOG(logINFO) << "calculating the marginal likelihood based on the ERROR model..." << endl;
+                        LOG(logINFO) << "calculating the marginal likelihood based on the ERROR model...";
                         MutationModel::estimate(haps, f_tumor_reads, f_normal_reads, rlt, rln, non_tumorHapFreqs, non_normalHapFreqs, non_tumor_her, non_normal_her, pos, leftPos, rightPos, candidateVariants, nmm_lb, params.hap3_params, "error",params.fileName+"logs/"+itos(index)+".hap3.err");
                         bf2 = mm_lb.lower_bound - nmm_lb.lower_bound;
                         LOG(logDEBUG) << "**** hap4 done ***" << endl;
@@ -485,8 +487,10 @@ namespace MutationCall
         vector<Read> f_normal_reads, f_tumor_reads;
         f_normal_reads.insert(f_normal_reads.end(), normalReads.begin(), normalReads.end());
         f_tumor_reads.insert(f_tumor_reads.end(), tumorReads.begin(), tumorReads.end());
+        LOG(logINFO) << "filter uninformative reads. remaining ";
         filter_reads(f_normal_reads, rln);
         filter_reads(f_tumor_reads, rlt);
+        LOGP(logINFO) << "tumor reads: " << f_tumor_reads.size() << " of " << nrt << ", normal reads: " << f_normal_reads.size() << " of " << nrn << endl;
 #ifdef LOGDEBUG
         output_liktable(index, "hap2_tumor", rlt, params);
         output_liktable(index, "hap2_normal", rln, params);
@@ -510,10 +514,10 @@ namespace MutationCall
         vector<double> normalHapFreqs, tumorHapFreqs, non_tumorHapFreqs, non_normalHapFreqs;
         vector<HapEstResult> non_tumor_her, non_normal_her;
         lower_bound_t mm_lb, nmm_lb;
-        LOG(logINFO) << "calculating the marginal likelihood based on the MUTATION model..." << endl;
+        LOG(logINFO) << "calculating the marginal likelihood based on the MUTATION model...";
         MutationModel::estimate(haps, tumorReads, normalReads, rlt, rln, tumorHapFreqs, normalHapFreqs, tumor_her, normal_her, pos, leftPos, rightPos, candidateVariants, mm_lb, params.hap2_params, "mutation", params.fileName+"logs/"+itos(index)+".hap2.mutation");
         //output_mm(haps, (params.fileName+".mm.txt"), leftPos, rightPos, 0.0, mm_lb, normalHapFreqs, tumorHapFreqs);
-        LOG(logINFO) << "calculating the marginal likelihood based on the ERROR model..." << endl;
+        LOG(logINFO) << "calculating the marginal likelihood based on the ERROR model...";
         MutationModel::estimate(haps, tumorReads, normalReads, rlt, rln, non_tumorHapFreqs, non_normalHapFreqs, non_tumor_her, non_normal_her, pos, leftPos, rightPos, candidateVariants, nmm_lb, params.hap2_params, "error",params.fileName+"logs/"+itos(index)+".hap2.err");
         //output_mm(haps, (params.fileName+".non-mm.txt"), leftPos, rightPos, 0.0, nmm_lb, non_normalHapFreqs, non_tumorHapFreqs);
         double bf = mm_lb.lower_bound - nmm_lb.lower_bound;

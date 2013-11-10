@@ -436,6 +436,7 @@ namespace MutationModel {
             llOld=llNew;
             iter++;
         }
+        LOGP(logINFO) << " finished (iterated " << iter << " times)" << endl;
 #ifdef LOGDEBUG
         log << "----------------finished[" << iter << "]---------------" << endl;
 #endif

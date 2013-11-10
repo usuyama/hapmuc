@@ -50,6 +50,7 @@ namespace Haps2 {
     };
 
     void filter_reads(vector<Read> & reads, vector<vector<MLAlignment> > & liks) {
+        // TODO: make a faster version.
         LOG(logDEBUG) << "##filter reads" << endl;
         int nh = liks.size();
         int i = 0;

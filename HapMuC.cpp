@@ -451,6 +451,8 @@ AlignedCandidates HapMuC::getCandidateVariants(string line, vector<AlignedVarian
     variants.push_back(variant);
     close_somatic = parse_close_vars(cand_somatic);
     close_germline = parse_close_vars(cand_germline);
+    // reads must overlap the candidate mutation
+    /*
     BOOST_FOREACH(AlignedVariant av, close_somatic) {
         if(leftPos > av.getStartHap())
             leftPos = av.getStartHap();
@@ -463,6 +465,7 @@ AlignedCandidates HapMuC::getCandidateVariants(string line, vector<AlignedVarian
         if(rightPos < av.getStartHap())
             rightPos = av.getStartHap();
     }
+     */
     return AlignedCandidates(vi.chr, variants, leftPos, rightPos);
 }
 

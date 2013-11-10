@@ -501,7 +501,7 @@ void HapMuC::mutationCall(const string & variantsFileName)
         vector<AlignedVariant> close_somatic_vars, close_germline_vars;
         AlignedCandidates candidateVariants = getCandidateVariants(line, close_somatic_vars, close_germline_vars);
         if (candidateVariants.variants.size()==0) continue;
-        LOG(logINFO) << "for each candidate variants(size=" << candidateVariants.variants.size() << ")" << endl;
+        LOG(logDEBUG) << "for each candidate variants(size=" << candidateVariants.variants.size() << ")" << endl;
         vector<Read> normalReads;
         vector<Read> tumorReads;
         vector<Read> mergedReads;

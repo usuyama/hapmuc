@@ -284,25 +284,6 @@ void ObservationModelFB::computeBMidPrior(vector<double> & _prior, double mapQua
 
 	_prior=vector<double>(2*numS,0.0);
 	vector<double> pinsert = vector<double>(numS,0.0);
-    /*
-	if (params.mapUnmappedReads && read.isPaired()) {
-		//cout << "read: " << bam1_qname(read.getBam()) << " read.pos: " << read.pos << " read.matePos: " << read.matePos << " read.mateLen: " << read.mateLen <<  " read.isUnmapped: " << read.isUnmapped() << " mateUnmapped: " << read.mateIsUnmapped() << " bmid: " << bMid << " hapStart: " << hapStart << " read.tid: " << read.getBam()->core.tid << " read.mtid: " << read.getBam()->core.mtid << endl;
-		//
-
-		if (!read.mateIsUnmapped() && read.mateLen != -1 && read.getBam()->core.tid == read.getBam()->core.mtid) {
-			if (read.mateIsReverse()) {
-				for ( int x=1;x<hapSize+1;x++) pinsert[x] = log(read.getLibrary().getProb(abs(hapStart+x-bMid-int(read.matePos+read.mateLen))));
-			} else {
-				for ( int x=1;x<hapSize+1;x++) pinsert[x] = log(read.getLibrary().getProb(abs(hapStart+x+readSize-bMid-int(read.matePos))));
-			}
-			pinsert[0] = log(read.getLibrary().getNinetyFifthPctProb());
-			// for (int x=0;x<hapSize+1;x++) cout << " " << pinsert[x];
-			// cout << endl;
-		}
-
-	}
-     */
-
 	for (size_t i=0;i<2;i++) {
 		double logpIns=(i==1)?(logpInsgNoIns):log(1.0-exp(logpInsgNoIns));
 		_prior[i*numS+0]=log(pOffFirst)+logpIns+pinsert[0];

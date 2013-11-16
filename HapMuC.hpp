@@ -173,7 +173,6 @@ public:
         showReads=false;
         fastWidthOverlap=4;
         noIndelWindow=-1;
-        mapUnmappedReads=false;
         priorIndel=1.0/10000;
         priorSNP=1.0/1000.0;
         filterReadAux=string("");
@@ -240,7 +239,6 @@ public:
         cout << "\tshowReads: " << showReads << endl;
         cout << "\tfilterHaplotypes: " << filterHaplotypes << endl;
         cout << "\tnoIndelWindow: " << noIndelWindow << endl;
-        cout << "\tmapUnmappedReads: " << mapUnmappedReads << endl;
         
         cout << "\tnumOutputTopHap: " << numOutputTopHap << endl;
         
@@ -277,7 +275,7 @@ public:
     double checkBaseQualThreshold;
     double mapQualThreshold, scaleErr, priorIndel, priorSNP, EMtol, bayesa0;
     string fileName, inferenceMethod, refFileName, tid, filterReadAux, bayesType;
-    bool analyzeLowFreq, showHapDist, showCandHap, showReads, showHapAlignments, alignAgainstReference, mapUnmappedReads, quiet, estimateHapFreqs, doDiploid, computeML, computeMAP,printCallsOnly, outputPooledLikelihoods, filterHaplotypes;
+    bool analyzeLowFreq, showHapDist, showCandHap, showReads, showHapAlignments, alignAgainstReference, quiet, estimateHapFreqs, doDiploid, computeML, computeMAP,printCallsOnly, outputPooledLikelihoods, filterHaplotypes;
     double analyzeLowFreqDiffThreshold;
     double meanInsert, stdInsert;
     Hap3Param hap3_params, hap2_params;

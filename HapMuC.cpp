@@ -314,50 +314,6 @@ void HapMuC::getReadsFromBams(vector<MyBam *> & Bams, uint32_t leftPos, uint32_t
             // read is unmapped
             LOG(logDEBUGREADS) << endl << "is UNmapped; filter" << endl;
             filter = true;
-            /*
-             if (params.mapUnmappedReads) {
-             LOG(logDEBUGREADS) << "lookup mapped read" << endl;
-             hash_it = mapped_name_to_idx.find(string(bam1_qname(reads[r].getBam())));
-             int idx;
-             if (hash_it == mapped_name_to_idx.end()) { numOrphanUnmapped++; filter=true; tf = 4;} else {
-             if (hash_it->second.size()!=1) {
-             LOG(logERROR) << "UNMAPPED READ HAS MORE THAN ONE MATE!" << endl;
-             exit(1);
-             }
-             idx = *(hash_it->second.begin());
-             uint32_t range_l, range_r; // range of mate
-
-             int maxInsert = (int) reads[idx].getLibrary().getMaxInsertSize();
-             int minInsert = 0;
-             uint32_t rpos = reads[idx].pos;
-
-             if (reads[idx].isReverse()) {
-             range_l = rpos-maxInsert;
-             range_r = rpos-minInsert;
-             } else {
-             range_l = rpos+minInsert;
-             range_r = rpos+maxInsert;
-             }
-
-             if (range_r>leftPos && range_l<rightPos) {
-             numInRegion++;
-             filter=false;
-             reads[r].mapQual = reads[idx].mapQual;
-             reads[r].matePos = reads[idx].pos;
-             reads[r].mateLen = reads[idx].size();
-             if (reads[r].isReverse() == reads[idx].isReverse()) {
-             reads[r].reverse();
-             reads[r].complement();
-             }
-             } else {
-             filter=true;
-             tf = 5;
-             }
-             }
-             } else {
-             filter = true;
-             }
-             */
         }
         LOG(logDEBUGREADS) << "reads[" << r << "]: " << bam1_qname(reads[r].getBam()) << " matePos: " << reads[r].matePos << " mateLen: " << reads[r].mateLen << " Filter: " << tf << " filter: " << filter <<  " mq: " << reads[r].mapQual << endl;
         if (filter == true) reads[r].mapQual = -1.0;
@@ -684,8 +640,6 @@ void getParameters(po::variables_map & vm, Parameters & params)
     /*
      params.outputRealignedBAM=vm.count("outputRealignedBAM")?true:false;
      params.obsParams.modelType=vm["modelType"].as<string>();
-     params.mapUnmappedReads=vm.count("mapUnmapped")?true:false;
-     params.obsParams.mapUnmappedReads=vm.count("mapUnmapped")?true:false;
      params.obsParams.pFirstgLO=vm["pFirstgLO"].as<double>();
      //params.numOutputTopHap=vm["numOutputTopHap"].as<int>();
 
@@ -722,7 +676,6 @@ int main(int argc, char *argv[])
 
     po::options_description analysis_opt("General algorithm parameters");
     analysis_opt.add_options()
-    //("mapUnmapped", "remap unmapped reads for which mate is mapped")
     ("filterHaplotypes","prefilter haplotypes based on coverage")
     ("flankRefSeq",po::value<int>()->default_value(2),"#bases of reference sequence of indel region")
     ("flankMaxMismatch",po::value<int>()->default_value(2),"max number of mismatches in indel region")

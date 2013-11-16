@@ -56,7 +56,6 @@ public:
 
 			bMid=-1;
 			forceReadOnHaplotype=false;
-			mapUnmappedReads = false;
 
 			padCover=5;
 			maxMismatch=1;
@@ -82,7 +81,6 @@ public:
 			cout << "\tmaxMismatch: " << maxMismatch << endl;
 			cout << "\tmaxTryHash: " << maxTryHash << endl;
 			cout << "\tcheckBaseQualThreshold: " << checkBaseQualThreshold << endl;
-			cout << "\tmapUnmappedReads: " << mapUnmappedReads << endl;
 			//cout << "\tlogLikThreshod: " << logLikThreshold << endl;
 		}
 		double pError, baseQualThreshold, fixedBaseQual, mapQualThreshold, capMapQualFast, scaleErr, pMut;
@@ -91,7 +89,7 @@ public:
 
 		string modelType, indelDist;
 		int maxLengthDel,maxTryHash;
-		bool forceReadOnHaplotype, mapUnmappedReads;
+        bool forceReadOnHaplotype;
 		double pFirstgLO;
 		int padCover, maxMismatch;
 

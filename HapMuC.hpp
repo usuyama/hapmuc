@@ -169,7 +169,6 @@ public:
         doDiploid=false;
         estimateHapFreqs=false;
         printCallsOnly=true;
-        outputPooledLikelihoods=false;
         hap3_params.clear_all();
         hap2_params.clear_all();
         hap3_params.mut_a0 += 1.0,1.0,1.0;
@@ -221,7 +220,6 @@ public:
         cout << "\tdoDiploid: " << doDiploid << endl;
         cout << "\tdoEM: " << estimateHapFreqs << endl;
         
-        cout << "\toutputPooledLikelihoods: " << outputPooledLikelihoods << endl;
         cout << "\tshowHapAlignments: " << showHapAlignments << endl;
         
         cout << "\tEM tol: " << EMtol << endl;
@@ -243,7 +241,7 @@ public:
     double checkBaseQualThreshold;
     double mapQualThreshold, scaleErr, priorIndel, priorSNP, EMtol;
     string fileName, refFileName, tid, filterReadAux;
-    bool showReads, showHapAlignments, alignAgainstReference, quiet, estimateHapFreqs, doDiploid, computeML, computeMAP,printCallsOnly, outputPooledLikelihoods;
+    bool showReads, showHapAlignments, alignAgainstReference, quiet, estimateHapFreqs, doDiploid, computeML, computeMAP,printCallsOnly;
     double meanInsert, stdInsert;
     Hap3Param hap3_params, hap2_params;
     ObservationModelParameters obsParams;

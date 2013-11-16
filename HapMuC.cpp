@@ -598,13 +598,9 @@ void getParameters(po::variables_map & vm, Parameters & params)
     params.obsParams.pError=vm["pError"].as<double>();
     params.obsParams.pMut=vm["pMut"].as<double>();
 
-    //params.obsParams.baseQualThreshold=vm["baseQualThreshold"].as<double>();
-    //	params.obsParams.fixedBaseQual=vm["fixedBaseQual"].as<double>();
     params.obsParams.maxLengthIndel=vm["maxLengthIndel"].as<int>();
     params.obsParams.maxLengthDel=params.obsParams.maxLengthIndel;
     params.obsParams.mapQualThreshold=vm["capMapQualThreshold"].as<double>();
-    //params.obsParams.scaleErr=vm["obsScaleError"].as<double>();
-    //params.obsParams.numE=vm["numE"].as<int>();
     params.obsParams.padCover = vm["flankRefSeq"].as<int>();
     params.obsParams.maxMismatch = vm["flankMaxMismatch"].as<int>();
 
@@ -616,19 +612,8 @@ void getParameters(po::variables_map & vm, Parameters & params)
 
     params.printCallsOnly=vm.count("printCallsOnly")?true:false;
     params.estimateHapFreqs=vm.count("doPooled")?true:false;
-    params.outputPooledLikelihoods=vm.count("opl")?true:false;
     params.showHapAlignments=vm.count("showHapAlignments")?true:false;
     if (vm.count("filterReadAux")) params.filterReadAux=vm["filterReadAux"].as<string>();
-
-    // removed options
-    /*
-     params.outputRealignedBAM=vm.count("outputRealignedBAM")?true:false;
-     params.obsParams.modelType=vm["modelType"].as<string>();
-     params.obsParams.pFirstgLO=vm["pFirstgLO"].as<double>();
-     //params.numOutputTopHap=vm["numOutputTopHap"].as<int>();
-
-     */
-
 }
 
 
@@ -684,7 +669,6 @@ int main(int argc, char *argv[])
     miscAnalysis.add_options()
     ("showHapAlignments","show for each haplotype which reads map to it")
     ("showReads","show reads")
-    ("opl","output likelihoods for every read and haplotype");
 
     required.add(baminput).add(varfileinput).add(output_options).add(analysis_opt).add(option_filter).add(obsModel).add(miscAnalysis).add(bams_tn);
 

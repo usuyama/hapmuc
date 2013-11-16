@@ -68,9 +68,7 @@ namespace MutationCall
     }
 
     void output_alignments(int index, string id, const vector<Read> & reads, const vector<vector<MLAlignment> > & liks, Parameters params) {
-#ifndef LOGDEBUG
-        return;
-#endif
+        if (!params.showHapAlignments) return;
         std::ofstream ofs((params.fileName+"logs/"+itos(index)+"."+id+".alignments").c_str(), std::ios::out);
         int nr = reads.size();
         int nh = liks.size();
@@ -92,7 +90,6 @@ namespace MutationCall
                     ofs << "[" << it->second.getString() << " " << (it->first) << "]";
                 }
                 ofs << endl;
-
             }
         }
     }
@@ -460,7 +457,6 @@ namespace MutationCall
         EMBasic::estimate(haps, mergedReads, liks, mergedHapFreqs, merged_her, pos, leftPos, rightPos, candidateVariants, merged_lb, merged_vpp,  1.0, "all", params);
         double bf = normal_lb.lower_bound + tumor_lb.lower_bound - merged_lb.lower_bound;
         outputLowerBounds(haps, (params.fileName+".basic_haplotypes.txt"), leftPos, rightPos, bf, normal_lb, tumor_lb, merged_lb, normalHapFreqs, tumorHapFreqs, mergedHapFreqs);
-
         return bf;
     }
 
@@ -488,10 +484,8 @@ namespace MutationCall
                 rln[idx] = normal_liks[h][r].ll;idx++;
             }
         }
-#ifdef LOGDEBUG
         output_alignments(index, "hap2_tumor", tumorReads, tumor_liks, params);
         output_alignments(index, "hap2_normal", normalReads, normal_liks, params);
-#endif
         vector<Read> f_normal_reads, f_tumor_reads;
         f_normal_reads.insert(f_normal_reads.end(), normalReads.begin(), normalReads.end());
         f_tumor_reads.insert(f_tumor_reads.end(), tumorReads.begin(), tumorReads.end());

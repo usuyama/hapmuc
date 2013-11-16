@@ -17,7 +17,6 @@
 #include <cmath>
 #include "Haplotype.hpp"
 #include "bam.h"
-#include "Library.hpp"
 #include <vector>
 #include <algorithm>
 #include <string>
@@ -35,24 +34,19 @@ public:
 	class FetchReadData
 	{
 	public:
-		FetchReadData(vector<Read> * _reads,int _poolID, const LibraryCollection * _libraries, vector<MyBam *> * _myBams, int _numReads = 0, int _maxNumReads = 100000)
+		FetchReadData(vector<Read> * _reads,int _poolID, vector<MyBam *> * _myBams, int _numReads = 0, int _maxNumReads = 100000)
 		{
 			reads=_reads;
 			poolID=_poolID;
-			libraries=_libraries;
 			myBams = _myBams;
-			numUnknownLib=0;
 			numReads = _numReads;
 			maxNumReads = _maxNumReads;
 		}
 		vector<Read> * reads;
 		vector<MyBam *> * myBams;
 		int poolID;
-		const LibraryCollection * libraries;
-		int numUnknownLib;
 		int numReads;
 		int maxNumReads;
-		string_hash<int> unknownLib;
 	};
 
 	Read()
@@ -73,7 +67,6 @@ public:
 		poolID=-1;
 		mateLen = -1;
 		matePos = -1;
-		library = NULL;
 	}
 	Read(const Read & r)
 	{
@@ -97,7 +90,6 @@ public:
 		 poolID=r.poolID;
 		 matePos = r.matePos;
 		 mateLen = r.mateLen;
-		 library = r.library;
 		 bamHeader = r.bamHeader;
 		if (initBam) {
 			delete[] bam->data;
@@ -121,7 +113,7 @@ public:
 		}
 		return *this;
 	}
-	Read(const bam1_t *b, const LibraryCollection & libraries, int _poolID, bam_header_t * _bamHeader, const string & overrideLibName = string("") )
+	Read(const bam1_t *b, int _poolID, bam_header_t * _bamHeader, const string & overrideLibName = string("") )
 	{
 		const bam1_core_t *c=&b->core;
 		uint32_t len=c->l_qseq;
@@ -167,6 +159,7 @@ public:
 		mateLen = -1;
 
 		this->bamHeader = _bamHeader;
+        /*
 		LibraryCollection::const_iterator it;
 		if (overrideLibName.empty()) {
 			it = libraries.find( this->getLibraryName() );
@@ -180,12 +173,13 @@ public:
 			throw string("Cannot find library: ").append(this->getLibraryName());
 		} else {
 			library = (const Library *) & (it->second);
-		}
+		}*/
 	}
 	uint32_t getEndPos() const
 	{
 		return bam->core.n_cigar? bam_calend(&bam->core, bam1_cigar(bam)) : bam->core.pos + 1;
 	}
+    /*
 	string getLibraryName() const
 	{
 		if (this->isPaired()) {
@@ -198,7 +192,7 @@ public:
 		} else {
 			return string("single_end");
 		}
-	}
+	}*/
 
 	int32_t getBAMMatePos() const { return bam->core.mpos; }
 	bool isUnmapped() const { return (bam->core.flag & BAM_FUNMAP) != 0 ; }
@@ -259,8 +253,6 @@ public:
 		return os.str();
 	}
 
-	const Library & getLibrary() const { return *this->library; };
-
 	// compute mean and standard deviation of first base position
 	static pair<double, double> computePositionStatistics(const bam1_t *b)
 	{
@@ -308,50 +300,7 @@ public:
 		var=var/double(totLen);
 		return pair<double,double>(dmean+double(refPos), var);
 	}
-	/*
-	static void filterReads(vector<Read> & reads, size_t max)
-	{
-		// filter using map quality
-		class SortFunc {
-		public:
-			static bool sortFunc(const Read & r1, const Read & r2)
-			{
-				// sort in decreasing order
-				if (r1.mapQual>r2.mapQual) return true; else return false;
-			}
-		};
-		sort(reads.begin(), reads.end(), SortFunc::sortFunc);
-		//reads.resize(max);
-		vector<Read> filteredReads;
-		for (size_t i=0;i<reads.size() && i<max ;i++) {
-			filteredReads[i]=reads[i];
-		}
-		reads.swap(filteredReads);
-	}
-	static void filterReads(vector<Read> & reads, size_t maxNum, double minMapQual, size_t maxReadLength)
-	{
-		vector<Read> filteredReads;
-		if (minMapQual<0.0) minMapQual=0.0;
-		// filter using map quality
-		class SortFunc {
-		public:
-			static bool sortFunc(const Read & r1, const Read & r2)
-			{
-				// sort in decreasing order
-				if (r1.mapQual>r2.mapQual) return true; else return false;
-			}
-		};
-		for (size_t r=0;r<reads.size();r++) {
-			const bam1_core_t *c=&(reads[r].bam->core);
-			if (reads[r].size()>maxReadLength || c->n_cigar==0) reads[r].mapQual=-1.0;
 
-		}
-
-		sort(reads.begin(), reads.end(), SortFunc::sortFunc);
-		size_t max; for (max=0;max<maxNum && max<reads.size();max++) if (!(reads[max].mapQual<minMapQual)) filteredReads.push_back(Read(reads[max])); else break;
-		reads.swap(filteredReads);
-	}
-	*/
 	static void filterReads(vector<Read> & reads, int exclude, const string & match)
 	{
 		vector<Read> filteredReads;
@@ -369,27 +318,17 @@ public:
 		}
 		reads.swap(filteredReads);
 	}
-	/*
-	static int fetchFuncVector(const bam1_t *b, void *data)
-	{
-		FetchReadData *ptr=(FetchReadData *) data;
-
-		if (!( (b->core.flag & BAM_FDUP) || (b->core.flag & BAM_FQCFAIL) )) {
-			ptr->reads->push_back(Read(b, *(ptr->libraries)));
-		}
-		return 0;
-	}
-	*/
 
 	static int fetchFuncVectorPooled(const bam1_t *b, void *data)
 	{
 		FetchReadData *ptr=(FetchReadData *) data;
 
-//		if (!( (b->core.flag & BAM_FDUP) || (b->core.flag & BAM_FQCFAIL) )) { //TODO: usuyama FLAG filter
+		if (!( (b->core.flag & BAM_FDUP) || (b->core.flag & BAM_FQCFAIL) )) {
 			try {
-				ptr->reads->push_back(Read(b, *(ptr->libraries), ptr->poolID, (*(ptr->myBams))[ptr->poolID]->bh));
+				ptr->reads->push_back(Read(b, ptr->poolID, (*(ptr->myBams))[ptr->poolID]->bh));
 				ptr->numReads++;
 			} catch (string s) {
+                /*
 				if (s.find("Cannot find library")!=string::npos) {
 					string lib = s.substr(22, s.size()-22);
 					string_hash<int>::iterator _it = ptr->unknownLib.find(lib);
@@ -400,8 +339,9 @@ public:
 				ptr->numUnknownLib++;
 				ptr->reads->push_back(Read(b, *(ptr->libraries), ptr->poolID, (*(ptr->myBams))[ptr->poolID]->bh, string("single_end")));
 				ptr->numReads++;
+                 */
 			}
-//		}
+		}
 		if (ptr->numReads > ptr->maxNumReads) {
 			throw string("Too many reads in region");
 		}
@@ -435,7 +375,6 @@ public:
 	int poolID;
 
 	bam_header_t * bamHeader;
-	const Library * library; // pointer to library this read was generated from
 
 	bam1_t *bam;
 

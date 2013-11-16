@@ -284,6 +284,7 @@ void ObservationModelFB::computeBMidPrior(vector<double> & _prior, double mapQua
 
 	_prior=vector<double>(2*numS,0.0);
 	vector<double> pinsert = vector<double>(numS,0.0);
+    /*
 	if (params.mapUnmappedReads && read.isPaired()) {
 		//cout << "read: " << bam1_qname(read.getBam()) << " read.pos: " << read.pos << " read.matePos: " << read.matePos << " read.mateLen: " << read.mateLen <<  " read.isUnmapped: " << read.isUnmapped() << " mateUnmapped: " << read.mateIsUnmapped() << " bmid: " << bMid << " hapStart: " << hapStart << " read.tid: " << read.getBam()->core.tid << " read.mtid: " << read.getBam()->core.mtid << endl;
 		//
@@ -300,6 +301,7 @@ void ObservationModelFB::computeBMidPrior(vector<double> & _prior, double mapQua
 		}
 
 	}
+     */
 
 	for (size_t i=0;i<2;i++) {
 		double logpIns=(i==1)?(logpInsgNoIns):log(1.0-exp(logpInsgNoIns));

@@ -18,7 +18,6 @@
 #include "StringHash.hpp"
 
 #include "OutputData.hpp"
-#include "Library.hpp"
 #include "VariantFile.hpp"
 #include "Variant.hpp"
 #include <boost/assign/std/vector.hpp>
@@ -301,8 +300,6 @@ public:
     string get_var_symbol(string ref, string obs);
     AlignedCandidates getCandidateVariants(string line, vector<AlignedVariant> &close_somatic, vector<AlignedVariant> &close_germline);
     void mutationCall(const string & variantsFileName); 
-	void addLibrary ( const string & name, const Library & lib) { libraries[name.c_str()]=lib; }
-	void addLibrary ( const string & fileName) { libraries.addFromFile(fileName); }
 
 protected:
 	void outputHapsAndFreqs(ostream *output, const string & prefix, const vector<Haplotype> & haps, const vector<double> & freqs, uint32_t leftPos);
@@ -320,8 +317,6 @@ protected:
     vector<string> normalBamsFileNames;
     
     vector<AlignedVariant> parse_close_vars(string s);
-    
-	LibraryCollection libraries;
 
 	class CIGAR : public vector<pair<int,int> >
 	{

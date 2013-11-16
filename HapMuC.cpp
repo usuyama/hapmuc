@@ -609,7 +609,6 @@ void getParameters(po::variables_map & vm, Parameters & params)
     params.obsParams.padCover = vm["flankRefSeq"].as<int>();
     params.obsParams.maxMismatch = vm["flankMaxMismatch"].as<int>();
 
-    params.showCandHap=vm.count("showCandHap")?true:false;
     params.showReads=vm.count("showReads")?true:false;
     params.quiet=vm.count("quiet")?true:false;
     params.computeML=vm.count("computeML")?true:false;
@@ -684,7 +683,6 @@ int main(int argc, char *argv[])
 
     po::options_description miscAnalysis("Misc results analysis options");
     miscAnalysis.add_options()
-    ("showCandHap", "show candidate haplotypes for fast method")
     ("showHapAlignments","show for each haplotype which reads map to it")
     ("showReads","show reads")
     ("inferenceMethod",po::value<string>()->default_value("empirical"), "inference method")

@@ -158,7 +158,6 @@ public:
         
         fastWidth=4;
         showHapAlignments=false;
-        showCandHap=false;
         showReads=false;
         fastWidthOverlap=4;
         noIndelWindow=-1;
@@ -210,13 +209,9 @@ public:
         cout << "\ttid: " << tid << " maxReads: " << maxReads << endl;
         cout << "\toutputFilename: " << fileName << endl;
         cout << "\tmapQualThreshold: " << mapQualThreshold << endl;
-        //cout << "\tscaleError: " << scaleErr << endl;
         cout << "\tinferenceMethod: " << inferenceMethod << endl;
         cout << "\tminReadOverlap: " << minReadOverlap << endl;
         cout << "\tmaxReadLength: " << maxReadLength << endl;
-        //cout << "\tfastWidth: " << fastWidth << endl;
-        //cout << "\tfastWidthOverlap: " << fastWidthOverlap << endl;
-        cout << "\tshowCandHap: " << showCandHap << endl;
         cout << "\tshowReads: " << showReads << endl;
         cout << "\tnoIndelWindow: " << noIndelWindow << endl;
         
@@ -250,7 +245,7 @@ public:
     double checkBaseQualThreshold;
     double mapQualThreshold, scaleErr, priorIndel, priorSNP, EMtol;
     string fileName, inferenceMethod, refFileName, tid, filterReadAux;
-    bool showCandHap, showReads, showHapAlignments, alignAgainstReference, quiet, estimateHapFreqs, doDiploid, computeML, computeMAP,printCallsOnly, outputPooledLikelihoods;
+    bool showReads, showHapAlignments, alignAgainstReference, quiet, estimateHapFreqs, doDiploid, computeML, computeMAP,printCallsOnly, outputPooledLikelihoods;
     double meanInsert, stdInsert;
     Hap3Param hap3_params, hap2_params;
     ObservationModelParameters obsParams;

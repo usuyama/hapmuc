@@ -680,8 +680,6 @@ void getParameters(po::variables_map & vm, Parameters & params)
     params.showHapAlignments=vm.count("showHapAlignments")?true:false;
     if (vm.count("filterReadAux")) params.filterReadAux=vm["filterReadAux"].as<string>();
 
-    params.slower=vm.count("faster")?false:true;
-
     // removed options
     /*
      params.outputRealignedBAM=vm.count("outputRealignedBAM")?true:false;
@@ -726,7 +724,6 @@ int main(int argc, char *argv[])
     po::options_description analysis_opt("General algorithm parameters");
     analysis_opt.add_options()
     //("mapUnmapped", "remap unmapped reads for which mate is mapped")
-    ("faster","use faster but less accurate ungapped read-haplotype alignment model")
     ("filterHaplotypes","prefilter haplotypes based on coverage")
     ("flankRefSeq",po::value<int>()->default_value(2),"#bases of reference sequence of indel region")
     ("flankMaxMismatch",po::value<int>()->default_value(2),"max number of mismatches in indel region")
@@ -749,7 +746,6 @@ int main(int argc, char *argv[])
     ("bayesa0", po::value<double>()->default_value(0.1), "Dirichlet a0 parameter haplotype frequency prior")
     ("bayesType",po::value<string>()->default_value("singlevariant"), "Bayesian EM program type (all or singlevariant or priorpersite)");
 
-
     po::options_description option_filter("General algorithm filtering options");
     option_filter.add_options()
     ("checkAllCIGARs",po::value<int>()->default_value(1),"include all indels at the position of the call site")
@@ -761,7 +757,7 @@ int main(int argc, char *argv[])
     ("pError", po::value<double>()->default_value(5e-4), "probability of a read indel")
     //("modelType", po::value<string>()->default_value("probabilistic"), "probabilistic/threshold")
     ("pMut", po::value<double>()->default_value(1e-5), "probability of a mutation in the read")
-    ("maxLengthIndel", po::value<int>()->default_value(5), "maximum length of a _sequencing error_ indel in read [not for --faster option]");
+    ("maxLengthIndel", po::value<int>()->default_value(5), "maximum length of a _sequencing error_ indel in read");
     //("pFirstgLO",po::value<double>()->default_value(0.01),"probability of transition from off the haplotype to on the haplotype");
 
 

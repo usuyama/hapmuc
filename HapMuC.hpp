@@ -181,7 +181,6 @@ public:
         computeML=false;
         computeMAP=false;
         doDiploid=false;
-        slower=true;
         estimateHapFreqs=false;
         printCallsOnly=true;
         outputPooledLikelihoods=false;
@@ -250,7 +249,6 @@ public:
         cout << endl;
         cout << "\tquiet: " << quiet << endl;
         cout << "\tprintCallsOnly: " << printCallsOnly << endl;
-        cout << "\tfaster: " << !slower << endl;
         cout << "\tdoDiploid: " << doDiploid << endl;
         cout << "\tdoEM: " << estimateHapFreqs << endl;
         
@@ -279,7 +277,7 @@ public:
     double checkBaseQualThreshold;
     double mapQualThreshold, scaleErr, priorIndel, priorSNP, EMtol, bayesa0;
     string fileName, inferenceMethod, refFileName, tid, filterReadAux, bayesType;
-    bool analyzeLowFreq, showHapDist, showCandHap, showReads, showHapAlignments, alignAgainstReference, mapUnmappedReads, quiet, estimateHapFreqs, doDiploid, computeML, computeMAP, slower,printCallsOnly, outputPooledLikelihoods, filterHaplotypes;
+    bool analyzeLowFreq, showHapDist, showCandHap, showReads, showHapAlignments, alignAgainstReference, mapUnmappedReads, quiet, estimateHapFreqs, doDiploid, computeML, computeMAP,printCallsOnly, outputPooledLikelihoods, filterHaplotypes;
     double analyzeLowFreqDiffThreshold;
     double meanInsert, stdInsert;
     Hap3Param hap3_params, hap2_params;

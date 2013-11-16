@@ -609,7 +609,6 @@ void getParameters(po::variables_map & vm, Parameters & params)
     params.obsParams.maxLengthIndel=vm["maxLengthIndel"].as<int>();
     params.obsParams.maxLengthDel=params.obsParams.maxLengthIndel;
     params.obsParams.mapQualThreshold=vm["capMapQualThreshold"].as<double>();
-    params.obsParams.capMapQualFast=vm["capMapQualFast"].as<double>();
     //params.obsParams.scaleErr=vm["obsScaleError"].as<double>();
     //params.obsParams.numE=vm["numE"].as<int>();
     params.obsParams.padCover = vm["flankRefSeq"].as<int>();
@@ -679,7 +678,6 @@ int main(int argc, char *argv[])
     ("maxRead", po::value<uint32_t>()->default_value(50000), "maximum number of reads in likelihood computation")
     ("mapQualThreshold", po::value<double>()->default_value(0.9), "lower limit for read mapping quality")
     ("capMapQualThreshold", po::value<double>()->default_value(100.0), "upper limit for read mapping quality in observationmodel_old (phred units)")
-    ("capMapQualFast", po::value<double>()->default_value(45.0), "cap mapping quality in alignment using fast ungapped method\n (WARNING: setting it too high (>50) might result in significant overcalling!)")
     ("skipMaxHap", po::value<uint32_t>()->default_value(200), "skip computation if number of haplotypes exceeds this number")
     //("numOutputTopHap", po::value<int>()->default_value(5), "number of haplotype pairs output to haplotype file")
     ("minReadOverlap", po::value<uint32_t>()->default_value(100),"minimum overlap between read and haplotype")

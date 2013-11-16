@@ -43,7 +43,6 @@ public:
 			fixedBaseQual=0.99;
 			maxLengthIndel=10;
 			mapQualThreshold=100.0;
-			capMapQualFast=40.0;
 			scaleErr=0.95;
 			numE=3;
 			pMut=1e-4;
@@ -68,7 +67,6 @@ public:
 			cout << "\tmaxLengthIndel: " << maxLengthIndel << " pError: " << pError << endl;
 			cout << "\tbaseQualThreshold: " << baseQualThreshold << " fixedBaseQual: " << fixedBaseQual << endl;
 			cout << "\tmapQualThreshold: " << mapQualThreshold << endl;
-			cout << "\tcapMapQualFast: " << capMapQualFast << endl;
 			cout << "\tminOverlap: " << minOverlap << endl;
 			cout << "\tscaleError: " << scaleErr << endl;
 			cout << "\tnumE: " << numE << endl;
@@ -83,7 +81,7 @@ public:
 			cout << "\tcheckBaseQualThreshold: " << checkBaseQualThreshold << endl;
 			//cout << "\tlogLikThreshod: " << logLikThreshold << endl;
 		}
-		double pError, baseQualThreshold, fixedBaseQual, mapQualThreshold, capMapQualFast, scaleErr, pMut;
+		double pError, baseQualThreshold, fixedBaseQual, mapQualThreshold, scaleErr, pMut;
 		int maxLengthIndel, numE, minOverlap, numIndels, bMid;
 		double checkBaseQualThreshold;
 

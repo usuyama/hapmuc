@@ -168,7 +168,7 @@ public:
 		return stream;
 	}
 
-	void generateHapsWithAlignedVariants(vector<Haplotype> & haps, const AlignedCandidates & variants, int print=0, bool changeINStoN=false)
+	void generateHapsWithAlignedVariants(vector<Haplotype> & haps, const AlignedCandidates & variants, int print=0)
 	{
 		haps.clear();
 	//	if (print) {
@@ -273,14 +273,8 @@ public:
 								refPos.erase(refPos.begin()+idx, refPos.begin()+idx+var.size());
 								changed=true;
 							} else if (var.getType()==Variant::INS) {
-								// insertion
-								if (changeINStoN) {
-									_hap.seq.insert(idx, string(var.getSeq().size(), 'N'));
-								} else {
-									_hap.seq.insert(idx, var.getSeq());
-								}
-								refPos.insert(refPos.begin()+idx, (size_t) var.size(), -1);
-
+								_hap.seq.insert(idx, var.getSeq());
+                                refPos.insert(refPos.begin()+idx, (size_t) var.size(), -1);
 								changed=true;
 							} else if (var.getType()==Variant::SNP) {
 								// snp

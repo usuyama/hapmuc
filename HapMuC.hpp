@@ -186,7 +186,6 @@ public:
         printCallsOnly=true;
         outputPooledLikelihoods=false;
         filterHaplotypes = false;
-        changeINStoN = false;
         hap3_params.clear_all();
         hap2_params.clear_all();
         hap3_params.mut_a0 += 1.0,1.0,1.0;
@@ -247,7 +246,6 @@ public:
         cout << "\tnumOutputTopHap: " << numOutputTopHap << endl;
         
         cout << "\tcheckAllCIGARs: " << checkAllCIGARs << endl;
-        cout << "\tchangeINStoN: " << changeINStoN << endl;
         
         cout << endl;
         cout << "\tquiet: " << quiet << endl;
@@ -282,7 +280,6 @@ public:
     double mapQualThreshold, scaleErr, priorIndel, priorSNP, EMtol, bayesa0;
     string fileName, inferenceMethod, refFileName, tid, filterReadAux, bayesType;
     bool analyzeLowFreq, showHapDist, showCandHap, showReads, showHapAlignments, alignAgainstReference, mapUnmappedReads, quiet, estimateHapFreqs, doDiploid, computeML, computeMAP, slower,printCallsOnly, outputPooledLikelihoods, filterHaplotypes;
-    bool changeINStoN;
     double analyzeLowFreqDiffThreshold;
     double meanInsert, stdInsert;
     Hap3Param hap3_params, hap2_params;

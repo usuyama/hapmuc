@@ -86,8 +86,7 @@ namespace Haps {
             
             //hdi.generateHapsWithIndels(haps, indels);
             vector<Haplotype> tmp_haps;
-            hdi.generateHapsWithAlignedVariants(haps, candidateVariants, 0, params.changeINStoN);
-            
+            hdi.generateHapsWithAlignedVariants(haps, candidateVariants, 0);
             
             
             if (haps.size()>params.skipMaxHap || haps.size()*reads.size()>params.maxHapReadProd) {

@@ -681,7 +681,6 @@ void getParameters(po::variables_map & vm, Parameters & params)
     if (vm.count("filterReadAux")) params.filterReadAux=vm["filterReadAux"].as<string>();
 
     params.slower=vm.count("faster")?false:true;
-    params.changeINStoN=vm.count("changeINStoN")?true:false;
 
     // removed options
     /*
@@ -744,8 +743,7 @@ int main(int argc, char *argv[])
     ("minReadOverlap", po::value<uint32_t>()->default_value(100),"minimum overlap between read and haplotype")
     ("maxReadLength", po::value<uint32_t>()->default_value(100),"maximum length of reads")
     ("minCount", po::value<uint32_t>()->default_value(1), "minimum number of WS observations of indel")
-    ("maxHapReadProd",po::value<uint32_t>()->default_value(10000000), "skip if product of number of reads and haplotypes exceeds this value")
-    ("changeINStoN", "change sequence of inserted sequence to 'N', so that no penalty is incurred if a read mismatches the inserted sequence");
+    ("maxHapReadProd",po::value<uint32_t>()->default_value(10000000), "skip if product of number of reads and haplotypes exceeds this value");
     po::options_description pooled_analysis("parameters for --pooled option");
     pooled_analysis.add_options()
     ("bayesa0", po::value<double>()->default_value(0.1), "Dirichlet a0 parameter haplotype frequency prior")

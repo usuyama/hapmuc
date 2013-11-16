@@ -625,11 +625,6 @@ int main(int argc, char *argv[])
     ("ref", po::value<string>(),"fasta reference sequence (should be indexed with .fai file)")
     ("outputFile", po::value<string>(),"file-prefix for output results");
 
-    po::options_description baminput("[Required] BAM input. Choose one of the following");
-    baminput.add_options()
-    ("bamFile",po::value<string>(), "read alignment file (should be indexed)")
-    ("bamFiles",po::value<string>(), "file containing filepaths for BAMs to be jointly analysed");
-
     po::options_description bams_tn("[Required for analysis = mutationCall] :");
     bams_tn.add_options()
     ("tumorBamFile", po::value<string>(), "bam files of tumor samples")
@@ -670,7 +665,7 @@ int main(int argc, char *argv[])
     ("showHapAlignments","show for each haplotype which reads map to it")
     ("showReads","show reads");
 
-    required.add(baminput).add(varfileinput).add(output_options).add(analysis_opt).add(option_filter).add(obsModel).add(miscAnalysis).add(bams_tn);
+    required.add(bams_tn).add(varfileinput).add(output_options).add(analysis_opt).add(option_filter).add(obsModel).add(miscAnalysis);
 
     po::variables_map vm;
 

@@ -408,7 +408,7 @@ AlignedCandidates HapMuC::getCandidateVariants(string line, vector<AlignedVarian
     stringstream  linestream(line);
     string cand_somatic, cand_germline;
     VariantInfo vi;
-    linestream >> vi.chr >> vi.start >> vi.end >> vi.ref >> vi.obs >> vi.ref_count_tumor >> vi.obs_count_tumor >> vi.ref_count_normal >> vi.obs_count_normal >> vi.missrate_tumor >> vi.strandrate_tumor >> vi.missrate_normal >> vi.strandrate_normal >> vi.ref_bq_tumor >> vi.obs_bq_normal >> vi.ref_bq_normal >> vi.obs_bq_normal >> vi.fisher_score >> cand_germline;
+    linestream >> vi.chr >> vi.start >> vi.end >> vi.ref >> vi.obs >> vi.ref_count_tumor >> vi.obs_count_tumor >> vi.ref_count_normal >> vi.obs_count_normal >> vi.missrate_tumor >> vi.strandrate_tumor >> vi.missrate_normal >> vi.strandrate_normal >> vi.ref_bq_tumor >> vi.obs_bq_tumor >> vi.ref_bq_normal >> vi.obs_bq_normal >> vi.fisher_score >> cand_germline;
     leftPos = vi.start - 0;//window size
     rightPos = vi.start + 0;
     vector<AlignedVariant> variants;

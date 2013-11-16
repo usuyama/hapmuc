@@ -227,11 +227,7 @@ public:
         cout << "\tpriorIndel: " << priorIndel << endl;
         cout << "\tpriorSNP: " << priorSNP << endl;
         
-        //cout << "\tmeanInsert: " << meanInsert << endl;
-        //cout << "\tstdInsert: " << stdInsert << endl;
-        
         cout << "\tfilterReadAux: " << filterReadAux << endl;
-        
         cout << "Observation model parameters: " << endl;
         obsParams.print();
     }

@@ -668,7 +668,7 @@ int main(int argc, char *argv[])
     po::options_description miscAnalysis("Misc results analysis options");
     miscAnalysis.add_options()
     ("showHapAlignments","show for each haplotype which reads map to it")
-    ("showReads","show reads")
+    ("showReads","show reads");
 
     required.add(baminput).add(varfileinput).add(output_options).add(analysis_opt).add(option_filter).add(obsModel).add(miscAnalysis).add(bams_tn);
 
@@ -685,6 +685,7 @@ int main(int argc, char *argv[])
     // required
     if (!(vm.count("ref") && vm.count("outputFile"))) {
         cerr << "Error: One of the following options was not specified:  --ref --tid or --outputFile" << endl;
+        cerr << "Usage: \n\n" << required << "\n";
         exit(1);
     }
 #define DEBUGGING

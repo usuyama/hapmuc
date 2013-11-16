@@ -1,11 +1,9 @@
-//
-//  Utils.cpp
-//  hapmuc2
-//
-//  Created by 直人 臼山 on 10/12/12.
-//  Copyright 2012 Univ. of Tokyo. All rights reserved.
-//
-
+/*
+ * HapMuC
+ * http://github.com/usuyama/hapmuc
+ *
+ * Copyright 2013, Naoto Usuyama
+ */
 #include <iostream>
 #include "Utils.hpp"
 #include <boost/math/special_functions/digamma.hpp>

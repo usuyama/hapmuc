@@ -1,3 +1,10 @@
+/*
+ * Dindel
+ * http://www.sanger.ac.uk/resources/software/dindel/
+ * 
+ * Copyright 2010, Kees Albers
+ * Released under the GPL Version 3.
+ */
 /*    
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by

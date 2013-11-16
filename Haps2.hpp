@@ -1,10 +1,16 @@
-//
-//  MutationCall.hpp
-//  hapmuc2
-//
-//  Created by 直人 臼山 on 10/10/12.
-//  Copyright 2012 Univ. of Tokyo. All rights reserved.
-//
+/*
+ * HapMuC
+ * http://github.com/usuyama/hapmuc
+ *
+ * Copyright 2013, Naoto Usuyama
+ */
+/*
+ * Dindel
+ * http://www.sanger.ac.uk/resources/software/dindel/
+ *
+ * Copyright 2010, Kees Albers
+ * Released under the GPL Version 3.
+ */
 #ifndef HAPS2_HPP_
 #define HAPS2_HPP_
 

@@ -1,3 +1,9 @@
+/*
+ * HapMuC
+ * http://github.com/usuyama/hapmuc
+ *
+ * Copyright 2013, Naoto Usuyama
+ */
 #include <stdlib.h>
 #include <iostream>
 #include <iomanip>

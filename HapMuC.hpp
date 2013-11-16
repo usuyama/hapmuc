@@ -1,3 +1,16 @@
+/*
+ * HapMuC
+ * http://github.com/usuyama/hapmuc
+ *
+ * Copyright 2013, Naoto Usuyama
+ */
+/*
+ * Dindel
+ * http://www.sanger.ac.uk/resources/software/dindel/
+ *
+ * Copyright 2010, Kees Albers
+ * Released under the GPL Version 3.
+ */
 #ifndef HAPMUC_HPP_
 #define HAPMUC_HPP_
 //#include <stdlib.h>

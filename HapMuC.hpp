@@ -154,7 +154,6 @@ public:
         mapQualThreshold=0.995;
         inferenceMethod="empirical";
         minReadOverlap=5;
-        minCount=2;
         maxReadLength=40;
         numOutputTopHap=5;
         checkAllCIGARs=1;
@@ -226,7 +225,6 @@ public:
         cout << "\tshowHapDist: " << showHapDist << endl;
         cout << "\tminReadOverlap: " << minReadOverlap << endl;
         cout << "\tmaxReadLength: " << maxReadLength << endl;
-        //cout << "\tminCount: " << minCount << endl;
         cout << "\tmaxHapReadProd: " << maxHapReadProd << endl;
         //cout << "\tfastWidth: " << fastWidth << endl;
         //cout << "\tfastWidthOverlap: " << fastWidthOverlap << endl;
@@ -265,7 +263,7 @@ public:
     }
     
     int noIndelWindow, numOutputTopHap, checkAllCIGARs, minReadOverlap, maxHapReadProd;
-    uint32_t maxReads,  maxReadLength, minCount, fastWidth, fastWidthOverlap;
+    uint32_t maxReads,  maxReadLength, fastWidth, fastWidthOverlap;
     double checkBaseQualThreshold;
     double mapQualThreshold, scaleErr, priorIndel, priorSNP, EMtol, bayesa0;
     string fileName, inferenceMethod, refFileName, tid, filterReadAux, bayesType;

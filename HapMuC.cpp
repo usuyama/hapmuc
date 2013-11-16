@@ -586,7 +586,6 @@ void getParameters(po::variables_map & vm, Parameters & params)
     params.minReadOverlap=vm["minReadOverlap"].as<uint32_t>();
     params.maxReadLength=vm["maxReadLength"].as<uint32_t>();
     //params.scaleErr=vm["mapScaleError"].as<double>();
-    //params.minCount=vm["minCount"].as<uint32_t>();
     params.maxHapReadProd=vm["maxHapReadProd"].as<uint32_t>();
 
     params.priorSNP=vm["priorSNP"].as<double>();
@@ -679,7 +678,6 @@ int main(int argc, char *argv[])
     ("capMapQualThreshold", po::value<double>()->default_value(100.0), "upper limit for read mapping quality in observationmodel_old (phred units)")
     ("minReadOverlap", po::value<uint32_t>()->default_value(100),"minimum overlap between read and haplotype")
     ("maxReadLength", po::value<uint32_t>()->default_value(100),"maximum length of reads")
-    ("minCount", po::value<uint32_t>()->default_value(1), "minimum number of WS observations of indel")
     ("maxHapReadProd",po::value<uint32_t>()->default_value(10000000), "skip if product of number of reads and haplotypes exceeds this value");
     po::options_description pooled_analysis("parameters for --pooled option");
     pooled_analysis.add_options()

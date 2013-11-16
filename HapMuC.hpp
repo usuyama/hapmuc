@@ -22,7 +22,6 @@
 #include "Variant.hpp"
 #include <boost/assign/std/vector.hpp>
 using namespace boost::assign;
-const int SHIFTSTRAND = 1000000; // used to keep track of forward and reverse matches in ::filterHaplotypes
 
 using namespace std;
 using namespace boost;
@@ -183,7 +182,6 @@ public:
         estimateHapFreqs=false;
         printCallsOnly=true;
         outputPooledLikelihoods=false;
-        filterHaplotypes = false;
         hap3_params.clear_all();
         hap2_params.clear_all();
         hap3_params.mut_a0 += 1.0,1.0,1.0;
@@ -237,7 +235,6 @@ public:
         //cout << "\tfastWidthOverlap: " << fastWidthOverlap << endl;
         cout << "\tshowCandHap: " << showCandHap << endl;
         cout << "\tshowReads: " << showReads << endl;
-        cout << "\tfilterHaplotypes: " << filterHaplotypes << endl;
         cout << "\tnoIndelWindow: " << noIndelWindow << endl;
         
         cout << "\tnumOutputTopHap: " << numOutputTopHap << endl;
@@ -275,7 +272,7 @@ public:
     double checkBaseQualThreshold;
     double mapQualThreshold, scaleErr, priorIndel, priorSNP, EMtol, bayesa0;
     string fileName, inferenceMethod, refFileName, tid, filterReadAux, bayesType;
-    bool analyzeLowFreq, showHapDist, showCandHap, showReads, showHapAlignments, alignAgainstReference, quiet, estimateHapFreqs, doDiploid, computeML, computeMAP,printCallsOnly, outputPooledLikelihoods, filterHaplotypes;
+    bool analyzeLowFreq, showHapDist, showCandHap, showReads, showHapAlignments, alignAgainstReference, quiet, estimateHapFreqs, doDiploid, computeML, computeMAP,printCallsOnly, outputPooledLikelihoods;
     double analyzeLowFreqDiffThreshold;
     double meanInsert, stdInsert;
     Hap3Param hap3_params, hap2_params;
@@ -295,7 +292,6 @@ protected:
 	void outputParams(int iter, int leftPos, const vector<int> & compatible, const vector<double> & resp, const vector<double> & ak, const vector<double> & ln_p_x_given_h, const vector<double> & lpi) ;
 	void debug(const pair<Haplotype, Haplotype> & hp, const vector<Read> & reads,  uint32_t leftPos, uint32_t rightPos);
 	void debug(const pair<Haplotype, Haplotype> & hp1, const pair<Haplotype, Haplotype> & hp2, const vector<Read> & reads,  uint32_t leftPos, uint32_t rightPos);
-	void filterHaplotypes(const vector<Haplotype> & haps, const vector<Read> & reads, const vector<vector<MLAlignment> > & liks,  vector<int> & filtered,  map<pair<int, AlignedVariant>, VariantCoverage> & varCoverage, bool doFilter);
 	vector<MyBam *> myBams;
 	vector<string> myBamsFileNames;
     void getReadsFromBams(vector<MyBam *> & Bams, uint32_t leftPos, uint32_t rightPos, vector<Read> & reads, uint32_t & oldLeftPos, uint32_t  & oldRightFetchReadPos, vector<Read *> & readBuffer, const bool reset);

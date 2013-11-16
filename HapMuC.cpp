@@ -628,8 +628,6 @@ void getParameters(po::variables_map & vm, Parameters & params)
     params.computeMAP=vm.count("computeMAP")?true:false;
     params.doDiploid=vm.count("doDiploid")?true:false;
 
-    params.filterHaplotypes=vm.count("filterHaplotypes")?true:false;
-
     params.printCallsOnly=vm.count("printCallsOnly")?true:false;
     params.estimateHapFreqs=vm.count("doPooled")?true:false;
     params.outputPooledLikelihoods=vm.count("opl")?true:false;
@@ -676,7 +674,6 @@ int main(int argc, char *argv[])
 
     po::options_description analysis_opt("General algorithm parameters");
     analysis_opt.add_options()
-    ("filterHaplotypes","prefilter haplotypes based on coverage")
     ("flankRefSeq",po::value<int>()->default_value(2),"#bases of reference sequence of indel region")
     ("flankMaxMismatch",po::value<int>()->default_value(2),"max number of mismatches in indel region")
     ("priorSNP", po::value<double>()->default_value(1.0/1000.0), "prior probability of a SNP site")

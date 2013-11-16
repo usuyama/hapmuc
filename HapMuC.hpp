@@ -157,7 +157,6 @@ public:
         numOutputTopHap=5;
         
         fastWidth=4;
-        analyzeLowFreq=false;
         analyzeLowFreqDiffThreshold=1.0;
         showHapDist=true;
         showHapAlignments=false;
@@ -215,7 +214,6 @@ public:
         cout << "\tmapQualThreshold: " << mapQualThreshold << endl;
         //cout << "\tscaleError: " << scaleErr << endl;
         cout << "\tinferenceMethod: " << inferenceMethod << endl;
-        cout << "\tanalyzeLowFreq: " << analyzeLowFreq << endl;
         cout << "\tanalyzeLowFreqDiffThreshold: " << analyzeLowFreqDiffThreshold << endl;
         cout << "\tshowHapDist: " << showHapDist << endl;
         cout << "\tminReadOverlap: " << minReadOverlap << endl;
@@ -256,7 +254,7 @@ public:
     double checkBaseQualThreshold;
     double mapQualThreshold, scaleErr, priorIndel, priorSNP, EMtol;
     string fileName, inferenceMethod, refFileName, tid, filterReadAux;
-    bool analyzeLowFreq, showHapDist, showCandHap, showReads, showHapAlignments, alignAgainstReference, quiet, estimateHapFreqs, doDiploid, computeML, computeMAP,printCallsOnly, outputPooledLikelihoods;
+    bool showHapDist, showCandHap, showReads, showHapAlignments, alignAgainstReference, quiet, estimateHapFreqs, doDiploid, computeML, computeMAP,printCallsOnly, outputPooledLikelihoods;
     double analyzeLowFreqDiffThreshold;
     double meanInsert, stdInsert;
     Hap3Param hap3_params, hap2_params;

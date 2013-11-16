@@ -609,7 +609,6 @@ void getParameters(po::variables_map & vm, Parameters & params)
     params.obsParams.padCover = vm["flankRefSeq"].as<int>();
     params.obsParams.maxMismatch = vm["flankMaxMismatch"].as<int>();
 
-    params.analyzeLowFreq=vm.count("compareReadHap")?true:false;
     params.analyzeLowFreqDiffThreshold=vm["compareReadHapThreshold"].as<double>();
     params.showHapDist=vm.count("showEmpirical")?true:false;
     params.showCandHap=vm.count("showCandHap")?true:false;
@@ -682,14 +681,11 @@ int main(int argc, char *argv[])
     po::options_description obsModel("Observation model parameters");
     obsModel.add_options()
     ("pError", po::value<double>()->default_value(5e-4), "probability of a read indel")
-    //("modelType", po::value<string>()->default_value("probabilistic"), "probabilistic/threshold")
     ("pMut", po::value<double>()->default_value(1e-5), "probability of a mutation in the read")
     ("maxLengthIndel", po::value<int>()->default_value(5), "maximum length of a _sequencing error_ indel in read");
-    //("pFirstgLO",po::value<double>()->default_value(0.01),"probability of transition from off the haplotype to on the haplotype");
 
     po::options_description miscAnalysis("Misc results analysis options");
     miscAnalysis.add_options()
-    ("compareReadHap",  "compare likelihood differences in reads against haplotypes")
     ("compareReadHapThreshold", po::value<double>()->default_value(0.5), "difference threshold for viewing")
     ("showEmpirical", "show empirical distribution over nucleotides")
     ("showCandHap", "show candidate haplotypes for fast method")

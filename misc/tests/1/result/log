@@ -1,0 +1,40 @@
+HapMuC parameters: 
+	tid: 1 maxReads: 50000
+	outputFilename: 1/result/mc
+	mapQualThreshold: 0.9
+	minReadOverlap: 100
+	maxReadLength: 100
+	showReads: 0
+	noIndelWindow: -1
+	numOutputTopHap: 5
+
+	quiet: 0
+	printCallsOnly: 0
+	doDiploid: 0
+	doEM: 0
+	showHapAlignments: 0
+	EM tol: 0.0001
+	priorIndel: 0.0001
+	priorSNP: 0.001
+	filterReadAux: 
+Observation model parameters: 
+	modelType: probabilistic
+	maxLengthIndel: 5 pError: 0.0005
+	baseQualThreshold: 0.995 fixedBaseQual: 0.99
+	mapQualThreshold: 100
+	minOverlap: 0
+	scaleError: 0.95
+	numE: 3
+	pMut: 1e-05
+	numIndels: 1
+	indelDistribution: exponential
+	maxLengthDel: 5 pError: 0.0005
+	pFirstgLO: 0.01
+	padCover: 2
+	maxMismatch: 2
+	maxTryHash: 5
+	checkBaseQualThreshold: 0.95
+ ******** 
+variants[x].pos: 1303 C=>A
+ ******** 
+lower_bound=-326.110672, ln_p_x_given_z=-294.648934, ln_p_z_given_pi=-41.845966, ln_p_pi=92.627384, ln_q_z=-19.955429, ln_q_pi=102.198586

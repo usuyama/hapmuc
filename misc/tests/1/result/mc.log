@@ -1,0 +1,2756 @@
+- 07:38:23.076 INFO: Reading BAM file 1/normal.bam
+- 07:38:23.076 INFO: Reading BAM file 1/tumor.bam
+- 07:38:23.076 DEBUG: mutationCall 1/windows
+- 07:38:23.080 DEBUG: for each candidate variants(size=1)
+- 07:38:23.080 INFO: ****
+- 07:38:23.080 INFO:  tid: chr1 pos: 1303 leftPos: 1203  rightPos: 1403
+- 07:38:23.080 DEBUG: getReadsFromBams()
+- 07:38:23.080 DEBUG:  1/normal.bam
+- 07:38:23.080 DEBUG: leftFetchReadPos: 203 rightFetchReadPos: 2203 oldRightFetchReadPos: 2203
+- 07:38:23.080 DEBUG: leftMostReadPos: 203 rightMostReadPos: 2203 leftOverlapsPrevious: 0
+- 07:38:23.080 DEBUG: leftPos : 1203 rightPos: 1403 maxDev: 800
+- 07:38:23.080 INFO: Fetching reads....
+- 07:38:23.084 DEBUG: 0 212
+- 07:38:23.086 DEBUGREADS: qname: 60 reads[r].pos: 876 reads[r].getEndPos(): 976
+- 07:38:23.086 DEBUGREADS: 
+is mapped
+- 07:38:23.086 DEBUGREADS: filtered by minOverlap
+- 07:38:23.086 DEBUGREADS: reads[0]: 60 matePos: 1111 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.086 DEBUGREADS: qname: 38 reads[r].pos: 880 reads[r].getEndPos(): 980
+- 07:38:23.086 DEBUGREADS: 
+is mapped
+- 07:38:23.086 DEBUGREADS: filtered by minOverlap
+- 07:38:23.086 DEBUGREADS: reads[1]: 38 matePos: 1088 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.086 DEBUGREADS: qname: 49 reads[r].pos: 880 reads[r].getEndPos(): 980
+- 07:38:23.086 DEBUGREADS: 
+is mapped
+- 07:38:23.086 DEBUGREADS: filtered by minOverlap
+- 07:38:23.086 DEBUGREADS: reads[2]: 49 matePos: 1100 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.086 DEBUGREADS: qname: 16 reads[r].pos: 884 reads[r].getEndPos(): 984
+- 07:38:23.086 DEBUGREADS: 
+is mapped
+- 07:38:23.086 DEBUGREADS: filtered by minOverlap
+- 07:38:23.086 DEBUGREADS: reads[3]: 16 matePos: 1099 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.086 DEBUGREADS: qname: 44 reads[r].pos: 887 reads[r].getEndPos(): 987
+- 07:38:23.086 DEBUGREADS: 
+is mapped
+- 07:38:23.086 DEBUGREADS: filtered by minOverlap
+- 07:38:23.086 DEBUGREADS: reads[4]: 44 matePos: 1136 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.086 DEBUGREADS: qname: 91 reads[r].pos: 898 reads[r].getEndPos(): 998
+- 07:38:23.086 DEBUGREADS: 
+is mapped
+- 07:38:23.086 DEBUGREADS: filtered by minOverlap
+- 07:38:23.086 DEBUGREADS: reads[5]: 91 matePos: 1114 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.086 DEBUGREADS: qname: 100 reads[r].pos: 899 reads[r].getEndPos(): 999
+- 07:38:23.086 DEBUGREADS: 
+is mapped
+- 07:38:23.086 DEBUGREADS: filtered by minOverlap
+- 07:38:23.086 DEBUGREADS: reads[6]: 100 matePos: 1094 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.086 DEBUGREADS: qname: 25 reads[r].pos: 904 reads[r].getEndPos(): 1004
+- 07:38:23.086 DEBUGREADS: 
+is mapped
+- 07:38:23.086 DEBUGREADS: filtered by minOverlap
+- 07:38:23.086 DEBUGREADS: reads[7]: 25 matePos: 1116 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.086 DEBUGREADS: qname: 35 reads[r].pos: 905 reads[r].getEndPos(): 1005
+- 07:38:23.086 DEBUGREADS: 
+is mapped
+- 07:38:23.086 DEBUGREADS: filtered by minOverlap
+- 07:38:23.086 DEBUGREADS: reads[8]: 35 matePos: 1145 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.086 DEBUGREADS: qname: 88 reads[r].pos: 911 reads[r].getEndPos(): 1011
+- 07:38:23.086 DEBUGREADS: 
+is mapped
+- 07:38:23.086 DEBUGREADS: filtered by minOverlap
+- 07:38:23.086 DEBUGREADS: reads[9]: 88 matePos: 1150 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.086 DEBUGREADS: qname: 96 reads[r].pos: 912 reads[r].getEndPos(): 1012
+- 07:38:23.086 DEBUGREADS: 
+is mapped
+- 07:38:23.086 DEBUGREADS: filtered by minOverlap
+- 07:38:23.086 DEBUGREADS: reads[10]: 96 matePos: 1109 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.086 DEBUGREADS: qname: 14 reads[r].pos: 915 reads[r].getEndPos(): 1015
+- 07:38:23.086 DEBUGREADS: 
+is mapped
+- 07:38:23.086 DEBUGREADS: filtered by minOverlap
+- 07:38:23.086 DEBUGREADS: reads[11]: 14 matePos: 1112 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.086 DEBUGREADS: qname: 12 reads[r].pos: 926 reads[r].getEndPos(): 1026
+- 07:38:23.086 DEBUGREADS: 
+is mapped
+- 07:38:23.086 DEBUGREADS: filtered by minOverlap
+- 07:38:23.086 DEBUGREADS: reads[12]: 12 matePos: 1165 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.086 DEBUGREADS: qname: 93 reads[r].pos: 933 reads[r].getEndPos(): 1033
+- 07:38:23.086 DEBUGREADS: 
+is mapped
+- 07:38:23.086 DEBUGREADS: filtered by minOverlap
+- 07:38:23.086 DEBUGREADS: reads[13]: 93 matePos: 1125 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.086 DEBUGREADS: qname: 67 reads[r].pos: 934 reads[r].getEndPos(): 1034
+- 07:38:23.087 DEBUGREADS: 
+is mapped
+- 07:38:23.087 DEBUGREADS: filtered by minOverlap
+- 07:38:23.087 DEBUGREADS: reads[14]: 67 matePos: 1142 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.087 DEBUGREADS: qname: 28 reads[r].pos: 942 reads[r].getEndPos(): 1042
+- 07:38:23.087 DEBUGREADS: 
+is mapped
+- 07:38:23.087 DEBUGREADS: filtered by minOverlap
+- 07:38:23.087 DEBUGREADS: reads[15]: 28 matePos: 1164 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.087 DEBUGREADS: qname: 74 reads[r].pos: 957 reads[r].getEndPos(): 1057
+- 07:38:23.087 DEBUGREADS: 
+is mapped
+- 07:38:23.087 DEBUGREADS: filtered by minOverlap
+- 07:38:23.087 DEBUGREADS: reads[16]: 74 matePos: 1188 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.087 DEBUGREADS: qname: 62 reads[r].pos: 967 reads[r].getEndPos(): 1067
+- 07:38:23.087 DEBUGREADS: 
+is mapped
+- 07:38:23.087 DEBUGREADS: filtered by minOverlap
+- 07:38:23.087 DEBUGREADS: reads[17]: 62 matePos: 1163 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.087 DEBUGREADS: qname: 32 reads[r].pos: 980 reads[r].getEndPos(): 1080
+- 07:38:23.087 DEBUGREADS: 
+is mapped
+- 07:38:23.087 DEBUGREADS: filtered by minOverlap
+- 07:38:23.087 DEBUGREADS: reads[18]: 32 matePos: 1194 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.087 DEBUGREADS: qname: 52 reads[r].pos: 984 reads[r].getEndPos(): 1084
+- 07:38:23.087 DEBUGREADS: 
+is mapped
+- 07:38:23.087 DEBUGREADS: filtered by minOverlap
+- 07:38:23.087 DEBUGREADS: reads[19]: 52 matePos: 1170 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.087 DEBUGREADS: qname: 56 reads[r].pos: 989 reads[r].getEndPos(): 1089
+- 07:38:23.087 DEBUGREADS: 
+is mapped
+- 07:38:23.087 DEBUGREADS: filtered by minOverlap
+- 07:38:23.087 DEBUGREADS: reads[20]: 56 matePos: 1189 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.087 DEBUGREADS: qname: 89 reads[r].pos: 998 reads[r].getEndPos(): 1098
+- 07:38:23.087 DEBUGREADS: 
+is mapped
+- 07:38:23.087 DEBUGREADS: filtered by minOverlap
+- 07:38:23.087 DEBUGREADS: reads[21]: 89 matePos: 1184 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.087 DEBUGREADS: qname: 99 reads[r].pos: 999 reads[r].getEndPos(): 1099
+- 07:38:23.087 DEBUGREADS: 
+is mapped
+- 07:38:23.087 DEBUGREADS: filtered by minOverlap
+- 07:38:23.087 DEBUGREADS: reads[22]: 99 matePos: 1163 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.087 DEBUGREADS: qname: 54 reads[r].pos: 1005 reads[r].getEndPos(): 1105
+- 07:38:23.087 DEBUGREADS: 
+is mapped
+- 07:38:23.087 DEBUGREADS: filtered by minOverlap
+- 07:38:23.087 DEBUGREADS: reads[23]: 54 matePos: 1176 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.087 DEBUGREADS: qname: 75 reads[r].pos: 1008 reads[r].getEndPos(): 1108
+- 07:38:23.087 DEBUGREADS: 
+is mapped
+- 07:38:23.087 DEBUGREADS: filtered by minOverlap
+- 07:38:23.087 DEBUGREADS: reads[24]: 75 matePos: 1213 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.087 DEBUGREADS: qname: 83 reads[r].pos: 1022 reads[r].getEndPos(): 1122
+- 07:38:23.087 DEBUGREADS: 
+is mapped
+- 07:38:23.087 DEBUGREADS: filtered by minOverlap
+- 07:38:23.087 DEBUGREADS: reads[25]: 83 matePos: 1228 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.087 DEBUGREADS: qname: 76 reads[r].pos: 1024 reads[r].getEndPos(): 1124
+- 07:38:23.087 DEBUGREADS: 
+is mapped
+- 07:38:23.087 DEBUGREADS: filtered by minOverlap
+- 07:38:23.087 DEBUGREADS: reads[26]: 76 matePos: 1231 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.087 DEBUGREADS: qname: 6 reads[r].pos: 1040 reads[r].getEndPos(): 1140
+- 07:38:23.087 DEBUGREADS: 
+is mapped
+- 07:38:23.087 DEBUGREADS: filtered by minOverlap
+- 07:38:23.087 DEBUGREADS: reads[27]: 6 matePos: 1208 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.087 DEBUGREADS: qname: 17 reads[r].pos: 1043 reads[r].getEndPos(): 1143
+- 07:38:23.087 DEBUGREADS: 
+is mapped
+- 07:38:23.087 DEBUGREADS: filtered by minOverlap
+- 07:38:23.087 DEBUGREADS: reads[28]: 17 matePos: 1285 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.087 DEBUGREADS: qname: 92 reads[r].pos: 1044 reads[r].getEndPos(): 1144
+- 07:38:23.087 DEBUGREADS: 
+is mapped
+- 07:38:23.087 DEBUGREADS: filtered by minOverlap
+- 07:38:23.087 DEBUGREADS: reads[29]: 92 matePos: 1299 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.087 DEBUGREADS: qname: 95 reads[r].pos: 1045 reads[r].getEndPos(): 1145
+- 07:38:23.087 DEBUGREADS: 
+is mapped
+- 07:38:23.087 DEBUGREADS: filtered by minOverlap
+- 07:38:23.087 DEBUGREADS: reads[30]: 95 matePos: 1253 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.087 DEBUGREADS: qname: 9 reads[r].pos: 1052 reads[r].getEndPos(): 1152
+- 07:38:23.087 DEBUGREADS: 
+is mapped
+- 07:38:23.087 DEBUGREADS: filtered by minOverlap
+- 07:38:23.087 DEBUGREADS: reads[31]: 9 matePos: 1240 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.087 DEBUGREADS: qname: 106 reads[r].pos: 1052 reads[r].getEndPos(): 1152
+- 07:38:23.087 DEBUGREADS: 
+is mapped
+- 07:38:23.087 DEBUGREADS: filtered by minOverlap
+- 07:38:23.087 DEBUGREADS: reads[32]: 106 matePos: 1197 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.087 DEBUGREADS: qname: 77 reads[r].pos: 1053 reads[r].getEndPos(): 1153
+- 07:38:23.087 DEBUGREADS: 
+is mapped
+- 07:38:23.087 DEBUGREADS: filtered by minOverlap
+- 07:38:23.087 DEBUGREADS: reads[33]: 77 matePos: 1237 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.087 DEBUGREADS: qname: 94 reads[r].pos: 1056 reads[r].getEndPos(): 1156
+- 07:38:23.087 DEBUGREADS: 
+is mapped
+- 07:38:23.087 DEBUGREADS: filtered by minOverlap
+- 07:38:23.087 DEBUGREADS: reads[34]: 94 matePos: 1231 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.087 DEBUGREADS: qname: 102 reads[r].pos: 1060 reads[r].getEndPos(): 1160
+- 07:38:23.087 DEBUGREADS: 
+is mapped
+- 07:38:23.087 DEBUGREADS: filtered by minOverlap
+- 07:38:23.087 DEBUGREADS: reads[35]: 102 matePos: 1275 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.087 DEBUGREADS: qname: 10 reads[r].pos: 1066 reads[r].getEndPos(): 1166
+- 07:38:23.087 DEBUGREADS: 
+is mapped
+- 07:38:23.087 DEBUGREADS: filtered by minOverlap
+- 07:38:23.087 DEBUGREADS: reads[36]: 10 matePos: 1254 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.087 DEBUGREADS: qname: 26 reads[r].pos: 1066 reads[r].getEndPos(): 1166
+- 07:38:23.087 DEBUGREADS: 
+is mapped
+- 07:38:23.087 DEBUGREADS: filtered by minOverlap
+- 07:38:23.087 DEBUGREADS: reads[37]: 26 matePos: 1271 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.087 DEBUGREADS: qname: 50 reads[r].pos: 1067 reads[r].getEndPos(): 1167
+- 07:38:23.087 DEBUGREADS: 
+is mapped
+- 07:38:23.087 DEBUGREADS: filtered by minOverlap
+- 07:38:23.087 DEBUGREADS: reads[38]: 50 matePos: 1241 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.087 DEBUGREADS: qname: 59 reads[r].pos: 1072 reads[r].getEndPos(): 1172
+- 07:38:23.087 DEBUGREADS: 
+is mapped
+- 07:38:23.087 DEBUGREADS: filtered by minOverlap
+- 07:38:23.087 DEBUGREADS: reads[39]: 59 matePos: 1251 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.087 DEBUGREADS: qname: 46 reads[r].pos: 1079 reads[r].getEndPos(): 1179
+- 07:38:23.087 DEBUGREADS: 
+is mapped
+- 07:38:23.087 DEBUGREADS: filtered by minOverlap
+- 07:38:23.087 DEBUGREADS: reads[40]: 46 matePos: 1317 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.087 DEBUGREADS: qname: 38 reads[r].pos: 1088 reads[r].getEndPos(): 1188
+- 07:38:23.087 DEBUGREADS: 
+is mapped
+- 07:38:23.087 DEBUGREADS: filtered by minOverlap
+- 07:38:23.087 DEBUGREADS: reads[41]: 38 matePos: 880 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.088 DEBUGREADS: qname: 97 reads[r].pos: 1091 reads[r].getEndPos(): 1191
+- 07:38:23.088 DEBUGREADS: 
+is mapped
+- 07:38:23.088 DEBUGREADS: filtered by minOverlap
+- 07:38:23.088 DEBUGREADS: reads[42]: 97 matePos: 1248 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.088 DEBUGREADS: qname: 100 reads[r].pos: 1094 reads[r].getEndPos(): 1194
+- 07:38:23.088 DEBUGREADS: 
+is mapped
+- 07:38:23.088 DEBUGREADS: filtered by minOverlap
+- 07:38:23.088 DEBUGREADS: reads[43]: 100 matePos: 899 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.088 DEBUGREADS: qname: 16 reads[r].pos: 1099 reads[r].getEndPos(): 1199
+- 07:38:23.088 DEBUGREADS: 
+is mapped
+- 07:38:23.088 DEBUGREADS: filtered by minOverlap
+- 07:38:23.088 DEBUGREADS: reads[44]: 16 matePos: 884 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.088 DEBUGREADS: qname: 105 reads[r].pos: 1099 reads[r].getEndPos(): 1199
+- 07:38:23.088 DEBUGREADS: 
+is mapped
+- 07:38:23.088 DEBUGREADS: filtered by minOverlap
+- 07:38:23.088 DEBUGREADS: reads[45]: 105 matePos: 1302 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.088 DEBUGREADS: qname: 49 reads[r].pos: 1100 reads[r].getEndPos(): 1200
+- 07:38:23.088 DEBUGREADS: 
+is mapped
+- 07:38:23.088 DEBUGREADS: filtered by minOverlap
+- 07:38:23.088 DEBUGREADS: reads[46]: 49 matePos: 880 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.088 DEBUGREADS: qname: 48 reads[r].pos: 1106 reads[r].getEndPos(): 1206
+- 07:38:23.088 DEBUGREADS: 
+is mapped
+- 07:38:23.088 DEBUGREADS: filtered by minOverlap
+- 07:38:23.088 DEBUGREADS: reads[47]: 48 matePos: 1281 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.088 DEBUGREADS: qname: 96 reads[r].pos: 1109 reads[r].getEndPos(): 1209
+- 07:38:23.088 DEBUGREADS: 
+is mapped
+- 07:38:23.088 DEBUGREADS: filtered by minOverlap
+- 07:38:23.088 DEBUGREADS: reads[48]: 96 matePos: 912 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.088 DEBUGREADS: qname: 60 reads[r].pos: 1111 reads[r].getEndPos(): 1211
+- 07:38:23.088 DEBUGREADS: 
+is mapped
+- 07:38:23.088 DEBUGREADS: filtered by minOverlap
+- 07:38:23.088 DEBUGREADS: reads[49]: 60 matePos: 876 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.088 DEBUGREADS: qname: 14 reads[r].pos: 1112 reads[r].getEndPos(): 1212
+- 07:38:23.088 DEBUGREADS: 
+is mapped
+- 07:38:23.088 DEBUGREADS: filtered by minOverlap
+- 07:38:23.088 DEBUGREADS: reads[50]: 14 matePos: 915 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.088 DEBUGREADS: qname: 91 reads[r].pos: 1114 reads[r].getEndPos(): 1214
+- 07:38:23.088 DEBUGREADS: 
+is mapped
+- 07:38:23.088 DEBUGREADS: filtered by minOverlap
+- 07:38:23.088 DEBUGREADS: reads[51]: 91 matePos: 898 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.088 DEBUGREADS: qname: 101 reads[r].pos: 1114 reads[r].getEndPos(): 1214
+- 07:38:23.088 DEBUGREADS: 
+is mapped
+- 07:38:23.088 DEBUGREADS: filtered by minOverlap
+- 07:38:23.088 DEBUGREADS: reads[52]: 101 matePos: 1304 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.088 DEBUGREADS: qname: 25 reads[r].pos: 1116 reads[r].getEndPos(): 1216
+- 07:38:23.088 DEBUGREADS: 
+is mapped
+- 07:38:23.088 DEBUGREADS: filtered by minOverlap
+- 07:38:23.088 DEBUGREADS: reads[53]: 25 matePos: 904 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.088 DEBUGREADS: qname: 58 reads[r].pos: 1117 reads[r].getEndPos(): 1217
+- 07:38:23.088 DEBUGREADS: 
+is mapped
+- 07:38:23.088 DEBUGREADS: filtered by minOverlap
+- 07:38:23.088 DEBUGREADS: reads[54]: 58 matePos: 1293 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.088 DEBUGREADS: qname: 65 reads[r].pos: 1118 reads[r].getEndPos(): 1218
+- 07:38:23.088 DEBUGREADS: 
+is mapped
+- 07:38:23.088 DEBUGREADS: filtered by minOverlap
+- 07:38:23.088 DEBUGREADS: reads[55]: 65 matePos: 1267 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.088 DEBUGREADS: qname: 66 reads[r].pos: 1120 reads[r].getEndPos(): 1220
+- 07:38:23.088 DEBUGREADS: 
+is mapped
+- 07:38:23.088 DEBUGREADS: filtered by minOverlap
+- 07:38:23.088 DEBUGREADS: reads[56]: 66 matePos: 1330 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.088 DEBUGREADS: qname: 1 reads[r].pos: 1122 reads[r].getEndPos(): 1222
+- 07:38:23.088 DEBUGREADS: 
+is mapped
+- 07:38:23.088 DEBUGREADS: filtered by minOverlap
+- 07:38:23.088 DEBUGREADS: reads[57]: 1 matePos: 1297 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.088 DEBUGREADS: qname: 84 reads[r].pos: 1123 reads[r].getEndPos(): 1223
+- 07:38:23.088 DEBUGREADS: 
+is mapped
+- 07:38:23.088 DEBUGREADS: filtered by minOverlap
+- 07:38:23.088 DEBUGREADS: reads[58]: 84 matePos: 1302 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.088 DEBUGREADS: qname: 80 reads[r].pos: 1125 reads[r].getEndPos(): 1225
+- 07:38:23.088 DEBUGREADS: 
+is mapped
+- 07:38:23.088 DEBUGREADS: filtered by minOverlap
+- 07:38:23.088 DEBUGREADS: reads[59]: 80 matePos: 1323 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.088 DEBUGREADS: qname: 93 reads[r].pos: 1125 reads[r].getEndPos(): 1225
+- 07:38:23.088 DEBUGREADS: 
+is mapped
+- 07:38:23.088 DEBUGREADS: filtered by minOverlap
+- 07:38:23.088 DEBUGREADS: reads[60]: 93 matePos: 933 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.088 DEBUGREADS: qname: 41 reads[r].pos: 1126 reads[r].getEndPos(): 1226
+- 07:38:23.088 DEBUGREADS: 
+is mapped
+- 07:38:23.088 DEBUGREADS: filtered by minOverlap
+- 07:38:23.088 DEBUGREADS: reads[61]: 41 matePos: 1373 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.088 DEBUGREADS: qname: 98 reads[r].pos: 1130 reads[r].getEndPos(): 1230
+- 07:38:23.088 DEBUGREADS: 
+is mapped
+- 07:38:23.088 DEBUGREADS: filtered by minOverlap
+- 07:38:23.088 DEBUGREADS: reads[62]: 98 matePos: 1322 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.088 DEBUGREADS: qname: 53 reads[r].pos: 1131 reads[r].getEndPos(): 1231
+- 07:38:23.088 DEBUGREADS: 
+is mapped
+- 07:38:23.088 DEBUGREADS: filtered by minOverlap
+- 07:38:23.088 DEBUGREADS: reads[63]: 53 matePos: 1354 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.088 DEBUGREADS: qname: 3 reads[r].pos: 1132 reads[r].getEndPos(): 1232
+- 07:38:23.088 DEBUGREADS: 
+is mapped
+- 07:38:23.088 DEBUGREADS: filtered by minOverlap
+- 07:38:23.088 DEBUGREADS: reads[64]: 3 matePos: 1298 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.088 DEBUGREADS: qname: 22 reads[r].pos: 1132 reads[r].getEndPos(): 1232
+- 07:38:23.088 DEBUGREADS: 
+is mapped
+- 07:38:23.088 DEBUGREADS: filtered by minOverlap
+- 07:38:23.088 DEBUGREADS: reads[65]: 22 matePos: 1320 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.088 DEBUGREADS: qname: 34 reads[r].pos: 1134 reads[r].getEndPos(): 1234
+- 07:38:23.088 DEBUGREADS: 
+is mapped
+- 07:38:23.088 DEBUGREADS: filtered by minOverlap
+- 07:38:23.088 DEBUGREADS: reads[66]: 34 matePos: 1352 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.088 DEBUGREADS: qname: 44 reads[r].pos: 1136 reads[r].getEndPos(): 1236
+- 07:38:23.088 DEBUGREADS: 
+is mapped
+- 07:38:23.088 DEBUGREADS: filtered by minOverlap
+- 07:38:23.088 DEBUGREADS: reads[67]: 44 matePos: 887 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.088 DEBUGREADS: qname: 79 reads[r].pos: 1138 reads[r].getEndPos(): 1238
+- 07:38:23.088 DEBUGREADS: 
+is mapped
+- 07:38:23.088 DEBUGREADS: filtered by minOverlap
+- 07:38:23.088 DEBUGREADS: reads[68]: 79 matePos: 1321 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.088 DEBUGREADS: qname: 63 reads[r].pos: 1140 reads[r].getEndPos(): 1240
+- 07:38:23.088 DEBUGREADS: 
+is mapped
+- 07:38:23.088 DEBUGREADS: filtered by minOverlap
+- 07:38:23.088 DEBUGREADS: reads[69]: 63 matePos: 1346 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.089 DEBUGREADS: qname: 39 reads[r].pos: 1141 reads[r].getEndPos(): 1241
+- 07:38:23.089 DEBUGREADS: 
+is mapped
+- 07:38:23.089 DEBUGREADS: filtered by minOverlap
+- 07:38:23.089 DEBUGREADS: reads[70]: 39 matePos: 1335 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.089 DEBUGREADS: qname: 67 reads[r].pos: 1142 reads[r].getEndPos(): 1242
+- 07:38:23.089 DEBUGREADS: 
+is mapped
+- 07:38:23.089 DEBUGREADS: filtered by minOverlap
+- 07:38:23.089 DEBUGREADS: reads[71]: 67 matePos: 934 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.089 DEBUGREADS: qname: 35 reads[r].pos: 1145 reads[r].getEndPos(): 1245
+- 07:38:23.089 DEBUGREADS: 
+is mapped
+- 07:38:23.089 DEBUGREADS: filtered by minOverlap
+- 07:38:23.089 DEBUGREADS: reads[72]: 35 matePos: 905 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.089 DEBUGREADS: qname: 81 reads[r].pos: 1145 reads[r].getEndPos(): 1245
+- 07:38:23.089 DEBUGREADS: 
+is mapped
+- 07:38:23.089 DEBUGREADS: filtered by minOverlap
+- 07:38:23.089 DEBUGREADS: reads[73]: 81 matePos: 1320 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.089 DEBUGREADS: qname: 55 reads[r].pos: 1147 reads[r].getEndPos(): 1247
+- 07:38:23.089 DEBUGREADS: 
+is mapped
+- 07:38:23.089 DEBUGREADS: filtered by minOverlap
+- 07:38:23.089 DEBUGREADS: reads[74]: 55 matePos: 1322 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.089 DEBUGREADS: qname: 11 reads[r].pos: 1149 reads[r].getEndPos(): 1249
+- 07:38:23.089 DEBUGREADS: 
+is mapped
+- 07:38:23.089 DEBUGREADS: filtered by minOverlap
+- 07:38:23.089 DEBUGREADS: reads[75]: 11 matePos: 1346 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.089 DEBUGREADS: qname: 82 reads[r].pos: 1150 reads[r].getEndPos(): 1250
+- 07:38:23.089 DEBUGREADS: 
+is mapped
+- 07:38:23.089 DEBUGREADS: filtered by minOverlap
+- 07:38:23.089 DEBUGREADS: reads[76]: 82 matePos: 1329 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.089 DEBUGREADS: qname: 88 reads[r].pos: 1150 reads[r].getEndPos(): 1250
+- 07:38:23.089 DEBUGREADS: 
+is mapped
+- 07:38:23.089 DEBUGREADS: filtered by minOverlap
+- 07:38:23.089 DEBUGREADS: reads[77]: 88 matePos: 911 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.089 DEBUGREADS: qname: 64 reads[r].pos: 1151 reads[r].getEndPos(): 1251
+- 07:38:23.089 DEBUGREADS: 
+is mapped
+- 07:38:23.089 DEBUGREADS: filtered by minOverlap
+- 07:38:23.089 DEBUGREADS: reads[78]: 64 matePos: 1331 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.089 DEBUGREADS: qname: 51 reads[r].pos: 1153 reads[r].getEndPos(): 1253
+- 07:38:23.089 DEBUGREADS: 
+is mapped
+- 07:38:23.089 DEBUGREADS: filtered by minOverlap
+- 07:38:23.089 DEBUGREADS: reads[79]: 51 matePos: 1328 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.089 DEBUGREADS: qname: 5 reads[r].pos: 1154 reads[r].getEndPos(): 1254
+- 07:38:23.089 DEBUGREADS: 
+is mapped
+- 07:38:23.089 DEBUGREADS: filtered by minOverlap
+- 07:38:23.089 DEBUGREADS: reads[80]: 5 matePos: 1367 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.089 DEBUGREADS: qname: 24 reads[r].pos: 1154 reads[r].getEndPos(): 1254
+- 07:38:23.089 DEBUGREADS: 
+is mapped
+- 07:38:23.089 DEBUGREADS: filtered by minOverlap
+- 07:38:23.089 DEBUGREADS: reads[81]: 24 matePos: 1332 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.089 DEBUGREADS: qname: 33 reads[r].pos: 1154 reads[r].getEndPos(): 1254
+- 07:38:23.089 DEBUGREADS: 
+is mapped
+- 07:38:23.089 DEBUGREADS: filtered by minOverlap
+- 07:38:23.089 DEBUGREADS: reads[82]: 33 matePos: 1352 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.089 DEBUGREADS: qname: 20 reads[r].pos: 1163 reads[r].getEndPos(): 1263
+- 07:38:23.089 DEBUGREADS: 
+is mapped
+- 07:38:23.089 DEBUGREADS: filtered by minOverlap
+- 07:38:23.089 DEBUGREADS: reads[83]: 20 matePos: 1346 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.089 DEBUGREADS: qname: 62 reads[r].pos: 1163 reads[r].getEndPos(): 1263
+- 07:38:23.089 DEBUGREADS: 
+is mapped
+- 07:38:23.089 DEBUGREADS: filtered by minOverlap
+- 07:38:23.089 DEBUGREADS: reads[84]: 62 matePos: 967 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.089 DEBUGREADS: qname: 99 reads[r].pos: 1163 reads[r].getEndPos(): 1263
+- 07:38:23.089 DEBUGREADS: 
+is mapped
+- 07:38:23.089 DEBUGREADS: filtered by minOverlap
+- 07:38:23.089 DEBUGREADS: reads[85]: 99 matePos: 999 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.089 DEBUGREADS: qname: 28 reads[r].pos: 1164 reads[r].getEndPos(): 1264
+- 07:38:23.089 DEBUGREADS: 
+is mapped
+- 07:38:23.089 DEBUGREADS: filtered by minOverlap
+- 07:38:23.089 DEBUGREADS: reads[86]: 28 matePos: 942 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.089 DEBUGREADS: qname: 12 reads[r].pos: 1165 reads[r].getEndPos(): 1265
+- 07:38:23.089 DEBUGREADS: 
+is mapped
+- 07:38:23.089 DEBUGREADS: filtered by minOverlap
+- 07:38:23.089 DEBUGREADS: reads[87]: 12 matePos: 926 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.089 DEBUGREADS: qname: 52 reads[r].pos: 1170 reads[r].getEndPos(): 1270
+- 07:38:23.089 DEBUGREADS: 
+is mapped
+- 07:38:23.089 DEBUGREADS: filtered by minOverlap
+- 07:38:23.089 DEBUGREADS: reads[88]: 52 matePos: 984 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.089 DEBUGREADS: qname: 54 reads[r].pos: 1176 reads[r].getEndPos(): 1276
+- 07:38:23.089 DEBUGREADS: 
+is mapped
+- 07:38:23.089 DEBUGREADS: filtered by minOverlap
+- 07:38:23.089 DEBUGREADS: reads[89]: 54 matePos: 1005 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.089 DEBUGREADS: qname: 4 reads[r].pos: 1182 reads[r].getEndPos(): 1282
+- 07:38:23.089 DEBUGREADS: 
+is mapped
+- 07:38:23.089 DEBUGREADS: filtered by minOverlap
+- 07:38:23.089 DEBUGREADS: reads[90]: 4 matePos: 1352 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.089 DEBUGREADS: qname: 90 reads[r].pos: 1182 reads[r].getEndPos(): 1282
+- 07:38:23.089 DEBUGREADS: 
+is mapped
+- 07:38:23.089 DEBUGREADS: filtered by minOverlap
+- 07:38:23.089 DEBUGREADS: reads[91]: 90 matePos: 1376 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.089 DEBUGREADS: qname: 7 reads[r].pos: 1184 reads[r].getEndPos(): 1284
+- 07:38:23.089 DEBUGREADS: 
+is mapped
+- 07:38:23.089 DEBUGREADS: filtered by minOverlap
+- 07:38:23.089 DEBUGREADS: reads[92]: 7 matePos: 1318 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.089 DEBUGREADS: qname: 87 reads[r].pos: 1184 reads[r].getEndPos(): 1284
+- 07:38:23.089 DEBUGREADS: 
+is mapped
+- 07:38:23.089 DEBUGREADS: filtered by minOverlap
+- 07:38:23.089 DEBUGREADS: reads[93]: 87 matePos: 1377 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.089 DEBUGREADS: qname: 89 reads[r].pos: 1184 reads[r].getEndPos(): 1284
+- 07:38:23.089 DEBUGREADS: 
+is mapped
+- 07:38:23.089 DEBUGREADS: filtered by minOverlap
+- 07:38:23.089 DEBUGREADS: reads[94]: 89 matePos: 998 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.089 DEBUGREADS: qname: 74 reads[r].pos: 1188 reads[r].getEndPos(): 1288
+- 07:38:23.089 DEBUGREADS: 
+is mapped
+- 07:38:23.089 DEBUGREADS: filtered by minOverlap
+- 07:38:23.089 DEBUGREADS: reads[95]: 74 matePos: 957 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.089 DEBUGREADS: qname: 56 reads[r].pos: 1189 reads[r].getEndPos(): 1289
+- 07:38:23.089 DEBUGREADS: 
+is mapped
+- 07:38:23.089 DEBUGREADS: filtered by minOverlap
+- 07:38:23.089 DEBUGREADS: reads[96]: 56 matePos: 989 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.089 DEBUGREADS: qname: 32 reads[r].pos: 1194 reads[r].getEndPos(): 1294
+- 07:38:23.089 DEBUGREADS: 
+is mapped
+- 07:38:23.089 DEBUGREADS: filtered by minOverlap
+- 07:38:23.089 DEBUGREADS: reads[97]: 32 matePos: 980 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.089 DEBUGREADS: qname: 106 reads[r].pos: 1197 reads[r].getEndPos(): 1297
+- 07:38:23.090 DEBUGREADS: 
+is mapped
+- 07:38:23.090 DEBUGREADS: filtered by minOverlap
+- 07:38:23.090 DEBUGREADS: reads[98]: 106 matePos: 1052 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.090 DEBUGREADS: qname: 104 reads[r].pos: 1204 reads[r].getEndPos(): 1304
+- 07:38:23.090 DEBUGREADS: 
+is mapped
+- 07:38:23.090 DEBUGREADS: mate is mapped
+- 07:38:23.090 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.090 DEBUGREADS: found the mate
+- 07:38:23.090 DEBUGREADS: reads[99]: 104 matePos: 1363 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.090 DEBUGREADS: qname: 73 reads[r].pos: 1205 reads[r].getEndPos(): 1305
+- 07:38:23.090 DEBUGREADS: 
+is mapped
+- 07:38:23.090 DEBUGREADS: mate is mapped
+- 07:38:23.090 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.090 DEBUGREADS: found the mate
+- 07:38:23.090 DEBUGREADS: reads[100]: 73 matePos: 1401 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.090 DEBUGREADS: qname: 6 reads[r].pos: 1208 reads[r].getEndPos(): 1308
+- 07:38:23.090 DEBUGREADS: 
+is mapped
+- 07:38:23.090 DEBUGREADS: mate is mapped
+- 07:38:23.090 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.090 DEBUGREADS: found the mate
+- 07:38:23.090 DEBUGREADS: reads[101]: 6 matePos: 1040 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.090 DEBUGREADS: qname: 75 reads[r].pos: 1213 reads[r].getEndPos(): 1313
+- 07:38:23.090 DEBUGREADS: 
+is mapped
+- 07:38:23.090 DEBUGREADS: mate is mapped
+- 07:38:23.090 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.090 DEBUGREADS: found the mate
+- 07:38:23.090 DEBUGREADS: reads[102]: 75 matePos: 1008 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.090 DEBUGREADS: qname: 31 reads[r].pos: 1217 reads[r].getEndPos(): 1317
+- 07:38:23.090 DEBUGREADS: 
+is mapped
+- 07:38:23.090 DEBUGREADS: mate is mapped
+- 07:38:23.090 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.090 DEBUGREADS: found the mate
+- 07:38:23.090 DEBUGREADS: reads[103]: 31 matePos: 1423 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.090 DEBUGREADS: qname: 36 reads[r].pos: 1217 reads[r].getEndPos(): 1317
+- 07:38:23.090 DEBUGREADS: 
+is mapped
+- 07:38:23.090 DEBUGREADS: mate is mapped
+- 07:38:23.090 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.090 DEBUGREADS: found the mate
+- 07:38:23.090 DEBUGREADS: reads[104]: 36 matePos: 1429 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.090 DEBUGREADS: qname: 18 reads[r].pos: 1218 reads[r].getEndPos(): 1318
+- 07:38:23.090 DEBUGREADS: 
+is mapped
+- 07:38:23.090 DEBUGREADS: mate is mapped
+- 07:38:23.090 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.090 DEBUGREADS: found the mate
+- 07:38:23.090 DEBUGREADS: reads[105]: 18 matePos: 1353 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.090 DEBUGREADS: qname: 29 reads[r].pos: 1222 reads[r].getEndPos(): 1322
+- 07:38:23.090 DEBUGREADS: 
+is mapped
+- 07:38:23.090 DEBUGREADS: mate is mapped
+- 07:38:23.090 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.090 DEBUGREADS: found the mate
+- 07:38:23.090 DEBUGREADS: reads[106]: 29 matePos: 1443 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.090 DEBUGREADS: qname: 43 reads[r].pos: 1222 reads[r].getEndPos(): 1322
+- 07:38:23.090 DEBUGREADS: 
+is mapped
+- 07:38:23.090 DEBUGREADS: mate is mapped
+- 07:38:23.090 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.090 DEBUGREADS: found the mate
+- 07:38:23.090 DEBUGREADS: reads[107]: 43 matePos: 1404 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.090 DEBUGREADS: qname: 85 reads[r].pos: 1222 reads[r].getEndPos(): 1322
+- 07:38:23.090 DEBUGREADS: 
+is mapped
+- 07:38:23.090 DEBUGREADS: mate is mapped
+- 07:38:23.090 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.090 DEBUGREADS: found the mate
+- 07:38:23.090 DEBUGREADS: reads[108]: 85 matePos: 1436 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.090 DEBUGREADS: qname: 8 reads[r].pos: 1226 reads[r].getEndPos(): 1326
+- 07:38:23.090 DEBUGREADS: 
+is mapped
+- 07:38:23.090 DEBUGREADS: mate is mapped
+- 07:38:23.090 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.090 DEBUGREADS: found the mate
+- 07:38:23.090 DEBUGREADS: reads[109]: 8 matePos: 1409 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.090 DEBUGREADS: qname: 40 reads[r].pos: 1227 reads[r].getEndPos(): 1327
+- 07:38:23.090 DEBUGREADS: 
+is mapped
+- 07:38:23.090 DEBUGREADS: mate is mapped
+- 07:38:23.090 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.090 DEBUGREADS: found the mate
+- 07:38:23.090 DEBUGREADS: reads[110]: 40 matePos: 1418 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.090 DEBUGREADS: qname: 83 reads[r].pos: 1228 reads[r].getEndPos(): 1328
+- 07:38:23.090 DEBUGREADS: 
+is mapped
+- 07:38:23.090 DEBUGREADS: mate is mapped
+- 07:38:23.090 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.090 DEBUGREADS: found the mate
+- 07:38:23.090 DEBUGREADS: reads[111]: 83 matePos: 1022 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.090 DEBUGREADS: qname: 47 reads[r].pos: 1229 reads[r].getEndPos(): 1329
+- 07:38:23.090 DEBUGREADS: 
+is mapped
+- 07:38:23.090 DEBUGREADS: mate is mapped
+- 07:38:23.090 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.090 DEBUGREADS: found the mate
+- 07:38:23.090 DEBUGREADS: reads[112]: 47 matePos: 1432 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.090 DEBUGREADS: qname: 76 reads[r].pos: 1231 reads[r].getEndPos(): 1331
+- 07:38:23.090 DEBUGREADS: 
+is mapped
+- 07:38:23.090 DEBUGREADS: mate is mapped
+- 07:38:23.090 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.090 DEBUGREADS: found the mate
+- 07:38:23.090 DEBUGREADS: reads[113]: 76 matePos: 1024 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.090 DEBUGREADS: qname: 94 reads[r].pos: 1231 reads[r].getEndPos(): 1331
+- 07:38:23.090 DEBUGREADS: 
+is mapped
+- 07:38:23.090 DEBUGREADS: mate is mapped
+- 07:38:23.090 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.090 DEBUGREADS: found the mate
+- 07:38:23.090 DEBUGREADS: reads[114]: 94 matePos: 1056 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.090 DEBUGREADS: qname: 45 reads[r].pos: 1233 reads[r].getEndPos(): 1333
+- 07:38:23.090 DEBUGREADS: 
+is mapped
+- 07:38:23.090 DEBUGREADS: mate is mapped
+- 07:38:23.090 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.090 DEBUGREADS: found the mate
+- 07:38:23.090 DEBUGREADS: reads[115]: 45 matePos: 1435 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.090 DEBUGREADS: qname: 77 reads[r].pos: 1237 reads[r].getEndPos(): 1337
+- 07:38:23.090 DEBUGREADS: 
+is mapped
+- 07:38:23.090 DEBUGREADS: mate is mapped
+- 07:38:23.090 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.090 DEBUGREADS: found the mate
+- 07:38:23.090 DEBUGREADS: reads[116]: 77 matePos: 1053 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.090 DEBUGREADS: qname: 9 reads[r].pos: 1240 reads[r].getEndPos(): 1340
+- 07:38:23.090 DEBUGREADS: 
+is mapped
+- 07:38:23.090 DEBUGREADS: mate is mapped
+- 07:38:23.091 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.091 DEBUGREADS: found the mate
+- 07:38:23.091 DEBUGREADS: reads[117]: 9 matePos: 1052 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.091 DEBUGREADS: qname: 50 reads[r].pos: 1241 reads[r].getEndPos(): 1341
+- 07:38:23.091 DEBUGREADS: 
+is mapped
+- 07:38:23.091 DEBUGREADS: mate is mapped
+- 07:38:23.091 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.091 DEBUGREADS: found the mate
+- 07:38:23.091 DEBUGREADS: reads[118]: 50 matePos: 1067 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.091 DEBUGREADS: qname: 57 reads[r].pos: 1246 reads[r].getEndPos(): 1346
+- 07:38:23.091 DEBUGREADS: 
+is mapped
+- 07:38:23.091 DEBUGREADS: mate is mapped
+- 07:38:23.091 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.091 DEBUGREADS: found the mate
+- 07:38:23.091 DEBUGREADS: reads[119]: 57 matePos: 1431 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.091 DEBUGREADS: qname: 69 reads[r].pos: 1248 reads[r].getEndPos(): 1348
+- 07:38:23.091 DEBUGREADS: 
+is mapped
+- 07:38:23.091 DEBUGREADS: mate is mapped
+- 07:38:23.091 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.091 DEBUGREADS: found the mate
+- 07:38:23.091 DEBUGREADS: reads[120]: 69 matePos: 1441 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.091 DEBUGREADS: qname: 97 reads[r].pos: 1248 reads[r].getEndPos(): 1348
+- 07:38:23.091 DEBUGREADS: 
+is mapped
+- 07:38:23.091 DEBUGREADS: mate is mapped
+- 07:38:23.091 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.091 DEBUGREADS: found the mate
+- 07:38:23.091 DEBUGREADS: reads[121]: 97 matePos: 1091 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.091 DEBUGREADS: qname: 59 reads[r].pos: 1251 reads[r].getEndPos(): 1351
+- 07:38:23.091 DEBUGREADS: 
+is mapped
+- 07:38:23.091 DEBUGREADS: mate is mapped
+- 07:38:23.091 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.091 DEBUGREADS: found the mate
+- 07:38:23.091 DEBUGREADS: reads[122]: 59 matePos: 1072 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.091 DEBUGREADS: qname: 95 reads[r].pos: 1253 reads[r].getEndPos(): 1353
+- 07:38:23.091 DEBUGREADS: 
+is mapped
+- 07:38:23.091 DEBUGREADS: mate is mapped
+- 07:38:23.091 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.091 DEBUGREADS: found the mate
+- 07:38:23.091 DEBUGREADS: reads[123]: 95 matePos: 1045 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.091 DEBUGREADS: qname: 10 reads[r].pos: 1254 reads[r].getEndPos(): 1354
+- 07:38:23.091 DEBUGREADS: 
+is mapped
+- 07:38:23.091 DEBUGREADS: mate is mapped
+- 07:38:23.091 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.091 DEBUGREADS: found the mate
+- 07:38:23.091 DEBUGREADS: reads[124]: 10 matePos: 1066 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.091 DEBUGREADS: qname: 30 reads[r].pos: 1262 reads[r].getEndPos(): 1362
+- 07:38:23.091 DEBUGREADS: 
+is mapped
+- 07:38:23.091 DEBUGREADS: mate is mapped
+- 07:38:23.091 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.091 DEBUGREADS: found the mate
+- 07:38:23.091 DEBUGREADS: reads[125]: 30 matePos: 1497 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.091 DEBUGREADS: qname: 19 reads[r].pos: 1266 reads[r].getEndPos(): 1366
+- 07:38:23.091 DEBUGREADS: 
+is mapped
+- 07:38:23.091 DEBUGREADS: mate is mapped
+- 07:38:23.091 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.091 DEBUGREADS: found the mate
+- 07:38:23.091 DEBUGREADS: reads[126]: 19 matePos: 1489 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.091 DEBUGREADS: qname: 65 reads[r].pos: 1267 reads[r].getEndPos(): 1367
+- 07:38:23.091 DEBUGREADS: 
+is mapped
+- 07:38:23.091 DEBUGREADS: mate is mapped
+- 07:38:23.091 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.091 DEBUGREADS: found the mate
+- 07:38:23.091 DEBUGREADS: reads[127]: 65 matePos: 1118 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.091 DEBUGREADS: qname: 15 reads[r].pos: 1268 reads[r].getEndPos(): 1368
+- 07:38:23.091 DEBUGREADS: 
+is mapped
+- 07:38:23.091 DEBUGREADS: mate is mapped
+- 07:38:23.091 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.091 DEBUGREADS: found the mate
+- 07:38:23.091 DEBUGREADS: reads[128]: 15 matePos: 1501 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.091 DEBUGREADS: qname: 26 reads[r].pos: 1271 reads[r].getEndPos(): 1371
+- 07:38:23.091 DEBUGREADS: 
+is mapped
+- 07:38:23.091 DEBUGREADS: mate is mapped
+- 07:38:23.091 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.091 DEBUGREADS: found the mate
+- 07:38:23.091 DEBUGREADS: reads[129]: 26 matePos: 1066 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.091 DEBUGREADS: qname: 61 reads[r].pos: 1274 reads[r].getEndPos(): 1374
+- 07:38:23.091 DEBUGREADS: 
+is mapped
+- 07:38:23.091 DEBUGREADS: mate is mapped
+- 07:38:23.091 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.091 DEBUGREADS: found the mate
+- 07:38:23.091 DEBUGREADS: reads[130]: 61 matePos: 1441 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.091 DEBUGREADS: qname: 102 reads[r].pos: 1275 reads[r].getEndPos(): 1375
+- 07:38:23.091 DEBUGREADS: 
+is mapped
+- 07:38:23.091 DEBUGREADS: mate is mapped
+- 07:38:23.091 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.091 DEBUGREADS: found the mate
+- 07:38:23.091 DEBUGREADS: reads[131]: 102 matePos: 1060 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.091 DEBUGREADS: qname: 48 reads[r].pos: 1281 reads[r].getEndPos(): 1381
+- 07:38:23.091 DEBUGREADS: 
+is mapped
+- 07:38:23.091 DEBUGREADS: mate is mapped
+- 07:38:23.091 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.091 DEBUGREADS: found the mate
+- 07:38:23.091 DEBUGREADS: reads[132]: 48 matePos: 1106 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.091 DEBUGREADS: qname: 70 reads[r].pos: 1281 reads[r].getEndPos(): 1381
+- 07:38:23.091 DEBUGREADS: 
+is mapped
+- 07:38:23.091 DEBUGREADS: mate is mapped
+- 07:38:23.091 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.091 DEBUGREADS: found the mate
+- 07:38:23.091 DEBUGREADS: reads[133]: 70 matePos: 1475 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.091 DEBUGREADS: qname: 17 reads[r].pos: 1285 reads[r].getEndPos(): 1385
+- 07:38:23.091 DEBUGREADS: 
+is mapped
+- 07:38:23.091 DEBUGREADS: mate is mapped
+- 07:38:23.091 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.091 DEBUGREADS: found the mate
+- 07:38:23.091 DEBUGREADS: reads[134]: 17 matePos: 1043 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.091 DEBUGREADS: qname: 86 reads[r].pos: 1288 reads[r].getEndPos(): 1388
+- 07:38:23.091 DEBUGREADS: 
+is mapped
+- 07:38:23.091 DEBUGREADS: mate is mapped
+- 07:38:23.091 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.091 DEBUGREADS: found the mate
+- 07:38:23.091 DEBUGREADS: reads[135]: 86 matePos: 1495 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.091 DEBUGREADS: qname: 2 reads[r].pos: 1289 reads[r].getEndPos(): 1389
+- 07:38:23.091 DEBUGREADS: 
+is mapped
+- 07:38:23.091 DEBUGREADS: mate is mapped
+- 07:38:23.091 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.091 DEBUGREADS: found the mate
+- 07:38:23.092 DEBUGREADS: reads[136]: 2 matePos: 1457 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.092 DEBUGREADS: qname: 58 reads[r].pos: 1293 reads[r].getEndPos(): 1393
+- 07:38:23.092 DEBUGREADS: 
+is mapped
+- 07:38:23.092 DEBUGREADS: mate is mapped
+- 07:38:23.092 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.092 DEBUGREADS: found the mate
+- 07:38:23.092 DEBUGREADS: reads[137]: 58 matePos: 1117 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.092 DEBUGREADS: qname: 103 reads[r].pos: 1296 reads[r].getEndPos(): 1396
+- 07:38:23.092 DEBUGREADS: 
+is mapped
+- 07:38:23.092 DEBUGREADS: mate is mapped
+- 07:38:23.092 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.092 DEBUGREADS: found the mate
+- 07:38:23.092 DEBUGREADS: reads[138]: 103 matePos: 1507 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.092 DEBUGREADS: qname: 1 reads[r].pos: 1297 reads[r].getEndPos(): 1397
+- 07:38:23.092 DEBUGREADS: 
+is mapped
+- 07:38:23.092 DEBUGREADS: mate is mapped
+- 07:38:23.092 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.092 DEBUGREADS: found the mate
+- 07:38:23.092 DEBUGREADS: reads[139]: 1 matePos: 1122 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.092 DEBUGREADS: qname: 3 reads[r].pos: 1298 reads[r].getEndPos(): 1398
+- 07:38:23.092 DEBUGREADS: 
+is mapped
+- 07:38:23.092 DEBUGREADS: mate is mapped
+- 07:38:23.092 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.092 DEBUGREADS: found the mate
+- 07:38:23.092 DEBUGREADS: reads[140]: 3 matePos: 1132 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.092 DEBUGREADS: qname: 92 reads[r].pos: 1299 reads[r].getEndPos(): 1399
+- 07:38:23.092 DEBUGREADS: 
+is mapped
+- 07:38:23.092 DEBUGREADS: mate is mapped
+- 07:38:23.092 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.092 DEBUGREADS: found the mate
+- 07:38:23.092 DEBUGREADS: reads[141]: 92 matePos: 1044 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.092 DEBUGREADS: qname: 71 reads[r].pos: 1302 reads[r].getEndPos(): 1402
+- 07:38:23.092 DEBUGREADS: 
+is mapped
+- 07:38:23.092 DEBUGREADS: mate is mapped
+- 07:38:23.092 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.092 DEBUGREADS: found the mate
+- 07:38:23.092 DEBUGREADS: reads[142]: 71 matePos: 1504 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.092 DEBUGREADS: qname: 84 reads[r].pos: 1302 reads[r].getEndPos(): 1402
+- 07:38:23.092 DEBUGREADS: 
+is mapped
+- 07:38:23.092 DEBUGREADS: mate is mapped
+- 07:38:23.092 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.092 DEBUGREADS: found the mate
+- 07:38:23.092 DEBUGREADS: reads[143]: 84 matePos: 1123 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.092 DEBUGREADS: qname: 105 reads[r].pos: 1302 reads[r].getEndPos(): 1402
+- 07:38:23.092 DEBUGREADS: 
+is mapped
+- 07:38:23.092 DEBUGREADS: mate is mapped
+- 07:38:23.092 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.092 DEBUGREADS: found the mate
+- 07:38:23.092 DEBUGREADS: reads[144]: 105 matePos: 1099 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.092 DEBUGREADS: qname: 68 reads[r].pos: 1303 reads[r].getEndPos(): 1403
+- 07:38:23.092 DEBUGREADS: 
+is mapped
+- 07:38:23.092 DEBUGREADS: filtered by minOverlap
+- 07:38:23.092 DEBUGREADS: reads[145]: 68 matePos: 1532 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.092 DEBUGREADS: qname: 101 reads[r].pos: 1304 reads[r].getEndPos(): 1404
+- 07:38:23.092 DEBUGREADS: 
+is mapped
+- 07:38:23.092 DEBUGREADS: filtered by minOverlap
+- 07:38:23.092 DEBUGREADS: reads[146]: 101 matePos: 1114 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.092 DEBUGREADS: qname: 42 reads[r].pos: 1311 reads[r].getEndPos(): 1411
+- 07:38:23.092 DEBUGREADS: 
+is mapped
+- 07:38:23.092 DEBUGREADS: filtered by minOverlap
+- 07:38:23.092 DEBUGREADS: reads[147]: 42 matePos: 1532 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.092 DEBUGREADS: qname: 46 reads[r].pos: 1317 reads[r].getEndPos(): 1417
+- 07:38:23.092 DEBUGREADS: 
+is mapped
+- 07:38:23.092 DEBUGREADS: filtered by minOverlap
+- 07:38:23.092 DEBUGREADS: reads[148]: 46 matePos: 1079 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.092 DEBUGREADS: qname: 78 reads[r].pos: 1317 reads[r].getEndPos(): 1417
+- 07:38:23.092 DEBUGREADS: 
+is mapped
+- 07:38:23.092 DEBUGREADS: filtered by minOverlap
+- 07:38:23.092 DEBUGREADS: reads[149]: 78 matePos: 1514 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.092 DEBUGREADS: qname: 7 reads[r].pos: 1318 reads[r].getEndPos(): 1418
+- 07:38:23.092 DEBUGREADS: 
+is mapped
+- 07:38:23.092 DEBUGREADS: filtered by minOverlap
+- 07:38:23.092 DEBUGREADS: reads[150]: 7 matePos: 1184 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.092 DEBUGREADS: qname: 22 reads[r].pos: 1320 reads[r].getEndPos(): 1420
+- 07:38:23.092 DEBUGREADS: 
+is mapped
+- 07:38:23.092 DEBUGREADS: filtered by minOverlap
+- 07:38:23.092 DEBUGREADS: reads[151]: 22 matePos: 1132 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.092 DEBUGREADS: qname: 81 reads[r].pos: 1320 reads[r].getEndPos(): 1420
+- 07:38:23.092 DEBUGREADS: 
+is mapped
+- 07:38:23.092 DEBUGREADS: filtered by minOverlap
+- 07:38:23.092 DEBUGREADS: reads[152]: 81 matePos: 1145 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.092 DEBUGREADS: qname: 79 reads[r].pos: 1321 reads[r].getEndPos(): 1421
+- 07:38:23.092 DEBUGREADS: 
+is mapped
+- 07:38:23.092 DEBUGREADS: filtered by minOverlap
+- 07:38:23.092 DEBUGREADS: reads[153]: 79 matePos: 1138 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.092 DEBUGREADS: qname: 55 reads[r].pos: 1322 reads[r].getEndPos(): 1422
+- 07:38:23.092 DEBUGREADS: 
+is mapped
+- 07:38:23.092 DEBUGREADS: filtered by minOverlap
+- 07:38:23.092 DEBUGREADS: reads[154]: 55 matePos: 1147 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.092 DEBUGREADS: qname: 98 reads[r].pos: 1322 reads[r].getEndPos(): 1422
+- 07:38:23.092 DEBUGREADS: 
+is mapped
+- 07:38:23.092 DEBUGREADS: filtered by minOverlap
+- 07:38:23.092 DEBUGREADS: reads[155]: 98 matePos: 1130 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.092 DEBUGREADS: qname: 80 reads[r].pos: 1323 reads[r].getEndPos(): 1423
+- 07:38:23.092 DEBUGREADS: 
+is mapped
+- 07:38:23.092 DEBUGREADS: filtered by minOverlap
+- 07:38:23.092 DEBUGREADS: reads[156]: 80 matePos: 1125 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.092 DEBUGREADS: qname: 23 reads[r].pos: 1324 reads[r].getEndPos(): 1424
+- 07:38:23.092 DEBUGREADS: 
+is mapped
+- 07:38:23.092 DEBUGREADS: filtered by minOverlap
+- 07:38:23.092 DEBUGREADS: reads[157]: 23 matePos: 1517 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.092 DEBUGREADS: qname: 37 reads[r].pos: 1324 reads[r].getEndPos(): 1424
+- 07:38:23.092 DEBUGREADS: 
+is mapped
+- 07:38:23.092 DEBUGREADS: filtered by minOverlap
+- 07:38:23.092 DEBUGREADS: reads[158]: 37 matePos: 1557 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.092 DEBUGREADS: qname: 27 reads[r].pos: 1325 reads[r].getEndPos(): 1425
+- 07:38:23.092 DEBUGREADS: 
+is mapped
+- 07:38:23.092 DEBUGREADS: filtered by minOverlap
+- 07:38:23.092 DEBUGREADS: reads[159]: 27 matePos: 1544 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.092 DEBUGREADS: qname: 51 reads[r].pos: 1328 reads[r].getEndPos(): 1428
+- 07:38:23.092 DEBUGREADS: 
+is mapped
+- 07:38:23.092 DEBUGREADS: filtered by minOverlap
+- 07:38:23.092 DEBUGREADS: reads[160]: 51 matePos: 1153 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.092 DEBUGREADS: qname: 72 reads[r].pos: 1328 reads[r].getEndPos(): 1428
+- 07:38:23.092 DEBUGREADS: 
+is mapped
+- 07:38:23.093 DEBUGREADS: filtered by minOverlap
+- 07:38:23.093 DEBUGREADS: reads[161]: 72 matePos: 1551 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.093 DEBUGREADS: qname: 82 reads[r].pos: 1329 reads[r].getEndPos(): 1429
+- 07:38:23.093 DEBUGREADS: 
+is mapped
+- 07:38:23.093 DEBUGREADS: filtered by minOverlap
+- 07:38:23.093 DEBUGREADS: reads[162]: 82 matePos: 1150 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.093 DEBUGREADS: qname: 66 reads[r].pos: 1330 reads[r].getEndPos(): 1430
+- 07:38:23.093 DEBUGREADS: 
+is mapped
+- 07:38:23.093 DEBUGREADS: filtered by minOverlap
+- 07:38:23.093 DEBUGREADS: reads[163]: 66 matePos: 1120 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.093 DEBUGREADS: qname: 64 reads[r].pos: 1331 reads[r].getEndPos(): 1431
+- 07:38:23.093 DEBUGREADS: 
+is mapped
+- 07:38:23.093 DEBUGREADS: filtered by minOverlap
+- 07:38:23.093 DEBUGREADS: reads[164]: 64 matePos: 1151 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.093 DEBUGREADS: qname: 24 reads[r].pos: 1332 reads[r].getEndPos(): 1432
+- 07:38:23.093 DEBUGREADS: 
+is mapped
+- 07:38:23.093 DEBUGREADS: filtered by minOverlap
+- 07:38:23.093 DEBUGREADS: reads[165]: 24 matePos: 1154 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.093 DEBUGREADS: qname: 39 reads[r].pos: 1335 reads[r].getEndPos(): 1435
+- 07:38:23.093 DEBUGREADS: 
+is mapped
+- 07:38:23.093 DEBUGREADS: filtered by minOverlap
+- 07:38:23.093 DEBUGREADS: reads[166]: 39 matePos: 1141 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.093 DEBUGREADS: qname: 13 reads[r].pos: 1344 reads[r].getEndPos(): 1444
+- 07:38:23.093 DEBUGREADS: 
+is mapped
+- 07:38:23.093 DEBUGREADS: filtered by minOverlap
+- 07:38:23.093 DEBUGREADS: reads[167]: 13 matePos: 1554 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.093 DEBUGREADS: qname: 11 reads[r].pos: 1346 reads[r].getEndPos(): 1446
+- 07:38:23.093 DEBUGREADS: 
+is mapped
+- 07:38:23.093 DEBUGREADS: filtered by minOverlap
+- 07:38:23.093 DEBUGREADS: reads[168]: 11 matePos: 1149 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.093 DEBUGREADS: qname: 20 reads[r].pos: 1346 reads[r].getEndPos(): 1446
+- 07:38:23.093 DEBUGREADS: 
+is mapped
+- 07:38:23.093 DEBUGREADS: filtered by minOverlap
+- 07:38:23.093 DEBUGREADS: reads[169]: 20 matePos: 1163 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.093 DEBUGREADS: qname: 63 reads[r].pos: 1346 reads[r].getEndPos(): 1446
+- 07:38:23.093 DEBUGREADS: 
+is mapped
+- 07:38:23.093 DEBUGREADS: filtered by minOverlap
+- 07:38:23.093 DEBUGREADS: reads[170]: 63 matePos: 1140 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.093 DEBUGREADS: qname: 21 reads[r].pos: 1348 reads[r].getEndPos(): 1448
+- 07:38:23.093 DEBUGREADS: 
+is mapped
+- 07:38:23.093 DEBUGREADS: filtered by minOverlap
+- 07:38:23.093 DEBUGREADS: reads[171]: 21 matePos: 1540 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.093 DEBUGREADS: qname: 4 reads[r].pos: 1352 reads[r].getEndPos(): 1452
+- 07:38:23.093 DEBUGREADS: 
+is mapped
+- 07:38:23.093 DEBUGREADS: filtered by minOverlap
+- 07:38:23.093 DEBUGREADS: reads[172]: 4 matePos: 1182 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.093 DEBUGREADS: qname: 33 reads[r].pos: 1352 reads[r].getEndPos(): 1452
+- 07:38:23.093 DEBUGREADS: 
+is mapped
+- 07:38:23.093 DEBUGREADS: filtered by minOverlap
+- 07:38:23.093 DEBUGREADS: reads[173]: 33 matePos: 1154 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.093 DEBUGREADS: qname: 34 reads[r].pos: 1352 reads[r].getEndPos(): 1452
+- 07:38:23.093 DEBUGREADS: 
+is mapped
+- 07:38:23.093 DEBUGREADS: filtered by minOverlap
+- 07:38:23.093 DEBUGREADS: reads[174]: 34 matePos: 1134 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.093 DEBUGREADS: qname: 18 reads[r].pos: 1353 reads[r].getEndPos(): 1453
+- 07:38:23.093 DEBUGREADS: 
+is mapped
+- 07:38:23.093 DEBUGREADS: filtered by minOverlap
+- 07:38:23.093 DEBUGREADS: reads[175]: 18 matePos: 1218 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.093 DEBUGREADS: qname: 53 reads[r].pos: 1354 reads[r].getEndPos(): 1454
+- 07:38:23.093 DEBUGREADS: 
+is mapped
+- 07:38:23.093 DEBUGREADS: filtered by minOverlap
+- 07:38:23.093 DEBUGREADS: reads[176]: 53 matePos: 1131 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.093 DEBUGREADS: qname: 104 reads[r].pos: 1363 reads[r].getEndPos(): 1463
+- 07:38:23.093 DEBUGREADS: 
+is mapped
+- 07:38:23.093 DEBUGREADS: filtered by minOverlap
+- 07:38:23.093 DEBUGREADS: reads[177]: 104 matePos: 1204 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.093 DEBUGREADS: qname: 5 reads[r].pos: 1367 reads[r].getEndPos(): 1467
+- 07:38:23.093 DEBUGREADS: 
+is mapped
+- 07:38:23.093 DEBUGREADS: filtered by minOverlap
+- 07:38:23.093 DEBUGREADS: reads[178]: 5 matePos: 1154 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.093 DEBUGREADS: qname: 41 reads[r].pos: 1373 reads[r].getEndPos(): 1473
+- 07:38:23.093 DEBUGREADS: 
+is mapped
+- 07:38:23.093 DEBUGREADS: filtered by minOverlap
+- 07:38:23.093 DEBUGREADS: reads[179]: 41 matePos: 1126 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.093 DEBUGREADS: qname: 90 reads[r].pos: 1376 reads[r].getEndPos(): 1476
+- 07:38:23.093 DEBUGREADS: 
+is mapped
+- 07:38:23.093 DEBUGREADS: filtered by minOverlap
+- 07:38:23.093 DEBUGREADS: reads[180]: 90 matePos: 1182 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.093 DEBUGREADS: qname: 87 reads[r].pos: 1377 reads[r].getEndPos(): 1477
+- 07:38:23.093 DEBUGREADS: 
+is mapped
+- 07:38:23.093 DEBUGREADS: filtered by minOverlap
+- 07:38:23.093 DEBUGREADS: reads[181]: 87 matePos: 1184 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.093 DEBUGREADS: qname: 73 reads[r].pos: 1401 reads[r].getEndPos(): 1501
+- 07:38:23.093 DEBUGREADS: 
+is mapped
+- 07:38:23.093 DEBUGREADS: filtered by minOverlap
+- 07:38:23.093 DEBUGREADS: reads[182]: 73 matePos: 1205 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.093 DEBUGREADS: qname: 43 reads[r].pos: 1404 reads[r].getEndPos(): 1504
+- 07:38:23.093 DEBUGREADS: 
+is mapped
+- 07:38:23.093 DEBUGREADS: filtered by minOverlap
+- 07:38:23.093 DEBUGREADS: reads[183]: 43 matePos: 1222 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.093 DEBUGREADS: qname: 8 reads[r].pos: 1409 reads[r].getEndPos(): 1509
+- 07:38:23.093 DEBUGREADS: 
+is mapped
+- 07:38:23.093 DEBUGREADS: filtered by minOverlap
+- 07:38:23.093 DEBUGREADS: reads[184]: 8 matePos: 1226 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.093 DEBUGREADS: qname: 40 reads[r].pos: 1418 reads[r].getEndPos(): 1518
+- 07:38:23.093 DEBUGREADS: 
+is mapped
+- 07:38:23.093 DEBUGREADS: filtered by minOverlap
+- 07:38:23.093 DEBUGREADS: reads[185]: 40 matePos: 1227 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.093 DEBUGREADS: qname: 31 reads[r].pos: 1423 reads[r].getEndPos(): 1523
+- 07:38:23.093 DEBUGREADS: 
+is mapped
+- 07:38:23.093 DEBUGREADS: filtered by minOverlap
+- 07:38:23.093 DEBUGREADS: reads[186]: 31 matePos: 1217 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.093 DEBUGREADS: qname: 36 reads[r].pos: 1429 reads[r].getEndPos(): 1529
+- 07:38:23.093 DEBUGREADS: 
+is mapped
+- 07:38:23.093 DEBUGREADS: filtered by minOverlap
+- 07:38:23.093 DEBUGREADS: reads[187]: 36 matePos: 1217 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.093 DEBUGREADS: qname: 57 reads[r].pos: 1431 reads[r].getEndPos(): 1531
+- 07:38:23.093 DEBUGREADS: 
+is mapped
+- 07:38:23.094 DEBUGREADS: filtered by minOverlap
+- 07:38:23.094 DEBUGREADS: reads[188]: 57 matePos: 1246 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.094 DEBUGREADS: qname: 47 reads[r].pos: 1432 reads[r].getEndPos(): 1532
+- 07:38:23.094 DEBUGREADS: 
+is mapped
+- 07:38:23.094 DEBUGREADS: filtered by minOverlap
+- 07:38:23.094 DEBUGREADS: reads[189]: 47 matePos: 1229 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.094 DEBUGREADS: qname: 45 reads[r].pos: 1435 reads[r].getEndPos(): 1535
+- 07:38:23.094 DEBUGREADS: 
+is mapped
+- 07:38:23.094 DEBUGREADS: filtered by minOverlap
+- 07:38:23.094 DEBUGREADS: reads[190]: 45 matePos: 1233 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.094 DEBUGREADS: qname: 85 reads[r].pos: 1436 reads[r].getEndPos(): 1536
+- 07:38:23.094 DEBUGREADS: 
+is mapped
+- 07:38:23.094 DEBUGREADS: filtered by minOverlap
+- 07:38:23.094 DEBUGREADS: reads[191]: 85 matePos: 1222 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.094 DEBUGREADS: qname: 61 reads[r].pos: 1441 reads[r].getEndPos(): 1541
+- 07:38:23.094 DEBUGREADS: 
+is mapped
+- 07:38:23.094 DEBUGREADS: filtered by minOverlap
+- 07:38:23.094 DEBUGREADS: reads[192]: 61 matePos: 1274 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.094 DEBUGREADS: qname: 69 reads[r].pos: 1441 reads[r].getEndPos(): 1541
+- 07:38:23.094 DEBUGREADS: 
+is mapped
+- 07:38:23.094 DEBUGREADS: filtered by minOverlap
+- 07:38:23.094 DEBUGREADS: reads[193]: 69 matePos: 1248 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.094 DEBUGREADS: qname: 29 reads[r].pos: 1443 reads[r].getEndPos(): 1543
+- 07:38:23.094 DEBUGREADS: 
+is mapped
+- 07:38:23.094 DEBUGREADS: filtered by minOverlap
+- 07:38:23.094 DEBUGREADS: reads[194]: 29 matePos: 1222 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.094 DEBUGREADS: qname: 2 reads[r].pos: 1457 reads[r].getEndPos(): 1557
+- 07:38:23.094 DEBUGREADS: 
+is mapped
+- 07:38:23.094 DEBUGREADS: filtered by minOverlap
+- 07:38:23.094 DEBUGREADS: reads[195]: 2 matePos: 1289 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.094 DEBUGREADS: qname: 70 reads[r].pos: 1475 reads[r].getEndPos(): 1575
+- 07:38:23.094 DEBUGREADS: 
+is mapped
+- 07:38:23.094 DEBUGREADS: filtered by minOverlap
+- 07:38:23.094 DEBUGREADS: reads[196]: 70 matePos: 1281 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.094 DEBUGREADS: qname: 19 reads[r].pos: 1489 reads[r].getEndPos(): 1589
+- 07:38:23.094 DEBUGREADS: 
+is mapped
+- 07:38:23.094 DEBUGREADS: filtered by minOverlap
+- 07:38:23.094 DEBUGREADS: reads[197]: 19 matePos: 1266 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.094 DEBUGREADS: qname: 86 reads[r].pos: 1495 reads[r].getEndPos(): 1595
+- 07:38:23.094 DEBUGREADS: 
+is mapped
+- 07:38:23.094 DEBUGREADS: filtered by minOverlap
+- 07:38:23.094 DEBUGREADS: reads[198]: 86 matePos: 1288 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.094 DEBUGREADS: qname: 30 reads[r].pos: 1497 reads[r].getEndPos(): 1597
+- 07:38:23.094 DEBUGREADS: 
+is mapped
+- 07:38:23.094 DEBUGREADS: filtered by minOverlap
+- 07:38:23.094 DEBUGREADS: reads[199]: 30 matePos: 1262 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.094 DEBUGREADS: qname: 15 reads[r].pos: 1501 reads[r].getEndPos(): 1601
+- 07:38:23.094 DEBUGREADS: 
+is mapped
+- 07:38:23.094 DEBUGREADS: filtered by minOverlap
+- 07:38:23.094 DEBUGREADS: reads[200]: 15 matePos: 1268 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.094 DEBUGREADS: qname: 71 reads[r].pos: 1504 reads[r].getEndPos(): 1604
+- 07:38:23.094 DEBUGREADS: 
+is mapped
+- 07:38:23.094 DEBUGREADS: filtered by minOverlap
+- 07:38:23.094 DEBUGREADS: reads[201]: 71 matePos: 1302 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.094 DEBUGREADS: qname: 103 reads[r].pos: 1507 reads[r].getEndPos(): 1607
+- 07:38:23.094 DEBUGREADS: 
+is mapped
+- 07:38:23.094 DEBUGREADS: filtered by minOverlap
+- 07:38:23.094 DEBUGREADS: reads[202]: 103 matePos: 1296 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.094 DEBUGREADS: qname: 78 reads[r].pos: 1514 reads[r].getEndPos(): 1614
+- 07:38:23.094 DEBUGREADS: 
+is mapped
+- 07:38:23.094 DEBUGREADS: filtered by minOverlap
+- 07:38:23.094 DEBUGREADS: reads[203]: 78 matePos: 1317 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.094 DEBUGREADS: qname: 23 reads[r].pos: 1517 reads[r].getEndPos(): 1617
+- 07:38:23.094 DEBUGREADS: 
+is mapped
+- 07:38:23.094 DEBUGREADS: filtered by minOverlap
+- 07:38:23.094 DEBUGREADS: reads[204]: 23 matePos: 1324 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.094 DEBUGREADS: qname: 42 reads[r].pos: 1532 reads[r].getEndPos(): 1632
+- 07:38:23.094 DEBUGREADS: 
+is mapped
+- 07:38:23.094 DEBUGREADS: filtered by minOverlap
+- 07:38:23.094 DEBUGREADS: reads[205]: 42 matePos: 1311 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.094 DEBUGREADS: qname: 68 reads[r].pos: 1532 reads[r].getEndPos(): 1632
+- 07:38:23.094 DEBUGREADS: 
+is mapped
+- 07:38:23.094 DEBUGREADS: filtered by minOverlap
+- 07:38:23.094 DEBUGREADS: reads[206]: 68 matePos: 1303 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.094 DEBUGREADS: qname: 21 reads[r].pos: 1540 reads[r].getEndPos(): 1640
+- 07:38:23.094 DEBUGREADS: 
+is mapped
+- 07:38:23.094 DEBUGREADS: filtered by minOverlap
+- 07:38:23.094 DEBUGREADS: reads[207]: 21 matePos: 1348 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.094 DEBUGREADS: qname: 27 reads[r].pos: 1544 reads[r].getEndPos(): 1644
+- 07:38:23.094 DEBUGREADS: 
+is mapped
+- 07:38:23.094 DEBUGREADS: filtered by minOverlap
+- 07:38:23.094 DEBUGREADS: reads[208]: 27 matePos: 1325 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.094 DEBUGREADS: qname: 72 reads[r].pos: 1551 reads[r].getEndPos(): 1651
+- 07:38:23.094 DEBUGREADS: 
+is mapped
+- 07:38:23.094 DEBUGREADS: filtered by minOverlap
+- 07:38:23.094 DEBUGREADS: reads[209]: 72 matePos: 1328 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.094 DEBUGREADS: qname: 13 reads[r].pos: 1554 reads[r].getEndPos(): 1654
+- 07:38:23.094 DEBUGREADS: 
+is mapped
+- 07:38:23.094 DEBUGREADS: filtered by minOverlap
+- 07:38:23.094 DEBUGREADS: reads[210]: 13 matePos: 1344 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.094 DEBUGREADS: qname: 37 reads[r].pos: 1557 reads[r].getEndPos(): 1657
+- 07:38:23.095 DEBUGREADS: 
+is mapped
+- 07:38:23.095 DEBUGREADS: filtered by minOverlap
+- 07:38:23.095 DEBUGREADS: reads[211]: 37 matePos: 1324 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.096 DEBUG: fetched reads:
+- 07:38:23.096 DEBUG: reads[0]: 59 pos: 1251 matePos: 1072 mateLen: 100 mq: 0.999999
+- 07:38:23.096 DEBUG: reads[1]: 95 pos: 1253 matePos: 1045 mateLen: 100 mq: 0.999999
+- 07:38:23.096 DEBUG: reads[2]: 10 pos: 1254 matePos: 1066 mateLen: 100 mq: 0.999999
+- 07:38:23.096 DEBUG: reads[3]: 30 pos: 1262 matePos: 1497 mateLen: 100 mq: 0.999999
+- 07:38:23.096 DEBUG: reads[4]: 19 pos: 1266 matePos: 1489 mateLen: 100 mq: 0.999999
+- 07:38:23.096 DEBUG: reads[5]: 65 pos: 1267 matePos: 1118 mateLen: 100 mq: 0.999999
+- 07:38:23.096 DEBUG: reads[6]: 15 pos: 1268 matePos: 1501 mateLen: 100 mq: 0.999999
+- 07:38:23.096 DEBUG: reads[7]: 26 pos: 1271 matePos: 1066 mateLen: 100 mq: 0.999999
+- 07:38:23.096 DEBUG: reads[8]: 61 pos: 1274 matePos: 1441 mateLen: 100 mq: 0.999999
+- 07:38:23.097 DEBUG: reads[9]: 102 pos: 1275 matePos: 1060 mateLen: 100 mq: 0.999999
+- 07:38:23.097 DEBUG: reads[10]: 48 pos: 1281 matePos: 1106 mateLen: 100 mq: 0.999999
+- 07:38:23.097 DEBUG: reads[11]: 70 pos: 1281 matePos: 1475 mateLen: 100 mq: 0.999999
+- 07:38:23.097 DEBUG: reads[12]: 17 pos: 1285 matePos: 1043 mateLen: 100 mq: 0.999999
+- 07:38:23.097 DEBUG: reads[13]: 86 pos: 1288 matePos: 1495 mateLen: 100 mq: 0.999999
+- 07:38:23.097 DEBUG: reads[14]: 2 pos: 1289 matePos: 1457 mateLen: 100 mq: 0.999999
+- 07:38:23.097 DEBUG: reads[15]: 58 pos: 1293 matePos: 1117 mateLen: 100 mq: 0.999999
+- 07:38:23.097 DEBUG: reads[16]: 103 pos: 1296 matePos: 1507 mateLen: 100 mq: 0.999999
+- 07:38:23.097 DEBUG: reads[17]: 1 pos: 1297 matePos: 1122 mateLen: 100 mq: 0.999999
+- 07:38:23.097 DEBUG: reads[18]: 3 pos: 1298 matePos: 1132 mateLen: 100 mq: 0.999999
+- 07:38:23.097 DEBUG: reads[19]: 92 pos: 1299 matePos: 1044 mateLen: 100 mq: 0.999999
+- 07:38:23.097 DEBUG: reads[20]: 71 pos: 1302 matePos: 1504 mateLen: 100 mq: 0.999999
+- 07:38:23.097 DEBUG: reads[21]: 84 pos: 1302 matePos: 1123 mateLen: 100 mq: 0.999999
+- 07:38:23.097 DEBUG: reads[22]: 105 pos: 1302 matePos: 1099 mateLen: 100 mq: 0.999999
+- 07:38:23.097 DEBUG: reads[23]: 47 pos: 1229 matePos: 1432 mateLen: 100 mq: 0.999999
+- 07:38:23.097 DEBUG: reads[24]: 83 pos: 1228 matePos: 1022 mateLen: 100 mq: 0.999999
+- 07:38:23.097 DEBUG: reads[25]: 40 pos: 1227 matePos: 1418 mateLen: 100 mq: 0.999999
+- 07:38:23.097 DEBUG: reads[26]: 8 pos: 1226 matePos: 1409 mateLen: 100 mq: 0.999999
+- 07:38:23.097 DEBUG: reads[27]: 85 pos: 1222 matePos: 1436 mateLen: 100 mq: 0.999999
+- 07:38:23.097 DEBUG: reads[28]: 43 pos: 1222 matePos: 1404 mateLen: 100 mq: 0.999999
+- 07:38:23.097 DEBUG: reads[29]: 29 pos: 1222 matePos: 1443 mateLen: 100 mq: 0.999999
+- 07:38:23.097 DEBUG: reads[30]: 18 pos: 1218 matePos: 1353 mateLen: 100 mq: 0.999999
+- 07:38:23.097 DEBUG: reads[31]: 36 pos: 1217 matePos: 1429 mateLen: 100 mq: 0.999999
+- 07:38:23.097 DEBUG: reads[32]: 31 pos: 1217 matePos: 1423 mateLen: 100 mq: 0.999999
+- 07:38:23.097 DEBUG: reads[33]: 75 pos: 1213 matePos: 1008 mateLen: 100 mq: 0.999999
+- 07:38:23.097 DEBUG: reads[34]: 97 pos: 1248 matePos: 1091 mateLen: 100 mq: 0.999999
+- 07:38:23.097 DEBUG: reads[35]: 69 pos: 1248 matePos: 1441 mateLen: 100 mq: 0.999999
+- 07:38:23.097 DEBUG: reads[36]: 57 pos: 1246 matePos: 1431 mateLen: 100 mq: 0.999999
+- 07:38:23.097 DEBUG: reads[37]: 50 pos: 1241 matePos: 1067 mateLen: 100 mq: 0.999999
+- 07:38:23.097 DEBUG: reads[38]: 9 pos: 1240 matePos: 1052 mateLen: 100 mq: 0.999999
+- 07:38:23.097 DEBUG: reads[39]: 77 pos: 1237 matePos: 1053 mateLen: 100 mq: 0.999999
+- 07:38:23.097 DEBUG: reads[40]: 45 pos: 1233 matePos: 1435 mateLen: 100 mq: 0.999999
+- 07:38:23.097 DEBUG: reads[41]: 94 pos: 1231 matePos: 1056 mateLen: 100 mq: 0.999999
+- 07:38:23.097 DEBUG: reads[42]: 76 pos: 1231 matePos: 1024 mateLen: 100 mq: 0.999999
+- 07:38:23.097 DEBUG: reads[43]: 104 pos: 1204 matePos: 1363 mateLen: 100 mq: 0.999999
+- 07:38:23.097 DEBUG: reads[44]: 73 pos: 1205 matePos: 1401 mateLen: 100 mq: 0.999999
+- 07:38:23.097 DEBUG: reads[45]: 6 pos: 1208 matePos: 1040 mateLen: 100 mq: 0.999999
+- 07:38:23.097 INFO: Number of reads: 46 out of 212 # unmapped reads: 0 numReadsUnknownLib: 0 numChrMismatch: 0 numMappedWithoutMate: 0 numUnmappedWithoutMate: 0
+- 07:38:23.097 DEBUG: getReadsFromBams()
+- 07:38:23.097 DEBUG:  1/tumor.bam
+- 07:38:23.097 DEBUG: leftFetchReadPos: 203 rightFetchReadPos: 2203 oldRightFetchReadPos: 2203
+- 07:38:23.097 DEBUG: leftMostReadPos: 203 rightMostReadPos: 2203 leftOverlapsPrevious: 0
+- 07:38:23.097 DEBUG: leftPos : 1203 rightPos: 1403 maxDev: 800
+- 07:38:23.097 INFO: Fetching reads....
+- 07:38:23.100 DEBUG: 0 212
+- 07:38:23.101 DEBUGREADS: qname: 6 reads[r].pos: 876 reads[r].getEndPos(): 976
+- 07:38:23.101 DEBUGREADS: 
+is mapped
+- 07:38:23.101 DEBUGREADS: filtered by minOverlap
+- 07:38:23.101 DEBUGREADS: reads[0]: 6 matePos: 1091 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.101 DEBUGREADS: qname: 106 reads[r].pos: 883 reads[r].getEndPos(): 983
+- 07:38:23.101 DEBUGREADS: 
+is mapped
+- 07:38:23.101 DEBUGREADS: filtered by minOverlap
+- 07:38:23.101 DEBUGREADS: reads[1]: 106 matePos: 1097 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.101 DEBUGREADS: qname: 87 reads[r].pos: 886 reads[r].getEndPos(): 986
+- 07:38:23.101 DEBUGREADS: 
+is mapped
+- 07:38:23.101 DEBUGREADS: filtered by minOverlap
+- 07:38:23.101 DEBUGREADS: reads[2]: 87 matePos: 1098 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.101 DEBUGREADS: qname: 45 reads[r].pos: 893 reads[r].getEndPos(): 993
+- 07:38:23.101 DEBUGREADS: 
+is mapped
+- 07:38:23.101 DEBUGREADS: filtered by minOverlap
+- 07:38:23.101 DEBUGREADS: reads[3]: 45 matePos: 1107 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.101 DEBUGREADS: qname: 7 reads[r].pos: 905 reads[r].getEndPos(): 1005
+- 07:38:23.101 DEBUGREADS: 
+is mapped
+- 07:38:23.101 DEBUGREADS: filtered by minOverlap
+- 07:38:23.101 DEBUGREADS: reads[4]: 7 matePos: 1125 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.101 DEBUGREADS: qname: 17 reads[r].pos: 907 reads[r].getEndPos(): 1007
+- 07:38:23.101 DEBUGREADS: 
+is mapped
+- 07:38:23.101 DEBUGREADS: filtered by minOverlap
+- 07:38:23.101 DEBUGREADS: reads[5]: 17 matePos: 1095 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.101 DEBUGREADS: qname: 77 reads[r].pos: 909 reads[r].getEndPos(): 1009
+- 07:38:23.101 DEBUGREADS: 
+is mapped
+- 07:38:23.101 DEBUGREADS: filtered by minOverlap
+- 07:38:23.101 DEBUGREADS: reads[6]: 77 matePos: 1103 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.101 DEBUGREADS: qname: 5 reads[r].pos: 918 reads[r].getEndPos(): 1018
+- 07:38:23.101 DEBUGREADS: 
+is mapped
+- 07:38:23.101 DEBUGREADS: filtered by minOverlap
+- 07:38:23.101 DEBUGREADS: reads[7]: 5 matePos: 1175 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.101 DEBUGREADS: qname: 91 reads[r].pos: 948 reads[r].getEndPos(): 1048
+- 07:38:23.101 DEBUGREADS: 
+is mapped
+- 07:38:23.101 DEBUGREADS: filtered by minOverlap
+- 07:38:23.101 DEBUGREADS: reads[8]: 91 matePos: 1147 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.101 DEBUGREADS: qname: 35 reads[r].pos: 949 reads[r].getEndPos(): 1049
+- 07:38:23.101 DEBUGREADS: 
+is mapped
+- 07:38:23.101 DEBUGREADS: filtered by minOverlap
+- 07:38:23.101 DEBUGREADS: reads[9]: 35 matePos: 1168 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.101 DEBUGREADS: qname: 47 reads[r].pos: 953 reads[r].getEndPos(): 1053
+- 07:38:23.101 DEBUGREADS: 
+is mapped
+- 07:38:23.101 DEBUGREADS: filtered by minOverlap
+- 07:38:23.101 DEBUGREADS: reads[10]: 47 matePos: 1162 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.101 DEBUGREADS: qname: 103 reads[r].pos: 954 reads[r].getEndPos(): 1054
+- 07:38:23.101 DEBUGREADS: 
+is mapped
+- 07:38:23.101 DEBUGREADS: filtered by minOverlap
+- 07:38:23.101 DEBUGREADS: reads[11]: 103 matePos: 1170 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.101 DEBUGREADS: qname: 57 reads[r].pos: 961 reads[r].getEndPos(): 1061
+- 07:38:23.101 DEBUGREADS: 
+is mapped
+- 07:38:23.102 DEBUGREADS: filtered by minOverlap
+- 07:38:23.102 DEBUGREADS: reads[12]: 57 matePos: 1138 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.102 DEBUGREADS: qname: 102 reads[r].pos: 963 reads[r].getEndPos(): 1063
+- 07:38:23.102 DEBUGREADS: 
+is mapped
+- 07:38:23.102 DEBUGREADS: filtered by minOverlap
+- 07:38:23.102 DEBUGREADS: reads[13]: 102 matePos: 1155 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.102 DEBUGREADS: qname: 40 reads[r].pos: 967 reads[r].getEndPos(): 1067
+- 07:38:23.102 DEBUGREADS: 
+is mapped
+- 07:38:23.102 DEBUGREADS: filtered by minOverlap
+- 07:38:23.102 DEBUGREADS: reads[14]: 40 matePos: 1159 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.102 DEBUGREADS: qname: 20 reads[r].pos: 974 reads[r].getEndPos(): 1074
+- 07:38:23.102 DEBUGREADS: 
+is mapped
+- 07:38:23.102 DEBUGREADS: filtered by minOverlap
+- 07:38:23.102 DEBUGREADS: reads[15]: 20 matePos: 1139 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.102 DEBUGREADS: qname: 33 reads[r].pos: 979 reads[r].getEndPos(): 1079
+- 07:38:23.102 DEBUGREADS: 
+is mapped
+- 07:38:23.102 DEBUGREADS: filtered by minOverlap
+- 07:38:23.102 DEBUGREADS: reads[16]: 33 matePos: 1199 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.102 DEBUGREADS: qname: 15 reads[r].pos: 981 reads[r].getEndPos(): 1081
+- 07:38:23.102 DEBUGREADS: 
+is mapped
+- 07:38:23.102 DEBUGREADS: filtered by minOverlap
+- 07:38:23.102 DEBUGREADS: reads[17]: 15 matePos: 1229 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.102 DEBUGREADS: qname: 56 reads[r].pos: 990 reads[r].getEndPos(): 1090
+- 07:38:23.102 DEBUGREADS: 
+is mapped
+- 07:38:23.102 DEBUGREADS: filtered by minOverlap
+- 07:38:23.102 DEBUGREADS: reads[18]: 56 matePos: 1156 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.102 DEBUGREADS: qname: 55 reads[r].pos: 995 reads[r].getEndPos(): 1095
+- 07:38:23.102 DEBUGREADS: 
+is mapped
+- 07:38:23.102 DEBUGREADS: filtered by minOverlap
+- 07:38:23.102 DEBUGREADS: reads[19]: 55 matePos: 1219 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.102 DEBUGREADS: qname: 67 reads[r].pos: 1004 reads[r].getEndPos(): 1104
+- 07:38:23.102 DEBUGREADS: 
+is mapped
+- 07:38:23.102 DEBUGREADS: filtered by minOverlap
+- 07:38:23.102 DEBUGREADS: reads[20]: 67 matePos: 1190 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.102 DEBUGREADS: qname: 32 reads[r].pos: 1009 reads[r].getEndPos(): 1109
+- 07:38:23.102 DEBUGREADS: 
+is mapped
+- 07:38:23.102 DEBUGREADS: filtered by minOverlap
+- 07:38:23.102 DEBUGREADS: reads[21]: 32 matePos: 1175 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.102 DEBUGREADS: qname: 2 reads[r].pos: 1019 reads[r].getEndPos(): 1119
+- 07:38:23.102 DEBUGREADS: 
+is mapped
+- 07:38:23.102 DEBUGREADS: filtered by minOverlap
+- 07:38:23.102 DEBUGREADS: reads[22]: 2 matePos: 1217 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.102 DEBUGREADS: qname: 94 reads[r].pos: 1021 reads[r].getEndPos(): 1121
+- 07:38:23.102 DEBUGREADS: 
+is mapped
+- 07:38:23.102 DEBUGREADS: filtered by minOverlap
+- 07:38:23.102 DEBUGREADS: reads[23]: 94 matePos: 1179 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.102 DEBUGREADS: qname: 31 reads[r].pos: 1030 reads[r].getEndPos(): 1130
+- 07:38:23.102 DEBUGREADS: 
+is mapped
+- 07:38:23.102 DEBUGREADS: filtered by minOverlap
+- 07:38:23.102 DEBUGREADS: reads[24]: 31 matePos: 1205 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.102 DEBUGREADS: qname: 1 reads[r].pos: 1039 reads[r].getEndPos(): 1139
+- 07:38:23.102 DEBUGREADS: 
+is mapped
+- 07:38:23.102 DEBUGREADS: filtered by minOverlap
+- 07:38:23.102 DEBUGREADS: reads[25]: 1 matePos: 1243 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.102 DEBUGREADS: qname: 36 reads[r].pos: 1039 reads[r].getEndPos(): 1139
+- 07:38:23.102 DEBUGREADS: 
+is mapped
+- 07:38:23.102 DEBUGREADS: filtered by minOverlap
+- 07:38:23.102 DEBUGREADS: reads[26]: 36 matePos: 1218 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.102 DEBUGREADS: qname: 21 reads[r].pos: 1044 reads[r].getEndPos(): 1144
+- 07:38:23.102 DEBUGREADS: 
+is mapped
+- 07:38:23.102 DEBUGREADS: filtered by minOverlap
+- 07:38:23.102 DEBUGREADS: reads[27]: 21 matePos: 1213 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.102 DEBUGREADS: qname: 65 reads[r].pos: 1052 reads[r].getEndPos(): 1152
+- 07:38:23.102 DEBUGREADS: 
+is mapped
+- 07:38:23.102 DEBUGREADS: filtered by minOverlap
+- 07:38:23.102 DEBUGREADS: reads[28]: 65 matePos: 1249 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.102 DEBUGREADS: qname: 60 reads[r].pos: 1053 reads[r].getEndPos(): 1153
+- 07:38:23.102 DEBUGREADS: 
+is mapped
+- 07:38:23.102 DEBUGREADS: filtered by minOverlap
+- 07:38:23.102 DEBUGREADS: reads[29]: 60 matePos: 1242 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.102 DEBUGREADS: qname: 79 reads[r].pos: 1053 reads[r].getEndPos(): 1153
+- 07:38:23.102 DEBUGREADS: 
+is mapped
+- 07:38:23.102 DEBUGREADS: filtered by minOverlap
+- 07:38:23.102 DEBUGREADS: reads[30]: 79 matePos: 1228 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.102 DEBUGREADS: qname: 70 reads[r].pos: 1056 reads[r].getEndPos(): 1156
+- 07:38:23.102 DEBUGREADS: 
+is mapped
+- 07:38:23.102 DEBUGREADS: filtered by minOverlap
+- 07:38:23.102 DEBUGREADS: reads[31]: 70 matePos: 1228 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.102 DEBUGREADS: qname: 99 reads[r].pos: 1060 reads[r].getEndPos(): 1160
+- 07:38:23.102 DEBUGREADS: 
+is mapped
+- 07:38:23.102 DEBUGREADS: filtered by minOverlap
+- 07:38:23.102 DEBUGREADS: reads[32]: 99 matePos: 1248 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.102 DEBUGREADS: qname: 44 reads[r].pos: 1063 reads[r].getEndPos(): 1163
+- 07:38:23.102 DEBUGREADS: 
+is mapped
+- 07:38:23.102 DEBUGREADS: filtered by minOverlap
+- 07:38:23.102 DEBUGREADS: reads[33]: 44 matePos: 1297 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.102 DEBUGREADS: qname: 93 reads[r].pos: 1063 reads[r].getEndPos(): 1163
+- 07:38:23.102 DEBUGREADS: 
+is mapped
+- 07:38:23.102 DEBUGREADS: filtered by minOverlap
+- 07:38:23.102 DEBUGREADS: reads[34]: 93 matePos: 1249 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.102 DEBUGREADS: qname: 78 reads[r].pos: 1069 reads[r].getEndPos(): 1169
+- 07:38:23.102 DEBUGREADS: 
+is mapped
+- 07:38:23.102 DEBUGREADS: filtered by minOverlap
+- 07:38:23.102 DEBUGREADS: reads[35]: 78 matePos: 1238 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.102 DEBUGREADS: qname: 85 reads[r].pos: 1069 reads[r].getEndPos(): 1169
+- 07:38:23.102 DEBUGREADS: 
+is mapped
+- 07:38:23.102 DEBUGREADS: filtered by minOverlap
+- 07:38:23.102 DEBUGREADS: reads[36]: 85 matePos: 1257 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.102 DEBUGREADS: qname: 18 reads[r].pos: 1077 reads[r].getEndPos(): 1177
+- 07:38:23.102 DEBUGREADS: 
+is mapped
+- 07:38:23.102 DEBUGREADS: filtered by minOverlap
+- 07:38:23.102 DEBUGREADS: reads[37]: 18 matePos: 1250 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.102 DEBUGREADS: qname: 98 reads[r].pos: 1077 reads[r].getEndPos(): 1177
+- 07:38:23.102 DEBUGREADS: 
+is mapped
+- 07:38:23.102 DEBUGREADS: filtered by minOverlap
+- 07:38:23.102 DEBUGREADS: reads[38]: 98 matePos: 1263 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.103 DEBUGREADS: qname: 24 reads[r].pos: 1081 reads[r].getEndPos(): 1181
+- 07:38:23.103 DEBUGREADS: 
+is mapped
+- 07:38:23.103 DEBUGREADS: filtered by minOverlap
+- 07:38:23.103 DEBUGREADS: reads[39]: 24 matePos: 1254 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.103 DEBUGREADS: qname: 83 reads[r].pos: 1083 reads[r].getEndPos(): 1183
+- 07:38:23.103 DEBUGREADS: 
+is mapped
+- 07:38:23.103 DEBUGREADS: filtered by minOverlap
+- 07:38:23.103 DEBUGREADS: reads[40]: 83 matePos: 1300 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.103 DEBUGREADS: qname: 86 reads[r].pos: 1089 reads[r].getEndPos(): 1189
+- 07:38:23.103 DEBUGREADS: 
+is mapped
+- 07:38:23.103 DEBUGREADS: filtered by minOverlap
+- 07:38:23.103 DEBUGREADS: reads[41]: 86 matePos: 1275 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.103 DEBUGREADS: qname: 29 reads[r].pos: 1090 reads[r].getEndPos(): 1190
+- 07:38:23.103 DEBUGREADS: 
+is mapped
+- 07:38:23.103 DEBUGREADS: filtered by minOverlap
+- 07:38:23.103 DEBUGREADS: reads[42]: 29 matePos: 1298 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.103 DEBUGREADS: qname: 6 reads[r].pos: 1091 reads[r].getEndPos(): 1191
+- 07:38:23.103 DEBUGREADS: 
+is mapped
+- 07:38:23.103 DEBUGREADS: filtered by minOverlap
+- 07:38:23.103 DEBUGREADS: reads[43]: 6 matePos: 876 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.103 DEBUGREADS: qname: 26 reads[r].pos: 1091 reads[r].getEndPos(): 1191
+- 07:38:23.103 DEBUGREADS: 
+is mapped
+- 07:38:23.103 DEBUGREADS: filtered by minOverlap
+- 07:38:23.103 DEBUGREADS: reads[44]: 26 matePos: 1263 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.103 DEBUGREADS: qname: 17 reads[r].pos: 1095 reads[r].getEndPos(): 1195
+- 07:38:23.103 DEBUGREADS: 
+is mapped
+- 07:38:23.103 DEBUGREADS: filtered by minOverlap
+- 07:38:23.103 DEBUGREADS: reads[45]: 17 matePos: 907 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.103 DEBUGREADS: qname: 19 reads[r].pos: 1097 reads[r].getEndPos(): 1197
+- 07:38:23.103 DEBUGREADS: 
+is mapped
+- 07:38:23.103 DEBUGREADS: filtered by minOverlap
+- 07:38:23.103 DEBUGREADS: reads[46]: 19 matePos: 1269 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.103 DEBUGREADS: qname: 64 reads[r].pos: 1097 reads[r].getEndPos(): 1197
+- 07:38:23.103 DEBUGREADS: 
+is mapped
+- 07:38:23.103 DEBUGREADS: filtered by minOverlap
+- 07:38:23.103 DEBUGREADS: reads[47]: 64 matePos: 1282 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.103 DEBUGREADS: qname: 106 reads[r].pos: 1097 reads[r].getEndPos(): 1197
+- 07:38:23.103 DEBUGREADS: 
+is mapped
+- 07:38:23.103 DEBUGREADS: filtered by minOverlap
+- 07:38:23.103 DEBUGREADS: reads[48]: 106 matePos: 883 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.103 DEBUGREADS: qname: 87 reads[r].pos: 1098 reads[r].getEndPos(): 1198
+- 07:38:23.103 DEBUGREADS: 
+is mapped
+- 07:38:23.103 DEBUGREADS: filtered by minOverlap
+- 07:38:23.103 DEBUGREADS: reads[49]: 87 matePos: 886 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.103 DEBUGREADS: qname: 97 reads[r].pos: 1099 reads[r].getEndPos(): 1199
+- 07:38:23.103 DEBUGREADS: 
+is mapped
+- 07:38:23.103 DEBUGREADS: filtered by minOverlap
+- 07:38:23.103 DEBUGREADS: reads[50]: 97 matePos: 1333 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.103 DEBUGREADS: qname: 59 reads[r].pos: 1101 reads[r].getEndPos(): 1201
+- 07:38:23.103 DEBUGREADS: 
+is mapped
+- 07:38:23.103 DEBUGREADS: filtered by minOverlap
+- 07:38:23.103 DEBUGREADS: reads[51]: 59 matePos: 1277 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.103 DEBUGREADS: qname: 73 reads[r].pos: 1101 reads[r].getEndPos(): 1201
+- 07:38:23.103 DEBUGREADS: 
+is mapped
+- 07:38:23.103 DEBUGREADS: filtered by minOverlap
+- 07:38:23.103 DEBUGREADS: reads[52]: 73 matePos: 1303 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.103 DEBUGREADS: qname: 30 reads[r].pos: 1102 reads[r].getEndPos(): 1202
+- 07:38:23.103 DEBUGREADS: 
+is mapped
+- 07:38:23.103 DEBUGREADS: filtered by minOverlap
+- 07:38:23.103 DEBUGREADS: reads[53]: 30 matePos: 1309 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.103 DEBUGREADS: qname: 50 reads[r].pos: 1102 reads[r].getEndPos(): 1202
+- 07:38:23.103 DEBUGREADS: 
+is mapped
+- 07:38:23.103 DEBUGREADS: filtered by minOverlap
+- 07:38:23.103 DEBUGREADS: reads[54]: 50 matePos: 1293 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.103 DEBUGREADS: qname: 77 reads[r].pos: 1103 reads[r].getEndPos(): 1203
+- 07:38:23.103 DEBUGREADS: 
+is mapped
+- 07:38:23.103 DEBUGREADS: filtered by minOverlap
+- 07:38:23.103 DEBUGREADS: reads[55]: 77 matePos: 909 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.103 DEBUGREADS: qname: 45 reads[r].pos: 1107 reads[r].getEndPos(): 1207
+- 07:38:23.103 DEBUGREADS: 
+is mapped
+- 07:38:23.103 DEBUGREADS: filtered by minOverlap
+- 07:38:23.103 DEBUGREADS: reads[56]: 45 matePos: 893 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.103 DEBUGREADS: qname: 96 reads[r].pos: 1108 reads[r].getEndPos(): 1208
+- 07:38:23.103 DEBUGREADS: 
+is mapped
+- 07:38:23.103 DEBUGREADS: filtered by minOverlap
+- 07:38:23.103 DEBUGREADS: reads[57]: 96 matePos: 1297 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.103 DEBUGREADS: qname: 9 reads[r].pos: 1120 reads[r].getEndPos(): 1220
+- 07:38:23.103 DEBUGREADS: 
+is mapped
+- 07:38:23.103 DEBUGREADS: filtered by minOverlap
+- 07:38:23.103 DEBUGREADS: reads[58]: 9 matePos: 1290 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.103 DEBUGREADS: qname: 101 reads[r].pos: 1120 reads[r].getEndPos(): 1220
+- 07:38:23.103 DEBUGREADS: 
+is mapped
+- 07:38:23.103 DEBUGREADS: filtered by minOverlap
+- 07:38:23.103 DEBUGREADS: reads[59]: 101 matePos: 1338 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.103 DEBUGREADS: qname: 48 reads[r].pos: 1122 reads[r].getEndPos(): 1222
+- 07:38:23.103 DEBUGREADS: 
+is mapped
+- 07:38:23.103 DEBUGREADS: filtered by minOverlap
+- 07:38:23.103 DEBUGREADS: reads[60]: 48 matePos: 1301 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.103 DEBUGREADS: qname: 27 reads[r].pos: 1124 reads[r].getEndPos(): 1224
+- 07:38:23.103 DEBUGREADS: 
+is mapped
+- 07:38:23.103 DEBUGREADS: filtered by minOverlap
+- 07:38:23.103 DEBUGREADS: reads[61]: 27 matePos: 1305 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.103 DEBUGREADS: qname: 7 reads[r].pos: 1125 reads[r].getEndPos(): 1225
+- 07:38:23.103 DEBUGREADS: 
+is mapped
+- 07:38:23.103 DEBUGREADS: filtered by minOverlap
+- 07:38:23.103 DEBUGREADS: reads[62]: 7 matePos: 905 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.103 DEBUGREADS: qname: 13 reads[r].pos: 1132 reads[r].getEndPos(): 1232
+- 07:38:23.103 DEBUGREADS: 
+is mapped
+- 07:38:23.103 DEBUGREADS: filtered by minOverlap
+- 07:38:23.103 DEBUGREADS: reads[63]: 13 matePos: 1306 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.103 DEBUGREADS: qname: 43 reads[r].pos: 1132 reads[r].getEndPos(): 1232
+- 07:38:23.103 DEBUGREADS: 
+is mapped
+- 07:38:23.103 DEBUGREADS: filtered by minOverlap
+- 07:38:23.103 DEBUGREADS: reads[64]: 43 matePos: 1346 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.103 DEBUGREADS: qname: 80 reads[r].pos: 1136 reads[r].getEndPos(): 1236
+- 07:38:23.103 DEBUGREADS: 
+is mapped
+- 07:38:23.103 DEBUGREADS: filtered by minOverlap
+- 07:38:23.103 DEBUGREADS: reads[65]: 80 matePos: 1390 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.104 DEBUGREADS: qname: 57 reads[r].pos: 1138 reads[r].getEndPos(): 1238
+- 07:38:23.104 DEBUGREADS: 
+is mapped
+- 07:38:23.104 DEBUGREADS: filtered by minOverlap
+- 07:38:23.104 DEBUGREADS: reads[66]: 57 matePos: 961 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.104 DEBUGREADS: qname: 82 reads[r].pos: 1138 reads[r].getEndPos(): 1238
+- 07:38:23.104 DEBUGREADS: 
+is mapped
+- 07:38:23.104 DEBUGREADS: filtered by minOverlap
+- 07:38:23.104 DEBUGREADS: reads[67]: 82 matePos: 1337 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.104 DEBUGREADS: qname: 20 reads[r].pos: 1139 reads[r].getEndPos(): 1239
+- 07:38:23.104 DEBUGREADS: 
+is mapped
+- 07:38:23.104 DEBUGREADS: filtered by minOverlap
+- 07:38:23.104 DEBUGREADS: reads[68]: 20 matePos: 974 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.104 DEBUGREADS: qname: 52 reads[r].pos: 1139 reads[r].getEndPos(): 1239
+- 07:38:23.104 DEBUGREADS: 
+is mapped
+- 07:38:23.104 DEBUGREADS: filtered by minOverlap
+- 07:38:23.104 DEBUGREADS: reads[69]: 52 matePos: 1349 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.104 DEBUGREADS: qname: 69 reads[r].pos: 1139 reads[r].getEndPos(): 1239
+- 07:38:23.104 DEBUGREADS: 
+is mapped
+- 07:38:23.104 DEBUGREADS: filtered by minOverlap
+- 07:38:23.104 DEBUGREADS: reads[70]: 69 matePos: 1337 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.104 DEBUGREADS: qname: 46 reads[r].pos: 1143 reads[r].getEndPos(): 1243
+- 07:38:23.104 DEBUGREADS: 
+is mapped
+- 07:38:23.104 DEBUGREADS: filtered by minOverlap
+- 07:38:23.104 DEBUGREADS: reads[71]: 46 matePos: 1342 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.104 DEBUGREADS: qname: 11 reads[r].pos: 1146 reads[r].getEndPos(): 1246
+- 07:38:23.104 DEBUGREADS: 
+is mapped
+- 07:38:23.104 DEBUGREADS: filtered by minOverlap
+- 07:38:23.104 DEBUGREADS: reads[72]: 11 matePos: 1300 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.104 DEBUGREADS: qname: 28 reads[r].pos: 1146 reads[r].getEndPos(): 1246
+- 07:38:23.104 DEBUGREADS: 
+is mapped
+- 07:38:23.104 DEBUGREADS: filtered by minOverlap
+- 07:38:23.104 DEBUGREADS: reads[73]: 28 matePos: 1362 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.104 DEBUGREADS: qname: 91 reads[r].pos: 1147 reads[r].getEndPos(): 1247
+- 07:38:23.104 DEBUGREADS: 
+is mapped
+- 07:38:23.104 DEBUGREADS: filtered by minOverlap
+- 07:38:23.104 DEBUGREADS: reads[74]: 91 matePos: 948 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.104 DEBUGREADS: qname: 62 reads[r].pos: 1150 reads[r].getEndPos(): 1250
+- 07:38:23.104 DEBUGREADS: 
+is mapped
+- 07:38:23.104 DEBUGREADS: filtered by minOverlap
+- 07:38:23.104 DEBUGREADS: reads[75]: 62 matePos: 1350 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.104 DEBUGREADS: qname: 51 reads[r].pos: 1151 reads[r].getEndPos(): 1251
+- 07:38:23.104 DEBUGREADS: 
+is mapped
+- 07:38:23.104 DEBUGREADS: filtered by minOverlap
+- 07:38:23.104 DEBUGREADS: reads[76]: 51 matePos: 1400 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.104 DEBUGREADS: qname: 102 reads[r].pos: 1155 reads[r].getEndPos(): 1255
+- 07:38:23.104 DEBUGREADS: 
+is mapped
+- 07:38:23.104 DEBUGREADS: filtered by minOverlap
+- 07:38:23.104 DEBUGREADS: reads[77]: 102 matePos: 963 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.104 DEBUGREADS: qname: 56 reads[r].pos: 1156 reads[r].getEndPos(): 1256
+- 07:38:23.104 DEBUGREADS: 
+is mapped
+- 07:38:23.104 DEBUGREADS: filtered by minOverlap
+- 07:38:23.104 DEBUGREADS: reads[78]: 56 matePos: 990 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.104 DEBUGREADS: qname: 40 reads[r].pos: 1159 reads[r].getEndPos(): 1259
+- 07:38:23.104 DEBUGREADS: 
+is mapped
+- 07:38:23.104 DEBUGREADS: filtered by minOverlap
+- 07:38:23.104 DEBUGREADS: reads[79]: 40 matePos: 967 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.104 DEBUGREADS: qname: 75 reads[r].pos: 1161 reads[r].getEndPos(): 1261
+- 07:38:23.104 DEBUGREADS: 
+is mapped
+- 07:38:23.104 DEBUGREADS: filtered by minOverlap
+- 07:38:23.104 DEBUGREADS: reads[80]: 75 matePos: 1341 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.104 DEBUGREADS: qname: 47 reads[r].pos: 1162 reads[r].getEndPos(): 1262
+- 07:38:23.104 DEBUGREADS: 
+is mapped
+- 07:38:23.104 DEBUGREADS: filtered by minOverlap
+- 07:38:23.104 DEBUGREADS: reads[81]: 47 matePos: 953 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.104 DEBUGREADS: qname: 63 reads[r].pos: 1165 reads[r].getEndPos(): 1265
+- 07:38:23.104 DEBUGREADS: 
+is mapped
+- 07:38:23.104 DEBUGREADS: filtered by minOverlap
+- 07:38:23.104 DEBUGREADS: reads[82]: 63 matePos: 1364 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.104 DEBUGREADS: qname: 42 reads[r].pos: 1167 reads[r].getEndPos(): 1267
+- 07:38:23.104 DEBUGREADS: 
+is mapped
+- 07:38:23.104 DEBUGREADS: filtered by minOverlap
+- 07:38:23.104 DEBUGREADS: reads[83]: 42 matePos: 1365 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.104 DEBUGREADS: qname: 35 reads[r].pos: 1168 reads[r].getEndPos(): 1268
+- 07:38:23.104 DEBUGREADS: 
+is mapped
+- 07:38:23.104 DEBUGREADS: filtered by minOverlap
+- 07:38:23.104 DEBUGREADS: reads[84]: 35 matePos: 949 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.104 DEBUGREADS: qname: 103 reads[r].pos: 1170 reads[r].getEndPos(): 1270
+- 07:38:23.104 DEBUGREADS: 
+is mapped
+- 07:38:23.104 DEBUGREADS: filtered by minOverlap
+- 07:38:23.104 DEBUGREADS: reads[85]: 103 matePos: 954 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.104 DEBUGREADS: qname: 84 reads[r].pos: 1172 reads[r].getEndPos(): 1272
+- 07:38:23.104 DEBUGREADS: 
+is mapped
+- 07:38:23.104 DEBUGREADS: filtered by minOverlap
+- 07:38:23.104 DEBUGREADS: reads[86]: 84 matePos: 1353 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.104 DEBUGREADS: qname: 5 reads[r].pos: 1175 reads[r].getEndPos(): 1275
+- 07:38:23.104 DEBUGREADS: 
+is mapped
+- 07:38:23.104 DEBUGREADS: filtered by minOverlap
+- 07:38:23.104 DEBUGREADS: reads[87]: 5 matePos: 918 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.104 DEBUGREADS: qname: 32 reads[r].pos: 1175 reads[r].getEndPos(): 1275
+- 07:38:23.104 DEBUGREADS: 
+is mapped
+- 07:38:23.104 DEBUGREADS: filtered by minOverlap
+- 07:38:23.104 DEBUGREADS: reads[88]: 32 matePos: 1009 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.104 DEBUGREADS: qname: 94 reads[r].pos: 1179 reads[r].getEndPos(): 1279
+- 07:38:23.104 DEBUGREADS: 
+is mapped
+- 07:38:23.104 DEBUGREADS: filtered by minOverlap
+- 07:38:23.104 DEBUGREADS: reads[89]: 94 matePos: 1021 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.104 DEBUGREADS: qname: 49 reads[r].pos: 1180 reads[r].getEndPos(): 1280
+- 07:38:23.104 DEBUGREADS: 
+is mapped
+- 07:38:23.104 DEBUGREADS: filtered by minOverlap
+- 07:38:23.104 DEBUGREADS: reads[90]: 49 matePos: 1383 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.104 DEBUGREADS: qname: 76 reads[r].pos: 1186 reads[r].getEndPos(): 1286
+- 07:38:23.104 DEBUGREADS: 
+is mapped
+- 07:38:23.104 DEBUGREADS: filtered by minOverlap
+- 07:38:23.104 DEBUGREADS: reads[91]: 76 matePos: 1417 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.104 DEBUGREADS: qname: 67 reads[r].pos: 1190 reads[r].getEndPos(): 1290
+- 07:38:23.104 DEBUGREADS: 
+is mapped
+- 07:38:23.104 DEBUGREADS: filtered by minOverlap
+- 07:38:23.104 DEBUGREADS: reads[92]: 67 matePos: 1004 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.104 DEBUGREADS: qname: 68 reads[r].pos: 1194 reads[r].getEndPos(): 1294
+- 07:38:23.104 DEBUGREADS: 
+is mapped
+- 07:38:23.104 DEBUGREADS: filtered by minOverlap
+- 07:38:23.104 DEBUGREADS: reads[93]: 68 matePos: 1384 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.104 DEBUGREADS: qname: 23 reads[r].pos: 1198 reads[r].getEndPos(): 1298
+- 07:38:23.104 DEBUGREADS: 
+is mapped
+- 07:38:23.105 DEBUGREADS: filtered by minOverlap
+- 07:38:23.105 DEBUGREADS: reads[94]: 23 matePos: 1378 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.105 DEBUGREADS: qname: 33 reads[r].pos: 1199 reads[r].getEndPos(): 1299
+- 07:38:23.105 DEBUGREADS: 
+is mapped
+- 07:38:23.105 DEBUGREADS: filtered by minOverlap
+- 07:38:23.105 DEBUGREADS: reads[95]: 33 matePos: 979 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.105 DEBUGREADS: qname: 31 reads[r].pos: 1205 reads[r].getEndPos(): 1305
+- 07:38:23.105 DEBUGREADS: 
+is mapped
+- 07:38:23.105 DEBUGREADS: mate is mapped
+- 07:38:23.105 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.105 DEBUGREADS: found the mate
+- 07:38:23.105 DEBUGREADS: reads[96]: 31 matePos: 1030 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.105 DEBUGREADS: qname: 92 reads[r].pos: 1206 reads[r].getEndPos(): 1306
+- 07:38:23.105 DEBUGREADS: 
+is mapped
+- 07:38:23.105 DEBUGREADS: mate is mapped
+- 07:38:23.105 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.105 DEBUGREADS: found the mate
+- 07:38:23.105 DEBUGREADS: reads[97]: 92 matePos: 1375 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.105 DEBUGREADS: qname: 38 reads[r].pos: 1209 reads[r].getEndPos(): 1309
+- 07:38:23.105 DEBUGREADS: 
+is mapped
+- 07:38:23.105 DEBUGREADS: mate is mapped
+- 07:38:23.105 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.105 DEBUGREADS: found the mate
+- 07:38:23.105 DEBUGREADS: reads[98]: 38 matePos: 1415 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.105 DEBUGREADS: qname: 21 reads[r].pos: 1213 reads[r].getEndPos(): 1313
+- 07:38:23.105 DEBUGREADS: 
+is mapped
+- 07:38:23.105 DEBUGREADS: mate is mapped
+- 07:38:23.105 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.105 DEBUGREADS: found the mate
+- 07:38:23.105 DEBUGREADS: reads[99]: 21 matePos: 1044 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.105 DEBUGREADS: qname: 74 reads[r].pos: 1216 reads[r].getEndPos(): 1316
+- 07:38:23.105 DEBUGREADS: 
+is mapped
+- 07:38:23.105 DEBUGREADS: mate is mapped
+- 07:38:23.105 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.105 DEBUGREADS: found the mate
+- 07:38:23.105 DEBUGREADS: reads[100]: 74 matePos: 1416 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.105 DEBUGREADS: qname: 2 reads[r].pos: 1217 reads[r].getEndPos(): 1317
+- 07:38:23.105 DEBUGREADS: 
+is mapped
+- 07:38:23.105 DEBUGREADS: mate is mapped
+- 07:38:23.105 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.105 DEBUGREADS: found the mate
+- 07:38:23.105 DEBUGREADS: reads[101]: 2 matePos: 1019 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.105 DEBUGREADS: qname: 36 reads[r].pos: 1218 reads[r].getEndPos(): 1318
+- 07:38:23.105 DEBUGREADS: 
+is mapped
+- 07:38:23.105 DEBUGREADS: mate is mapped
+- 07:38:23.105 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.105 DEBUGREADS: found the mate
+- 07:38:23.105 DEBUGREADS: reads[102]: 36 matePos: 1039 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.105 DEBUGREADS: qname: 55 reads[r].pos: 1219 reads[r].getEndPos(): 1319
+- 07:38:23.105 DEBUGREADS: 
+is mapped
+- 07:38:23.105 DEBUGREADS: mate is mapped
+- 07:38:23.105 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.105 DEBUGREADS: found the mate
+- 07:38:23.105 DEBUGREADS: reads[103]: 55 matePos: 995 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.105 DEBUGREADS: qname: 81 reads[r].pos: 1222 reads[r].getEndPos(): 1322
+- 07:38:23.105 DEBUGREADS: 
+is mapped
+- 07:38:23.105 DEBUGREADS: mate is mapped
+- 07:38:23.105 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.105 DEBUGREADS: found the mate
+- 07:38:23.105 DEBUGREADS: reads[104]: 81 matePos: 1406 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.105 DEBUGREADS: qname: 3 reads[r].pos: 1224 reads[r].getEndPos(): 1324
+- 07:38:23.105 DEBUGREADS: 
+is mapped
+- 07:38:23.105 DEBUGREADS: mate is mapped
+- 07:38:23.105 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.105 DEBUGREADS: found the mate
+- 07:38:23.105 DEBUGREADS: reads[105]: 3 matePos: 1410 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.105 DEBUGREADS: qname: 53 reads[r].pos: 1228 reads[r].getEndPos(): 1328
+- 07:38:23.105 DEBUGREADS: 
+is mapped
+- 07:38:23.105 DEBUGREADS: mate is mapped
+- 07:38:23.105 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.105 DEBUGREADS: found the mate
+- 07:38:23.105 DEBUGREADS: reads[106]: 53 matePos: 1414 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.105 DEBUGREADS: qname: 70 reads[r].pos: 1228 reads[r].getEndPos(): 1328
+- 07:38:23.105 DEBUGREADS: 
+is mapped
+- 07:38:23.105 DEBUGREADS: mate is mapped
+- 07:38:23.105 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.105 DEBUGREADS: found the mate
+- 07:38:23.105 DEBUGREADS: reads[107]: 70 matePos: 1056 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.105 DEBUGREADS: qname: 79 reads[r].pos: 1228 reads[r].getEndPos(): 1328
+- 07:38:23.105 DEBUGREADS: 
+is mapped
+- 07:38:23.105 DEBUGREADS: mate is mapped
+- 07:38:23.105 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.105 DEBUGREADS: found the mate
+- 07:38:23.105 DEBUGREADS: reads[108]: 79 matePos: 1053 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.105 DEBUGREADS: qname: 15 reads[r].pos: 1229 reads[r].getEndPos(): 1329
+- 07:38:23.105 DEBUGREADS: 
+is mapped
+- 07:38:23.105 DEBUGREADS: mate is mapped
+- 07:38:23.105 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.105 DEBUGREADS: found the mate
+- 07:38:23.105 DEBUGREADS: reads[109]: 15 matePos: 981 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.105 DEBUGREADS: qname: 90 reads[r].pos: 1234 reads[r].getEndPos(): 1334
+- 07:38:23.105 DEBUGREADS: 
+is mapped
+- 07:38:23.105 DEBUGREADS: mate is mapped
+- 07:38:23.105 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.105 DEBUGREADS: found the mate
+- 07:38:23.105 DEBUGREADS: reads[110]: 90 matePos: 1456 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.105 DEBUGREADS: qname: 34 reads[r].pos: 1238 reads[r].getEndPos(): 1338
+- 07:38:23.105 DEBUGREADS: 
+is mapped
+- 07:38:23.105 DEBUGREADS: mate is mapped
+- 07:38:23.105 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.105 DEBUGREADS: found the mate
+- 07:38:23.105 DEBUGREADS: reads[111]: 34 matePos: 1479 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.105 DEBUGREADS: qname: 78 reads[r].pos: 1238 reads[r].getEndPos(): 1338
+- 07:38:23.105 DEBUGREADS: 
+is mapped
+- 07:38:23.105 DEBUGREADS: mate is mapped
+- 07:38:23.105 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.105 DEBUGREADS: found the mate
+- 07:38:23.105 DEBUGREADS: reads[112]: 78 matePos: 1069 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.105 DEBUGREADS: qname: 12 reads[r].pos: 1241 reads[r].getEndPos(): 1341
+- 07:38:23.105 DEBUGREADS: 
+is mapped
+- 07:38:23.105 DEBUGREADS: mate is mapped
+- 07:38:23.105 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.105 DEBUGREADS: found the mate
+- 07:38:23.105 DEBUGREADS: reads[113]: 12 matePos: 1433 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.105 DEBUGREADS: qname: 60 reads[r].pos: 1242 reads[r].getEndPos(): 1342
+- 07:38:23.105 DEBUGREADS: 
+is mapped
+- 07:38:23.106 DEBUGREADS: mate is mapped
+- 07:38:23.106 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.106 DEBUGREADS: found the mate
+- 07:38:23.106 DEBUGREADS: reads[114]: 60 matePos: 1053 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.106 DEBUGREADS: qname: 1 reads[r].pos: 1243 reads[r].getEndPos(): 1343
+- 07:38:23.106 DEBUGREADS: 
+is mapped
+- 07:38:23.106 DEBUGREADS: mate is mapped
+- 07:38:23.106 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.106 DEBUGREADS: found the mate
+- 07:38:23.106 DEBUGREADS: reads[115]: 1 matePos: 1039 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.106 DEBUGREADS: qname: 100 reads[r].pos: 1247 reads[r].getEndPos(): 1347
+- 07:38:23.106 DEBUGREADS: 
+is mapped
+- 07:38:23.106 DEBUGREADS: mate is mapped
+- 07:38:23.106 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.106 DEBUGREADS: found the mate
+- 07:38:23.106 DEBUGREADS: reads[116]: 100 matePos: 1433 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.106 DEBUGREADS: qname: 99 reads[r].pos: 1248 reads[r].getEndPos(): 1348
+- 07:38:23.106 DEBUGREADS: 
+is mapped
+- 07:38:23.106 DEBUGREADS: mate is mapped
+- 07:38:23.106 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.106 DEBUGREADS: found the mate
+- 07:38:23.106 DEBUGREADS: reads[117]: 99 matePos: 1060 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.106 DEBUGREADS: qname: 65 reads[r].pos: 1249 reads[r].getEndPos(): 1349
+- 07:38:23.106 DEBUGREADS: 
+is mapped
+- 07:38:23.106 DEBUGREADS: mate is mapped
+- 07:38:23.106 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.106 DEBUGREADS: found the mate
+- 07:38:23.106 DEBUGREADS: reads[118]: 65 matePos: 1052 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.106 DEBUGREADS: qname: 93 reads[r].pos: 1249 reads[r].getEndPos(): 1349
+- 07:38:23.106 DEBUGREADS: 
+is mapped
+- 07:38:23.106 DEBUGREADS: mate is mapped
+- 07:38:23.106 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.106 DEBUGREADS: found the mate
+- 07:38:23.106 DEBUGREADS: reads[119]: 93 matePos: 1063 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.106 DEBUGREADS: qname: 18 reads[r].pos: 1250 reads[r].getEndPos(): 1350
+- 07:38:23.106 DEBUGREADS: 
+is mapped
+- 07:38:23.106 DEBUGREADS: mate is mapped
+- 07:38:23.106 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.106 DEBUGREADS: found the mate
+- 07:38:23.106 DEBUGREADS: reads[120]: 18 matePos: 1077 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.106 DEBUGREADS: qname: 41 reads[r].pos: 1250 reads[r].getEndPos(): 1350
+- 07:38:23.106 DEBUGREADS: 
+is mapped
+- 07:38:23.106 DEBUGREADS: mate is mapped
+- 07:38:23.106 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.106 DEBUGREADS: found the mate
+- 07:38:23.106 DEBUGREADS: reads[121]: 41 matePos: 1435 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.106 DEBUGREADS: qname: 71 reads[r].pos: 1251 reads[r].getEndPos(): 1351
+- 07:38:23.106 DEBUGREADS: 
+is mapped
+- 07:38:23.106 DEBUGREADS: mate is mapped
+- 07:38:23.106 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.106 DEBUGREADS: found the mate
+- 07:38:23.106 DEBUGREADS: reads[122]: 71 matePos: 1490 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.106 DEBUGREADS: qname: 24 reads[r].pos: 1254 reads[r].getEndPos(): 1354
+- 07:38:23.106 DEBUGREADS: 
+is mapped
+- 07:38:23.106 DEBUGREADS: mate is mapped
+- 07:38:23.106 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.106 DEBUGREADS: found the mate
+- 07:38:23.106 DEBUGREADS: reads[123]: 24 matePos: 1081 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.106 DEBUGREADS: qname: 85 reads[r].pos: 1257 reads[r].getEndPos(): 1357
+- 07:38:23.106 DEBUGREADS: 
+is mapped
+- 07:38:23.106 DEBUGREADS: mate is mapped
+- 07:38:23.106 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.106 DEBUGREADS: found the mate
+- 07:38:23.106 DEBUGREADS: reads[124]: 85 matePos: 1069 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.106 DEBUGREADS: qname: 8 reads[r].pos: 1261 reads[r].getEndPos(): 1361
+- 07:38:23.106 DEBUGREADS: 
+is mapped
+- 07:38:23.106 DEBUGREADS: mate is mapped
+- 07:38:23.106 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.106 DEBUGREADS: found the mate
+- 07:38:23.106 DEBUGREADS: reads[125]: 8 matePos: 1454 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.106 DEBUGREADS: qname: 26 reads[r].pos: 1263 reads[r].getEndPos(): 1363
+- 07:38:23.106 DEBUGREADS: 
+is mapped
+- 07:38:23.106 DEBUGREADS: mate is mapped
+- 07:38:23.106 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.106 DEBUGREADS: found the mate
+- 07:38:23.106 DEBUGREADS: reads[126]: 26 matePos: 1091 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.106 DEBUGREADS: qname: 88 reads[r].pos: 1263 reads[r].getEndPos(): 1363
+- 07:38:23.106 DEBUGREADS: 
+is mapped
+- 07:38:23.106 DEBUGREADS: mate is mapped
+- 07:38:23.106 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.106 DEBUGREADS: found the mate
+- 07:38:23.106 DEBUGREADS: reads[127]: 88 matePos: 1497 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.106 DEBUGREADS: qname: 98 reads[r].pos: 1263 reads[r].getEndPos(): 1363
+- 07:38:23.106 DEBUGREADS: 
+is mapped
+- 07:38:23.106 DEBUGREADS: mate is mapped
+- 07:38:23.106 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.106 DEBUGREADS: found the mate
+- 07:38:23.106 DEBUGREADS: reads[128]: 98 matePos: 1077 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.106 DEBUGREADS: qname: 19 reads[r].pos: 1269 reads[r].getEndPos(): 1369
+- 07:38:23.106 DEBUGREADS: 
+is mapped
+- 07:38:23.106 DEBUGREADS: mate is mapped
+- 07:38:23.106 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.106 DEBUGREADS: found the mate
+- 07:38:23.106 DEBUGREADS: reads[129]: 19 matePos: 1097 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.106 DEBUGREADS: qname: 4 reads[r].pos: 1272 reads[r].getEndPos(): 1372
+- 07:38:23.106 DEBUGREADS: 
+is mapped
+- 07:38:23.106 DEBUGREADS: mate is mapped
+- 07:38:23.106 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.106 DEBUGREADS: found the mate
+- 07:38:23.106 DEBUGREADS: reads[130]: 4 matePos: 1526 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.106 DEBUGREADS: qname: 86 reads[r].pos: 1275 reads[r].getEndPos(): 1375
+- 07:38:23.106 DEBUGREADS: 
+is mapped
+- 07:38:23.106 DEBUGREADS: mate is mapped
+- 07:38:23.106 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.106 DEBUGREADS: found the mate
+- 07:38:23.106 DEBUGREADS: reads[131]: 86 matePos: 1089 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.106 DEBUGREADS: qname: 22 reads[r].pos: 1276 reads[r].getEndPos(): 1376
+- 07:38:23.106 DEBUGREADS: 
+is mapped
+- 07:38:23.106 DEBUGREADS: mate is mapped
+- 07:38:23.106 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.106 DEBUGREADS: found the mate
+- 07:38:23.106 DEBUGREADS: reads[132]: 22 matePos: 1488 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.106 DEBUGREADS: qname: 59 reads[r].pos: 1277 reads[r].getEndPos(): 1377
+- 07:38:23.106 DEBUGREADS: 
+is mapped
+- 07:38:23.106 DEBUGREADS: mate is mapped
+- 07:38:23.106 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.106 DEBUGREADS: found the mate
+- 07:38:23.106 DEBUGREADS: reads[133]: 59 matePos: 1101 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.106 DEBUGREADS: qname: 64 reads[r].pos: 1282 reads[r].getEndPos(): 1382
+- 07:38:23.106 DEBUGREADS: 
+is mapped
+- 07:38:23.107 DEBUGREADS: mate is mapped
+- 07:38:23.107 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.107 DEBUGREADS: found the mate
+- 07:38:23.107 DEBUGREADS: reads[134]: 64 matePos: 1097 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.107 DEBUGREADS: qname: 9 reads[r].pos: 1290 reads[r].getEndPos(): 1390
+- 07:38:23.107 DEBUGREADS: 
+is mapped
+- 07:38:23.107 DEBUGREADS: mate is mapped
+- 07:38:23.107 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.107 DEBUGREADS: found the mate
+- 07:38:23.107 DEBUGREADS: reads[135]: 9 matePos: 1120 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.107 DEBUGREADS: qname: 50 reads[r].pos: 1293 reads[r].getEndPos(): 1393
+- 07:38:23.107 DEBUGREADS: 
+is mapped
+- 07:38:23.107 DEBUGREADS: mate is mapped
+- 07:38:23.107 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.107 DEBUGREADS: found the mate
+- 07:38:23.107 DEBUGREADS: reads[136]: 50 matePos: 1102 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.107 DEBUGREADS: qname: 37 reads[r].pos: 1296 reads[r].getEndPos(): 1396
+- 07:38:23.107 DEBUGREADS: 
+is mapped
+- 07:38:23.107 DEBUGREADS: mate is mapped
+- 07:38:23.107 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.107 DEBUGREADS: found the mate
+- 07:38:23.107 DEBUGREADS: reads[137]: 37 matePos: 1496 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.107 DEBUGREADS: qname: 44 reads[r].pos: 1297 reads[r].getEndPos(): 1397
+- 07:38:23.107 DEBUGREADS: 
+is mapped
+- 07:38:23.107 DEBUGREADS: mate is mapped
+- 07:38:23.107 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.107 DEBUGREADS: found the mate
+- 07:38:23.107 DEBUGREADS: reads[138]: 44 matePos: 1063 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.107 DEBUGREADS: qname: 96 reads[r].pos: 1297 reads[r].getEndPos(): 1397
+- 07:38:23.107 DEBUGREADS: 
+is mapped
+- 07:38:23.107 DEBUGREADS: mate is mapped
+- 07:38:23.107 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.107 DEBUGREADS: found the mate
+- 07:38:23.107 DEBUGREADS: reads[139]: 96 matePos: 1108 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.107 DEBUGREADS: qname: 29 reads[r].pos: 1298 reads[r].getEndPos(): 1398
+- 07:38:23.107 DEBUGREADS: 
+is mapped
+- 07:38:23.107 DEBUGREADS: mate is mapped
+- 07:38:23.107 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.107 DEBUGREADS: found the mate
+- 07:38:23.107 DEBUGREADS: reads[140]: 29 matePos: 1090 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.107 DEBUGREADS: qname: 11 reads[r].pos: 1300 reads[r].getEndPos(): 1400
+- 07:38:23.107 DEBUGREADS: 
+is mapped
+- 07:38:23.107 DEBUGREADS: mate is mapped
+- 07:38:23.107 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.107 DEBUGREADS: found the mate
+- 07:38:23.107 DEBUGREADS: reads[141]: 11 matePos: 1146 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.107 DEBUGREADS: qname: 14 reads[r].pos: 1300 reads[r].getEndPos(): 1400
+- 07:38:23.107 DEBUGREADS: 
+is mapped
+- 07:38:23.107 DEBUGREADS: mate is mapped
+- 07:38:23.107 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.107 DEBUGREADS: found the mate
+- 07:38:23.107 DEBUGREADS: reads[142]: 14 matePos: 1483 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.107 DEBUGREADS: qname: 83 reads[r].pos: 1300 reads[r].getEndPos(): 1400
+- 07:38:23.107 DEBUGREADS: 
+is mapped
+- 07:38:23.107 DEBUGREADS: mate is mapped
+- 07:38:23.107 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.107 DEBUGREADS: found the mate
+- 07:38:23.107 DEBUGREADS: reads[143]: 83 matePos: 1083 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.107 DEBUGREADS: qname: 39 reads[r].pos: 1301 reads[r].getEndPos(): 1401
+- 07:38:23.107 DEBUGREADS: 
+is mapped
+- 07:38:23.107 DEBUGREADS: mate is mapped
+- 07:38:23.107 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.107 DEBUGREADS: found the mate
+- 07:38:23.107 DEBUGREADS: reads[144]: 39 matePos: 1475 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.107 DEBUGREADS: qname: 48 reads[r].pos: 1301 reads[r].getEndPos(): 1401
+- 07:38:23.107 DEBUGREADS: 
+is mapped
+- 07:38:23.107 DEBUGREADS: mate is mapped
+- 07:38:23.107 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.107 DEBUGREADS: found the mate
+- 07:38:23.107 DEBUGREADS: reads[145]: 48 matePos: 1122 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.107 DEBUGREADS: qname: 66 reads[r].pos: 1301 reads[r].getEndPos(): 1401
+- 07:38:23.107 DEBUGREADS: 
+is mapped
+- 07:38:23.107 DEBUGREADS: mate is mapped
+- 07:38:23.107 DEBUGREADS: lookup mate and filter if we cannot find it (mapped to another chromosome, those are a bit suspicious)
+- 07:38:23.107 DEBUGREADS: found the mate
+- 07:38:23.107 DEBUGREADS: reads[146]: 66 matePos: 1471 mateLen: 100 Filter: 0 filter: 0 mq: 0.999999
+- 07:38:23.107 DEBUGREADS: qname: 10 reads[r].pos: 1303 reads[r].getEndPos(): 1403
+- 07:38:23.107 DEBUGREADS: 
+is mapped
+- 07:38:23.107 DEBUGREADS: filtered by minOverlap
+- 07:38:23.107 DEBUGREADS: reads[147]: 10 matePos: 1479 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.107 DEBUGREADS: qname: 25 reads[r].pos: 1303 reads[r].getEndPos(): 1403
+- 07:38:23.107 DEBUGREADS: 
+is mapped
+- 07:38:23.107 DEBUGREADS: filtered by minOverlap
+- 07:38:23.107 DEBUGREADS: reads[148]: 25 matePos: 1464 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.107 DEBUGREADS: qname: 73 reads[r].pos: 1303 reads[r].getEndPos(): 1403
+- 07:38:23.107 DEBUGREADS: 
+is mapped
+- 07:38:23.107 DEBUGREADS: filtered by minOverlap
+- 07:38:23.107 DEBUGREADS: reads[149]: 73 matePos: 1101 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.107 DEBUGREADS: qname: 27 reads[r].pos: 1305 reads[r].getEndPos(): 1405
+- 07:38:23.107 DEBUGREADS: 
+is mapped
+- 07:38:23.107 DEBUGREADS: filtered by minOverlap
+- 07:38:23.107 DEBUGREADS: reads[150]: 27 matePos: 1124 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.107 DEBUGREADS: qname: 13 reads[r].pos: 1306 reads[r].getEndPos(): 1406
+- 07:38:23.107 DEBUGREADS: 
+is mapped
+- 07:38:23.107 DEBUGREADS: filtered by minOverlap
+- 07:38:23.107 DEBUGREADS: reads[151]: 13 matePos: 1132 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.107 DEBUGREADS: qname: 30 reads[r].pos: 1309 reads[r].getEndPos(): 1409
+- 07:38:23.107 DEBUGREADS: 
+is mapped
+- 07:38:23.107 DEBUGREADS: filtered by minOverlap
+- 07:38:23.107 DEBUGREADS: reads[152]: 30 matePos: 1102 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.107 DEBUGREADS: qname: 105 reads[r].pos: 1317 reads[r].getEndPos(): 1417
+- 07:38:23.107 DEBUGREADS: 
+is mapped
+- 07:38:23.107 DEBUGREADS: filtered by minOverlap
+- 07:38:23.107 DEBUGREADS: reads[153]: 105 matePos: 1525 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.107 DEBUGREADS: qname: 95 reads[r].pos: 1328 reads[r].getEndPos(): 1428
+- 07:38:23.107 DEBUGREADS: 
+is mapped
+- 07:38:23.107 DEBUGREADS: filtered by minOverlap
+- 07:38:23.107 DEBUGREADS: reads[154]: 95 matePos: 1539 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.107 DEBUGREADS: qname: 61 reads[r].pos: 1332 reads[r].getEndPos(): 1432
+- 07:38:23.107 DEBUGREADS: 
+is mapped
+- 07:38:23.107 DEBUGREADS: filtered by minOverlap
+- 07:38:23.107 DEBUGREADS: reads[155]: 61 matePos: 1543 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.107 DEBUGREADS: qname: 97 reads[r].pos: 1333 reads[r].getEndPos(): 1433
+- 07:38:23.107 DEBUGREADS: 
+is mapped
+- 07:38:23.107 DEBUGREADS: filtered by minOverlap
+- 07:38:23.107 DEBUGREADS: reads[156]: 97 matePos: 1099 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.107 DEBUGREADS: qname: 54 reads[r].pos: 1335 reads[r].getEndPos(): 1435
+- 07:38:23.107 DEBUGREADS: 
+is mapped
+- 07:38:23.107 DEBUGREADS: filtered by minOverlap
+- 07:38:23.108 DEBUGREADS: reads[157]: 54 matePos: 1532 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.108 DEBUGREADS: qname: 69 reads[r].pos: 1337 reads[r].getEndPos(): 1437
+- 07:38:23.108 DEBUGREADS: 
+is mapped
+- 07:38:23.108 DEBUGREADS: filtered by minOverlap
+- 07:38:23.108 DEBUGREADS: reads[158]: 69 matePos: 1139 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.108 DEBUGREADS: qname: 82 reads[r].pos: 1337 reads[r].getEndPos(): 1437
+- 07:38:23.108 DEBUGREADS: 
+is mapped
+- 07:38:23.108 DEBUGREADS: filtered by minOverlap
+- 07:38:23.108 DEBUGREADS: reads[159]: 82 matePos: 1138 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.108 DEBUGREADS: qname: 101 reads[r].pos: 1338 reads[r].getEndPos(): 1438
+- 07:38:23.108 DEBUGREADS: 
+is mapped
+- 07:38:23.108 DEBUGREADS: filtered by minOverlap
+- 07:38:23.108 DEBUGREADS: reads[160]: 101 matePos: 1120 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.108 DEBUGREADS: qname: 75 reads[r].pos: 1341 reads[r].getEndPos(): 1441
+- 07:38:23.108 DEBUGREADS: 
+is mapped
+- 07:38:23.108 DEBUGREADS: filtered by minOverlap
+- 07:38:23.108 DEBUGREADS: reads[161]: 75 matePos: 1161 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.108 DEBUGREADS: qname: 46 reads[r].pos: 1342 reads[r].getEndPos(): 1442
+- 07:38:23.108 DEBUGREADS: 
+is mapped
+- 07:38:23.108 DEBUGREADS: filtered by minOverlap
+- 07:38:23.108 DEBUGREADS: reads[162]: 46 matePos: 1143 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.108 DEBUGREADS: qname: 16 reads[r].pos: 1346 reads[r].getEndPos(): 1446
+- 07:38:23.108 DEBUGREADS: 
+is mapped
+- 07:38:23.108 DEBUGREADS: filtered by minOverlap
+- 07:38:23.108 DEBUGREADS: reads[163]: 16 matePos: 1545 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.108 DEBUGREADS: qname: 43 reads[r].pos: 1346 reads[r].getEndPos(): 1446
+- 07:38:23.108 DEBUGREADS: 
+is mapped
+- 07:38:23.108 DEBUGREADS: filtered by minOverlap
+- 07:38:23.108 DEBUGREADS: reads[164]: 43 matePos: 1132 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.108 DEBUGREADS: qname: 58 reads[r].pos: 1348 reads[r].getEndPos(): 1448
+- 07:38:23.108 DEBUGREADS: 
+is mapped
+- 07:38:23.108 DEBUGREADS: filtered by minOverlap
+- 07:38:23.108 DEBUGREADS: reads[165]: 58 matePos: 1608 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.108 DEBUGREADS: qname: 52 reads[r].pos: 1349 reads[r].getEndPos(): 1449
+- 07:38:23.108 DEBUGREADS: 
+is mapped
+- 07:38:23.108 DEBUGREADS: filtered by minOverlap
+- 07:38:23.108 DEBUGREADS: reads[166]: 52 matePos: 1139 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.108 DEBUGREADS: qname: 72 reads[r].pos: 1349 reads[r].getEndPos(): 1449
+- 07:38:23.108 DEBUGREADS: 
+is mapped
+- 07:38:23.108 DEBUGREADS: filtered by minOverlap
+- 07:38:23.108 DEBUGREADS: reads[167]: 72 matePos: 1553 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.108 DEBUGREADS: qname: 62 reads[r].pos: 1350 reads[r].getEndPos(): 1450
+- 07:38:23.108 DEBUGREADS: 
+is mapped
+- 07:38:23.108 DEBUGREADS: filtered by minOverlap
+- 07:38:23.108 DEBUGREADS: reads[168]: 62 matePos: 1150 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.108 DEBUGREADS: qname: 104 reads[r].pos: 1350 reads[r].getEndPos(): 1450
+- 07:38:23.108 DEBUGREADS: 
+is mapped
+- 07:38:23.108 DEBUGREADS: filtered by minOverlap
+- 07:38:23.108 DEBUGREADS: reads[169]: 104 matePos: 1526 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.108 DEBUGREADS: qname: 89 reads[r].pos: 1352 reads[r].getEndPos(): 1452
+- 07:38:23.108 DEBUGREADS: 
+is mapped
+- 07:38:23.108 DEBUGREADS: filtered by minOverlap
+- 07:38:23.108 DEBUGREADS: reads[170]: 89 matePos: 1607 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.108 DEBUGREADS: qname: 84 reads[r].pos: 1353 reads[r].getEndPos(): 1453
+- 07:38:23.108 DEBUGREADS: 
+is mapped
+- 07:38:23.108 DEBUGREADS: filtered by minOverlap
+- 07:38:23.108 DEBUGREADS: reads[171]: 84 matePos: 1172 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.108 DEBUGREADS: qname: 28 reads[r].pos: 1362 reads[r].getEndPos(): 1462
+- 07:38:23.108 DEBUGREADS: 
+is mapped
+- 07:38:23.108 DEBUGREADS: filtered by minOverlap
+- 07:38:23.108 DEBUGREADS: reads[172]: 28 matePos: 1146 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.108 DEBUGREADS: qname: 63 reads[r].pos: 1364 reads[r].getEndPos(): 1464
+- 07:38:23.108 DEBUGREADS: 
+is mapped
+- 07:38:23.108 DEBUGREADS: filtered by minOverlap
+- 07:38:23.108 DEBUGREADS: reads[173]: 63 matePos: 1165 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.108 DEBUGREADS: qname: 42 reads[r].pos: 1365 reads[r].getEndPos(): 1465
+- 07:38:23.108 DEBUGREADS: 
+is mapped
+- 07:38:23.108 DEBUGREADS: filtered by minOverlap
+- 07:38:23.108 DEBUGREADS: reads[174]: 42 matePos: 1167 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.108 DEBUGREADS: qname: 92 reads[r].pos: 1375 reads[r].getEndPos(): 1475
+- 07:38:23.108 DEBUGREADS: 
+is mapped
+- 07:38:23.108 DEBUGREADS: filtered by minOverlap
+- 07:38:23.108 DEBUGREADS: reads[175]: 92 matePos: 1206 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.108 DEBUGREADS: qname: 23 reads[r].pos: 1378 reads[r].getEndPos(): 1478
+- 07:38:23.108 DEBUGREADS: 
+is mapped
+- 07:38:23.108 DEBUGREADS: filtered by minOverlap
+- 07:38:23.108 DEBUGREADS: reads[176]: 23 matePos: 1198 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.108 DEBUGREADS: qname: 49 reads[r].pos: 1383 reads[r].getEndPos(): 1483
+- 07:38:23.108 DEBUGREADS: 
+is mapped
+- 07:38:23.108 DEBUGREADS: filtered by minOverlap
+- 07:38:23.108 DEBUGREADS: reads[177]: 49 matePos: 1180 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.108 DEBUGREADS: qname: 68 reads[r].pos: 1384 reads[r].getEndPos(): 1484
+- 07:38:23.108 DEBUGREADS: 
+is mapped
+- 07:38:23.108 DEBUGREADS: filtered by minOverlap
+- 07:38:23.108 DEBUGREADS: reads[178]: 68 matePos: 1194 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.108 DEBUGREADS: qname: 80 reads[r].pos: 1390 reads[r].getEndPos(): 1490
+- 07:38:23.108 DEBUGREADS: 
+is mapped
+- 07:38:23.108 DEBUGREADS: filtered by minOverlap
+- 07:38:23.108 DEBUGREADS: reads[179]: 80 matePos: 1136 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.108 DEBUGREADS: qname: 51 reads[r].pos: 1400 reads[r].getEndPos(): 1500
+- 07:38:23.108 DEBUGREADS: 
+is mapped
+- 07:38:23.108 DEBUGREADS: filtered by minOverlap
+- 07:38:23.108 DEBUGREADS: reads[180]: 51 matePos: 1151 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.108 DEBUGREADS: qname: 81 reads[r].pos: 1406 reads[r].getEndPos(): 1506
+- 07:38:23.108 DEBUGREADS: 
+is mapped
+- 07:38:23.108 DEBUGREADS: filtered by minOverlap
+- 07:38:23.108 DEBUGREADS: reads[181]: 81 matePos: 1222 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.108 DEBUGREADS: qname: 3 reads[r].pos: 1410 reads[r].getEndPos(): 1510
+- 07:38:23.108 DEBUGREADS: 
+is mapped
+- 07:38:23.108 DEBUGREADS: filtered by minOverlap
+- 07:38:23.108 DEBUGREADS: reads[182]: 3 matePos: 1224 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.108 DEBUGREADS: qname: 53 reads[r].pos: 1414 reads[r].getEndPos(): 1514
+- 07:38:23.108 DEBUGREADS: 
+is mapped
+- 07:38:23.108 DEBUGREADS: filtered by minOverlap
+- 07:38:23.108 DEBUGREADS: reads[183]: 53 matePos: 1228 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.108 DEBUGREADS: qname: 38 reads[r].pos: 1415 reads[r].getEndPos(): 1515
+- 07:38:23.108 DEBUGREADS: 
+is mapped
+- 07:38:23.108 DEBUGREADS: filtered by minOverlap
+- 07:38:23.108 DEBUGREADS: reads[184]: 38 matePos: 1209 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.108 DEBUGREADS: qname: 74 reads[r].pos: 1416 reads[r].getEndPos(): 1516
+- 07:38:23.108 DEBUGREADS: 
+is mapped
+- 07:38:23.108 DEBUGREADS: filtered by minOverlap
+- 07:38:23.108 DEBUGREADS: reads[185]: 74 matePos: 1216 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.108 DEBUGREADS: qname: 76 reads[r].pos: 1417 reads[r].getEndPos(): 1517
+- 07:38:23.109 DEBUGREADS: 
+is mapped
+- 07:38:23.109 DEBUGREADS: filtered by minOverlap
+- 07:38:23.109 DEBUGREADS: reads[186]: 76 matePos: 1186 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.109 DEBUGREADS: qname: 12 reads[r].pos: 1433 reads[r].getEndPos(): 1533
+- 07:38:23.109 DEBUGREADS: 
+is mapped
+- 07:38:23.109 DEBUGREADS: filtered by minOverlap
+- 07:38:23.109 DEBUGREADS: reads[187]: 12 matePos: 1241 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.109 DEBUGREADS: qname: 100 reads[r].pos: 1433 reads[r].getEndPos(): 1533
+- 07:38:23.109 DEBUGREADS: 
+is mapped
+- 07:38:23.109 DEBUGREADS: filtered by minOverlap
+- 07:38:23.109 DEBUGREADS: reads[188]: 100 matePos: 1247 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.109 DEBUGREADS: qname: 41 reads[r].pos: 1435 reads[r].getEndPos(): 1535
+- 07:38:23.109 DEBUGREADS: 
+is mapped
+- 07:38:23.109 DEBUGREADS: filtered by minOverlap
+- 07:38:23.109 DEBUGREADS: reads[189]: 41 matePos: 1250 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.109 DEBUGREADS: qname: 8 reads[r].pos: 1454 reads[r].getEndPos(): 1554
+- 07:38:23.109 DEBUGREADS: 
+is mapped
+- 07:38:23.109 DEBUGREADS: filtered by minOverlap
+- 07:38:23.109 DEBUGREADS: reads[190]: 8 matePos: 1261 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.109 DEBUGREADS: qname: 90 reads[r].pos: 1456 reads[r].getEndPos(): 1556
+- 07:38:23.109 DEBUGREADS: 
+is mapped
+- 07:38:23.109 DEBUGREADS: filtered by minOverlap
+- 07:38:23.109 DEBUGREADS: reads[191]: 90 matePos: 1234 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.109 DEBUGREADS: qname: 25 reads[r].pos: 1464 reads[r].getEndPos(): 1564
+- 07:38:23.109 DEBUGREADS: 
+is mapped
+- 07:38:23.109 DEBUGREADS: filtered by minOverlap
+- 07:38:23.109 DEBUGREADS: reads[192]: 25 matePos: 1303 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.109 DEBUGREADS: qname: 66 reads[r].pos: 1471 reads[r].getEndPos(): 1571
+- 07:38:23.109 DEBUGREADS: 
+is mapped
+- 07:38:23.109 DEBUGREADS: filtered by minOverlap
+- 07:38:23.109 DEBUGREADS: reads[193]: 66 matePos: 1301 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.109 DEBUGREADS: qname: 39 reads[r].pos: 1475 reads[r].getEndPos(): 1575
+- 07:38:23.109 DEBUGREADS: 
+is mapped
+- 07:38:23.109 DEBUGREADS: filtered by minOverlap
+- 07:38:23.109 DEBUGREADS: reads[194]: 39 matePos: 1301 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.109 DEBUGREADS: qname: 10 reads[r].pos: 1479 reads[r].getEndPos(): 1579
+- 07:38:23.109 DEBUGREADS: 
+is mapped
+- 07:38:23.109 DEBUGREADS: filtered by minOverlap
+- 07:38:23.109 DEBUGREADS: reads[195]: 10 matePos: 1303 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.109 DEBUGREADS: qname: 34 reads[r].pos: 1479 reads[r].getEndPos(): 1579
+- 07:38:23.109 DEBUGREADS: 
+is mapped
+- 07:38:23.109 DEBUGREADS: filtered by minOverlap
+- 07:38:23.109 DEBUGREADS: reads[196]: 34 matePos: 1238 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.109 DEBUGREADS: qname: 14 reads[r].pos: 1483 reads[r].getEndPos(): 1583
+- 07:38:23.109 DEBUGREADS: 
+is mapped
+- 07:38:23.109 DEBUGREADS: filtered by minOverlap
+- 07:38:23.109 DEBUGREADS: reads[197]: 14 matePos: 1300 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.109 DEBUGREADS: qname: 22 reads[r].pos: 1488 reads[r].getEndPos(): 1588
+- 07:38:23.109 DEBUGREADS: 
+is mapped
+- 07:38:23.109 DEBUGREADS: filtered by minOverlap
+- 07:38:23.109 DEBUGREADS: reads[198]: 22 matePos: 1276 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.109 DEBUGREADS: qname: 71 reads[r].pos: 1490 reads[r].getEndPos(): 1590
+- 07:38:23.109 DEBUGREADS: 
+is mapped
+- 07:38:23.109 DEBUGREADS: filtered by minOverlap
+- 07:38:23.109 DEBUGREADS: reads[199]: 71 matePos: 1251 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.109 DEBUGREADS: qname: 37 reads[r].pos: 1496 reads[r].getEndPos(): 1596
+- 07:38:23.109 DEBUGREADS: 
+is mapped
+- 07:38:23.109 DEBUGREADS: filtered by minOverlap
+- 07:38:23.109 DEBUGREADS: reads[200]: 37 matePos: 1296 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.109 DEBUGREADS: qname: 88 reads[r].pos: 1497 reads[r].getEndPos(): 1597
+- 07:38:23.109 DEBUGREADS: 
+is mapped
+- 07:38:23.109 DEBUGREADS: filtered by minOverlap
+- 07:38:23.109 DEBUGREADS: reads[201]: 88 matePos: 1263 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.109 DEBUGREADS: qname: 105 reads[r].pos: 1525 reads[r].getEndPos(): 1625
+- 07:38:23.109 DEBUGREADS: 
+is mapped
+- 07:38:23.109 DEBUGREADS: filtered by minOverlap
+- 07:38:23.109 DEBUGREADS: reads[202]: 105 matePos: 1317 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.109 DEBUGREADS: qname: 4 reads[r].pos: 1526 reads[r].getEndPos(): 1626
+- 07:38:23.109 DEBUGREADS: 
+is mapped
+- 07:38:23.109 DEBUGREADS: filtered by minOverlap
+- 07:38:23.109 DEBUGREADS: reads[203]: 4 matePos: 1272 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.109 DEBUGREADS: qname: 104 reads[r].pos: 1526 reads[r].getEndPos(): 1626
+- 07:38:23.109 DEBUGREADS: 
+is mapped
+- 07:38:23.109 DEBUGREADS: filtered by minOverlap
+- 07:38:23.109 DEBUGREADS: reads[204]: 104 matePos: 1350 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.109 DEBUGREADS: qname: 54 reads[r].pos: 1532 reads[r].getEndPos(): 1632
+- 07:38:23.109 DEBUGREADS: 
+is mapped
+- 07:38:23.109 DEBUGREADS: filtered by minOverlap
+- 07:38:23.109 DEBUGREADS: reads[205]: 54 matePos: 1335 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.109 DEBUGREADS: qname: 95 reads[r].pos: 1539 reads[r].getEndPos(): 1639
+- 07:38:23.109 DEBUGREADS: 
+is mapped
+- 07:38:23.109 DEBUGREADS: filtered by minOverlap
+- 07:38:23.109 DEBUGREADS: reads[206]: 95 matePos: 1328 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.109 DEBUGREADS: qname: 61 reads[r].pos: 1543 reads[r].getEndPos(): 1643
+- 07:38:23.109 DEBUGREADS: 
+is mapped
+- 07:38:23.109 DEBUGREADS: filtered by minOverlap
+- 07:38:23.109 DEBUGREADS: reads[207]: 61 matePos: 1332 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.109 DEBUGREADS: qname: 16 reads[r].pos: 1545 reads[r].getEndPos(): 1645
+- 07:38:23.109 DEBUGREADS: 
+is mapped
+- 07:38:23.109 DEBUGREADS: filtered by minOverlap
+- 07:38:23.109 DEBUGREADS: reads[208]: 16 matePos: 1346 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.109 DEBUGREADS: qname: 72 reads[r].pos: 1553 reads[r].getEndPos(): 1653
+- 07:38:23.109 DEBUGREADS: 
+is mapped
+- 07:38:23.109 DEBUGREADS: filtered by minOverlap
+- 07:38:23.109 DEBUGREADS: reads[209]: 72 matePos: 1349 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.109 DEBUGREADS: qname: 89 reads[r].pos: 1607 reads[r].getEndPos(): 1707
+- 07:38:23.109 DEBUGREADS: 
+is mapped
+- 07:38:23.109 DEBUGREADS: filtered by minOverlap
+- 07:38:23.109 DEBUGREADS: reads[210]: 89 matePos: 1352 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.109 DEBUGREADS: qname: 58 reads[r].pos: 1608 reads[r].getEndPos(): 1708
+- 07:38:23.109 DEBUGREADS: 
+is mapped
+- 07:38:23.109 DEBUGREADS: filtered by minOverlap
+- 07:38:23.109 DEBUGREADS: reads[211]: 58 matePos: 1348 mateLen: -1 Filter: 1 filter: 1 mq: 0.999999
+- 07:38:23.111 DEBUG: fetched reads:
+- 07:38:23.111 DEBUG: reads[0]: 71 pos: 1251 matePos: 1490 mateLen: 100 mq: 0.999999
+- 07:38:23.111 DEBUG: reads[1]: 24 pos: 1254 matePos: 1081 mateLen: 100 mq: 0.999999
+- 07:38:23.111 DEBUG: reads[2]: 85 pos: 1257 matePos: 1069 mateLen: 100 mq: 0.999999
+- 07:38:23.111 DEBUG: reads[3]: 8 pos: 1261 matePos: 1454 mateLen: 100 mq: 0.999999
+- 07:38:23.111 DEBUG: reads[4]: 26 pos: 1263 matePos: 1091 mateLen: 100 mq: 0.999999
+- 07:38:23.111 DEBUG: reads[5]: 88 pos: 1263 matePos: 1497 mateLen: 100 mq: 0.999999
+- 07:38:23.111 DEBUG: reads[6]: 98 pos: 1263 matePos: 1077 mateLen: 100 mq: 0.999999
+- 07:38:23.111 DEBUG: reads[7]: 19 pos: 1269 matePos: 1097 mateLen: 100 mq: 0.999999
+- 07:38:23.111 DEBUG: reads[8]: 4 pos: 1272 matePos: 1526 mateLen: 100 mq: 0.999999
+- 07:38:23.111 DEBUG: reads[9]: 86 pos: 1275 matePos: 1089 mateLen: 100 mq: 0.999999
+- 07:38:23.111 DEBUG: reads[10]: 22 pos: 1276 matePos: 1488 mateLen: 100 mq: 0.999999
+- 07:38:23.111 DEBUG: reads[11]: 59 pos: 1277 matePos: 1101 mateLen: 100 mq: 0.999999
+- 07:38:23.111 DEBUG: reads[12]: 64 pos: 1282 matePos: 1097 mateLen: 100 mq: 0.999999
+- 07:38:23.111 DEBUG: reads[13]: 9 pos: 1290 matePos: 1120 mateLen: 100 mq: 0.999999
+- 07:38:23.111 DEBUG: reads[14]: 50 pos: 1293 matePos: 1102 mateLen: 100 mq: 0.999999
+- 07:38:23.111 DEBUG: reads[15]: 37 pos: 1296 matePos: 1496 mateLen: 100 mq: 0.999999
+- 07:38:23.111 DEBUG: reads[16]: 44 pos: 1297 matePos: 1063 mateLen: 100 mq: 0.999999
+- 07:38:23.111 DEBUG: reads[17]: 96 pos: 1297 matePos: 1108 mateLen: 100 mq: 0.999999
+- 07:38:23.111 DEBUG: reads[18]: 29 pos: 1298 matePos: 1090 mateLen: 100 mq: 0.999999
+- 07:38:23.111 DEBUG: reads[19]: 11 pos: 1300 matePos: 1146 mateLen: 100 mq: 0.999999
+- 07:38:23.111 DEBUG: reads[20]: 14 pos: 1300 matePos: 1483 mateLen: 100 mq: 0.999999
+- 07:38:23.111 DEBUG: reads[21]: 83 pos: 1300 matePos: 1083 mateLen: 100 mq: 0.999999
+- 07:38:23.111 DEBUG: reads[22]: 39 pos: 1301 matePos: 1475 mateLen: 100 mq: 0.999999
+- 07:38:23.112 DEBUG: reads[23]: 48 pos: 1301 matePos: 1122 mateLen: 100 mq: 0.999999
+- 07:38:23.112 DEBUG: reads[24]: 66 pos: 1301 matePos: 1471 mateLen: 100 mq: 0.999999
+- 07:38:23.112 DEBUG: reads[25]: 1 pos: 1243 matePos: 1039 mateLen: 100 mq: 0.999999
+- 07:38:23.112 DEBUG: reads[26]: 60 pos: 1242 matePos: 1053 mateLen: 100 mq: 0.999999
+- 07:38:23.112 DEBUG: reads[27]: 12 pos: 1241 matePos: 1433 mateLen: 100 mq: 0.999999
+- 07:38:23.112 DEBUG: reads[28]: 78 pos: 1238 matePos: 1069 mateLen: 100 mq: 0.999999
+- 07:38:23.112 DEBUG: reads[29]: 34 pos: 1238 matePos: 1479 mateLen: 100 mq: 0.999999
+- 07:38:23.112 DEBUG: reads[30]: 90 pos: 1234 matePos: 1456 mateLen: 100 mq: 0.999999
+- 07:38:23.112 DEBUG: reads[31]: 15 pos: 1229 matePos: 981 mateLen: 100 mq: 0.999999
+- 07:38:23.112 DEBUG: reads[32]: 79 pos: 1228 matePos: 1053 mateLen: 100 mq: 0.999999
+- 07:38:23.112 DEBUG: reads[33]: 70 pos: 1228 matePos: 1056 mateLen: 100 mq: 0.999999
+- 07:38:23.112 DEBUG: reads[34]: 53 pos: 1228 matePos: 1414 mateLen: 100 mq: 0.999999
+- 07:38:23.112 DEBUG: reads[35]: 3 pos: 1224 matePos: 1410 mateLen: 100 mq: 0.999999
+- 07:38:23.112 DEBUG: reads[36]: 81 pos: 1222 matePos: 1406 mateLen: 100 mq: 0.999999
+- 07:38:23.112 DEBUG: reads[37]: 55 pos: 1219 matePos: 995 mateLen: 100 mq: 0.999999
+- 07:38:23.112 DEBUG: reads[38]: 41 pos: 1250 matePos: 1435 mateLen: 100 mq: 0.999999
+- 07:38:23.112 DEBUG: reads[39]: 18 pos: 1250 matePos: 1077 mateLen: 100 mq: 0.999999
+- 07:38:23.112 DEBUG: reads[40]: 93 pos: 1249 matePos: 1063 mateLen: 100 mq: 0.999999
+- 07:38:23.112 DEBUG: reads[41]: 65 pos: 1249 matePos: 1052 mateLen: 100 mq: 0.999999
+- 07:38:23.112 DEBUG: reads[42]: 99 pos: 1248 matePos: 1060 mateLen: 100 mq: 0.999999
+- 07:38:23.112 DEBUG: reads[43]: 100 pos: 1247 matePos: 1433 mateLen: 100 mq: 0.999999
+- 07:38:23.112 DEBUG: reads[44]: 31 pos: 1205 matePos: 1030 mateLen: 100 mq: 0.999999
+- 07:38:23.112 DEBUG: reads[45]: 92 pos: 1206 matePos: 1375 mateLen: 100 mq: 0.999999
+- 07:38:23.112 DEBUG: reads[46]: 38 pos: 1209 matePos: 1415 mateLen: 100 mq: 0.999999
+- 07:38:23.112 DEBUG: reads[47]: 21 pos: 1213 matePos: 1044 mateLen: 100 mq: 0.999999
+- 07:38:23.112 DEBUG: reads[48]: 74 pos: 1216 matePos: 1416 mateLen: 100 mq: 0.999999
+- 07:38:23.112 DEBUG: reads[49]: 2 pos: 1217 matePos: 1019 mateLen: 100 mq: 0.999999
+- 07:38:23.112 DEBUG: reads[50]: 36 pos: 1218 matePos: 1039 mateLen: 100 mq: 0.999999
+- 07:38:23.112 INFO: Number of reads: 51 out of 212 # unmapped reads: 0 numReadsUnknownLib: 0 numChrMismatch: 0 numMappedWithoutMate: 0 numUnmappedWithoutMate: 0
+- 07:38:23.112 DEBUG: read size: n, t =46 51
+- 07:38:23.112 DEBUG: computeBayesFactor: 1
+- 07:38:23.112 DEBUG: check for long indel
+- 07:38:23.112 DEBUG: centerPos=1303
+- 07:38:23.112 DEBUG: calc_hap2_bf_with_hap3
+- 07:38:23.112 INFO: ### calculate the Bayes factor without SNP information nearby:
+- 07:38:23.112 INFO: preparing haplotypes...
+- 07:38:23.112 DEBUG: getHaplotypesBasic
+- 07:38:23.112 DEBUG: getAdditionalHaps
+- 07:38:23.112 DEBUG: get_comb_vars
+- 07:38:23.112 DEBUG: CCACAAGTCACACGCCACGCTACATTCGTTCAGGCAGAGCCACCTAGTTCCTAGTCACTTGTGCATGATAGCTCTGTCGCGAGGTGTCCCACCTGTTAAGAGTTACGCGGGTGGCAGAGCGACCGTGTTAACTTCAGAGCGCGCCACTCGACGTCGCCTACGTTCGCAACAATGGCGATGCTGTCCTTAAGTGAGCCCAGG
+- 07:38:23.112 DEBUG: CCACAAGTCACACGCCACGCTACATTCGTTCAGGCAGAGCCACCTAGTTCCTAGTCACTTGTGCATGATAGCTCTGTCGCGAGGTGTCCCACCTGTTAAGCGTTACGCGGGTGGCAGAGCGACCGTGTTAACTTCAGAGCGCGCCACTCGACGTCGCCTACGTTCGCAACAATGGCGATGCTGTCCTTAAGTGAGCCCAGG
+- 07:38:23.112 DEBUG: alignHaplotypes- 07:38:23.112 DEBUG: num hap: 2- 07:38:23.112 DEBUG: 0 CCACAAGTCACACGCCACGCTACATTCGTTCAGGCAGAGCCACCTAGTTCCTAGTCACTTGTGCATGATAGCTCTGTCGCGAGGTGTCCCACCTGTTAAGAGTTACGCGGGTGGCAGAGCGACCGTGTTAACTTCAGAGCGCGCCACTCGACGTCGCCTACGTTCGCAACAATGGCGATGCTGTCCTTAAGTGAGCCCAGG
+- 07:38:23.113 DEBUG: 0hasStartEndIndel
+- 07:38:23.113 DEBUG: C=>A
+- 07:38:23.113 DEBUG: 1 CCACAAGTCACACGCCACGCTACATTCGTTCAGGCAGAGCCACCTAGTTCCTAGTCACTTGTGCATGATAGCTCTGTCGCGAGGTGTCCCACCTGTTAAGCGTTACGCGGGTGGCAGAGCGACCGTGTTAACTTCAGAGCGCGCCACTCGACGTCGCCTACGTTCGCAACAATGGCGATGCTGTCCTTAAGTGAGCCCAGG
+- 07:38:23.113 DEBUG: 0hasStartEndIndel
+- 07:38:23.113 INFO: aligned_var@pos  1303 C=>A
+- 07:38:23.113 DEBUG: 0 #indels0 #snps1
+- 07:38:23.113 DEBUG: 1 #indels0 #snps0
+- 07:38:23.113 DEBUG: CCACAAGTCACACGCCACGCTACATTCGTTCAGGCAGAGCCACCTAGTTCCTAGTCACTTGTGCATGATAGCTCTGTCGCGAGGTGTCCCACCTGTTAAGAGTTACGCGGGTGGCAGAGCGACCGTGTTAACTTCAGAGCGCGCCACTCGACGTCGCCTACGTTCGCAACAATGGCGATGCTGTCCTTAAGTGAGCCCAGG
+- 07:38:23.113 DEBUG: CCACAAGTCACACGCCACGCTACATTCGTTCAGGCAGAGCCACCTAGTTCCTAGTCACTTGTGCATGATAGCTCTGTCGCGAGGTGTCCCACCTGTTAAGCGTTACGCGGGTGGCAGAGCGACCGTGTTAACTTCAGAGCGCGCCACTCGACGTCGCCTACGTTCGCAACAATGGCGATGCTGTCCTTAAGTGAGCCCAGG
+- 07:38:23.113 DEBUG: 2
+- 07:38:23.113 DEBUG: getAdditionalHaps fin
+- 07:38:23.113 DEBUG: 2
+- 07:38:23.113 INFO: computing alignment likelihhods for tumor reads...
+- 07:38:23.113 DEBUG: ### Computing likelihoods for all reads and haplotypes.
+- 07:38:23.253 DEBUG: computeLikelihoods done
+- 07:38:23.253 INFO: computing alignment likelihhods for normal reads...
+- 07:38:23.253 DEBUG: ### Computing likelihoods for all reads and haplotypes.
+- 07:38:23.371 DEBUG: computeLikelihoods done
+- 07:38:23.371 DEBUG: #basic haplotypes for comparison
+- 07:38:23.371 DEBUG: hap[0] CCACAAGTCACACGCCACGCTACATTCGTTCAGGCAGAGCCACCTAGTTCCTAGTCACTTGTGCATGATAGCTCTGTCGCGAGGTGTCCCACCTGTTAAGCGTTACGCGGGTGGCAGAGCGACCGTGTTAACTTCAGAGCGCGCCACTCGACGTCGCCTACGTTCGCAACAATGGCGATGCTGTCCTTAAGTGAGCCCAGG
+- 07:38:23.371 DEBUG: 
+- 07:38:23.371 DEBUG: hap[1] CCACAAGTCACACGCCACGCTACATTCGTTCAGGCAGAGCCACCTAGTTCCTAGTCACTTGTGCATGATAGCTCTGTCGCGAGGTGTCCCACCTGTTAAGAGTTACGCGGGTGGCAGAGCGACCGTGTTAACTTCAGAGCGCGCCACTCGACGTCGCCTACGTTCGCAACAATGGCGATGCTGTCCTTAAGTGAGCCCAGG
+- 07:38:23.371 DEBUG: [R=>A 100]- 07:38:23.371 DEBUG: 
+- 07:38:23.371 INFO: filter uninformative reads. remaining - 07:38:23.371 DEBUG: filter_reads: 
+- 07:38:23.371 DEBUG: filter_reads done
+- 07:38:23.371 DEBUG: filter_reads: 
+- 07:38:23.371 DEBUG: filter_reads done
+tumor reads: 51 of 51, normal reads: 46 of 46
+- 07:38:23.374 INFO: prepared haplotypes:
+- 07:38:23.374 INFO: hap[0] CCACAAGTCACACGCCACGCTACATTCGTTCAGGCAGAGCCACCTAGTTCCTAGTCACTTGTGCATGATAGCTCTGTCGCGAGGTGTCCCACCTGTTAAGCGTTACGCGGGTGGCAGAGCGACCGTGTTAACTTCAGAGCGCGCCACTCGACGTCGCCTACGTTCGCAACAATGGCGATGCTGTCCTTAAGTGAGCCCAGG 
+- 07:38:23.374 INFO: hap[1] CCACAAGTCACACGCCACGCTACATTCGTTCAGGCAGAGCCACCTAGTTCCTAGTCACTTGTGCATGATAGCTCTGTCGCGAGGTGTCCCACCTGTTAAGCGTTACGCGGGTGGCAGAGCGACCGTGTTAACTTCAGAGCGCGCCACTCGACGTCGCCTACGTTCGCAACAATGGCGATGCTGTCCTTAAGTGAGCCCAGG 
+- 07:38:23.374 INFO: hap[2] CCACAAGTCACACGCCACGCTACATTCGTTCAGGCAGAGCCACCTAGTTCCTAGTCACTTGTGCATGATAGCTCTGTCGCGAGGTGTCCCACCTGTTAAGAGTTACGCGGGTGGCAGAGCGACCGTGTTAACTTCAGAGCGCGCCACTCGACGTCGCCTACGTTCGCAACAATGGCGATGCTGTCCTTAAGTGAGCCCAGG [R=>A 100]
+- 07:38:23.374 INFO: hap[3] CCACAAGTCACACGCCACGCTACATTCGTTCAGGCAGAGCCACCTAGTTCCTAGTCACTTGTGCATGATAGCTCTGTCGCGAGGTGTCCCACCTGTTAAGAGTTACGCGGGTGGCAGAGCGACCGTGTTAACTTCAGAGCGCGCCACTCGACGTCGCCTACGTTCGCAACAATGGCGATGCTGTCCTTAAGTGAGCCCAGG [R=>A 100]
+- 07:38:23.374 INFO: calculating the marginal likelihood based on the MUTATION model... finished (iterated 62 times)
+- 07:38:23.415 INFO: calculating the marginal likelihood based on the ERROR model... finished (iterated 5 times)
+- 07:38:23.421 DEBUG: ********** calc_hap2_bf_with_hap3 done ***********
+- 07:38:23.421 INFO: --------------------------------------------------
+- 07:38:23.421 INFO: ### calculate the Bayes factor with SNP information nearby:
+- 07:38:23.421 WARNING: choose the closest SNP
+- 07:38:23.421 DEBUG: target_pos 1303
+- 07:38:23.421 DEBUG: min 67 0
+- 07:38:23.421 WARNING: the closest SNP is 1236:G=>C
+- 07:38:23.421 DEBUG: Haps2::getHaplotypes
+- 07:38:23.421 INFO: preparing haplotypes...
+- 07:38:23.422 DEBUG: == target variant ==
+- 07:38:23.422 DEBUG:  1303,C=>A- 07:38:23.422 DEBUG: 
+- 07:38:23.422 DEBUG: == close somatic ==
+- 07:38:23.422 DEBUG: 
+- 07:38:23.422 DEBUG: == close germline ==
+- 07:38:23.422 DEBUG:  1236,G=>C- 07:38:23.422 DEBUG: 
+- 07:38:23.422 DEBUG: check vars
+- 07:38:23.422 DEBUG: getAdditionalHaps
+- 07:38:23.422 DEBUG: get_comb_vars
+- 07:38:23.422 DEBUG: CCACAAGTCACACGCCACGCTACATTCGTTCAGCCAGAGCCACCTAGTTCCTAGTCACTTGTGCATGATAGCTCTGTCGCGAGGTGTCCCACCTGTTAAGCGTTACGCGGGTGGCAGAGCGACCGTGTTAACTTCAGAGCGCGCCACTCGACGTCGCCTACGTTCGCAACAATGGCGATGCTGTCCTTAAGTGAGCCCAGG
+- 07:38:23.422 DEBUG: CCACAAGTCACACGCCACGCTACATTCGTTCAGGCAGAGCCACCTAGTTCCTAGTCACTTGTGCATGATAGCTCTGTCGCGAGGTGTCCCACCTGTTAAGCGTTACGCGGGTGGCAGAGCGACCGTGTTAACTTCAGAGCGCGCCACTCGACGTCGCCTACGTTCGCAACAATGGCGATGCTGTCCTTAAGTGAGCCCAGG
+- 07:38:23.422 DEBUG: alignHaplotypes- 07:38:23.422 DEBUG: num hap: 2- 07:38:23.422 DEBUG: 0 CCACAAGTCACACGCCACGCTACATTCGTTCAGCCAGAGCCACCTAGTTCCTAGTCACTTGTGCATGATAGCTCTGTCGCGAGGTGTCCCACCTGTTAAGCGTTACGCGGGTGGCAGAGCGACCGTGTTAACTTCAGAGCGCGCCACTCGACGTCGCCTACGTTCGCAACAATGGCGATGCTGTCCTTAAGTGAGCCCAGG
+- 07:38:23.422 DEBUG: 0hasStartEndIndel
+- 07:38:23.422 DEBUG: G=>C
+- 07:38:23.422 DEBUG: 1 CCACAAGTCACACGCCACGCTACATTCGTTCAGGCAGAGCCACCTAGTTCCTAGTCACTTGTGCATGATAGCTCTGTCGCGAGGTGTCCCACCTGTTAAGCGTTACGCGGGTGGCAGAGCGACCGTGTTAACTTCAGAGCGCGCCACTCGACGTCGCCTACGTTCGCAACAATGGCGATGCTGTCCTTAAGTGAGCCCAGG
+- 07:38:23.423 DEBUG: 0hasStartEndIndel
+- 07:38:23.423 INFO: aligned_var@pos  1236 G=>C
+- 07:38:23.423 DEBUG: 0 #indels0 #snps1
+- 07:38:23.423 DEBUG: 1 #indels0 #snps0
+- 07:38:23.423 DEBUG: CCACAAGTCACACGCCACGCTACATTCGTTCAGCCAGAGCCACCTAGTTCCTAGTCACTTGTGCATGATAGCTCTGTCGCGAGGTGTCCCACCTGTTAAGCGTTACGCGGGTGGCAGAGCGACCGTGTTAACTTCAGAGCGCGCCACTCGACGTCGCCTACGTTCGCAACAATGGCGATGCTGTCCTTAAGTGAGCCCAGG
+- 07:38:23.423 DEBUG: CCACAAGTCACACGCCACGCTACATTCGTTCAGGCAGAGCCACCTAGTTCCTAGTCACTTGTGCATGATAGCTCTGTCGCGAGGTGTCCCACCTGTTAAGCGTTACGCGGGTGGCAGAGCGACCGTGTTAACTTCAGAGCGCGCCACTCGACGTCGCCTACGTTCGCAACAATGGCGATGCTGTCCTTAAGTGAGCCCAGG
+- 07:38:23.423 DEBUG: 2
+- 07:38:23.423 DEBUG: getAdditionalHaps fin
+- 07:38:23.423 DEBUG: 2
+- 07:38:23.423 DEBUG: R=>C 1236- 07:38:23.423 DEBUG: ]
+- 07:38:23.423 DEBUG: ]
+- 07:38:23.423 DEBUG: #normal haplotype list
+- 07:38:23.423 DEBUG: hap[0] CCACAAGTCACACGCCACGCTACATTCGTTCAGCCAGAGCCACCTAGTTCCTAGTCACTTGTGCATGATAGCTCTGTCGCGAGGTGTCCCACCTGTTAAGCGTTACGCGGGTGGCAGAGCGACCGTGTTAACTTCAGAGCGCGCCACTCGACGTCGCCTACGTTCGCAACAATGGCGATGCTGTCCTTAAGTGAGCCCAGG
+[R=>C 33]
+- 07:38:23.423 DEBUG: hap[1] CCACAAGTCACACGCCACGCTACATTCGTTCAGGCAGAGCCACCTAGTTCCTAGTCACTTGTGCATGATAGCTCTGTCGCGAGGTGTCCCACCTGTTAAGCGTTACGCGGGTGGCAGAGCGACCGTGTTAACTTCAGAGCGCGCCACTCGACGTCGCCTACGTTCGCAACAATGGCGATGCTGTCCTTAAGTGAGCCCAGG
+
+- 07:38:23.423 DEBUG: normal hap decided
+- 07:38:23.423 DEBUG: getAdditionalHaps
+- 07:38:23.423 DEBUG: get_comb_vars
+- 07:38:23.423 DEBUG: CCACAAGTCACACGCCACGCTACATTCGTTCAGCCAGAGCCACCTAGTTCCTAGTCACTTGTGCATGATAGCTCTGTCGCGAGGTGTCCCACCTGTTAAGAGTTACGCGGGTGGCAGAGCGACCGTGTTAACTTCAGAGCGCGCCACTCGACGTCGCCTACGTTCGCAACAATGGCGATGCTGTCCTTAAGTGAGCCCAGG
+- 07:38:23.423 DEBUG: CCACAAGTCACACGCCACGCTACATTCGTTCAGCCAGAGCCACCTAGTTCCTAGTCACTTGTGCATGATAGCTCTGTCGCGAGGTGTCCCACCTGTTAAGCGTTACGCGGGTGGCAGAGCGACCGTGTTAACTTCAGAGCGCGCCACTCGACGTCGCCTACGTTCGCAACAATGGCGATGCTGTCCTTAAGTGAGCCCAGG
+- 07:38:23.423 DEBUG: CCACAAGTCACACGCCACGCTACATTCGTTCAGGCAGAGCCACCTAGTTCCTAGTCACTTGTGCATGATAGCTCTGTCGCGAGGTGTCCCACCTGTTAAGAGTTACGCGGGTGGCAGAGCGACCGTGTTAACTTCAGAGCGCGCCACTCGACGTCGCCTACGTTCGCAACAATGGCGATGCTGTCCTTAAGTGAGCCCAGG
+- 07:38:23.423 DEBUG: CCACAAGTCACACGCCACGCTACATTCGTTCAGGCAGAGCCACCTAGTTCCTAGTCACTTGTGCATGATAGCTCTGTCGCGAGGTGTCCCACCTGTTAAGCGTTACGCGGGTGGCAGAGCGACCGTGTTAACTTCAGAGCGCGCCACTCGACGTCGCCTACGTTCGCAACAATGGCGATGCTGTCCTTAAGTGAGCCCAGG
+- 07:38:23.423 DEBUG: alignHaplotypes- 07:38:23.423 DEBUG: num hap: 4- 07:38:23.423 DEBUG: 0 CCACAAGTCACACGCCACGCTACATTCGTTCAGCCAGAGCCACCTAGTTCCTAGTCACTTGTGCATGATAGCTCTGTCGCGAGGTGTCCCACCTGTTAAGAGTTACGCGGGTGGCAGAGCGACCGTGTTAACTTCAGAGCGCGCCACTCGACGTCGCCTACGTTCGCAACAATGGCGATGCTGTCCTTAAGTGAGCCCAGG
+- 07:38:23.423 DEBUG: 0hasStartEndIndel
+- 07:38:23.423 DEBUG: G=>C
+- 07:38:23.423 DEBUG: C=>A
+- 07:38:23.423 DEBUG: 1 CCACAAGTCACACGCCACGCTACATTCGTTCAGCCAGAGCCACCTAGTTCCTAGTCACTTGTGCATGATAGCTCTGTCGCGAGGTGTCCCACCTGTTAAGCGTTACGCGGGTGGCAGAGCGACCGTGTTAACTTCAGAGCGCGCCACTCGACGTCGCCTACGTTCGCAACAATGGCGATGCTGTCCTTAAGTGAGCCCAGG
+- 07:38:23.424 DEBUG: 0hasStartEndIndel
+- 07:38:23.424 DEBUG: G=>C
+- 07:38:23.424 DEBUG: 2 CCACAAGTCACACGCCACGCTACATTCGTTCAGGCAGAGCCACCTAGTTCCTAGTCACTTGTGCATGATAGCTCTGTCGCGAGGTGTCCCACCTGTTAAGAGTTACGCGGGTGGCAGAGCGACCGTGTTAACTTCAGAGCGCGCCACTCGACGTCGCCTACGTTCGCAACAATGGCGATGCTGTCCTTAAGTGAGCCCAGG
+- 07:38:23.424 DEBUG: 0hasStartEndIndel
+- 07:38:23.424 DEBUG: C=>A
+- 07:38:23.424 DEBUG: 3 CCACAAGTCACACGCCACGCTACATTCGTTCAGGCAGAGCCACCTAGTTCCTAGTCACTTGTGCATGATAGCTCTGTCGCGAGGTGTCCCACCTGTTAAGCGTTACGCGGGTGGCAGAGCGACCGTGTTAACTTCAGAGCGCGCCACTCGACGTCGCCTACGTTCGCAACAATGGCGATGCTGTCCTTAAGTGAGCCCAGG
+- 07:38:23.425 DEBUG: 0hasStartEndIndel
+- 07:38:23.425 INFO: aligned_var@pos  1236 G=>C
+- 07:38:23.425 INFO: aligned_var@pos  1303 C=>A
+- 07:38:23.425 DEBUG: 0 #indels0 #snps2
+- 07:38:23.425 DEBUG: 1 #indels0 #snps1
+- 07:38:23.425 DEBUG: 2 #indels0 #snps1
+- 07:38:23.425 DEBUG: 3 #indels0 #snps0
+- 07:38:23.425 DEBUG: CCACAAGTCACACGCCACGCTACATTCGTTCAGCCAGAGCCACCTAGTTCCTAGTCACTTGTGCATGATAGCTCTGTCGCGAGGTGTCCCACCTGTTAAGAGTTACGCGGGTGGCAGAGCGACCGTGTTAACTTCAGAGCGCGCCACTCGACGTCGCCTACGTTCGCAACAATGGCGATGCTGTCCTTAAGTGAGCCCAGG
+- 07:38:23.425 DEBUG: CCACAAGTCACACGCCACGCTACATTCGTTCAGCCAGAGCCACCTAGTTCCTAGTCACTTGTGCATGATAGCTCTGTCGCGAGGTGTCCCACCTGTTAAGCGTTACGCGGGTGGCAGAGCGACCGTGTTAACTTCAGAGCGCGCCACTCGACGTCGCCTACGTTCGCAACAATGGCGATGCTGTCCTTAAGTGAGCCCAGG
+- 07:38:23.425 DEBUG: CCACAAGTCACACGCCACGCTACATTCGTTCAGGCAGAGCCACCTAGTTCCTAGTCACTTGTGCATGATAGCTCTGTCGCGAGGTGTCCCACCTGTTAAGAGTTACGCGGGTGGCAGAGCGACCGTGTTAACTTCAGAGCGCGCCACTCGACGTCGCCTACGTTCGCAACAATGGCGATGCTGTCCTTAAGTGAGCCCAGG
+- 07:38:23.425 DEBUG: CCACAAGTCACACGCCACGCTACATTCGTTCAGGCAGAGCCACCTAGTTCCTAGTCACTTGTGCATGATAGCTCTGTCGCGAGGTGTCCCACCTGTTAAGCGTTACGCGGGTGGCAGAGCGACCGTGTTAACTTCAGAGCGCGCCACTCGACGTCGCCTACGTTCGCAACAATGGCGATGCTGTCCTTAAGTGAGCCCAGG
+- 07:38:23.425 DEBUG: 4
+- 07:38:23.425 DEBUG: getAdditionalHaps fin
+- 07:38:23.425 DEBUG: #merged haplotype list
+- 07:38:23.425 DEBUG: merged_haps[0] CCACAAGTCACACGCCACGCTACATTCGTTCAGCCAGAGCCACCTAGTTCCTAGTCACTTGTGCATGATAGCTCTGTCGCGAGGTGTCCCACCTGTTAAGAGTTACGCGGGTGGCAGAGCGACCGTGTTAACTTCAGAGCGCGCCACTCGACGTCGCCTACGTTCGCAACAATGGCGATGCTGTCCTTAAGTGAGCCCAGG
+[R=>C 33][R=>A 100]
+- 07:38:23.425 DEBUG: merged_haps[1] CCACAAGTCACACGCCACGCTACATTCGTTCAGCCAGAGCCACCTAGTTCCTAGTCACTTGTGCATGATAGCTCTGTCGCGAGGTGTCCCACCTGTTAAGCGTTACGCGGGTGGCAGAGCGACCGTGTTAACTTCAGAGCGCGCCACTCGACGTCGCCTACGTTCGCAACAATGGCGATGCTGTCCTTAAGTGAGCCCAGG
+[R=>C 33]
+- 07:38:23.425 DEBUG: merged_haps[2] CCACAAGTCACACGCCACGCTACATTCGTTCAGGCAGAGCCACCTAGTTCCTAGTCACTTGTGCATGATAGCTCTGTCGCGAGGTGTCCCACCTGTTAAGAGTTACGCGGGTGGCAGAGCGACCGTGTTAACTTCAGAGCGCGCCACTCGACGTCGCCTACGTTCGCAACAATGGCGATGCTGTCCTTAAGTGAGCCCAGG
+[R=>A 100]
+- 07:38:23.425 DEBUG: merged_haps[3] CCACAAGTCACACGCCACGCTACATTCGTTCAGGCAGAGCCACCTAGTTCCTAGTCACTTGTGCATGATAGCTCTGTCGCGAGGTGTCCCACCTGTTAAGCGTTACGCGGGTGGCAGAGCGACCGTGTTAACTTCAGAGCGCGCCACTCGACGTCGCCTACGTTCGCAACAATGGCGATGCTGTCCTTAAGTGAGCCCAGG
+
+- 07:38:23.425 INFO: computing alignment likelihhods for tumor reads...
+- 07:38:23.425 DEBUG: ### Computing likelihoods for all reads and haplotypes.
+- 07:38:23.690 DEBUG: computeLikelihoods done
+- 07:38:23.690 DEBUG: EMBasic::estimate
+- 07:38:23.690 DEBUG: - 07:38:23.690 DEBUG: nh, nr:4 51
+- 07:38:23.690 DEBUG: #haplotype list
+- 07:38:23.690 DEBUG: hap[0] CCACAAGTCACACGCCACGCTACATTCGTTCAGCCAGAGCCACCTAGTTCCTAGTCACTTGTGCATGATAGCTCTGTCGCGAGGTGTCCCACCTGTTAAGAGTTACGCGGGTGGCAGAGCGACCGTGTTAACTTCAGAGCGCGCCACTCGACGTCGCCTACGTTCGCAACAATGGCGATGCTGTCCTTAAGTGAGCCCAGG
+[R=>C 33][R=>A 100]
+- 07:38:23.690 DEBUG: hap[1] CCACAAGTCACACGCCACGCTACATTCGTTCAGCCAGAGCCACCTAGTTCCTAGTCACTTGTGCATGATAGCTCTGTCGCGAGGTGTCCCACCTGTTAAGCGTTACGCGGGTGGCAGAGCGACCGTGTTAACTTCAGAGCGCGCCACTCGACGTCGCCTACGTTCGCAACAATGGCGATGCTGTCCTTAAGTGAGCCCAGG
+[R=>C 33]
+- 07:38:23.690 DEBUG: hap[2] CCACAAGTCACACGCCACGCTACATTCGTTCAGGCAGAGCCACCTAGTTCCTAGTCACTTGTGCATGATAGCTCTGTCGCGAGGTGTCCCACCTGTTAAGAGTTACGCGGGTGGCAGAGCGACCGTGTTAACTTCAGAGCGCGCCACTCGACGTCGCCTACGTTCGCAACAATGGCGATGCTGTCCTTAAGTGAGCCCAGG
+[R=>A 100]
+- 07:38:23.690 DEBUG: hap[3] CCACAAGTCACACGCCACGCTACATTCGTTCAGGCAGAGCCACCTAGTTCCTAGTCACTTGTGCATGATAGCTCTGTCGCGAGGTGTCCCACCTGTTAAGCGTTACGCGGGTGGCAGAGCGACCGTGTTAACTTCAGAGCGCGCCACTCGACGTCGCCTACGTTCGCAACAATGGCGATGCTGTCCTTAAGTGAGCCCAGG
+
+- 07:38:23.690 DEBUG: #log haplotype and read likelihood
+71 rl[0]: -10.5288 -5.64448 -10.5288 -5.64448
+24 rl[1]: -10.5288 -5.64446 -10.5288 -5.64446
+85 rl[2]: -5.64446 -0.760138 -5.64446 -0.760138
+8 rl[3]: -15.4132 -10.5288 -15.4132 -10.5288
+26 rl[4]: -5.64446 -0.760138 -5.64446 -0.760138
+88 rl[5]: -5.64446 -0.760138 -5.64446 -0.760138
+98 rl[6]: -10.5288 -5.64446 -10.5288 -5.64446
+19 rl[7]: -15.4131 -10.5288 -15.4131 -10.5288
+4 rl[8]: -5.6445 -0.760178 -5.6445 -0.760178
+86 rl[9]: -10.5289 -5.64452 -10.5289 -5.64452
+22 rl[10]: -5.64452 -0.760198 -5.64452 -0.760198
+59 rl[11]: -10.5288 -5.64449 -10.5288 -5.64449
+64 rl[12]: -15.4132 -10.5289 -15.4132 -10.5289
+9 rl[13]: -5.64454 -0.760218 -5.64454 -0.760218
+50 rl[14]: -15.4132 -10.5289 -15.4132 -10.5289
+37 rl[15]: -10.5289 -5.64452 -10.5289 -5.64452
+44 rl[16]: -5.64452 -10.5289 -5.64452 -10.5289
+96 rl[17]: -10.5289 -5.64452 -10.5289 -5.64452
+29 rl[18]: -10.5289 -5.64456 -10.5289 -5.64456
+11 rl[19]: -10.5288 -5.64447 -10.5288 -5.64447
+14 rl[20]: -0.76014 -5.64447 -0.76014 -5.64447
+83 rl[21]: -5.64447 -0.76014 -5.64447 -0.76014
+39 rl[22]: -5.64452 -0.760198 -5.64452 -0.760198
+48 rl[23]: -10.5289 -5.64452 -10.5289 -5.64452
+66 rl[24]: -10.5289 -5.64452 -10.5289 -5.64452
+1 rl[25]: -15.4132 -10.5288 -15.4132 -10.5288
+60 rl[26]: -15.4132 -10.5289 -15.4132 -10.5289
+12 rl[27]: -20.2975 -15.4132 -20.2975 -15.4132
+78 rl[28]: -5.64452 -0.760198 -5.64452 -0.760198
+34 rl[29]: -15.4132 -10.5289 -15.4132 -10.5289
+90 rl[30]: -25.1216 -20.2975 -20.2975 -15.4132
+15 rl[31]: -20.2975 -15.4132 -15.4132 -10.5288
+79 rl[32]: -10.5288 -5.6445 -15.4132 -10.5288
+70 rl[33]: -5.6445 -0.760178 -10.5288 -5.6445
+53 rl[34]: -5.6445 -10.5288 -0.760178 -5.6445
+3 rl[35]: -15.4132 -10.5288 -20.2975 -15.4132
+81 rl[36]: -10.5288 -5.6445 -10.5288 -5.6445
+55 rl[37]: -10.5288 -5.6445 -15.4132 -10.5288
+41 rl[38]: -10.5289 -5.64454 -10.5289 -5.64454
+18 rl[39]: -20.2975 -15.4132 -20.2975 -15.4132
+93 rl[40]: -15.4132 -10.5288 -15.4132 -10.5288
+65 rl[41]: -10.5288 -5.6445 -10.5288 -5.6445
+99 rl[42]: -10.5288 -5.6445 -10.5288 -5.6445
+100 rl[43]: -5.64445 -10.5288 -5.64445 -10.5288
+31 rl[44]: -5.64446 -0.760138 -10.5288 -5.64446
+92 rl[45]: -5.64443 -0.7601 -10.5288 -5.64443
+38 rl[46]: -10.5288 -5.64446 -15.4131 -10.5288
+21 rl[47]: -5.64439 -0.760062 -10.5287 -5.64439
+74 rl[48]: -10.5288 -15.4131 -5.64447 -10.5288
+2 rl[49]: -5.64456 -0.760236 -10.5289 -5.64456
+36 rl[50]: -20.2975 -15.4132 -15.4132 -10.5288
+- 07:38:23.691 DEBUG: allVariants:  [33 R=>C] [100 R=>A]
+- 07:38:23.691 DEBUG: #subsets
+[0]  1 1 1 1
+- 07:38:23.692 DEBUG: ----------------finished[41]---------------
+- 07:38:23.692 DEBUG: ###compatible
+ 1 1 1 1
+- 07:38:23.692 DEBUG: lpi =  -104.484 -0.365136 -2.46511 -1.60349
+a0=0.01, a =  0.01 35.5793 4.78631 10.6644- 07:38:23.692 DEBUG: 
+- 07:38:23.692 DEBUG: 
+###computeLowerBound###
+- 07:38:23.692 DEBUG: nh, nr = 4, 51
+- 07:38:23.692 DEBUG: ###compatible
+ 1 1 1 1
+- 07:38:23.692 DEBUG: lpi =  -104.484 -0.365136 -2.46511 -1.60349
+a0=0.01, a =  0.01 35.5793 4.78631 10.6644
+- 07:38:23.692 DEBUG: ln_C(a0) + tmp = -15.2008 + 107.828
+- 07:38:23.692 DEBUG: ln_C(a) + tmp = 36.2163 + 65.9823
+- 07:38:23.692 DEBUG: ########
+
+- 07:38:23.692 DEBUG: 71 z[0]: 3.54655e-48 0.774719 0.000717634 0.224564
+- 07:38:23.692 DEBUG: 24 z[1]: 3.54655e-48 0.774719 0.000717634 0.224564
+- 07:38:23.692 DEBUG: 85 z[2]: 3.54655e-48 0.774719 0.000717634 0.224564
+- 07:38:23.692 DEBUG: 8 z[3]: 3.54655e-48 0.774719 0.000717634 0.224564
+- 07:38:23.692 DEBUG: 26 z[4]: 3.54655e-48 0.774719 0.000717634 0.224564
+- 07:38:23.692 DEBUG: 88 z[5]: 3.54655e-48 0.774719 0.000717634 0.224564
+- 07:38:23.692 DEBUG: 98 z[6]: 3.54655e-48 0.774719 0.000717634 0.224564
+- 07:38:23.692 DEBUG: 19 z[7]: 3.54655e-48 0.774719 0.000717634 0.224564
+- 07:38:23.692 DEBUG: 4 z[8]: 3.54655e-48 0.774719 0.000717634 0.224564
+- 07:38:23.692 DEBUG: 86 z[9]: 3.54655e-48 0.774719 0.000717634 0.224564
+- 07:38:23.693 DEBUG: 22 z[10]: 3.54655e-48 0.774719 0.000717634 0.224564
+- 07:38:23.693 DEBUG: 59 z[11]: 3.54655e-48 0.774719 0.000717634 0.224564
+- 07:38:23.693 DEBUG: 64 z[12]: 3.54655e-48 0.774719 0.000717634 0.224564
+- 07:38:23.693 DEBUG: 9 z[13]: 3.54655e-48 0.774719 0.000717634 0.224564
+- 07:38:23.693 DEBUG: 50 z[14]: 3.54655e-48 0.774719 0.000717634 0.224564
+- 07:38:23.693 DEBUG: 37 z[15]: 3.54655e-48 0.774719 0.000717634 0.224564
+- 07:38:23.693 DEBUG: 44 z[16]: 4.57731e-45 0.0572106 0.926206 0.0165833
+- 07:38:23.693 DEBUG: 96 z[17]: 3.54655e-48 0.774719 0.000717634 0.224564
+- 07:38:23.693 DEBUG: 29 z[18]: 3.54655e-48 0.774719 0.000717634 0.224564
+- 07:38:23.693 DEBUG: 11 z[19]: 3.54655e-48 0.774719 0.000717634 0.224564
+- 07:38:23.693 DEBUG: 14 z[20]: 4.57731e-45 0.0572106 0.926206 0.0165833
+- 07:38:23.693 DEBUG: 83 z[21]: 3.54655e-48 0.774719 0.000717634 0.224564
+- 07:38:23.693 DEBUG: 39 z[22]: 3.54655e-48 0.774719 0.000717634 0.224564
+- 07:38:23.693 DEBUG: 48 z[23]: 3.54655e-48 0.774719 0.000717634 0.224564
+- 07:38:23.693 DEBUG: 66 z[24]: 3.54655e-48 0.774719 0.000717634 0.224564
+- 07:38:23.693 DEBUG: 1 z[25]: 3.54655e-48 0.774719 0.000717634 0.224564
+- 07:38:23.693 DEBUG: 60 z[26]: 3.54655e-48 0.774719 0.000717634 0.224564
+- 07:38:23.693 DEBUG: 12 z[27]: 3.54655e-48 0.774719 0.000717634 0.224564
+- 07:38:23.693 DEBUG: 78 z[28]: 3.54655e-48 0.774719 0.000717634 0.224564
+- 07:38:23.693 DEBUG: 34 z[29]: 3.54655e-48 0.774719 0.000717634 0.224564
+- 07:38:23.693 DEBUG: 90 z[30]: 1.23266e-49 0.0253531 0.00310474 0.971542
+- 07:38:23.693 DEBUG: 15 z[31]: 1.16062e-49 0.0253531 0.00310474 0.971542
+- 07:38:23.693 DEBUG: 79 z[32]: 4.5678e-48 0.997805 6.99147e-06 0.00218779
+- 07:38:23.693 DEBUG: 70 z[33]: 4.5678e-48 0.997805 6.99147e-06 0.00218779
+- 07:38:23.693 DEBUG: 53 z[34]: 3.67079e-47 0.000458803 0.98196 0.0175816
+- 07:38:23.693 DEBUG: 3 z[35]: 4.5678e-48 0.997805 6.99147e-06 0.00218779
+- 07:38:23.693 DEBUG: 81 z[36]: 3.54655e-48 0.774719 0.000717634 0.224564
+- 07:38:23.693 DEBUG: 55 z[37]: 4.5678e-48 0.997805 6.99147e-06 0.00218779
+- 07:38:23.693 DEBUG: 41 z[38]: 3.54655e-48 0.774719 0.000717634 0.224564
+- 07:38:23.693 DEBUG: 18 z[39]: 3.54655e-48 0.774719 0.000717634 0.224564
+- 07:38:23.693 DEBUG: 93 z[40]: 3.54655e-48 0.774719 0.000717634 0.224564
+- 07:38:23.693 DEBUG: 65 z[41]: 3.54655e-48 0.774719 0.000717634 0.224564
+- 07:38:23.694 DEBUG: 99 z[42]: 3.54655e-48 0.774719 0.000717634 0.224564
+- 07:38:23.694 DEBUG: 100 z[43]: 4.57731e-45 0.0572106 0.926206 0.0165833
+- 07:38:23.694 DEBUG: 31 z[44]: 4.5678e-48 0.997805 6.99147e-06 0.00218779
+- 07:38:23.694 DEBUG: 92 z[45]: 4.5678e-48 0.997805 6.99147e-06 0.00218779
+- 07:38:23.694 DEBUG: 38 z[46]: 4.5678e-48 0.997805 6.99147e-06 0.00218779
+- 07:38:23.694 DEBUG: 21 z[47]: 4.5678e-48 0.997805 6.99147e-06 0.00218779
+- 07:38:23.694 DEBUG: 74 z[48]: 3.67079e-47 0.000458803 0.98196 0.0175816
+- 07:38:23.694 DEBUG: 2 z[49]: 4.5678e-48 0.997805 6.99147e-06 0.00218779
+- 07:38:23.694 DEBUG: 36 z[50]: 1.16062e-49 0.0253531 0.00310474 0.971542
+ 0.000195925 0.697087 0.0937758 0.208942
+- 07:38:23.694 DEBUG: lower_bound: -326.111 loglik: -316.539 -316.539 logprior: -13.8155
+
+- 07:38:23.694 DEBUG: post[0]: 1
+- 07:38:23.694 DEBUG: ==================results====================
+- 07:38:23.694 DEBUG: [0] -326.111 -13.8155; 1 1 1 1; (freqs) 0.000195925 0.697087 0.0937758 0.208942
+- 07:38:23.694 DEBUG: hap[0] CCACAAGTCACACGCCACGCTACATTCGTTCAGCCAGAGCCACCTAGTTCCTAGTCACTTGTGCATGATAGCTCTGTCGCGAGGTGTCCCACCTGTTAAGAGTTACGCGGGTGGCAGAGCGACCGTGTTAACTTCAGAGCGCGCCACTCGACGTCGCCTACGTTCGCAACAATGGCGATGCTGTCCTTAAGTGAGCCCAGG
+0.000195925 [R=>C 33][R=>A 100]
+- 07:38:23.694 DEBUG: hap[1] CCACAAGTCACACGCCACGCTACATTCGTTCAGCCAGAGCCACCTAGTTCCTAGTCACTTGTGCATGATAGCTCTGTCGCGAGGTGTCCCACCTGTTAAGCGTTACGCGGGTGGCAGAGCGACCGTGTTAACTTCAGAGCGCGCCACTCGACGTCGCCTACGTTCGCAACAATGGCGATGCTGTCCTTAAGTGAGCCCAGG
+0.697087 [R=>C 33]
+- 07:38:23.694 DEBUG: hap[2] CCACAAGTCACACGCCACGCTACATTCGTTCAGGCAGAGCCACCTAGTTCCTAGTCACTTGTGCATGATAGCTCTGTCGCGAGGTGTCCCACCTGTTAAGAGTTACGCGGGTGGCAGAGCGACCGTGTTAACTTCAGAGCGCGCCACTCGACGTCGCCTACGTTCGCAACAATGGCGATGCTGTCCTTAAGTGAGCCCAGG
+0.0937758 [R=>A 100]
+- 07:38:23.694 DEBUG: hap[3] CCACAAGTCACACGCCACGCTACATTCGTTCAGGCAGAGCCACCTAGTTCCTAGTCACTTGTGCATGATAGCTCTGTCGCGAGGTGTCCCACCTGTTAAGCGTTACGCGGGTGGCAGAGCGACCGTGTTAACTTCAGAGCGCGCCACTCGACGTCGCCTACGTTCGCAACAATGGCGATGCTGTCCTTAAGTGAGCCCAGG
+0.208942 
+- 07:38:23.694 DEBUG: 
+- 07:38:23.694 DEBUG: k:0
+- 07:38:23.694 DEBUG: k:1
+- 07:38:23.694 DEBUG: from normal: type: 2 seq: CCACAAGTCACACGCCACGCTACATTCGTTCAGCCAGAGCCACCTAGTTCCTAGTCACTTGTGCATGATAGCTCTGTCGCGAGGTGTCCCACCTGTTAAGCGTTACGCGGGTGGCAGAGCGACCGTGTTAACTTCAGAGCGCGCCACTCGACGTCGCCTACGTTCGCAACAATGGCGATGCTGTCCTTAAGTGAGCCCAGG len: 201 nfreq: 1 freq: 1 indel: 
+- 07:38:23.694 DEBUG: k:2
+- 07:38:23.694 DEBUG: k:3
+- 07:38:23.694 DEBUG: from normal: type: 2 seq: CCACAAGTCACACGCCACGCTACATTCGTTCAGGCAGAGCCACCTAGTTCCTAGTCACTTGTGCATGATAGCTCTGTCGCGAGGTGTCCCACCTGTTAAGCGTTACGCGGGTGGCAGAGCGACCGTGTTAACTTCAGAGCGCGCCACTCGACGTCGCCTACGTTCGCAACAATGGCGATGCTGTCCTTAAGTGAGCCCAGG len: 201 nfreq: 1 freq: 1 indel: 
+- 07:38:23.695 DEBUG: tumor hap with max freq: type: 2 seq: CCACAAGTCACACGCCACGCTACATTCGTTCAGGCAGAGCCACCTAGTTCCTAGTCACTTGTGCATGATAGCTCTGTCGCGAGGTGTCCCACCTGTTAAGAGTTACGCGGGTGGCAGAGCGACCGTGTTAACTTCAGAGCGCGCCACTCGACGTCGCCTACGTTCGCAACAATGGCGATGCTGTCCTTAAGTGAGCCCAGG len: 201 nfreq: 1 freq: 1 indel: 
+- 07:38:23.695 DEBUG: add the last haplotype that is left
+- 07:38:23.695 DEBUG: R=>A 1303- 07:38:23.695 DEBUG: ]
+- 07:38:23.695 DEBUG: R=>C 1236- 07:38:23.695 DEBUG: ]
+- 07:38:23.695 DEBUG: tumor hap order change!
+- 07:38:23.695 DEBUG: tumor hap decided
+- 07:38:23.695 DEBUG: - 07:38:23.695 INFO: computing alignment likelihhods for normal reads...
+- 07:38:23.695 DEBUG: ### Computing likelihoods for all reads and haplotypes.
+- 07:38:23.953 DEBUG: computeLikelihoods done
+- 07:38:23.953 DEBUG: end Haps2
+- 07:38:23.953 DEBUG: #normal haplotype list
+- 07:38:23.953 DEBUG: hap[0] CCACAAGTCACACGCCACGCTACATTCGTTCAGCCAGAGCCACCTAGTTCCTAGTCACTTGTGCATGATAGCTCTGTCGCGAGGTGTCCCACCTGTTAAGCGTTACGCGGGTGGCAGAGCGACCGTGTTAACTTCAGAGCGCGCCACTCGACGTCGCCTACGTTCGCAACAATGGCGATGCTGTCCTTAAGTGAGCCCAGG
+[R=>C 33]
+- 07:38:23.953 DEBUG: hap[1] CCACAAGTCACACGCCACGCTACATTCGTTCAGGCAGAGCCACCTAGTTCCTAGTCACTTGTGCATGATAGCTCTGTCGCGAGGTGTCCCACCTGTTAAGCGTTACGCGGGTGGCAGAGCGACCGTGTTAACTTCAGAGCGCGCCACTCGACGTCGCCTACGTTCGCAACAATGGCGATGCTGTCCTTAAGTGAGCCCAGG
+
+- 07:38:23.953 INFO: prepared haplotypes:
+- 07:38:23.953 INFO: hap[0] CCACAAGTCACACGCCACGCTACATTCGTTCAGGCAGAGCCACCTAGTTCCTAGTCACTTGTGCATGATAGCTCTGTCGCGAGGTGTCCCACCTGTTAAGCGTTACGCGGGTGGCAGAGCGACCGTGTTAACTTCAGAGCGCGCCACTCGACGTCGCCTACGTTCGCAACAATGGCGATGCTGTCCTTAAGTGAGCCCAGG 
+- 07:38:23.953 INFO: hap[1] CCACAAGTCACACGCCACGCTACATTCGTTCAGCCAGAGCCACCTAGTTCCTAGTCACTTGTGCATGATAGCTCTGTCGCGAGGTGTCCCACCTGTTAAGCGTTACGCGGGTGGCAGAGCGACCGTGTTAACTTCAGAGCGCGCCACTCGACGTCGCCTACGTTCGCAACAATGGCGATGCTGTCCTTAAGTGAGCCCAGG [R=>C 33]
+- 07:38:23.953 INFO: hap[2] CCACAAGTCACACGCCACGCTACATTCGTTCAGGCAGAGCCACCTAGTTCCTAGTCACTTGTGCATGATAGCTCTGTCGCGAGGTGTCCCACCTGTTAAGAGTTACGCGGGTGGCAGAGCGACCGTGTTAACTTCAGAGCGCGCCACTCGACGTCGCCTACGTTCGCAACAATGGCGATGCTGTCCTTAAGTGAGCCCAGG [R=>A 100]
+- 07:38:23.953 INFO: hap[3] CCACAAGTCACACGCCACGCTACATTCGTTCAGCCAGAGCCACCTAGTTCCTAGTCACTTGTGCATGATAGCTCTGTCGCGAGGTGTCCCACCTGTTAAGAGTTACGCGGGTGGCAGAGCGACCGTGTTAACTTCAGAGCGCGCCACTCGACGTCGCCTACGTTCGCAACAATGGCGATGCTGTCCTTAAGTGAGCCCAGG [R=>C 33][R=>A 100]
+- 07:38:23.953 DEBUG: Haps2::getHaplotypes done
+- 07:38:23.953 DEBUG: ************ hap4 **************
+haps: 4
+- 07:38:23.953 DEBUG: before 46 51 184 204
+- 07:38:23.953 INFO: filter uninformative reads. remaining - 07:38:23.953 DEBUG: filter_reads: 
+- 07:38:23.953 DEBUG: filter_reads done
+- 07:38:23.953 DEBUG: filter_reads: 
+- 07:38:23.953 DEBUG: filter_reads done
+tumor reads: 51 of 51, normal reads: 46 of 46
+- 07:38:23.953 DEBUG:  184 204
+- 07:38:23.954 INFO: calculating the marginal likelihood based on the MUTATION model... finished (iterated 24 times)
+- 07:38:23.980 INFO: calculating the marginal likelihood based on the ERROR model... finished (iterated 21 times)
+- 07:38:24.000 DEBUG: **** hap4 done ***
+- 07:38:24.000 DEBUG: output
+- 07:38:24.000 DEBUG: 0
+- 07:38:24.001 DEBUG: after read size: n, t =46 51

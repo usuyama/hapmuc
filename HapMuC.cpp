@@ -681,7 +681,6 @@ void getParameters(po::variables_map & vm, Parameters & params)
     params.outputPooledLikelihoods=vm.count("opl")?true:false;
     params.showHapAlignments=vm.count("showHapAlignments")?true:false;
     if (vm.count("filterReadAux")) params.filterReadAux=vm["filterReadAux"].as<string>();
-    if (vm.count("processRealignedBAM")) params.processRealignedBAM=vm["processRealignedBAM"].as<string>();
 
     params.slower=vm.count("faster")?false:true;
     params.changeINStoN=vm.count("changeINStoN")?true:false;
@@ -726,7 +725,6 @@ int main(int argc, char *argv[])
     po::options_description output_options("Output options");
     output_options.add_options()
     ("outputRealignedBAM", "output BAM file with realigned reads")
-    ("processRealignedBAM", po::value<string>(),"ABSOLUTE path to script to process realigned BAM file")
     ("quiet", "quiet output");
     //("printCallsOnly", "print only genotypes where call_lik_ref>0.0001 (only affects --single)");
 

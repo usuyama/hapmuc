@@ -719,7 +719,6 @@ int main(int argc, char *argv[])
     po::options_description output_options("Output options");
     output_options.add_options()
     ("quiet", "quiet output");
-    //("printCallsOnly", "print only genotypes where call_lik_ref>0.0001 (only affects --single)");
 
     po::options_description analysis_opt("General algorithm parameters");
     analysis_opt.add_options()

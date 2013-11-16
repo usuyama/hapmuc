@@ -583,10 +583,6 @@ namespace Haps2 {
             if (ml.hpos[0] == MLAlignment::LO) hasStartEndIndel = true;
             int hs = ml.hpos.size()-1;
             if (hs>0 && ml.hpos[hs] == MLAlignment::RO) hasStartEndIndel = true;
-            //if (params.showCandHap) {
-            //			LOG(logDEBUG) << "hap " << h << endl;om.printAlignment(20);
-            //			LOG(logDEBUG) << string(20,' ') << haps[h].align << endl;
-            //	}
            	LOG(logDEBUG) << hasStartEndIndel << "hasStartEndIndel" << endl;
             for (map<int, AlignedVariant>::const_iterator it=haps[h].indels.begin(); it!=haps[h].indels.end();it++) {
 					variants[it->first].insert(it->second);
@@ -612,15 +608,13 @@ namespace Haps2 {
 
         if (!params.quiet) {
             for (map<int, std::set<AlignedVariant> >::const_iterator it=variants.begin();it!=variants.end();it++) {
-                LOG(logDEBUG) << "aligned_var@pos " << " " << leftPos+it->first;
+                LOG(logINFO) << "aligned_var@pos " << " " << leftPos+it->first;
                 BOOST_FOREACH(AlignedVariant av, it->second) {
-                    LOG(logDEBUG) << " " << av.getString();
+                    LOGP(logINFO) << " " << av.getString();
                 }
-                LOG(logDEBUG) << endl;
+                LOGP(logINFO) << endl;
             }
         }
-
-
         return true;
     }
 

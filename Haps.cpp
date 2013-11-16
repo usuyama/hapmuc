@@ -55,26 +55,15 @@ namespace Haps {
         haps.clear();
         vector<Variant> indelVariants;
         
-        /*
-         if (!(candidateVariants.size()>0 && params.checkAllCIGARs==0)) {
-         indelVariants=hd.getIndelVariantsAtMidPos();
-         }
-         
-         
-         // add any prespecified variants
-         //indelVariants.insert(indelVariants.begin(), variants.begin(), variants.end());
-         */
         if (!params.quiet) {
-            LOG(logDEBUG) << "candidate_var@pos: " << pos ;
+            LOG(logINFO) << "candidate_var@pos: " << pos ;
             BOOST_FOREACH(AlignedVariant v, candidateVariants.variants) {
-                LOG(logDEBUG) << " " << v.getStartHap() << "," << v.getString();
+                LOGP(logINFO) << " " << v.getStartHap() << "," << v.getString();
             }
-            LOG(logDEBUG) << endl;
+            LOGP(logINFO) << endl;
         }
         
-        
         // get haplotypes from empirical distribution
-        
         try {
             HDIterator2 hdi(hd, params.maxHap, pos, leftPos, rightPos, params.noIndelWindow);
             
@@ -94,13 +83,6 @@ namespace Haps {
                 return true;
             }
             
-            //	if (params.showHapDist) {
-            /*
-             LOG(logDEBUG) << endl << "Empirical distribution: " << endl;
-             LOG(logDEBUG) << hdi << endl; 
-             */
-            //	}
-            
             leftPos=hdi.start();
             rightPos=hdi.end();
             typedef map<int, AlignedVariant>::const_iterator It;
@@ -116,7 +98,6 @@ namespace Haps {
                 }
                 LOG(logDEBUG) << endl;
             }
-            
             
             map<int, std::set<AlignedVariant> > variants;
             alignHaplotypes(haps,pos, leftPos, rightPos, variants, params, refSeqForAlign);
@@ -466,11 +447,11 @@ namespace Haps {
         
         if (!params.quiet) {
             for (map<int, std::set<AlignedVariant> >::const_iterator it=variants.begin();it!=variants.end();it++) {
-                LOG(logDEBUG) << "aligned_var@pos " << pos << " " << leftPos+it->first;
+                LOG(logINFO) << "aligned_var@pos " << pos << " " << leftPos+it->first;
                 BOOST_FOREACH(AlignedVariant av, it->second) {
-                    LOG(logDEBUG) << " " << av.getString();
+                    LOGP(logINFO) << " " << av.getString();
                 }
-                LOG(logDEBUG) << endl;
+                LOGP(logINFO) << endl;
             }
         }
         

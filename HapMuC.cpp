@@ -582,7 +582,6 @@ void getParameters(po::variables_map & vm, Parameters & params)
 {
     params.maxReads=vm["maxRead"].as<uint32_t> ();
     params.mapQualThreshold=vm["mapQualThreshold"].as<double>();
-    params.inferenceMethod=vm["inferenceMethod"].as<string>();
     params.minReadOverlap=vm["minReadOverlap"].as<uint32_t>();
     params.maxReadLength=vm["maxReadLength"].as<uint32_t>();
 
@@ -685,7 +684,6 @@ int main(int argc, char *argv[])
     miscAnalysis.add_options()
     ("showHapAlignments","show for each haplotype which reads map to it")
     ("showReads","show reads")
-    ("inferenceMethod",po::value<string>()->default_value("empirical"), "inference method")
     ("opl","output likelihoods for every read and haplotype");
 
     required.add(baminput).add(varfileinput).add(output_options).add(analysis_opt).add(option_filter).add(obsModel).add(miscAnalysis).add(bams_tn);

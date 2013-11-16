@@ -151,7 +151,6 @@ public:
     {
         maxReads=2000;
         mapQualThreshold=0.995;
-        inferenceMethod="empirical";
         minReadOverlap=5;
         maxReadLength=40;
         numOutputTopHap=5;
@@ -209,7 +208,6 @@ public:
         cout << "\ttid: " << tid << " maxReads: " << maxReads << endl;
         cout << "\toutputFilename: " << fileName << endl;
         cout << "\tmapQualThreshold: " << mapQualThreshold << endl;
-        cout << "\tinferenceMethod: " << inferenceMethod << endl;
         cout << "\tminReadOverlap: " << minReadOverlap << endl;
         cout << "\tmaxReadLength: " << maxReadLength << endl;
         cout << "\tshowReads: " << showReads << endl;
@@ -244,7 +242,7 @@ public:
     uint32_t maxReads,  maxReadLength, fastWidth, fastWidthOverlap;
     double checkBaseQualThreshold;
     double mapQualThreshold, scaleErr, priorIndel, priorSNP, EMtol;
-    string fileName, inferenceMethod, refFileName, tid, filterReadAux;
+    string fileName, refFileName, tid, filterReadAux;
     bool showReads, showHapAlignments, alignAgainstReference, quiet, estimateHapFreqs, doDiploid, computeML, computeMAP,printCallsOnly, outputPooledLikelihoods;
     double meanInsert, stdInsert;
     Hap3Param hap3_params, hap2_params;

@@ -225,7 +225,6 @@ public:
         cout << "\tshowHapDist: " << showHapDist << endl;
         cout << "\tminReadOverlap: " << minReadOverlap << endl;
         cout << "\tmaxReadLength: " << maxReadLength << endl;
-        cout << "\tmaxHapReadProd: " << maxHapReadProd << endl;
         //cout << "\tfastWidth: " << fastWidth << endl;
         //cout << "\tfastWidthOverlap: " << fastWidthOverlap << endl;
         cout << "\tshowCandHap: " << showCandHap << endl;
@@ -262,7 +261,7 @@ public:
         obsParams.print();
     }
     
-    int noIndelWindow, numOutputTopHap, checkAllCIGARs, minReadOverlap, maxHapReadProd;
+    int noIndelWindow, numOutputTopHap, checkAllCIGARs, minReadOverlap;
     uint32_t maxReads,  maxReadLength, fastWidth, fastWidthOverlap;
     double checkBaseQualThreshold;
     double mapQualThreshold, scaleErr, priorIndel, priorSNP, EMtol, bayesa0;

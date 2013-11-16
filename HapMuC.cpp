@@ -383,7 +383,6 @@ void HapMuC::getReadsFromBams(vector<MyBam *> & Bams, uint32_t leftPos, uint32_t
 
 }
 
-
 string HapMuC::get_var_symbol(string ref, string obs) {
     if(ref == "-") return("+" + obs);
     else if(obs == "-") return("-" + ref);
@@ -409,15 +408,13 @@ AlignedCandidates HapMuC::getCandidateVariants(string line, vector<AlignedVarian
     stringstream  linestream(line);
     string cand_somatic, cand_germline;
     VariantInfo vi;
-    linestream >> vi.chr >> vi.start >> vi.end >> vi.ref >> vi.obs >> vi.ref_count_tumor >> vi.obs_count_tumor >> vi.ref_count_normal >> vi.obs_count_normal >> vi.missrate_tumor >> vi.strandrate_tumor >> vi.missrate_normal >> vi.strandrate_normal >> vi.fisher_score >> cand_somatic >> cand_germline;
-
+    linestream >> vi.chr >> vi.start >> vi.end >> vi.ref >> vi.obs >> vi.ref_count_tumor >> vi.obs_count_tumor >> vi.ref_count_normal >> vi.obs_count_normal >> vi.missrate_tumor >> vi.strandrate_tumor >> vi.missrate_normal >> vi.strandrate_normal >> vi.ref_bq_tumor >> vi.obs_bq_normal >> vi.ref_bq_normal >> vi.obs_bq_normal >> vi.fisher_score >> cand_germline;
     leftPos = vi.start - 0;//window size
     rightPos = vi.start + 0;
     vector<AlignedVariant> variants;
     AlignedVariant variant(get_var_symbol(vi.ref, vi.obs), vi.start, -1, 0);
     variant.info = vi;
     variants.push_back(variant);
-    close_somatic = parse_close_vars(cand_somatic);
     close_germline = parse_close_vars(cand_germline);
     // reads must overlap the candidate mutation
     /*

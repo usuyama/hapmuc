@@ -353,17 +353,13 @@ namespace MutationCall
             line.set("missrate_normal", v.missrate_normal);
             line.set("strandrate_normal", v.strandrate_normal);
             line.set("fisher", v.fisher_score);
-            line.set("NN1", "-");
-            line.set("NN2", "-");
-            line.set("NN3", "-");
-            line.set("NN4", "-");
-            line.set("TN1", "-");
-            line.set("TN2", "-");
-            line.set("TN3", "-");
-            line.set("TN4", "-");
-            line.set("hap2_bf", "-");
-            line.set("bf2", "-");
-            line.set("closest_germline", "-");
+            line.set("ref_bq_tumor", v.ref_bq_tumor);
+            line.set("obs_bq_tumor", v.obs_bq_tumor);
+            line.set("ref_bq_normal", v.ref_bq_normal);
+            line.set("obs_bq_normal", v.obs_bq_normal);
+            line.set("bf_without_snp", "-");
+            line.set("bf_with_snp", "-");
+            line.set("germline_snp_nearby", "-");
             line.set("distance", "-");
             oData.output(line);
         } else {
@@ -390,44 +386,29 @@ namespace MutationCall
                 line.set("missrate_normal", v.missrate_normal);
                 line.set("strandrate_normal", v.strandrate_normal);
                 line.set("fisher", v.fisher_score);
-                if(hap2_flag==false && hap3_flag==false) {
-                    line.set("NN1", "-");
-                    line.set("NN2", "-");
-                    line.set("NN3", "-");
-                    line.set("NN4", "-");
-                    line.set("TN1", "-");
-                    line.set("TN2", "-");
-                    line.set("TN3", "-");
-                    line.set("TN4", "-");
-                } else {
-                    line.set("NN1", n_result.N1);
-                    line.set("NN2", n_result.N2);
-                    line.set("NN3", n_result.N3);
-                    line.set("NN4", n_result.N4);
-                    line.set("TN1", t_result.N1);
-                    line.set("TN2", t_result.N2);
-                    line.set("TN3", t_result.N3);
-                    line.set("TN4", t_result.N4);
-                }
+                line.set("ref_bq_tumor", v.ref_bq_tumor);
+                line.set("obs_bq_tumor", v.obs_bq_tumor);
+                line.set("ref_bq_normal", v.ref_bq_normal);
+                line.set("obs_bq_normal", v.obs_bq_normal);
                 if(hap2_flag) {
-                    line.set("hap2_bf", hap2_bf);
+                    line.set("bf_without_snp", hap2_bf);
                 } else {
-                    line.set("hap2_bf", "-");
+                    line.set("bf_with_snp", "-");
                 }
                 if(hap3_flag){
-                    line.set("bf2", bf2);
+                    line.set("bf_with_snp", bf2);
                 } else {
                     if(haps_size_error) {
-                        line.set("bf2", "-");
+                        line.set("bf_with_snp", "-");
                     } else {
-                        line.set("bf2", "-");
+                        line.set("bf_with_snp", "-");
                     }
                 }
                 if(closest_germline == "-") {
-                    line.set("closest_germline", "-");
+                    line.set("germline_snp_nearby", "-");
                     line.set("distance", "-");
                 } else {
-                    line.set("closest_germline", closest_germline);
+                    line.set("germline_snp_nearby", closest_germline);
                     line.set("distance", distance);
                 }
                 oData.output(line);

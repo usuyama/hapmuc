@@ -206,11 +206,10 @@ public:
         oData("ref")("obs");
         oData("ref_count_tumor")("obs_count_tumor")("ref_count_normal")("obs_count_normal");
         oData("missrate_tumor")("strandrate_tumor")("missrate_normal")("strandrate_normal");
-        oData("TN1")("TN2")("TN3")("TN4");
-        oData("NN1")("NN2")("NN3")("NN4");
+        oData("ref_bq_tumor")("obs_bq_tumor")("ref_bq_normal")("obs_bq_normal");
         oData("fisher");
-        oData("hap2_bf")("bf2");
-        oData("closest_germline")("distance");
+        oData("bf_without_snp")("bf_with_snp");
+        oData("germline_snp_nearby")("distance");
         return oData;
     }
       

@@ -92,6 +92,7 @@ public:
     string missrate_tumor, strandrate_tumor;
     string ref_count_normal, obs_count_normal;
     string missrate_normal, strandrate_normal;
+    string ref_bq_tumor, obs_bq_tumor, ref_bq_normal, obs_bq_normal;
     string fisher_score;
     VariantInfo() {};
 };

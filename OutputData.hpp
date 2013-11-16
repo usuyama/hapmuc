@@ -61,7 +61,7 @@ public:
 		stringstream out;
 		if (labels.size()>0) {
 			out << labels[0];
-			for (size_t x=1;x<labels.size();x++) out << " " << labels[x];
+			for (size_t x=1;x<labels.size();x++) out << "\t" << labels[x];
 		}
 		return out.str();
 	}

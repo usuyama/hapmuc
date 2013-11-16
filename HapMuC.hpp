@@ -186,7 +186,6 @@ public:
         printCallsOnly=true;
         outputPooledLikelihoods=false;
         filterHaplotypes = false;
-        outputRealignedBAM=false;
         changeINStoN = false;
         hap3_params.clear_all();
         hap2_params.clear_all();
@@ -258,7 +257,6 @@ public:
         cout << "\tdoEM: " << estimateHapFreqs << endl;
         
         cout << "\toutputPooledLikelihoods: " << outputPooledLikelihoods << endl;
-        cout << "\toutputRealignedBAM: " << outputRealignedBAM << endl;
         cout << "\tshowHapAlignments: " << showHapAlignments << endl;
         
         cout << "\tEM tol: " << EMtol << endl;
@@ -284,7 +282,7 @@ public:
     double mapQualThreshold, scaleErr, priorIndel, priorSNP, EMtol, bayesa0;
     string fileName, inferenceMethod, refFileName, tid, filterReadAux, bayesType;
     bool analyzeLowFreq, showHapDist, showCandHap, showReads, showHapAlignments, alignAgainstReference, mapUnmappedReads, quiet, estimateHapFreqs, doDiploid, computeML, computeMAP, slower,printCallsOnly, outputPooledLikelihoods, filterHaplotypes;
-    bool outputRealignedBAM, changeINStoN;
+    bool changeINStoN;
     double analyzeLowFreqDiffThreshold;
     double meanInsert, stdInsert;
     Hap3Param hap3_params, hap2_params;

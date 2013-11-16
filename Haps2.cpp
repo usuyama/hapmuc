@@ -258,10 +258,6 @@ namespace Haps2 {
 		LOG(logDEBUG) << normal_haps.size() << endl;
         vector<Haplotype> tmp_haps;
         vector<vector<MLAlignment> > tmp_liks;
-        if(normal_haps.size() > params.skipMaxHap) {
-            cerr << "tid: " << params.tid << " pos: " << pos << " too many haplotypes [(" << normal_haps.size() << ")]" << endl;
-            throw string("too many normal candidate haplotypes");
-        }
         typedef map<int, AlignedVariant>::const_iterator It;
         vector<int> onHap(normal_reads.size(),1); // which reads were mapped inside the haplotype window given an artificially high mapping quality
         vector<double> normal_hap_freqs;vector<HapEstResult> normal_her;map<AlignedVariant, double> normal_vpp;lower_bound_t normal_lb;
@@ -330,12 +326,7 @@ namespace Haps2 {
         vector<AlignedVariant> somatic_vars;
         somatic_vars.push_back(candidateVariants.variants[0]);
         vector<Haplotype> merged_haps;
-        getAdditionalHaps(merged_haps, refSeq, refSeqForAlign, leftPos, rightPos, somatic_vars, normal_vars, params);
-        if(merged_haps.size() > params.skipMaxHap) {
-            LOG(logERROR) << "tid: " << params.tid << " pos: " << pos << " too many haplotypes [(" << merged_haps.size() << ")]" << endl;
-            throw string("too many merged candidate haplotypes");
-        }
-
+		getAdditionalHaps(merged_haps, refSeq, refSeqForAlign, leftPos, rightPos, somatic_vars, normal_vars, params);
         LOG(logDEBUG) << "#merged haplotype list" << endl;
         for (size_t th=0;th<merged_haps.size();th++) {
             const Haplotype & hap=merged_haps[th];

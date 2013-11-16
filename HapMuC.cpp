@@ -582,7 +582,6 @@ void getParameters(po::variables_map & vm, Parameters & params)
 {
     params.maxReads=vm["maxRead"].as<uint32_t> ();
     params.mapQualThreshold=vm["mapQualThreshold"].as<double>();
-    params.skipMaxHap=vm["skipMaxHap"].as<uint32_t>();
     params.inferenceMethod=vm["inferenceMethod"].as<string>();
     params.minReadOverlap=vm["minReadOverlap"].as<uint32_t>();
     params.maxReadLength=vm["maxReadLength"].as<uint32_t>();
@@ -678,8 +677,6 @@ int main(int argc, char *argv[])
     ("maxRead", po::value<uint32_t>()->default_value(50000), "maximum number of reads in likelihood computation")
     ("mapQualThreshold", po::value<double>()->default_value(0.9), "lower limit for read mapping quality")
     ("capMapQualThreshold", po::value<double>()->default_value(100.0), "upper limit for read mapping quality in observationmodel_old (phred units)")
-    ("skipMaxHap", po::value<uint32_t>()->default_value(200), "skip computation if number of haplotypes exceeds this number")
-    //("numOutputTopHap", po::value<int>()->default_value(5), "number of haplotype pairs output to haplotype file")
     ("minReadOverlap", po::value<uint32_t>()->default_value(100),"minimum overlap between read and haplotype")
     ("maxReadLength", po::value<uint32_t>()->default_value(100),"maximum length of reads")
     ("minCount", po::value<uint32_t>()->default_value(1), "minimum number of WS observations of indel")

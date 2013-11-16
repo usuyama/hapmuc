@@ -588,7 +588,6 @@ void getParameters(po::variables_map & vm, Parameters & params)
 
     params.priorSNP=vm["priorSNP"].as<double>();
     params.priorIndel=vm["priorIndel"].as<double>();
-    params.bayesType=vm["bayesType"].as<string>();
 
     if (vm.count("ref")) {
         params.alignAgainstReference=true;
@@ -676,10 +675,6 @@ int main(int argc, char *argv[])
     ("capMapQualThreshold", po::value<double>()->default_value(100.0), "upper limit for read mapping quality in observationmodel_old (phred units)")
     ("minReadOverlap", po::value<uint32_t>()->default_value(100),"minimum overlap between read and haplotype")
     ("maxReadLength", po::value<uint32_t>()->default_value(100),"maximum length of reads");
-    po::options_description pooled_analysis("parameters for --pooled option");
-    pooled_analysis.add_options()
-    ("bayesa0", po::value<double>()->default_value(0.1), "Dirichlet a0 parameter haplotype frequency prior")
-    ("bayesType",po::value<string>()->default_value("singlevariant"), "Bayesian EM program type (all or singlevariant or priorpersite)");
 
     po::options_description option_filter("General algorithm filtering options");
     option_filter.add_options()
@@ -707,7 +702,7 @@ int main(int argc, char *argv[])
     ("inferenceMethod",po::value<string>()->default_value("empirical"), "inference method")
     ("opl","output likelihoods for every read and haplotype");
 
-    required.add(baminput).add(varfileinput).add(output_options).add(analysis_opt).add(pooled_analysis).add(option_filter).add(obsModel).add(miscAnalysis).add(bams_tn);
+    required.add(baminput).add(varfileinput).add(output_options).add(analysis_opt).add(option_filter).add(obsModel).add(miscAnalysis).add(bams_tn);
 
     po::variables_map vm;
 

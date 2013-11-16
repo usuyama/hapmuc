@@ -149,7 +149,6 @@ public:
     
     void setDefaultValues()
     {
-        bayesa0=0.1;
         maxReads=2000;
         mapQualThreshold=0.995;
         inferenceMethod="empirical";
@@ -157,7 +156,6 @@ public:
         maxReadLength=40;
         numOutputTopHap=5;
         checkAllCIGARs=1;
-        bayesType="all";
         
         fastWidth=4;
         analyzeLowFreq=false;
@@ -245,9 +243,6 @@ public:
         cout << "\tshowHapAlignments: " << showHapAlignments << endl;
         
         cout << "\tEM tol: " << EMtol << endl;
-        cout << "\tbayesEM a0: " << bayesa0 << endl;
-        cout << "\tbayesType: " << bayesType << endl;
-        
         
         cout << "\tpriorIndel: " << priorIndel << endl;
         cout << "\tpriorSNP: " << priorSNP << endl;
@@ -264,8 +259,8 @@ public:
     int noIndelWindow, numOutputTopHap, checkAllCIGARs, minReadOverlap;
     uint32_t maxReads,  maxReadLength, fastWidth, fastWidthOverlap;
     double checkBaseQualThreshold;
-    double mapQualThreshold, scaleErr, priorIndel, priorSNP, EMtol, bayesa0;
-    string fileName, inferenceMethod, refFileName, tid, filterReadAux, bayesType;
+    double mapQualThreshold, scaleErr, priorIndel, priorSNP, EMtol;
+    string fileName, inferenceMethod, refFileName, tid, filterReadAux;
     bool analyzeLowFreq, showHapDist, showCandHap, showReads, showHapAlignments, alignAgainstReference, quiet, estimateHapFreqs, doDiploid, computeML, computeMAP,printCallsOnly, outputPooledLikelihoods;
     double analyzeLowFreqDiffThreshold;
     double meanInsert, stdInsert;

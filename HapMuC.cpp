@@ -122,7 +122,7 @@ void HapMuC::getReadsFromBams(vector<MyBam *> & Bams, uint32_t leftPos, uint32_t
 
 	reads.clear();
 
-//	if (int(rightPos-leftPos)<params.minReadOverlap) throw string("Choose a larger width or a smaller minReadOverlap.");
+	if (int(rightPos-leftPos)<params.minReadOverlap) throw string("You should choose a larger maxReadLength or a smaller minReadOverlap.");
 
 
 	int maxDev = 800; //int (libraries.getMaxInsertSize());

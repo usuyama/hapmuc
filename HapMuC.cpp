@@ -609,7 +609,6 @@ void getParameters(po::variables_map & vm, Parameters & params)
     params.obsParams.padCover = vm["flankRefSeq"].as<int>();
     params.obsParams.maxMismatch = vm["flankMaxMismatch"].as<int>();
 
-    params.analyzeLowFreqDiffThreshold=vm["compareReadHapThreshold"].as<double>();
     params.showHapDist=vm.count("showEmpirical")?true:false;
     params.showCandHap=vm.count("showCandHap")?true:false;
     params.showReads=vm.count("showReads")?true:false;
@@ -686,7 +685,6 @@ int main(int argc, char *argv[])
 
     po::options_description miscAnalysis("Misc results analysis options");
     miscAnalysis.add_options()
-    ("compareReadHapThreshold", po::value<double>()->default_value(0.5), "difference threshold for viewing")
     ("showEmpirical", "show empirical distribution over nucleotides")
     ("showCandHap", "show candidate haplotypes for fast method")
     ("showHapAlignments","show for each haplotype which reads map to it")

@@ -97,31 +97,10 @@ namespace MutationCall
         }
     }
 
-
     void filter_reads(vector<Read> &reads, vector<double> &liks) {
-        LOG(logDEBUG) << "filter_reads: " << endl;
-        if (liks.size() % 4 != 0) throw(string("haps size should be 4!"));
-        //h1とh3で差がでないreadを消す。
-        for(int i=0;i<reads.size();i++) {
-            double max=-DBL_MAX, min=DBL_MAX;
-            for(int j=0;j<2;j++) {
-                if(liks[i*4+j*2]>max) max = liks[i*4+j*2];
-                if(liks[i*4+j*2]<min) min = liks[i*4+j*2];
-            }
-            if((max-min)<0.0001) {
-                LOG(logDEBUG) << "filter read: " << reads[i].seq_name << " " << i << " " << max << " " << min << endl;
-                reads.erase(reads.begin()+i);
-                liks.erase(liks.begin()+i*4, liks.begin()+i*4+4);
-                i--;
-            }
-        }
-        LOG(logDEBUG) << "filter_reads done" << endl;
-    }
-
-    void filter_reads_faster(vector<Read> &reads, vector<double> &liks) {
         if (liks.size() % 4 != 0) throw(string("haps size should be 4!"));
         // TODO: can be more efficient.
-        LOG(logDEBUG) << "filter_reads_faster: " << endl;
+        LOG(logDEBUG) << "filter_reads: " << endl;
         int count = 0;
         //h1とh3で差がでないreadを消す。
         for(int i=0;i<reads.size();i++) {
@@ -142,7 +121,7 @@ namespace MutationCall
         }
         reads.erase(reads.begin()+count, reads.end());
         liks.erase(liks.begin()+count*4, liks.end());
-        LOG(logDEBUG) << "filter_reads_faster done" << endl;
+        LOG(logDEBUG) << "filter_reads done" << endl;
     }
 
     void output_mm(vector<Haplotype> &haps, string fname, uint32_t leftPos, uint32_t rightPos, double bf, lower_bound_t& lb, vector<double> normalHapFreqs, vector<double> tumorHapFreqs) {
@@ -325,8 +304,8 @@ namespace MutationCall
                         f_tumor_reads.insert(f_tumor_reads.end(), tumorReads.begin(), tumorReads.end());
                         LOG(logDEBUG) << "before " << f_normal_reads.size() << " " << f_tumor_reads.size() << " " << rln.size()  << " " << rlt.size() << endl;
                         LOG(logINFO) << "filter uninformative reads. remaining ";
-                        filter_reads_faster(f_normal_reads, rln);
-                        filter_reads_faster(f_tumor_reads, rlt);
+                        filter_reads(f_normal_reads, rln);
+                        filter_reads(f_tumor_reads, rlt);
                         LOGP(logINFO) << "tumor reads: " << f_tumor_reads.size() << " of " << nrt << ", normal reads: " << f_normal_reads.size() << " of " << nrn << endl;
                         LOG(logDEBUG) << " " << rln.size() << " " << rlt.size() << endl;
 
@@ -517,8 +496,8 @@ namespace MutationCall
         f_normal_reads.insert(f_normal_reads.end(), normalReads.begin(), normalReads.end());
         f_tumor_reads.insert(f_tumor_reads.end(), tumorReads.begin(), tumorReads.end());
         LOG(logINFO) << "filter uninformative reads. remaining ";
-        filter_reads_faster(f_normal_reads, rln);
-        filter_reads_faster(f_tumor_reads, rlt);
+        filter_reads(f_normal_reads, rln);
+        filter_reads(f_tumor_reads, rlt);
         LOGP(logINFO) << "tumor reads: " << f_tumor_reads.size() << " of " << nrt << ", normal reads: " << f_normal_reads.size() << " of " << nrn << endl;
 #ifdef LOGDEBUG
         output_liktable(index, "hap2_tumor", rlt, params);

@@ -1,6 +1,5 @@
 *.o
-*.pyc
-*.py
+hapmuc
 .DS_Store
 .RData
 .Rhistory

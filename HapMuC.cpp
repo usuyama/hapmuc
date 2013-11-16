@@ -608,7 +608,6 @@ void getParameters(po::variables_map & vm, Parameters & params)
     //params.obsParams.numE=vm["numE"].as<int>();
     params.obsParams.padCover = vm["flankRefSeq"].as<int>();
     params.obsParams.maxMismatch = vm["flankMaxMismatch"].as<int>();
-    params.checkAllCIGARs=vm["checkAllCIGARs"].as<int>();
 
     params.analyzeLowFreq=vm.count("compareReadHap")?true:false;
     params.analyzeLowFreqDiffThreshold=vm["compareReadHapThreshold"].as<double>();
@@ -678,7 +677,6 @@ int main(int argc, char *argv[])
 
     po::options_description option_filter("General algorithm filtering options");
     option_filter.add_options()
-    ("checkAllCIGARs",po::value<int>()->default_value(1),"include all indels at the position of the call site")
     ("filterReadAux", po::value<string>(), "match string for exclusion of reads based on auxilary information");
 
     po::options_description obsModel("Observation model parameters");

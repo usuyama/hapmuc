@@ -155,7 +155,6 @@ public:
         minReadOverlap=5;
         maxReadLength=40;
         numOutputTopHap=5;
-        checkAllCIGARs=1;
         
         fastWidth=4;
         analyzeLowFreq=false;
@@ -231,8 +230,6 @@ public:
         
         cout << "\tnumOutputTopHap: " << numOutputTopHap << endl;
         
-        cout << "\tcheckAllCIGARs: " << checkAllCIGARs << endl;
-        
         cout << endl;
         cout << "\tquiet: " << quiet << endl;
         cout << "\tprintCallsOnly: " << printCallsOnly << endl;
@@ -256,7 +253,7 @@ public:
         obsParams.print();
     }
     
-    int noIndelWindow, numOutputTopHap, checkAllCIGARs, minReadOverlap;
+    int noIndelWindow, numOutputTopHap, minReadOverlap;
     uint32_t maxReads,  maxReadLength, fastWidth, fastWidthOverlap;
     double checkBaseQualThreshold;
     double mapQualThreshold, scaleErr, priorIndel, priorSNP, EMtol;

@@ -150,7 +150,6 @@ public:
     void setDefaultValues()
     {
         bayesa0=0.1;
-        maxHap=100;
         skipMaxHap=100;
         maxReads=2000;
         mapQualThreshold=0.995;
@@ -218,7 +217,7 @@ public:
     void print()
     {
         cout << "HapMuC parameters: " << endl;
-        cout << "\ttid: " << tid << " maxHap: " << maxHap << " maxReads: " << maxReads << " skipMaxHap: " << skipMaxHap << endl;
+        cout << "\ttid: " << tid << " maxReads: " << maxReads << " skipMaxHap: " << skipMaxHap << endl;
         cout << "\toutputFilename: " << fileName << endl;
         cout << "\tmapQualThreshold: " << mapQualThreshold << endl;
         //cout << "\tscaleError: " << scaleErr << endl;
@@ -267,7 +266,7 @@ public:
     }
     
     int noIndelWindow, numOutputTopHap, checkAllCIGARs, minReadOverlap, maxHapReadProd;
-    uint32_t maxHap, maxReads, skipMaxHap, maxReadLength, minCount, fastWidth, fastWidthOverlap;
+    uint32_t maxReads, skipMaxHap, maxReadLength, minCount, fastWidth, fastWidthOverlap;
     double checkBaseQualThreshold;
     double mapQualThreshold, scaleErr, priorIndel, priorSNP, EMtol, bayesa0;
     string fileName, inferenceMethod, refFileName, tid, filterReadAux, bayesType;

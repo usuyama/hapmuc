@@ -1,8 +1,0 @@
-snapshotDirectory tmp/igvss
-new
-load /home/usuyama/hapmuc_sim3/1_1_1/sm/tp0.8/1/tumor.sort.bam
-load /home/usuyama/hapmuc_sim3/1_1_1/sm/tp0.8/1/normal.sort.bam
-genome hg19
-goto chr1:1105-1905
-collapse
-snapshot sm_tp0.8_1_chr1:1105-1905.png

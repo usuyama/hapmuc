@@ -1,7 +1,0 @@
-new
-load /nshare1/home/usuyama/codes/hapmuc_sc/hapmuc_testcases/1/tumor.bam
-collapse
-load /nshare1/home/usuyama/codes/hapmuc_sc/hapmuc_testcases/1/normal.bam
-collapse
-snapshotDirectory /nshare1/home/usuyama/codes/hapmuc_sc/hapmuc_testcases/1/pics
-genome hg19

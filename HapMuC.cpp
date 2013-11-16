@@ -122,7 +122,7 @@ void HapMuC::getReadsFromBams(vector<MyBam *> & Bams, uint32_t leftPos, uint32_t
 
 	reads.clear();
 
-	//if (int(rightPos-leftPos)<3*params.minReadOverlap) throw string("Choose a larger width or a smaller minReadOverlap.");
+//	if (int(rightPos-leftPos)<params.minReadOverlap) throw string("Choose a larger width or a smaller minReadOverlap.");
 
 
 	int maxDev = 800; //int (libraries.getMaxInsertSize());
@@ -582,7 +582,6 @@ void getParameters(po::variables_map & vm, Parameters & params)
 {
     params.maxHap=vm["maxHap"].as<uint32_t> ();
     params.maxReads=vm["maxRead"].as<uint32_t> ();
-    params.width=vm["width"].as<uint32_t> ();
     params.mapQualThreshold=vm["mapQualThreshold"].as<double>();
     params.skipMaxHap=vm["skipMaxHap"].as<uint32_t>();
     params.inferenceMethod=vm["inferenceMethod"].as<string>();
@@ -678,7 +677,6 @@ int main(int argc, char *argv[])
     ("flankMaxMismatch",po::value<int>()->default_value(2),"max number of mismatches in indel region")
     ("priorSNP", po::value<double>()->default_value(1.0/1000.0), "prior probability of a SNP site")
     ("priorIndel", po::value<double>()->default_value(1.0/10000.0), "prior probability of a detected indel not being a sequencing error")
-    ("width", po::value<uint32_t>()->default_value(80), "number of bases to left and right of indel")
     ("maxHap", po::value<uint32_t>()->default_value(8), "maximum number of haplotypes in likelihood computation")
     ("maxRead", po::value<uint32_t>()->default_value(50000), "maximum number of reads in likelihood computation")
     ("mapQualThreshold", po::value<double>()->default_value(0.9), "lower limit for read mapping quality")

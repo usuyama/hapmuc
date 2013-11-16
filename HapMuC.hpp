@@ -207,8 +207,6 @@ public:
         return oData;
     }
       
-    
-    
     void print()
     {
         cout << "HapMuC parameters: " << endl;

@@ -284,7 +284,7 @@ public:
     double mapQualThreshold, scaleErr, priorIndel, priorSNP, EMtol, bayesa0;
     string fileName, inferenceMethod, refFileName, tid, filterReadAux, bayesType;
     bool analyzeLowFreq, showHapDist, showCandHap, showReads, showHapAlignments, alignAgainstReference, mapUnmappedReads, quiet, estimateHapFreqs, doDiploid, computeML, computeMAP, slower,printCallsOnly, outputPooledLikelihoods, filterHaplotypes;
-    bool outputRealignedBAM, varFileIsOneBased, changeINStoN;
+    bool outputRealignedBAM, changeINStoN;
     double analyzeLowFreqDiffThreshold;
     double meanInsert, stdInsert;
     Hap3Param hap3_params, hap2_params;

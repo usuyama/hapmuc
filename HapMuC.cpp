@@ -662,7 +662,6 @@ void getParameters(po::variables_map & vm, Parameters & params)
     params.obsParams.maxMismatch = vm["flankMaxMismatch"].as<int>();
     params.checkAllCIGARs=vm["checkAllCIGARs"].as<int>();
 
-    params.varFileIsOneBased=vm.count("varFileIsOneBased")?true:false;
     params.outputRealignedBAM=vm.count("outputRealignedBAM")?true:false;
     params.analyzeLowFreq=vm.count("compareReadHap")?true:false;
     params.analyzeLowFreqDiffThreshold=vm["compareReadHapThreshold"].as<double>();
@@ -710,17 +709,16 @@ int main(int argc, char *argv[])
     po::options_description baminput("[Required] BAM input. Choose one of the following");
     baminput.add_options()
     ("bamFile",po::value<string>(), "read alignment file (should be indexed)")
-    ("bamFiles",po::value<string>(), "file containing filepaths for BAMs to be jointly analysed (not possible for --analysis==indels");
+    ("bamFiles",po::value<string>(), "file containing filepaths for BAMs to be jointly analysed);
 
     po::options_description bams_tn("[Required for analysis = mutationCall] :");
     bams_tn.add_options()
     ("tumorBamFile", po::value<string>(), "bam files of tumor samples")
     ("normalBamFile", po::value<string>(), "bam files of normal samples");
 
-    po::options_description varfileinput("[Required for analysis == indels, mutationCall]");
+    po::options_description varfileinput("[Required for analysis == mutationCall]");
     varfileinput.add_options()
-    ("varFile", po::value<string>(), "file with candidate variants to be tested.")
-    ("varFileIsOneBased", "coordinates in varFile are one-based");
+    ("varFile", po::value<string>(), "file with candidate variants to be tested.");
 
     po::options_description output_options("Output options");
     output_options.add_options()

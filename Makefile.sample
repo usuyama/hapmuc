@@ -1,29 +1,17 @@
 .PHONY: all clean test
 SAMTOOLDIR=<insert samtools root dir>
 SEQANDIR=seqan_library/
-BOOST=<insert boost ver 1.45 root dir>
-BOOSTLIB=${BOOST}stage/lib/
+BOOST=boost/
 
 CXX= g++
-CPPFLAGS= -D_IOLIB=2 -DMINREADS=2 -DHAPMUC # -DLOGDEBUG -g -DNDEBUG -DMMTEST #for mutation_model_test
+CPPFLAGS= -D_IOLIB=2 -DMINREADS=2 # -DLOGDEBUG -g -DNDEBUG -DMMTEST
 CXXFLAGS= -I$(SAMTOOLDIR) -I$(SEQANDIR) -I${BOOST} -I./ -Wno-deprecated  -O3
-LDFLAGS= -L$(SAMTOOLDIR) -lbam -lz -L${BOOSTLIB} -lboost_program_options
-SRCSDINDEL=HapMuC.cpp Utils.cpp MutationModel.cpp HapBlock.cpp HaplotypeDistribution.cpp ObservationModelFB.cpp Haps.cpp Haps2.cpp EMBasic.cpp EMfor2.cpp MutationCall.cpp
-OBJSDINDEL=$(SRCSDINDEL:%.cpp=%.o)
+LDFLAGS= -L$(SAMTOOLDIR) -lbam -lz
+SRCSHAPMUC=HapMuC.cpp Utils.cpp MutationModel.cpp HapBlock.cpp HaplotypeDistribution.cpp ObservationModelFB.cpp Haps.cpp Haps2.cpp EMBasic.cpp EMfor2.cpp MutationCall.cpp
+OBJSHAPMUC=$(SRCSHAPMUC:%.cpp=%.o)
 all: hapmuc
-hapmuc:$(OBJSDINDEL)
-	$(CXX) -o $@ $(CXXFLAGS) $(DINDELFLAGS) $(OBJSDINDEL) $(LDFLAGS)
-
-OBJSTEST=Utils.o MutationModel.o HapBlock.o HaplotypeDistribution.o ObservationModelFB.o Haps.o Haps2.o EMBasic.o EMfor2.o MutationCall.o mutation_model_test.o
-mutation_model_test: $(OBJSTEST)
-	$(CXX) -o mutation_model_test $(CXXFLAGS) $(OBJSTEST) $(LDFLAGS)
+hapmuc:$(OBJSHAPMUC)
+	$(CXX) -o $@ $(CXXFLAGS) $(HAPMUCFLAGS) $(OBJSHAPMUC) $(LDFLAGS)
 
 clean:
-	rm -f $(OBJSDINDEL) $(OBJSCOMPAREVARIANTS)  $(OBJSMAKEGLF)
-
-test: hapmuc
-	@sh hapmuc_testcases/test.sh 1
-	@sh hapmuc_testcases/test.sh 2
-	@sh hapmuc_testcases/test.sh 3
-	@sh hapmuc_testcases/test.sh 4
-	@sh hapmuc_testcases/test.sh 5
+	rm -f $(OBJSHAPMUC) $(OBJSCOMPAREVARIANTS)  $(OBJSMAKEGLF)

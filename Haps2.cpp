@@ -38,7 +38,6 @@
 #include <math.h>
 #include <sys/stat.h>
 #include <sys/types.h>
-#include <boost/algorithm/string.hpp>
 #include "MutationCall.hpp"
 #include "Haps.hpp"
 #include "Haps2.hpp"

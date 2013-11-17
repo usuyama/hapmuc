@@ -17,7 +17,6 @@
 //#include <iostream>
 //#include <iomanip>
 //#include <string>
-//#include <boost/tuple/tuple.hpp>
 #include <ext/hash_map>
 //#include "MyBam.hpp"
 //#include "faidx.h"
@@ -37,7 +36,6 @@
 using namespace boost::assign;
 
 using namespace std;
-using namespace boost;
 using __gnu_cxx::hash;
 typedef struct
 {

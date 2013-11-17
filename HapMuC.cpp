@@ -19,7 +19,6 @@
 #include <fstream>
 #include <set>
 #include <algorithm>
-#include <boost/math/special_functions/digamma.hpp>
 #include <seqan/align.h>
 #include <seqan/graph_align.h>
 #include "foreach.hpp"
@@ -37,12 +36,11 @@
 #include <math.h>
 #include <sys/stat.h>
 #include <sys/types.h>
-#include <boost/algorithm/string.hpp>
 #include "MutationCall.hpp"
 #include "log.h"
 #include "cmdline.h"
+#include <boost/algorithm/string.hpp>
 
-using namespace boost;
 const int USECALLWINDOW=0;
 using namespace seqan;
 
@@ -390,9 +388,9 @@ vector<AlignedVariant> HapMuC::parse_close_vars(string s) {
     if(s == "-") return variants;
     vector<string> str_vars;
     vector<string> pos_var;
-    split(str_vars, s, is_any_of(","));
+    boost::split(str_vars, s, boost::is_any_of(","));
     BOOST_FOREACH(string x, str_vars) {
-        split(pos_var, x, is_any_of(":"));
+        boost::split(pos_var, x, boost::is_any_of(":"));
         AlignedVariant v(pos_var[1], atoi(pos_var[0].c_str()), -1, 0);
         variants.push_back(v);
     }

@@ -39,7 +39,7 @@ using __gnu_cxx::hash;
   
 struct my_hash_funct : public unary_function<string, size_t>
 {	
-	size_t operator()(const string & x) const { return hash<const char*>() (x.c_str()); }
+	size_t operator()(const string & x) const { return __gnu_cxx::hash<const char*>() (x.c_str()); }
 };
 
 template<class T>  class string_hash : public hash_map<string, T, my_hash_funct> {};

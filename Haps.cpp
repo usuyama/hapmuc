@@ -22,7 +22,6 @@
 #include <fstream>
 #include <set>
 #include <algorithm>
-#include <boost/program_options.hpp>
 #include <boost/math/special_functions/digamma.hpp>
 #include <seqan/align.h>
 #include <seqan/graph_align.h>

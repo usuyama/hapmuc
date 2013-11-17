@@ -30,7 +30,6 @@
 #include <math.h>
 #include <sys/stat.h>
 #include <sys/types.h>
-#include <boost/algorithm/string.hpp>
 #include "EMBasic.hpp"
 #include "log.h"
 

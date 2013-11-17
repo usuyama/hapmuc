@@ -12,7 +12,6 @@
 #include <fstream>
 #include <set>
 #include <algorithm>
-#include <boost/math/special_functions/digamma.hpp>
 #include <seqan/align.h>
 #include <seqan/graph_align.h>
 #include "foreach.hpp"
@@ -30,7 +29,6 @@
 #include <math.h>
 #include <sys/stat.h>
 #include <sys/types.h>
-#include <boost/algorithm/string.hpp>
 #include "EMfor2.hpp"
 #include "log.h"
 

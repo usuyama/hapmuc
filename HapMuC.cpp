@@ -19,7 +19,6 @@
 #include <fstream>
 #include <set>
 #include <algorithm>
-#include <boost/program_options.hpp>
 #include <boost/math/special_functions/digamma.hpp>
 #include <seqan/align.h>
 #include <seqan/graph_align.h>
@@ -41,11 +40,11 @@
 #include <boost/algorithm/string.hpp>
 #include "MutationCall.hpp"
 #include "log.h"
+#include "cmdline.h"
 
 using namespace boost;
 const int USECALLWINDOW=0;
 using namespace seqan;
-namespace po = boost::program_options;
 
 using namespace std;
 //using namespace fasta;
@@ -54,13 +53,10 @@ using namespace std;
 HapMuC::HapMuC(const string & normalBF, const string & tumorBF, const Parameters & _params) : params(_params)
 {
 	fai=NULL;
-	if (params.alignAgainstReference) {
-		fai = fai_load(params.refFileName.c_str());
-		if (!fai) {
-			LOG(logERROR) << "Cannot open reference sequence file." << endl;
-			params.alignAgainstReference=false;
-			exit(1);
-		}
+	fai = fai_load(params.refFileName.c_str());
+	if (!fai) {
+		LOG(logERROR) << "Cannot open reference sequence file." << endl;
+		exit(1);
 	}
 
     string fname = normalBF;
@@ -85,7 +81,7 @@ HapMuC::HapMuC(const string & normalBF, const string & tumorBF, const Parameters
 
 HapMuC::~HapMuC()
 {
-	if (params.alignAgainstReference && fai) {
+	if (fai) {
 		fai_destroy(fai);
 	}
 	for (size_t b=0;b<myBams.size();b++) delete myBams[b];
@@ -585,146 +581,93 @@ void HapMuC::mutationCall(const string & variantsFileName)
     for (size_t r=0;r<tumorReadBuf.size();r++) {
         if (tumorReadBuf[r]!=NULL) delete tumorReadBuf[r];
     }
-
 }
 
-void getParameters(po::variables_map & vm, Parameters & params)
+void getParameters(cmdline::parser & a, Parameters & params)
 {
-    params.maxReads=vm["maxRead"].as<uint32_t> ();
-    params.mapQualThreshold=vm["mapQualThreshold"].as<double>();
-    params.minReadOverlap=vm["minReadOverlap"].as<uint32_t>();
-    params.maxReadLength=vm["maxReadLength"].as<uint32_t>();
+    params.maxReads=a.get<int>("maxReads");
+    params.mapQualThreshold=a.get<double>("mapQualThreshold");
+    params.minReadOverlap=a.get<int>("minReadOverlap");
+    params.maxReadLength=a.get<int>("maxReadLength");
 
-    params.priorSNP=vm["priorSNP"].as<double>();
-    params.priorIndel=vm["priorIndel"].as<double>();
+    params.priorSNP=a.get<double>("priorSNP");
+    params.priorIndel=a.get<double>("priorIndel");
 
-    if (vm.count("ref")) {
-        params.alignAgainstReference=true;
-        params.refFileName=vm["ref"].as<string>();
-    } else {
-        params.alignAgainstReference=false;
-    }
+    params.refFileName=a.get<string>("ref");
 
-    params.obsParams.pError=vm["pError"].as<double>();
-    params.obsParams.pMut=vm["pMut"].as<double>();
+    params.obsParams.pError=a.get<double>("pError");
+    params.obsParams.pMut=a.get<double>("pMut");
 
-    params.obsParams.maxLengthIndel=vm["maxLengthIndel"].as<int>();
+    params.obsParams.maxLengthIndel=a.get<int>("maxLengthIndel");
     params.obsParams.maxLengthDel=params.obsParams.maxLengthIndel;
-    params.obsParams.mapQualThreshold=vm["capMapQualThreshold"].as<double>();
-    params.obsParams.padCover = vm["flankRefSeq"].as<int>();
-    params.obsParams.maxMismatch = vm["flankMaxMismatch"].as<int>();
+    params.obsParams.mapQualThreshold=a.get<double>("capMapQualThreshold");
+    params.obsParams.padCover = a.get<int>("flankRefSeq");
+    params.obsParams.maxMismatch = a.get<int>("flankMaxMismatch");
 
-    params.showReads=vm.count("showReads")?true:false;
-    params.quiet=vm.count("quiet")?true:false;
-    params.computeML=vm.count("computeML")?true:false;
-    params.computeMAP=vm.count("computeMAP")?true:false;
-    params.doDiploid=vm.count("doDiploid")?true:false;
+    params.showReads=a.exist("showReads")?true:false;
+    params.quiet=a.exist("quiet")?true:false;
 
-    params.printCallsOnly=vm.count("printCallsOnly")?true:false;
-    params.estimateHapFreqs=vm.count("doPooled")?true:false;
-    params.showHapAlignments=vm.count("showHapAlignments")?true:false;
-    if (vm.count("filterReadAux")) params.filterReadAux=vm["filterReadAux"].as<string>();
+    params.showHapAlignments=a.exist("showHapAlignments")?true:false;
+    params.filterReadAux=a.get<string>("filterReadAux");
 }
 
-
-#ifdef HAPMUC
 int main(int argc, char *argv[])
 {
-    po::options_description required("[Required] ");
-    required.add_options()
-    ("ref", po::value<string>(),"fasta reference sequence (should be indexed with .fai file)")
-    ("outputFile", po::value<string>(),"file-prefix for output results");
-
-    po::options_description bams_tn("[Required for analysis = mutationCall] :");
-    bams_tn.add_options()
-    ("tumorBamFile", po::value<string>(), "bam files of tumor samples")
-    ("normalBamFile", po::value<string>(), "bam files of normal samples");
-
-    po::options_description varfileinput("[Required for analysis == mutationCall]");
-    varfileinput.add_options()
-    ("varFile", po::value<string>(), "file with candidate variants to be tested.");
-
-    po::options_description output_options("Output options");
-    output_options.add_options()
-    ("quiet", "quiet output");
-
-    po::options_description analysis_opt("General algorithm parameters");
-    analysis_opt.add_options()
-    ("flankRefSeq",po::value<int>()->default_value(2),"#bases of reference sequence of indel region")
-    ("flankMaxMismatch",po::value<int>()->default_value(2),"max number of mismatches in indel region")
-    ("priorSNP", po::value<double>()->default_value(1.0/1000.0), "prior probability of a SNP site")
-    ("priorIndel", po::value<double>()->default_value(1.0/10000.0), "prior probability of a detected indel not being a sequencing error")
-    ("maxRead", po::value<uint32_t>()->default_value(50000), "maximum number of reads in likelihood computation")
-    ("mapQualThreshold", po::value<double>()->default_value(0.9), "lower limit for read mapping quality")
-    ("capMapQualThreshold", po::value<double>()->default_value(100.0), "upper limit for read mapping quality in observationmodel_old (phred units)")
-    ("minReadOverlap", po::value<uint32_t>()->default_value(100),"minimum overlap between read and haplotype")
-    ("maxReadLength", po::value<uint32_t>()->default_value(100),"maximum length of reads");
-
-    po::options_description option_filter("General algorithm filtering options");
-    option_filter.add_options()
-    ("filterReadAux", po::value<string>(), "match string for exclusion of reads based on auxilary information");
-
-    po::options_description obsModel("Observation model parameters");
-    obsModel.add_options()
-    ("pError", po::value<double>()->default_value(5e-4), "probability of a read indel")
-    ("pMut", po::value<double>()->default_value(1e-5), "probability of a mutation in the read")
-    ("maxLengthIndel", po::value<int>()->default_value(5), "maximum length of a _sequencing error_ indel in read");
-
-    po::options_description miscAnalysis("Misc results analysis options");
-    miscAnalysis.add_options()
-    ("showHapAlignments","show for each haplotype which reads map to it")
-    ("showReads","show reads");
-
-    required.add(bams_tn).add(varfileinput).add(output_options).add(analysis_opt).add(option_filter).add(obsModel).add(miscAnalysis);
-
-    po::variables_map vm;
-
+    cmdline::parser a;
+    a.add<string>("ref", 'f', "fasta reference sequence (should be indexed with .fai file)", true, "");
+    a.add<string>("tumor", 'a', "tumor bam file", true, "");
+    a.add<string>("normal", 'b', "normal bam file", true, "");
+    a.add<string>("out", 'o', "file-prefix for output results", true, "");
+    a.add<string>("windows", 'w', "file with candidate variants to be tested.", true, "");
+    
+    a.add("quiet", '\0', "quiet output");
+    
+    a.add<int>("flankRefSeq", '\0', "#bases of reference sequence of indel region", false, 2, cmdline::range(1, 10));
+    a.add<int>("flankMaxMismatch", '\0', "max number of mismatches in indel region", false, 2, cmdline::range(1, 10));
+    
+    a.add<double>("priorSNP", '\0', "prior probability of a SNP site", false, 1.0/1000.0);
+    a.add<double>("priorIndel", '\0', "prior probability of a detected indel not being a sequencing error", false, 1.0/10000.0);
+    a.add<int>("maxReads", '\0', "maximum number of reads in likelihood computation", false, 50000);
+    a.add<double>("mapQualThreshold", '\0', "lower limit for read mapping quality", false, 0.9);
+    a.add<double>("capMapQualThreshold", '\0', "upper limit for read mapping quality in observationmodel_old (phred units)", false, 100.0);
+    a.add<int>("minReadOverlap", '\0', "minimum overlap between read and haplotype", false, 100);
+    a.add<int>("maxReadLength", '\0', "maximum length of reads", false, 100);
+    
+    a.add<string>("filterReadAux", '\0', "match string for exclusion of reads based on auxilary information", false, "");
+    
+    a.add<double>("pError", '\0', "probability of a read indel", false, 5e-4);
+    a.add<double>("pMut", '\0', "probability of a mutation in the read", false, 1e-5);
+    a.add<int>("maxLengthIndel", '\0', "maximum length of a _sequencing error_ indel in read", false, 5);
+    
+    a.add("showHapAlignments", '\0', "show for each haplotype which reads map to it");
+    a.add("showReads", '\0', "show reads");
+    
+    a.parse_check(argc, argv);
     try {
-        po::store(po::parse_command_line(argc, argv, required), vm);
-    } catch (boost::program_options::error) {
-        cout << "Error parsing input options. Usage: \n\n" << required <<"\n";
-        exit(1);
-    }
-    po::notify(vm);
-
-    // required
-    if (!(vm.count("ref") && vm.count("outputFile"))) {
-        cerr << "Error: One of the following options was not specified:  --ref --tid or --outputFile" << endl;
-        cerr << "Usage: \n\n" << required << "\n";
-        exit(1);
-    }
-#define DEBUGGING
-#ifndef DEBUGGING
-    try {
-#endif
         // extract required parameters
         string file;
         int multipleFiles=0;
 
-        string faFile=vm["ref"].as<string>();
-        string outputFile=vm["outputFile"].as< string >();
+        string faFile=a.get<string>("ref");
+        string outputFile=a.get<string>("out");
 
-        string modelType="probabilistic"; //vm["modelType"].as< string >();
+        string modelType="probabilistic";
         Parameters params(string("1"), outputFile, modelType);
-        getParameters(vm, params);
+        getParameters(a, params);
 
         FILE* pFile = fopen((outputFile + ".log").c_str(), "w");
         Output2FILE::Stream() = pFile;
         //  FILELog::ReportingLevel() = FILELog::FromString("DEBUG");
-        string varFile = vm["varFile"].as<string>();
-        string tumorBF = vm["tumorBamFile"].as<string>();
-        string normalBF = vm["normalBamFile"].as<string>();
+        string varFile = a.get<string>("windows");
+        string tumorBF = a.get<string>("tumor");
+        string normalBF = a.get<string>("normal");
         HapMuC hapmuc(normalBF, tumorBF, params);
         hapmuc.params.print();
         hapmuc.mutationCall(varFile);
-
-#ifndef DEBUGGING
     }
     catch (string s) {
         LOG(logERROR) << "Exception: " << s << endl;
         exit(1);
     }
-#endif
     return 0;
 }
-#endif

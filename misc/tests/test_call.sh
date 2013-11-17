@@ -5,5 +5,5 @@
 i=$1
 echo "index: $1"
 mkdir -p $i/result
-../../hapmuc --tumorBamFile $i/tumor.bam --normalBamFile $i/normal.bam --ref random_ref.fasta --varFile $i/windows --outputFile $i/result/mc > $i/result/log
+../../hapmuc -a $i/tumor.bam -v $i/normal.bam -f random_ref.fasta -w $i/windows -o $i/result/mc > $i/result/log
 echo "please check $i/result/mc.calls.txt for result"

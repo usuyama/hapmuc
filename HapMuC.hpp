@@ -177,11 +177,6 @@ public:
         priorSNP=1.0/1000.0;
         filterReadAux=string("");
         quiet=true;
-        computeML=false;
-        computeMAP=false;
-        doDiploid=false;
-        estimateHapFreqs=false;
-        printCallsOnly=true;
         hap3_params.clear_all();
         hap2_params.clear_all();
         hap3_params.mut_a0 += 1.0,1.0,1.0;
@@ -228,9 +223,6 @@ public:
         
         cout << endl;
         cout << "\tquiet: " << quiet << endl;
-        cout << "\tprintCallsOnly: " << printCallsOnly << endl;
-        cout << "\tdoDiploid: " << doDiploid << endl;
-        cout << "\tdoEM: " << estimateHapFreqs << endl;
         
         cout << "\tshowHapAlignments: " << showHapAlignments << endl;
         
@@ -249,7 +241,7 @@ public:
     double checkBaseQualThreshold;
     double mapQualThreshold, scaleErr, priorIndel, priorSNP, EMtol;
     string fileName, refFileName, tid, filterReadAux;
-    bool showReads, showHapAlignments, alignAgainstReference, quiet, estimateHapFreqs, doDiploid, computeML, computeMAP,printCallsOnly;
+    bool showReads, showHapAlignments, quiet;
     double meanInsert, stdInsert;
     Hap3Param hap3_params, hap2_params;
     ObservationModelParameters obsParams;

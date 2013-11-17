@@ -1,7 +1,7 @@
 .PHONY: all clean test
 SAMTOOLDIR=<insert samtools root dir>
 SEQANDIR=seqan_library/
-BOOST=boost/
+BOOST=<insert boost 1.45 root dir>
 
 CXX= g++
 CPPFLAGS= -D_IOLIB=2 -DMINREADS=2 # -DLOGDEBUG -g -DNDEBUG -DMMTEST

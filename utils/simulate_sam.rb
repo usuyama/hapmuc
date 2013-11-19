@@ -15,7 +15,7 @@ BASE_QUAL = 20
 @ft = [0.5 - tp/2, 0.5, tp/2, 0.0]
 
 if negative
-  @ft = [0.5 - tp/2, 0.5 - tp/2, tp/2, tp/2]
+  @ft = [0.5 - tp/4, 0.5 - tp/4, tp/4, tp/4]
 end
 
 p [:normal_freq, @fn]

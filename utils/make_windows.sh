@@ -1,6 +1,4 @@
-#!/bin/bash
-#$ -S /bin/bash
-#$ -cwd
+#!/bin/sh
 
 tumor_pileup=$1
 normal_pileup=$2

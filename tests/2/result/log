@@ -9,9 +9,6 @@ HapMuC parameters:
 	numOutputTopHap: 5
 
 	quiet: 0
-	printCallsOnly: 0
-	doDiploid: 0
-	doEM: 0
 	showHapAlignments: 0
 	EM tol: 0.0001
 	priorIndel: 0.0001
@@ -35,6 +32,6 @@ Observation model parameters:
 	maxTryHash: 5
 	checkBaseQualThreshold: 0.95
  ******** 
-variants[x].pos: 2046 A=>T
+variants[x].pos: 1344 C=>A
  ******** 
-lower_bound=-305.780488, ln_p_x_given_z=-248.682500, ln_p_z_given_pi=-54.559607, ln_p_pi=-9.132177, ln_q_z=-10.995800, ln_q_pi=4.402004
+lower_bound=-235.795308, ln_p_x_given_z=-192.610866, ln_p_z_given_pi=-41.816990, ln_p_pi=-7.593955, ln_q_z=-11.344398, ln_q_pi=5.117895

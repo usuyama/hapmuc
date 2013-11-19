@@ -4,37 +4,35 @@
  *
  * Copyright 2013, Naoto Usuyama
  */
-//#include <stdlib.h>
+#include <stdlib.h>
 #include <iostream>
-//#include <iomanip>
-//#include <string>
-//#include <sstream>
-//#include <fstream>
-//#include <set>
-//#include <algorithm>
-//#include <seqan/align.h>
-//#include <seqan/graph_align.h>
-//#include "foreach.hpp"
-//#include "bam.h"
+#include <iomanip>
+#include <string>
+#include <sstream>
+#include <fstream>
+#include <set>
+#include <algorithm>
+#include <seqan/align.h>
+#include <seqan/graph_align.h>
+#include "bam.h"
 #include "HapMuC.hpp"
-//#include "Haplotype.hpp"
-//#include "HaplotypeDistribution.hpp"
-//#include "ObservationModelFB.hpp"
-//#include "Utils.hpp"
-//#include "faidx.h"
-//#include "ObservationModelSeqAn.hpp"
-//#include "VariantFile.hpp"
-//#include <ext/hash_map>
-//#include <exception>
-//#include <math.h>
-//#include <sys/stat.h>
-//#include <sys/types.h>
+#include "Haplotype.hpp"
+#include "HaplotypeDistribution.hpp"
+#include "ObservationModelFB.hpp"
+#include "Utils.hpp"
+#include "faidx.h"
+#include "ObservationModelSeqAn.hpp"
+#include "VariantFile.hpp"
+#include <ext/hash_map>
+#include <exception>
+#include <math.h>
+#include <sys/stat.h>
+#include <sys/types.h>
 #include "Haps2.hpp"
 #include "EMfor2.hpp"
 #include "MutationCall.hpp"
 #include "EMBasic.hpp"
 #include "MutationModel.hpp"
-#include <boost/lexical_cast.hpp>
 #include <stdlib.h>
 #include <float.h>
 #include <log.h>
@@ -42,8 +40,9 @@
 namespace MutationCall
 {
     string itos(int num) {
-        std::string str = boost::lexical_cast<std::string>(num);
-        return(str);
+        std::ostringstream oss; 
+        oss<< num; 
+        return oss.str(); 
     }
 
     void output_liktable(int index, string id, const vector<double> & liks, Parameters params) {

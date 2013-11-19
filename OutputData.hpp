@@ -32,7 +32,7 @@
 #include "StringHash.hpp"
 #include <string>
 #include <iostream>
-#include "foreach.hpp"
+#include <boost/foreach.hpp>
 using namespace std;
 using namespace boost;
 

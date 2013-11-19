@@ -34,7 +34,6 @@
 #include "bam.h"
 #include "Haplotype.hpp"
 #include "HapBlock.hpp"
-#include "foreach.hpp"
 #include "VariantFile.hpp"
 using namespace std;
 

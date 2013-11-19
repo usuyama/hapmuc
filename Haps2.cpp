@@ -24,7 +24,7 @@
 #include <algorithm>
 #include <seqan/align.h>
 #include <seqan/graph_align.h>
-#include "foreach.hpp"
+#include <boost/foreach.hpp>
 #include "bam.h"
 #include "HapMuC.hpp"
 #include "Haplotype.hpp"

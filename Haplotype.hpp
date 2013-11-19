@@ -30,7 +30,7 @@
 #include <vector>
 #include "Variant.hpp"
 #include "MLAlignment.hpp"
-#include "foreach.hpp"
+#include <boost/foreach.hpp>
 #include <ext/hash_map>
 #include <set>
 //#include "Fast.hpp"

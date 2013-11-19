@@ -330,6 +330,7 @@ namespace MutationCall
         }
         LOG(logDEBUG) << "output" << endl;
         if(tumor_her.empty()) {
+            LOG(logERROR) << "the variant bucket is empty. something strange." << endl;
             const VariantInfo &v = candidateVariants.variants[0].info;
             int pos = v.start;
             int end = v.end;

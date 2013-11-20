@@ -12,6 +12,7 @@ depth = ARGV[0].to_i # roughly
 tp = ARGV[1].to_f # tumor purity
 @out_f = ARGV[2]
 negative = !ARGV[3].nil? # generate a negative sample
+no_germline_var = !ARGV[4].nil?
 BASE_QUAL = 20
 
 @fn = [0.5, 0.5, 0.0, 0.0] # h1, h2, h3, h4
@@ -19,6 +20,9 @@ BASE_QUAL = 20
 
 if negative
   @ft = [0.5 - tp/4, 0.5 - tp/4, tp/4, tp/4]
+end
+if no_germline_var
+  @ft = [1.0 - tp/2, 0.0, tp/2, 0.0]
 end
 
 p [:normal_freq, @fn]

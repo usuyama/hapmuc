@@ -1,8 +1,11 @@
 require "#{File.dirname(__FILE__)}/seq_lib.rb"
-REF  = open("#{File.dirname(__FILE__)}/../tests/random_ref.fasta").read.split("\n")[1..-1].join("")
+refs = open("#{File.dirname(__FILE__)}/../tests/random_ref.fasta").read.split(">")[1..-1]#.split("\n")[1..-1].join("")
+chr = rand(refs.size)
+ref = refs[chr].split("\n")
+REF = ref[1..-1].join("")
+CHR = ref[0]
 DNA = ["A", "T", "G", "C"]
 READ_SIZE=100
-CHR = "chr1"
 POS = -1
 
 depth = ARGV[0].to_i # roughly

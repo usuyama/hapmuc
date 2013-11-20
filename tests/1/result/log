@@ -1,6 +1,6 @@
 HapMuC parameters: 
 	tid: 1 maxReads: 50000
-	outputFilename: 1/result/mc
+	outputFilename: 4/result/mc
 	mapQualThreshold: 0.9
 	minReadOverlap: 100
 	maxReadLength: 100
@@ -32,6 +32,13 @@ Observation model parameters:
 	maxTryHash: 5
 	checkBaseQualThreshold: 0.95
  ******** 
-variants[x].pos: 1841 T=>G
+variants[x].pos: 1503 T=>G
  ******** 
-lower_bound=-306.389787, ln_p_x_given_z=-270.827519, ln_p_z_given_pi=-39.245893, ln_p_pi=91.792447, ln_q_z=-13.259908, ln_q_pi=101.368730
+lower_bound=-364.004970, ln_p_x_given_z=-336.425022, ln_p_z_given_pi=-45.209957, ln_p_pi=92.228644, ln_q_z=-27.304529, ln_q_pi=101.903166
+ ******** 
+variants[x].pos: 2937 T=>G
+ ******** 
+lower_bound=-253.618407, ln_p_x_given_z=-204.930658, ln_p_z_given_pi=-46.041921, ln_p_pi=-7.862188, ln_q_z=-10.296203, ln_q_pi=5.079844
+ ******** 
+variants[x].pos: 2873 T=>G
+ ******** 

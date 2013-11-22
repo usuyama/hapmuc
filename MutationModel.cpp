@@ -115,6 +115,12 @@ namespace MutationModel {
 #endif
     }
 
+    template <class X> void print_veci(vector<X> vec) {
+#ifdef LOGDEBUG
+      BOOST_FOREACH(X x, vec) { LOGP(logINFO) << x << " "; }
+#endif
+    }
+
     double cal_e_log_dir(vector<double> log_theta, vector<double> param, std::ofstream &log) {
         //E[log p(theta|param)] : Dir
         //- sum(lgamma(param)) + lgamma(sum(param)) + sum((param-1) * log_theta)
@@ -320,16 +326,16 @@ namespace MutationModel {
     {
         std::ofstream log;
 #ifdef LOGDEBUG
+        LOGP(logINFO) << endl;
+        LOG(logINFO) << "ModelType: " << est_type << endl;
+        LOG(logINFO) << "mut a0: ";print_veci(params.mut_a0);LOGP(logINFO) << endl;
+        LOG(logINFO) << "mut b0: ";print_veci(params.mut_b0);LOGP(logINFO) << endl;
+        LOG(logINFO) << "mut c0: ";print_veci(params.mut_c0);LOGP(logINFO) << endl;
+        LOG(logINFO) << "err a0: ";print_veci(params.err_a0);LOGP(logINFO) << endl;
+        LOG(logINFO) << "err b0: ";print_veci(params.err_b0);LOGP(logINFO) << endl;
+        LOG(logINFO) << "err c0: ";print_veci(params.err_c0);LOGP(logINFO) << endl;
         log.open((log_prefix+".log").c_str(), std::ios::out | std::ios::app);
         //est_type=mutation or non-mutation
-        log << "MutationModel: " << est_type << endl;
-        log << "mut a0:";print_vec(params.mut_a0, log);
-        log << endl << "mut b0:";print_vec(params.mut_b0, log);
-        log << endl << "mut c0:";print_vec(params.mut_c0, log);
-        log << endl << "err a0:";print_vec(params.err_a0, log);
-        log << endl << "err b0:";print_vec(params.err_b0, log);
-        log << endl << "err c0:";print_vec(params.err_c0, log);
-        log << endl;
 #endif
         normalHapFreqs.clear();
         tumorHapFreqs.clear();

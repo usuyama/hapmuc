@@ -492,10 +492,10 @@ namespace MutationCall
         vector<HapEstResult> non_tumor_her, non_normal_her;
         lower_bound_t mm_lb, nmm_lb;
         LOG(logINFO) << "calculating the marginal likelihood based on the MUTATION model...";
-        MutationModel::estimate(haps, tumorReads, normalReads, rlt, rln, tumorHapFreqs, normalHapFreqs, tumor_her, normal_her, pos, leftPos, rightPos, candidateVariants, mm_lb, params.hap2_params, "mutation", params.fileName+"logs/"+itos(index)+".hap2.mutation");
+        MutationModel::estimate(haps, tumorReads, normalReads, rlt, rln, tumorHapFreqs, normalHapFreqs, tumor_her, normal_her, pos, leftPos, rightPos, candidateVariants, mm_lb, params.hap3_params, "mutation", params.fileName+"logs/"+itos(index)+".hap2.mutation");
         //output_mm(haps, (params.fileName+".mm.txt"), leftPos, rightPos, 0.0, mm_lb, normalHapFreqs, tumorHapFreqs);
         LOG(logINFO) << "calculating the marginal likelihood based on the ERROR model...";
-        MutationModel::estimate(haps, tumorReads, normalReads, rlt, rln, non_tumorHapFreqs, non_normalHapFreqs, non_tumor_her, non_normal_her, pos, leftPos, rightPos, candidateVariants, nmm_lb, params.hap2_params, "error",params.fileName+"logs/"+itos(index)+".hap2.err");
+        MutationModel::estimate(haps, tumorReads, normalReads, rlt, rln, non_tumorHapFreqs, non_normalHapFreqs, non_tumor_her, non_normal_her, pos, leftPos, rightPos, candidateVariants, nmm_lb, params.hap3_params, "error",params.fileName+"logs/"+itos(index)+".hap2.err");
         //output_mm(haps, (params.fileName+".non-mm.txt"), leftPos, rightPos, 0.0, nmm_lb, non_normalHapFreqs, non_tumorHapFreqs);
         double bf = mm_lb.lower_bound - nmm_lb.lower_bound;
         LOG(logDEBUG) << "********** calc_hap2_bf_with_hap3 done ***********" << endl;

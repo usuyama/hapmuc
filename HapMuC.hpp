@@ -32,8 +32,7 @@
 #include "OutputData.hpp"
 #include "VariantFile.hpp"
 #include "Variant.hpp"
-#include <boost/assign/std/vector.hpp>
-using namespace boost::assign;
+#include "log.h"
 
 using namespace std;
 using __gnu_cxx::hash;
@@ -42,7 +41,7 @@ typedef struct
 	double pOff, pOn;
 } HapReadLik;
 
-struct lower_bound_t {	
+struct lower_bound_t {
 	double lower_bound;
 	double ln_p_x_given_z;
     double ln_p_z_given_pi;
@@ -52,7 +51,7 @@ struct lower_bound_t {
     double ln_prior;
     vector<int> compatible;
 public:
-	lower_bound_t(){			
+	lower_bound_t(){
         lower_bound = 0.0;
         ln_p_x_given_z = 0.0;
         ln_p_z_given_pi = 0.0;
@@ -60,9 +59,9 @@ public:
         ln_q_z = 0.0;
         ln_q_pi = 0.0;
 	}
-    
+
     void printCOut() const {
-        cout << "lb=" << lower_bound << ", ln_p_x_given_z = " << ln_p_x_given_z 
+        cout << "lb=" << lower_bound << ", ln_p_x_given_z = " << ln_p_x_given_z
         << ", ln_p_z_given_pi = " << ln_p_z_given_pi << ", ln_p_pi = " << ln_p_pi << ", ln_q_z = " << ln_q_z
         << ", ln_q_pi = " << ln_q_pi << "ln_prior" << ln_prior << endl;
     }
@@ -85,7 +84,7 @@ public:
 		nf=0;
 		nr=0;
 	}
-	VariantCoverage(int _nf, int _nr) 
+	VariantCoverage(int _nf, int _nr)
 	{
 		nf = _nf;
 		nr = _nr;
@@ -102,7 +101,7 @@ public:
     int numOffBoth; // number of reads that do not map to either haplotype
     double numOffBothError;
     map<int, VariantCoverage> hapIndelCoverage1, hapSNPCoverage1,hapIndelCoverage2, hapSNPCoverage2; // indels and snps in the _haplotype_ covered by the read
-    
+
     operator double() const { return ll;};
 };
 
@@ -131,21 +130,32 @@ public:
     int nrr; // number of reads on forward strand
     double N1, N2, N3, N4;
     void printCOut() const {
-        cout << "[" << av.getStartHap() << ", " << av.getString() << "] " 
+        cout << "[" << av.getStartHap() << ", " << av.getString() << "] "
         << pos << " " << prob << " " << freq << " " << nrf << " " << nrr << endl;
     }
 };
 
 class Hap3Param {
 public:
-    typedef vector<double> vd;
-    vd mut_a0, mut_b0, mut_c0;
-    vd err_a0, err_b0, err_c0;
+    vector<double> mut_a0, mut_b0, mut_c0;
+    vector<double> err_a0, err_b0, err_c0;
     Hap3Param() {};
     ~Hap3Param() {};
     void clear_all() {
         mut_a0.clear();mut_b0.clear();mut_c0.clear();
         err_a0.clear();err_b0.clear();err_c0.clear();
+    }
+
+    template <class X> void print_veci(vector<X> vec) {
+      BOOST_FOREACH(X x, vec) { LOGP(logINFO) << x << " "; }
+    }
+    void print() {
+      LOG(logINFO) << "mut a0: ";print_veci(mut_a0);LOGP(logINFO) << endl;
+      LOG(logINFO) << "mut b0: ";print_veci(mut_b0);LOGP(logINFO) << endl;
+      LOG(logINFO) << "mut c0: ";print_veci(mut_c0);LOGP(logINFO) << endl;
+      LOG(logINFO) << "err a0: ";print_veci(err_a0);LOGP(logINFO) << endl;
+      LOG(logINFO) << "err b0: ";print_veci(err_b0);LOGP(logINFO) << endl;
+      LOG(logINFO) << "err c0: ";print_veci(err_c0);LOGP(logINFO) << endl;
     }
 };
 
@@ -157,7 +167,16 @@ public:
         fileName=_fileName;
         setDefaultValues();
     }
-    
+
+    static void parseHyperParameters(vector<double> &vec, string s)
+    {
+      vector<string> params = split(s, ',');
+      vec.clear();
+      BOOST_FOREACH(string x, params) {
+        vec.push_back(atof(x.c_str()));
+      }
+    }
+
     void setDefaultValues()
     {
         maxReads=2000;
@@ -165,7 +184,7 @@ public:
         minReadOverlap=5;
         maxReadLength=40;
         numOutputTopHap=5;
-        
+
         fastWidth=4;
         showHapAlignments=false;
         showReads=false;
@@ -177,22 +196,22 @@ public:
         quiet=true;
         hap3_params.clear_all();
         hap2_params.clear_all();
-        hap3_params.mut_a0 += 1.0,1.0,1.0;
-        hap3_params.mut_b0 += 0.1,10.0;
-        hap3_params.mut_c0 += 1.0,1.0;
-        hap3_params.err_a0 += 1.0,1.0;
-        hap3_params.err_b0 += 1.0,10.0;
-        hap3_params.err_c0 += 1.0,1.0;
-        hap2_params.mut_a0 += 1.0,1.0,1.0;
-        hap2_params.mut_b0 += 0.1,10.0;
-        hap2_params.mut_c0 += 1.0,1.0;
-        hap2_params.err_a0 += 1.0,1.0;
-        hap2_params.err_b0 += 1.0,10.0;
-        hap2_params.err_c0 += 1.0,1.0;
-        
+        parseHyperParameters(hap3_params.mut_a0, "1.0,1.0,1.0");
+        parseHyperParameters(hap3_params.mut_b0, "0.1,10.0");
+        parseHyperParameters(hap3_params.mut_c0, "1.0,1.0");
+        parseHyperParameters(hap3_params.err_a0, "1.0,1.0");
+        parseHyperParameters(hap3_params.err_b0, "1.0,10.0");
+        parseHyperParameters(hap3_params.err_c0, "1.0,1.0");
+        parseHyperParameters(hap2_params.mut_a0, "1.0,1.0,1.0");
+        parseHyperParameters(hap2_params.mut_b0, "0.1,10.0");
+        parseHyperParameters(hap2_params.mut_c0, "1.0,1.0");
+        parseHyperParameters(hap2_params.err_a0, "1.0,1.0");
+        parseHyperParameters(hap2_params.err_b0, "1.0,10.0");
+        parseHyperParameters(hap2_params.err_c0, "1.0,1.0");
+
         EMtol=1e-4;
     }
-        
+
     OutputData makeMutationData(ostream & out) {
         OutputData oData(out);
         oData("chr")("start")("end");
@@ -205,35 +224,37 @@ public:
         oData("germline_snp_nearby")("distance");
         return oData;
     }
-      
+
     void print()
     {
-        cout << "HapMuC parameters: " << endl;
-        cout << "\ttid: " << tid << " maxReads: " << maxReads << endl;
-        cout << "\toutputFilename: " << fileName << endl;
-        cout << "\tmapQualThreshold: " << mapQualThreshold << endl;
-        cout << "\tminReadOverlap: " << minReadOverlap << endl;
-        cout << "\tmaxReadLength: " << maxReadLength << endl;
-        cout << "\tshowReads: " << showReads << endl;
-        cout << "\tnoIndelWindow: " << noIndelWindow << endl;
-        
-        cout << "\tnumOutputTopHap: " << numOutputTopHap << endl;
-        
-        cout << endl;
-        cout << "\tquiet: " << quiet << endl;
-        
-        cout << "\tshowHapAlignments: " << showHapAlignments << endl;
-        
-        cout << "\tEM tol: " << EMtol << endl;
-        
-        cout << "\tpriorIndel: " << priorIndel << endl;
-        cout << "\tpriorSNP: " << priorSNP << endl;
-        
-        cout << "\tfilterReadAux: " << filterReadAux << endl;
-        cout << "Observation model parameters: " << endl;
-        obsParams.print();
+        LOG(logINFO) << "HapMuC parameters: " << endl;
+        LOG(logINFO) << "\ttid: " << tid << " maxReads: " << maxReads << endl;
+        LOG(logINFO) << "\toutputFilename: " << fileName << endl;
+        LOG(logINFO) << "\tmapQualThreshold: " << mapQualThreshold << endl;
+        LOG(logINFO) << "\tminReadOverlap: " << minReadOverlap << endl;
+        LOG(logINFO) << "\tmaxReadLength: " << maxReadLength << endl;
+        LOG(logINFO) << "\tshowReads: " << showReads << endl;
+        LOG(logINFO) << "\tnoIndelWindow: " << noIndelWindow << endl;
+
+        LOG(logINFO) << "\tnumOutputTopHap: " << numOutputTopHap << endl;
+
+        LOG(logINFO) << "\tquiet: " << quiet << endl;
+
+        LOG(logINFO) << "\tshowHapAlignments: " << showHapAlignments << endl;
+
+        LOG(logINFO) << "\tEM tol: " << EMtol << endl;
+
+        LOG(logINFO) << "\tpriorIndel: " << priorIndel << endl;
+        LOG(logINFO) << "\tpriorSNP: " << priorSNP << endl;
+
+        LOG(logINFO) << "\tfilterReadAux: " << filterReadAux << endl;
+    //    LOG(logINFO) << "Observation model parameters: " << endl;
+    //    obsParams.print();
+        LOG(logINFO) << "Model parameters: " << endl;
+        hap3_params.print();
+        hap2_params.print();
     }
-    
+
     int noIndelWindow, numOutputTopHap, minReadOverlap;
     uint32_t maxReads,  maxReadLength, fastWidth, fastWidthOverlap;
     double checkBaseQualThreshold;
@@ -251,7 +272,7 @@ public:
 	string getRefSeq(uint32_t lpos, uint32_t rpos);
     string get_var_symbol(string ref, string obs);
     AlignedCandidates getCandidateVariants(string line, vector<AlignedVariant> &close_somatic, vector<AlignedVariant> &close_germline);
-    void mutationCall(const string & variantsFileName); 
+    void mutationCall(const string & variantsFileName);
 
 protected:
 	void outputHapsAndFreqs(ostream *output, const string & prefix, const vector<Haplotype> & haps, const vector<double> & freqs, uint32_t leftPos);
@@ -261,12 +282,12 @@ protected:
 	vector<MyBam *> myBams;
 	vector<string> myBamsFileNames;
     void getReadsFromBams(vector<MyBam *> & Bams, uint32_t leftPos, uint32_t rightPos, vector<Read> & reads, uint32_t & oldLeftPos, uint32_t  & oldRightFetchReadPos, vector<Read *> & readBuffer, const bool reset);
-    
+
     vector<MyBam *> tumorBams;
     vector<string> tumorBamsFileNames;
     vector<MyBam *> normalBams;
     vector<string> normalBamsFileNames;
-    
+
     vector<AlignedVariant> parse_close_vars(string s);
 
 	class CIGAR : public vector<pair<int,int> >

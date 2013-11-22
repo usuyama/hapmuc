@@ -32,6 +32,7 @@
 #include <sstream>
 #include <iostream>
 #include <math.h>
+#include <vector>
 using namespace std;
 
 inline double addLogs(const double l1, const double l2)
@@ -56,6 +57,6 @@ bool from_string(T& t,
   return !(iss >> f >> t).fail();
 }
 
-
+std::vector<std::string> split(const std::string &s, char delim);
 
 #endif /* UTILS_HPP_ */

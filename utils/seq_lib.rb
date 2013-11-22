@@ -182,16 +182,16 @@ class Haplotype
     [read, qualities, gen_cigar(pos), pos]
   end
 
-  def gen_paired_reads(l_pos, r_pos)
-    start = l_pos - READ_SIZE - 50 + rand(READ_SIZE + 100 + r_pos - l_pos).to_i
+  def gen_paired_reads(pos)
+    start = pos - READ_SIZE + rand(READ_SIZE)
     to_forward = rand() > 0.5 # direction of strand
-    ins_size = gaussian(100, 100) # lenth between paired reads
+    ins_size = gaussian(300, 100)
     if to_forward
       start1 = start
-      start2 = start + ins_size + READ_SIZE
+      start2 = start + ins_size - READ_SIZE
     else
       start2 = start
-      start1 = start - ins_size - READ_SIZE
+      start1 = start - ins_size + READ_SIZE
     end
     r1 = gen_read(start1)
     r2 = gen_read(start2)

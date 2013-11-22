@@ -63,7 +63,7 @@ end
 
 @normal_reads = []
 index = 0
-(depth*(200 + r_pos-l_pos).to_f/READ_SIZE).to_i.times do
+depth.to_i.times do
   r = rand()
   i = 0
   th = 0.0
@@ -76,13 +76,13 @@ index = 0
     end
   end
   index+=1
-  pair = @haps[i].gen_paired_reads(l_pos, r_pos)
+  pair = @haps[i].gen_paired_reads(sm_pos)
   normal.puts Haplotype.pair_to_sam(index, pair)
 end
 
 index = 0
 @tumor_reads = []
-(depth*(200 + r_pos-l_pos).to_f/READ_SIZE).to_i.times do
+depth.to_i.times do
   r = rand()
   i = 0
   th = 0.0
@@ -95,7 +95,7 @@ index = 0
     end
   end
   index+=1
-  pair = @haps[i].gen_paired_reads(l_pos, r_pos)
+  pair = @haps[i].gen_paired_reads(sm_pos)
   tumor.puts Haplotype.pair_to_sam(index, pair)
 end
 

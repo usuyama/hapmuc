@@ -7,7 +7,7 @@ CXX= g++
 CPPFLAGS= -D_IOLIB=2 -DMINREADS=2
 HAPMUCFLAGS= # -DLOGDEBUG -DNDEBUG -DMMTEST
 CXXFLAGS= -I$(SAMTOOLDIR) -I$(SEQANDIR) -I${BOOST} -I./ -Wno-deprecated -O3
-LDFLAGS= -L$(SAMTOOLDIR) -lbam -lz
+LDFLAGS= -L$(SAMTOOLDIR) -lbam -lz -lpthread
 SRCSHAPMUC=HapMuC.cpp Utils.cpp MutationModel.cpp HapBlock.cpp HaplotypeDistribution.cpp ObservationModelFB.cpp Haps.cpp Haps2.cpp EMBasic.cpp EMfor2.cpp MutationCall.cpp
 OBJSHAPMUC=$(SRCSHAPMUC:%.cpp=%.o)
 

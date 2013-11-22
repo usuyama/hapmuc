@@ -1,6 +1,6 @@
 HapMuC parameters: 
 	tid: 1 maxReads: 50000
-	outputFilename: 4/result/mc
+	outputFilename: 1/result/mc
 	mapQualThreshold: 0.9
 	minReadOverlap: 100
 	maxReadLength: 100

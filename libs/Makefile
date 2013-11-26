@@ -19,6 +19,3 @@ samtools-0.1.19/samtools:
 seqan_library/seqan.h:
 	echo "pareparing seqan library..."
 	tar zxvf seqan_library.tar.gz
-
-clean:
-	rm -fr bedtools-2.17.0 boost_1_45_0_subset samtools-0.1.19 seqan_library

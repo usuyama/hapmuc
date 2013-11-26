@@ -29,7 +29,6 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include "Haps2.hpp"
-#include "EMfor2.hpp"
 #include "MutationCall.hpp"
 #include "EMBasic.hpp"
 #include "MutationModel.hpp"
@@ -502,34 +501,6 @@ namespace MutationCall
         return bf;
     }
 
-
-
-    double calc_hap2_bf(const vector<Read> & normalReads, const vector<Read> & tumorReads, const vector<Read> & mergedReads, uint32_t pos, uint32_t leftPos, uint32_t rightPos, const AlignedCandidates & candidateVariants, Parameters params, string refSeq, string refSeqForAlign, double a0, double b0, double free_a0, vector<HapEstResult> &normal_her, vector<HapEstResult> &tumor_her, vector<HapEstResult> &merged_her) {
-        LOG(logDEBUG) << "********** calc_hap2_bf ***********" << endl;
-        vector<Haplotype> haps;
-        vector<vector<MLAlignment> > liks;
-        vector<vector<MLAlignment> > normal_liks;
-        vector<vector<MLAlignment> > tumor_liks;
-        Haps2::getHaplotypesBasic(haps, normalReads, tumorReads, pos, leftPos, rightPos, candidateVariants, params, refSeq, refSeqForAlign, normal_liks, tumor_liks);
-        liks.insert(liks.end(), normal_liks.begin(), normal_liks.end());
-        for(int i = 0;i < haps.size();i++) {
-            liks[i].insert(liks[i].end(), tumor_liks[i].begin(), tumor_liks[i].end());
-        }
-        vector<double> mergedHapFreqs, normalHapFreqs, tumorHapFreqs;
-
-        lower_bound_t normal_lb;
-        lower_bound_t tumor_lb;
-        lower_bound_t merged_lb;
-        map<AlignedVariant, double> merged_vpp;
-        map<AlignedVariant, double> normal_vpp;
-        map<AlignedVariant, double> tumor_vpp;
-        EMfor2::estimate_basic(haps, normalReads, normal_liks, normalHapFreqs, normal_her, pos, leftPos, rightPos, candidateVariants, normal_lb, normal_vpp, params, 1.0, 1.0);
-        EMfor2::estimate_basic(haps, tumorReads, tumor_liks, tumorHapFreqs, tumor_her, pos, leftPos, rightPos, candidateVariants, tumor_lb, tumor_vpp, params, 1.0, 1.0);
-        EMfor2::estimate_basic(haps, mergedReads, liks, mergedHapFreqs, merged_her, pos, leftPos, rightPos, candidateVariants, merged_lb, merged_vpp, params, 1.0, 1.0);
-        double bf = normal_lb.lower_bound + tumor_lb.lower_bound - merged_lb.lower_bound;
-        outputLowerBounds(haps, (params.fileName+".hap2_haplotypes.txt"), leftPos, rightPos, bf, normal_lb, tumor_lb, merged_lb, normalHapFreqs, tumorHapFreqs, mergedHapFreqs);
-        return bf;
-    }
 
     void outputLowerBounds(const vector<Haplotype> &haps, string fname, uint32_t leftPos, uint32_t rightPos, double bf, lower_bound_t& normal_lb, lower_bound_t &tumor_lb, lower_bound_t &merged_lb, vector<double> normalHapFreqs, vector<double> tumorHapFreqs, vector<double> mergedHapFreqs) {
 #ifndef LOGDEBUG

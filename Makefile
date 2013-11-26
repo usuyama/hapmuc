@@ -7,10 +7,10 @@ CXX= g++
 CPPFLAGS= -D_IOLIB=2 -DMINREADS=2 #-DLOGDEBUG -DDEBUGREADS #-DNDEBUG -DMMTEST
 CXXFLAGS= -I$(SAMTOOLDIR) -I$(SEQANDIR) -I${BOOST} -I./ -Wno-deprecated -O3
 LDFLAGS= -L$(SAMTOOLDIR) -lbam -lz -lpthread
-SRCSHAPMUC=HapMuC.cpp Utils.cpp MutationModel.cpp HapBlock.cpp HaplotypeDistribution.cpp ObservationModelFB.cpp Haps.cpp Haps2.cpp EMBasic.cpp MutationCall.cpp
+SRCSHAPMUC=HapMuC.cpp Utils.cpp MutationModel.cpp HapBlock.cpp HaplotypeDistribution.cpp ObservationModelFB.cpp Haps2.cpp EMBasic.cpp MutationCall.cpp
 OBJSHAPMUC=$(SRCSHAPMUC:%.cpp=%.o)
 
-hapmuc:$(OBJSHAPMUC) EMBasic.hpp Fasta.hpp HapBlock.hpp HapMuC.hpp Haplotype.hpp HaplotypeDistribution.hpp Haps.hpp Haps2.hpp MLAlignment.hpp MutationCall.hpp MutationModel.hpp MyBam.hpp ObservationModel.hpp ObservationModelFB.hpp ObservationModelSeqAn.hpp OutputData.hpp Read.hpp ReadIndelErrorModel.hpp StringHash.hpp Utils.hpp Variant.hpp VariantFile.hpp cmdline.h log.h
+hapmuc:$(OBJSHAPMUC) EMBasic.hpp Fasta.hpp HapBlock.hpp HapMuC.hpp Haplotype.hpp HaplotypeDistribution.hpp Haps2.hpp MLAlignment.hpp MutationCall.hpp MutationModel.hpp MyBam.hpp ObservationModel.hpp ObservationModelFB.hpp ObservationModelSeqAn.hpp OutputData.hpp Read.hpp ReadIndelErrorModel.hpp StringHash.hpp Utils.hpp Variant.hpp VariantFile.hpp cmdline.h log.h
 	$(CXX) -o $@ $(CXXFLAGS) $(CPPFLAGS) $(OBJSHAPMUC) $(LDFLAGS)
 
 dependencies:

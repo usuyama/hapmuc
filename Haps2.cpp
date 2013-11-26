@@ -39,7 +39,6 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include "MutationCall.hpp"
-#include "Haps.hpp"
 #include "Haps2.hpp"
 #include "EMBasic.hpp"
 #include "log.h"
@@ -56,6 +55,46 @@ namespace Haps2 {
         bool operator()(const HapFreqPair& riLeft, const HapFreqPair& riRight) const {
             return riLeft.freq > riRight.freq;        }
     };
+
+    void computeLikelihoods(const vector<Haplotype> &haps, const vector<Read> & reads, vector<vector<MLAlignment> > & liks, uint32_t leftPos, uint32_t rightPos, vector<int> & onHap, Parameters params)
+    {
+      LOG(logDEBUG) << "### Computing likelihoods for all reads and haplotypes.\n";
+      onHap = vector<int>(reads.size(),0); // records whether a read was aligned onto at least one haplotype
+
+      typedef map<size_t, vector<size_t> >::const_iterator hapsCIt;
+
+      liks=vector<vector<MLAlignment> >(haps.size(),vector<MLAlignment>(reads.size()));
+      for (size_t r=0;r<reads.size();r++) {
+        for (size_t hidx=0;hidx<haps.size();hidx++) {
+          const Haplotype & hap=haps[hidx];
+          ObservationModelFBMaxErr oms(hap, reads[r], leftPos, params.obsParams);
+          liks[hidx][r]=oms.calcLikelihood();
+          if (!liks[hidx][r].offHapHMQ) onHap[r]=1;
+          /*
+             LOG(logDEBUG) << "---" << endl;
+             LOG(logDEBUG) <<  "read: " << bam1_qname(reads[r].getBam()) << ", hidx: " << hidx << " mpos: " << reads[r].matePos << endl;
+             LOG(logDEBUG) << "isUnmapped: " << reads[r].isUnmapped() << endl;
+             LOG(logDEBUG) << string(50,' ') << haps[hidx].seq << endl;
+             oms.printAlignment(50);*/
+          if (liks[hidx][r].ll>0.1) {
+            LOG(logDEBUG) << "warning" << endl;
+            ObservationModelFBMaxErr om(hap, reads[r], leftPos, params.obsParams);
+            liks[hidx][r]=om.calcLikelihood();
+            LOG(logDEBUG) << string(25,' ') << hap.seq << endl;
+            om.printAlignment(25);
+            LOG(logDEBUG) << "hidx: " << hidx << " r: " << r << endl;
+            LOG(logDEBUG) << bam1_qname(reads[r].getBam()) << endl;
+            cerr << "Likelihood>0" << endl;
+            exit(1);
+          }
+          if (isnan(liks[hidx][r]) || isinf(liks[hidx][r])) {
+            LOG(logDEBUG) << "NAN/Inf error" << endl;
+            throw string("Nan detected");
+          }
+        }
+      }
+      LOG(logDEBUG) << "computeLikelihoods done" << endl;
+    }
 
     void filter_reads(vector<Read> & reads, vector<vector<MLAlignment> > & liks) {
         // TODO: make a faster version.
@@ -349,7 +388,7 @@ namespace Haps2 {
 
         vector<int> on_hap_tumor(tumor_reads.size(),1); // which reads were mapped inside the haplotype window given an artificially high mapping quality
         LOG(logINFO) << "computing alignment likelihhods for tumor reads..." << endl;
-        Haps::computeLikelihoods(merged_haps, tumor_reads, tumor_liks, leftPos, rightPos, on_hap_tumor, params);
+        computeLikelihoods(merged_haps, tumor_reads, tumor_liks, leftPos, rightPos, on_hap_tumor, params);
         vector<double> tumor_hap_freqs;vector<HapEstResult> tumor_her;map<AlignedVariant, double> tumor_vpp;lower_bound_t tumor_lb;
         EMBasic::estimate(merged_haps, tumor_reads, tumor_liks, tumor_hap_freqs, tumor_her, pos, leftPos, rightPos, candidateVariants, tumor_lb, tumor_vpp, 0.01, "all", params);
         freq_pairs.clear();
@@ -444,7 +483,7 @@ namespace Haps2 {
         LOG(logDEBUG) << "tumor hap decided" << endl;
         LOG(logDEBUG).flush();
         LOG(logINFO) << "computing alignment likelihhods for normal reads..." << endl;
-        Haps::computeLikelihoods(haps, normal_reads, normal_liks, leftPos, rightPos, onHap, params);
+        computeLikelihoods(haps, normal_reads, normal_liks, leftPos, rightPos, onHap, params);
      //   Haps::computeLikelihoods(haps, tumor_reads, tumor_liks, leftPos, rightPos, onHap, params);
         LOG(logDEBUG) << "end Haps2" << endl;
         LOG(logDEBUG) << "#normal haplotype list" << endl;
@@ -500,10 +539,10 @@ namespace Haps2 {
         }
         LOG(logINFO) << "computing alignment likelihhods for tumor reads..." << endl;
         vector<int> on_hap_tumor(tumor_reads.size(),1); // which reads were mapped inside the haplotype window given an artificially high mapping quality
-        Haps::computeLikelihoods(haps, tumor_reads, tumor_liks, leftPos, rightPos, on_hap_tumor, params);
+        computeLikelihoods(haps, tumor_reads, tumor_liks, leftPos, rightPos, on_hap_tumor, params);
         LOG(logINFO) << "computing alignment likelihhods for normal reads..." << endl;
         vector<int> onHap(normal_reads.size(),1); // which reads were mapped inside the haplotype window given an artificially high mapping quality
-        Haps::computeLikelihoods(haps, normal_reads, normal_liks, leftPos, rightPos, onHap, params);
+        computeLikelihoods(haps, normal_reads, normal_liks, leftPos, rightPos, onHap, params);
         LOG(logDEBUG) << "#basic haplotypes for comparison" << endl;
         for (size_t th=0;th<haps.size();th++) {
             const Haplotype & hap=haps[th];

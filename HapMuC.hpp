@@ -150,12 +150,14 @@ public:
       BOOST_FOREACH(X x, vec) { LOGP(logINFO) << x << " "; }
     }
     void print() {
-      LOG(logINFO) << "mut a0: ";print_veci(mut_a0);LOGP(logINFO) << endl;
-      LOG(logINFO) << "mut b0: ";print_veci(mut_b0);LOGP(logINFO) << endl;
-      LOG(logINFO) << "mut c0: ";print_veci(mut_c0);LOGP(logINFO) << endl;
-      LOG(logINFO) << "err a0: ";print_veci(err_a0);LOGP(logINFO) << endl;
-      LOG(logINFO) << "err b0: ";print_veci(err_b0);LOGP(logINFO) << endl;
-      LOG(logINFO) << "err c0: ";print_veci(err_c0);LOGP(logINFO) << endl;
+      LOG(logINFO) << "\tMutationModel:" << endl;
+      LOG(logINFO) << "\t\ta0: ";print_veci(mut_a0);LOGP(logINFO) << endl;
+      LOG(logINFO) << "\t\tb0: ";print_veci(mut_b0);LOGP(logINFO) << endl;
+      LOG(logINFO) << "\t\tc0: ";print_veci(mut_c0);LOGP(logINFO) << endl;
+      LOG(logINFO) << "\tErrorModel:" << endl;
+      LOG(logINFO) << "\t\ta0: ";print_veci(err_a0);LOGP(logINFO) << endl;
+      LOG(logINFO) << "\t\tb0: ";print_veci(err_b0);LOGP(logINFO) << endl;
+      LOG(logINFO) << "\t\tc0: ";print_veci(err_c0);LOGP(logINFO) << endl;
     }
 };
 
@@ -252,7 +254,7 @@ public:
     //    obsParams.print();
         LOG(logINFO) << "Model parameters: " << endl;
         hap3_params.print();
-        hap2_params.print();
+        //hap2_params.print();
     }
 
     int noIndelWindow, numOutputTopHap, minReadOverlap;

@@ -4,7 +4,7 @@ SEQANDIR=libs/seqan_library/
 BOOST=libs/boost_1_45_0_subset/
 
 CXX= g++
-CPPFLAGS= -D_IOLIB=2 -DMINREADS=2 -DLOGDEBUG -DDEBUGREADS #-DNDEBUG -DMMTEST
+CPPFLAGS= -D_IOLIB=2 -DMINREADS=2 #-DLOGDEBUG -DDEBUGREADS #-DNDEBUG -DMMTEST
 CXXFLAGS= -I$(SAMTOOLDIR) -I$(SEQANDIR) -I${BOOST} -I./ -Wno-deprecated -O3
 LDFLAGS= -L$(SAMTOOLDIR) -lbam -lz -lpthread
 SRCSHAPMUC=HapMuC.cpp Utils.cpp MutationModel.cpp HapBlock.cpp HaplotypeDistribution.cpp ObservationModelFB.cpp Haps.cpp Haps2.cpp EMBasic.cpp MutationCall.cpp

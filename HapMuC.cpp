@@ -658,7 +658,7 @@ int main(int argc, char *argv[])
   a.add<string>("mutationModelGamma", 'j', "hyper parameter for normal haplotype frequencies in mutation model.", false, "1.0,1.0");
 
   a.add<string>("errorModelAlpha", 'k', "hyper parameter for tumor haplotype frequencies in error model.", false, "1.0,1.0");
-  a.add<string>("errorModelBeta", 'l', "hyper parameter for error rates in error model.", false, "1.0,1.0");
+  a.add<string>("errorModelBeta", 'l', "hyper parameter for error rates in error model.", false, "1.0,10.0");
   a.add<string>("errorModelGamma", 'm', "hyper parameter for normal haplotype frequencies in error model.", false, "1.0,1.0");
 
   a.add<double>("pError", '\0', "probability of a read indel", false, 5e-4);

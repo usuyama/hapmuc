@@ -46,7 +46,7 @@ Outputs:
 
 ### Step3: mutation calling by HapMuC algorithm ###
 ```sh
-../../hapmuc -a tumor.bam -b normal.bam -f ../random_ref.fasta -w windows -o result/mc > results/log
+../../hapmuc -a tumor.bam -b normal.bam -f ../random_ref.fasta -w windows -o result/mc
 ```
 You can check the results in `results/mc.calls.txt`
 

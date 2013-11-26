@@ -109,7 +109,7 @@ namespace EMBasic {
         lb.ln_q_pi = ln_C + tmp;
         //
         lb.lower_bound = lb.ln_p_x_given_z + lb.ln_p_z_given_pi + lb.ln_p_pi - lb.ln_q_z - lb.ln_q_pi;
-        printf("lower_bound=%lf, ln_p_x_given_z=%lf, ln_p_z_given_pi=%lf, ln_p_pi=%lf, ln_q_z=%lf, ln_q_pi=%lf\n", lb.lower_bound, lb.ln_p_x_given_z, lb.ln_p_z_given_pi, lb.ln_p_pi, lb.ln_q_z, lb.ln_q_pi);
+        //printf("lower_bound=%lf, ln_p_x_given_z=%lf, ln_p_z_given_pi=%lf, ln_p_pi=%lf, ln_q_z=%lf, ln_q_pi=%lf\n", lb.lower_bound, lb.ln_p_x_given_z, lb.ln_p_z_given_pi, lb.ln_p_pi, lb.ln_q_z, lb.ln_q_pi);
         //
         LOG(logDEBUG) << "########" << endl << endl;
     }

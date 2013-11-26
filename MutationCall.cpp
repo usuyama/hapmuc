@@ -225,7 +225,7 @@ namespace MutationCall
         int tumor_count = (int)tumorReads.size();
         double bf2;
         LOG(logDEBUG) <<  "centerPos=" << candidateVariants.centerPos << endl;
-        candidateVariants.printAll();
+        //candidateVariants.printAll();
         double hap2_bf = -100;
         bool hap2_flag = true, hap3_flag = true;
         bool haps_size_error = false;

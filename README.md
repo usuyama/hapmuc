@@ -1,6 +1,6 @@
 HapMuC
 ======================
-HapMuC is a **somatic mutation caller**, which can utilize the information of hetero germline variants near candidate mutations. It takes a tumor bam and a normal bam as inputs, and generates a list of candidate somatic mutations.
+HapMuC is a **somatic mutation caller**, which can utilize the information of heterozygous germline variants near candidate mutations. It takes a tumor bam and a normal bam as inputs, and generates a list of candidate somatic mutations.
 
 How to build
 ----------
@@ -40,7 +40,7 @@ Outputs:
 * ./cand_somatic
     * Candidate somatic mutations, which passed the minimum criterion. (NOTE: you can set the parameters in `utils/search_variants.rb` )
 * ./cand_hetero_germline
-    * Hetero germline variants. Also, you can check the criterion in `utils/search_variants.rb`.
+    * Heterozygous germline variants. Also, you can check the criterion in `utils/search_variants.rb`.
 * ./windows
     * A list of candidate windows, which is generated based on the above two files using `bedtools window`.
 

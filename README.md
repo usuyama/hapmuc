@@ -38,9 +38,9 @@ sh ../../utils/make_windows.sh tumor.pileup normal.pileup ./
 ```
 Outputs:
 * ./cand_somatic
-    * Candidate somatic mutations, which passed the minimum criterion. (NOTE: you can set the parameters in `utils/search_variants.rb` )
+    * Candidate somatic mutations, which passed the minimum criteria. (NOTE: you can set the parameters in `utils/search_variants.rb` )
 * ./cand_hetero_germline
-    * Heterozygous germline variants. Also, you can check the criterion in `utils/search_variants.rb`.
+    * Heterozygous germline variants. Also, you can check the criteria in `utils/search_variants.rb`.
 * ./windows
     * A list of candidate windows, which is generated based on the above two files using `bedtools window`.
 

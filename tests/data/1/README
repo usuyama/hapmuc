@@ -1,0 +1,5 @@
+# simulated examples
+chrA:1436 a positive example with a hetero germline SNP nearby.
+chrB:2876 a negative example with a hetero germline SNP nearby.
+chrC:2234 an example without a hetero germline SNP nearby.
+* We can evaluate the position without using hetero germline variants anyway.

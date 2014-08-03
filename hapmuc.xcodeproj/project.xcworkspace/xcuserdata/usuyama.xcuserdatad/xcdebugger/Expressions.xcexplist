@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "BamReader::getSingleReads(std::string, int, int, int):BamReader.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "readBuffer">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ProfileHMM::viterbi():ProfileHMM.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "*max_it">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ProfileHMM::ProfileHMM(Haplotype const&amp;, std::string const&amp;, std::vector&lt;double, std::allocator&lt;double&gt; &gt; const&amp;, int, double, bool, bool, std::string):ProfileHMM.cpp">
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

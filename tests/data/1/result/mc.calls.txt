@@ -1,0 +1,4 @@
+chr	start	end	ref	obs	ref_count_tumor	obs_count_tumor	ref_count_normal	obs_count_normal	missrate_tumor	strandrate_tumor	missrate_normal	strandrate_normal	ref_bq_tumor	obs_bq_tumor	ref_bq_normal	obs_bq_normal	fisher	bf_without_snp	bf_with_snp	germline_snp_nearby	distance
+chrA	1436	1436	T	G	42	7	48	0	0.14285714285714285	0.42857142857142855	0	-	20.0	20.0	20.0	20.0	1.905934629259833	4.36283	6.50006	1495:G=>C	59
+chrB	2876	2876	G	C	43	7	49	0	0.14	0.7142857142857143	0	-	20.0	20.0	20.0	20.0	1.903797499201494	4.34526	-1.91728	2855:T=>G	21
+chrC	2234	2234	G	C	40	7	48	0	0.14893617021276595	0.42857142857142855	0	-	20.0	20.0	20.0	20.0	2.2447736606173563	4.54942	-	-	-	

@@ -1,0 +1,2 @@
+chr	start	end	ref	obs	ref_count_tumor	obs_count_tumor	ref_count_normal	obs_count_normal	missrate_tumor	strandrate_tumor	missrate_normal	strandrate_normal	ref_bq_tumor	obs_bq_tumor	ref_bq_normal	obs_bq_normal	fisher	bf_without_snp	bf_with_snp	germline_snp_nearby	distance
+chrB	1328	1328	-	GTC	39	6	39	0	0.15	0.16666666666666666	0	-	20.0	-	20.0	-	1.5518433871768549	4.77695	2.95792	1338:T=>G	10

@@ -1,0 +1,61 @@
+- 17:12:25.803 INFO: HapMuC ver1.1
+- 17:12:25.842 INFO: ************************* target: chrA 1436 T=>G *************************
+- 17:12:25.842 INFO: Fetching reads....
+- 17:12:25.843 INFO: Number of read pairs: 50
+- 17:12:25.843 INFO: Fetching reads....
+- 17:12:25.844 INFO: Number of read pairs: 50
+- 17:12:25.844 INFO: [1495 G=>C] was selected as the closest SNP.
+- 17:12:25.844 INFO: calculating alignment likelihoods...
+- 17:12:26.449 INFO: ==== MutationModel.estimate() ====
+- 17:12:26.449 INFO: ModelType: mutation
+- 17:12:26.451 INFO: ---- finished[12] ----
+- 17:12:26.451 INFO: lower bound = -747.382
+- 17:12:26.451 INFO: ==== MutationModel.estimate() ====
+- 17:12:26.451 INFO: ModelType: error
+- 17:12:26.452 INFO: ---- finished[11] ----
+- 17:12:26.452 INFO: lower bound = -753.882
+- 17:12:26.452 INFO: ==== MutationModel.estimate() ====
+- 17:12:26.452 INFO: ModelType: mutation
+- 17:12:26.453 INFO: ---- finished[4] ----
+- 17:12:26.453 INFO: lower bound = -829.835
+- 17:12:26.453 INFO: ==== MutationModel.estimate() ====
+- 17:12:26.453 INFO: ModelType: error
+- 17:12:26.453 INFO: ---- finished[4] ----
+- 17:12:26.453 INFO: lower bound = -834.198
+- 17:12:26.453 INFO: ************************* target: chrB 2876 G=>C *************************
+- 17:12:26.453 INFO: Fetching reads....
+- 17:12:26.454 INFO: Number of read pairs: 50
+- 17:12:26.454 INFO: Fetching reads....
+- 17:12:26.455 INFO: Number of read pairs: 50
+- 17:12:26.456 INFO: [2855 T=>G] was selected as the closest SNP.
+- 17:12:26.456 INFO: calculating alignment likelihoods...
+- 17:12:27.057 INFO: ==== MutationModel.estimate() ====
+- 17:12:27.057 INFO: ModelType: mutation
+- 17:12:27.058 INFO: ---- finished[6] ----
+- 17:12:27.058 INFO: lower bound = -683.984
+- 17:12:27.058 INFO: ==== MutationModel.estimate() ====
+- 17:12:27.058 INFO: ModelType: error
+- 17:12:27.059 INFO: ---- finished[5] ----
+- 17:12:27.059 INFO: lower bound = -682.067
+- 17:12:27.059 INFO: ==== MutationModel.estimate() ====
+- 17:12:27.059 INFO: ModelType: mutation
+- 17:12:27.060 INFO: ---- finished[4] ----
+- 17:12:27.060 INFO: lower bound = -913.76
+- 17:12:27.060 INFO: ==== MutationModel.estimate() ====
+- 17:12:27.060 INFO: ModelType: error
+- 17:12:27.061 INFO: ---- finished[4] ----
+- 17:12:27.061 INFO: lower bound = -918.106
+- 17:12:27.061 INFO: ************************* target: chrC 2234 G=>C *************************
+- 17:12:27.061 INFO: Fetching reads....
+- 17:12:27.062 INFO: Number of read pairs: 48
+- 17:12:27.062 INFO: Fetching reads....
+- 17:12:27.064 INFO: Number of read pairs: 48
+- 17:12:27.064 INFO: calculating alignment likelihoods...
+- 17:12:27.370 INFO: ==== MutationModel.estimate() ====
+- 17:12:27.370 INFO: ModelType: mutation
+- 17:12:27.371 INFO: ---- finished[5] ----
+- 17:12:27.371 INFO: lower bound = -652.733
+- 17:12:27.371 INFO: ==== MutationModel.estimate() ====
+- 17:12:27.371 INFO: ModelType: error
+- 17:12:27.371 INFO: ---- finished[4] ----
+- 17:12:27.371 INFO: lower bound = -657.283

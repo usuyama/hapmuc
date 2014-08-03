@@ -1,0 +1,8 @@
+*.o
+hapmuc
+.DS_Store
+.RData
+.Rhistory
+localfiles
+tmp/*
+real_test/*

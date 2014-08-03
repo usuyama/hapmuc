@@ -1,0 +1,697 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		122B029618D73E2F00C1D640 /* SingleRead.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 122B029418D73E2E00C1D640 /* SingleRead.cpp */; };
+		122B029818D73E6000C1D640 /* SingleRead.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 122B029418D73E2E00C1D640 /* SingleRead.cpp */; };
+		12AC9B7218BC14970060E975 /* History.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 12AC9B6F18BC14970060E975 /* History.cpp */; };
+		12AC9B7318BC14970060E975 /* History.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 12AC9B6F18BC14970060E975 /* History.cpp */; };
+		12AC9B7418BC14970060E975 /* OptimalDPPhaser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 12AC9B7018BC14970060E975 /* OptimalDPPhaser.cpp */; };
+		12AC9B7518BC14970060E975 /* OptimalDPPhaser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 12AC9B7018BC14970060E975 /* OptimalDPPhaser.cpp */; };
+		12AC9B7618BC14970060E975 /* Read.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 12AC9B7118BC14970060E975 /* Read.cpp */; };
+		12AC9B7718BC14970060E975 /* Read.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 12AC9B7118BC14970060E975 /* Read.cpp */; };
+		12DF892C18B72F520048E692 /* Alignment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 12DF890018B72F520048E692 /* Alignment.cpp */; };
+		12DF892D18B72F520048E692 /* BamReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 12DF890218B72F520048E692 /* BamReader.cpp */; };
+		12DF892E18B72F520048E692 /* BasicHaplotypeBuilder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 12DF890418B72F520048E692 /* BasicHaplotypeBuilder.cpp */; };
+		12DF892F18B72F520048E692 /* CandidateWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 12DF890618B72F520048E692 /* CandidateWindow.cpp */; };
+		12DF893018B72F520048E692 /* HaplotypeBuilder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 12DF890C18B72F520048E692 /* HaplotypeBuilder.cpp */; };
+		12DF893118B72F520048E692 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 12DF891118B72F520048E692 /* main.cpp */; };
+		12DF893218B72F520048E692 /* MutationCaller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 12DF891318B72F520048E692 /* MutationCaller.cpp */; };
+		12DF893318B72F520048E692 /* MutationModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 12DF891618B72F520048E692 /* MutationModel.cpp */; };
+		12DF893418B72F520048E692 /* PairedRead.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 12DF891918B72F520048E692 /* PairedRead.cpp */; };
+		12DF893518B72F520048E692 /* Parameters.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 12DF891B18B72F520048E692 /* Parameters.cpp */; };
+		12DF893618B72F520048E692 /* ProfileHMM.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 12DF891D18B72F520048E692 /* ProfileHMM.cpp */; };
+		12DF893718B72F520048E692 /* ReadsProfile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 12DF892118B72F520048E692 /* ReadsProfile.cpp */; };
+		12DF893818B72F520048E692 /* SamRead.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 12DF892418B72F520048E692 /* SamRead.cpp */; };
+		12DF893918B72F520048E692 /* Variant.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 12DF892718B72F520048E692 /* Variant.cpp */; };
+		12DF893A18B72F520048E692 /* VariantFromSAM.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 12DF892918B72F520048E692 /* VariantFromSAM.cpp */; };
+		12DF893E18B72F7D0048E692 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 12DF893C18B72F7D0048E692 /* main.cpp */; };
+		12DF894C18B72FC50048E692 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 12DF893C18B72F7D0048E692 /* main.cpp */; };
+		12DF894E18B72FC50048E692 /* Alignment.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 12DF890018B72F520048E692 /* Alignment.cpp */; };
+		12DF895018B72FC50048E692 /* BamReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 12DF890218B72F520048E692 /* BamReader.cpp */; };
+		12DF895218B72FC50048E692 /* BasicHaplotypeBuilder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 12DF890418B72F520048E692 /* BasicHaplotypeBuilder.cpp */; };
+		12DF895418B72FC50048E692 /* CandidateWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 12DF890618B72F520048E692 /* CandidateWindow.cpp */; };
+		12DF895918B72FC50048E692 /* HaplotypeBuilder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 12DF890C18B72F520048E692 /* HaplotypeBuilder.cpp */; };
+		12DF895F18B72FCF0048E692 /* MutationCaller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 12DF891318B72F520048E692 /* MutationCaller.cpp */; };
+		12DF896218B72FCF0048E692 /* MutationModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 12DF891618B72F520048E692 /* MutationModel.cpp */; };
+		12DF896318B72FCF0048E692 /* MutationModel.hpp in Sources */ = {isa = PBXBuildFile; fileRef = 12DF891718B72F520048E692 /* MutationModel.hpp */; };
+		12DF896518B72FCF0048E692 /* PairedRead.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 12DF891918B72F520048E692 /* PairedRead.cpp */; };
+		12DF896718B72FCF0048E692 /* Parameters.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 12DF891B18B72F520048E692 /* Parameters.cpp */; };
+		12DF896918B72FCF0048E692 /* ProfileHMM.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 12DF891D18B72F520048E692 /* ProfileHMM.cpp */; };
+		12DF896D18B72FCF0048E692 /* ReadsProfile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 12DF892118B72F520048E692 /* ReadsProfile.cpp */; };
+		12DF897018B72FCF0048E692 /* SamRead.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 12DF892418B72F520048E692 /* SamRead.cpp */; };
+		12DF897318B72FCF0048E692 /* Variant.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 12DF892718B72F520048E692 /* Variant.cpp */; };
+		12DF897518B72FCF0048E692 /* VariantFromSAM.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 12DF892918B72F520048E692 /* VariantFromSAM.cpp */; };
+		12DF899418B730360048E692 /* libgtest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 12DF898718B730210048E692 /* libgtest.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		12DF898418B730210048E692 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 12DF897818B730200048E692 /* gtest.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4539C8FF0EC27F6400A70F4C;
+			remoteInfo = "gtest-framework";
+		};
+		12DF898618B730210048E692 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 12DF897818B730200048E692 /* gtest.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 40C848FA101A209C0083642A;
+			remoteInfo = "gtest-static";
+		};
+		12DF898818B730210048E692 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 12DF897818B730200048E692 /* gtest.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 40C8490B101A217E0083642A;
+			remoteInfo = "gtest_main-static";
+		};
+		12DF898A18B730210048E692 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 12DF897818B730200048E692 /* gtest.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 40899F430FFA7184000B29AE;
+			remoteInfo = "gtest_unittest-framework";
+		};
+		12DF898C18B730210048E692 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 12DF897818B730200048E692 /* gtest.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 40C84987101A36850083642A;
+			remoteInfo = "gtest_unittest-static";
+		};
+		12DF898E18B730210048E692 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 12DF897818B730200048E692 /* gtest.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4089A0130FFACEFC000B29AE;
+			remoteInfo = "sample1_unittest-framework";
+		};
+		12DF899018B730210048E692 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 12DF897818B730200048E692 /* gtest.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 40C84997101A36A60083642A;
+			remoteInfo = "sample1_unittest-static";
+		};
+		12DF899218B7302D0048E692 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 12DF897818B730200048E692 /* gtest.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8D07F2BC0486CC7A007CD1D0;
+			remoteInfo = "gtest-framework";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		12DF88F218B72EE20048E692 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		12DF894118B72F930048E692 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		122B029418D73E2E00C1D640 /* SingleRead.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SingleRead.cpp; path = src/SingleRead.cpp; sourceTree = SOURCE_ROOT; };
+		122B029518D73E2F00C1D640 /* SingleRead.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SingleRead.h; path = src/SingleRead.h; sourceTree = SOURCE_ROOT; };
+		122B029718D73E4F00C1D640 /* src */ = {isa = PBXFileReference; lastKnownFileType = folder; path = src; sourceTree = SOURCE_ROOT; };
+		12AC9B6418BC13120060E975 /* real_test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = real_test.h; path = real_test/real_test.h; sourceTree = SOURCE_ROOT; };
+		12AC9B6F18BC14970060E975 /* History.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = History.cpp; path = src/haplotype_phaser/History.cpp; sourceTree = SOURCE_ROOT; };
+		12AC9B7018BC14970060E975 /* OptimalDPPhaser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OptimalDPPhaser.cpp; path = src/haplotype_phaser/OptimalDPPhaser.cpp; sourceTree = SOURCE_ROOT; };
+		12AC9B7118BC14970060E975 /* Read.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Read.cpp; path = src/haplotype_phaser/Read.cpp; sourceTree = SOURCE_ROOT; };
+		12DF88F418B72EE20048E692 /* hapmuc */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = hapmuc; sourceTree = BUILT_PRODUCTS_DIR; };
+		12DF890018B72F520048E692 /* Alignment.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Alignment.cpp; path = src/Alignment.cpp; sourceTree = SOURCE_ROOT; };
+		12DF890118B72F520048E692 /* Alignment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Alignment.h; path = src/Alignment.h; sourceTree = SOURCE_ROOT; };
+		12DF890218B72F520048E692 /* BamReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BamReader.cpp; path = src/BamReader.cpp; sourceTree = SOURCE_ROOT; };
+		12DF890318B72F520048E692 /* BamReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BamReader.h; path = src/BamReader.h; sourceTree = SOURCE_ROOT; };
+		12DF890418B72F520048E692 /* BasicHaplotypeBuilder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BasicHaplotypeBuilder.cpp; path = src/BasicHaplotypeBuilder.cpp; sourceTree = SOURCE_ROOT; };
+		12DF890518B72F520048E692 /* BasicHaplotypeBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BasicHaplotypeBuilder.h; path = src/BasicHaplotypeBuilder.h; sourceTree = SOURCE_ROOT; };
+		12DF890618B72F520048E692 /* CandidateWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CandidateWindow.cpp; path = src/CandidateWindow.cpp; sourceTree = SOURCE_ROOT; };
+		12DF890718B72F520048E692 /* CandidateWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CandidateWindow.h; path = src/CandidateWindow.h; sourceTree = SOURCE_ROOT; };
+		12DF890818B72F520048E692 /* CIGAR.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CIGAR.h; path = src/CIGAR.h; sourceTree = SOURCE_ROOT; };
+		12DF890918B72F520048E692 /* cmdline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cmdline.h; path = src/cmdline.h; sourceTree = SOURCE_ROOT; };
+		12DF890B18B72F520048E692 /* Haplotype.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Haplotype.hpp; path = src/Haplotype.hpp; sourceTree = SOURCE_ROOT; };
+		12DF890C18B72F520048E692 /* HaplotypeBuilder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = HaplotypeBuilder.cpp; path = src/HaplotypeBuilder.cpp; sourceTree = SOURCE_ROOT; };
+		12DF890D18B72F520048E692 /* HaplotypeBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HaplotypeBuilder.h; path = src/HaplotypeBuilder.h; sourceTree = SOURCE_ROOT; };
+		12DF890E18B72F520048E692 /* HaplotypePhaserUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HaplotypePhaserUtils.h; path = src/HaplotypePhaserUtils.h; sourceTree = SOURCE_ROOT; };
+		12DF890F18B72F520048E692 /* IRead.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IRead.h; path = src/IRead.h; sourceTree = SOURCE_ROOT; };
+		12DF891018B72F520048E692 /* log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = log.h; path = src/log.h; sourceTree = SOURCE_ROOT; };
+		12DF891118B72F520048E692 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = src/main.cpp; sourceTree = SOURCE_ROOT; };
+		12DF891218B72F520048E692 /* MD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MD.h; path = src/MD.h; sourceTree = SOURCE_ROOT; };
+		12DF891318B72F520048E692 /* MutationCaller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MutationCaller.cpp; path = src/MutationCaller.cpp; sourceTree = SOURCE_ROOT; };
+		12DF891418B72F520048E692 /* MutationCaller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MutationCaller.h; path = src/MutationCaller.h; sourceTree = SOURCE_ROOT; };
+		12DF891518B72F520048E692 /* MutationCallResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MutationCallResult.h; path = src/MutationCallResult.h; sourceTree = SOURCE_ROOT; };
+		12DF891618B72F520048E692 /* MutationModel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MutationModel.cpp; path = src/MutationModel.cpp; sourceTree = SOURCE_ROOT; };
+		12DF891718B72F520048E692 /* MutationModel.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = MutationModel.hpp; path = src/MutationModel.hpp; sourceTree = SOURCE_ROOT; };
+		12DF891818B72F520048E692 /* MyBam.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = MyBam.hpp; path = src/MyBam.hpp; sourceTree = SOURCE_ROOT; };
+		12DF891918B72F520048E692 /* PairedRead.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PairedRead.cpp; path = src/PairedRead.cpp; sourceTree = SOURCE_ROOT; };
+		12DF891A18B72F520048E692 /* PairedRead.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PairedRead.h; path = src/PairedRead.h; sourceTree = SOURCE_ROOT; };
+		12DF891B18B72F520048E692 /* Parameters.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Parameters.cpp; path = src/Parameters.cpp; sourceTree = SOURCE_ROOT; };
+		12DF891C18B72F520048E692 /* Parameters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Parameters.h; path = src/Parameters.h; sourceTree = SOURCE_ROOT; };
+		12DF891D18B72F520048E692 /* ProfileHMM.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ProfileHMM.cpp; path = src/ProfileHMM.cpp; sourceTree = SOURCE_ROOT; };
+		12DF891E18B72F520048E692 /* ProfileHMM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProfileHMM.h; path = src/ProfileHMM.h; sourceTree = SOURCE_ROOT; };
+		12DF891F18B72F520048E692 /* ProfileHMMUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProfileHMMUtils.h; path = src/ProfileHMMUtils.h; sourceTree = SOURCE_ROOT; };
+		12DF892018B72F520048E692 /* ReadIndelErrorModel.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ReadIndelErrorModel.hpp; path = src/ReadIndelErrorModel.hpp; sourceTree = SOURCE_ROOT; };
+		12DF892118B72F520048E692 /* ReadsProfile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ReadsProfile.cpp; path = src/ReadsProfile.cpp; sourceTree = SOURCE_ROOT; };
+		12DF892218B72F520048E692 /* ReadsProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ReadsProfile.h; path = src/ReadsProfile.h; sourceTree = SOURCE_ROOT; };
+		12DF892318B72F520048E692 /* ReadUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ReadUtils.h; path = src/ReadUtils.h; sourceTree = SOURCE_ROOT; };
+		12DF892418B72F520048E692 /* SamRead.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SamRead.cpp; path = src/SamRead.cpp; sourceTree = SOURCE_ROOT; };
+		12DF892518B72F520048E692 /* SamRead.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SamRead.h; path = src/SamRead.h; sourceTree = SOURCE_ROOT; };
+		12DF892618B72F520048E692 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Utils.h; path = src/Utils.h; sourceTree = SOURCE_ROOT; };
+		12DF892718B72F520048E692 /* Variant.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Variant.cpp; path = src/Variant.cpp; sourceTree = SOURCE_ROOT; };
+		12DF892818B72F520048E692 /* Variant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Variant.h; path = src/Variant.h; sourceTree = SOURCE_ROOT; };
+		12DF892918B72F520048E692 /* VariantFromSAM.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = VariantFromSAM.cpp; path = src/VariantFromSAM.cpp; sourceTree = SOURCE_ROOT; };
+		12DF892A18B72F520048E692 /* VariantFromSAM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VariantFromSAM.h; path = src/VariantFromSAM.h; sourceTree = SOURCE_ROOT; };
+		12DF892B18B72F520048E692 /* VariantUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VariantUtils.h; path = src/VariantUtils.h; sourceTree = SOURCE_ROOT; };
+		12DF893C18B72F7D0048E692 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = tests/src/main.cpp; sourceTree = SOURCE_ROOT; };
+		12DF893D18B72F7D0048E692 /* sim_test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sim_test.h; path = tests/src/sim_test.h; sourceTree = SOURCE_ROOT; };
+		12DF894318B72F930048E692 /* test */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = test; sourceTree = BUILT_PRODUCTS_DIR; };
+		12DF897818B730200048E692 /* gtest.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = gtest.xcodeproj; path = "tests/libs/gtest-1.7.0/xcode/gtest.xcodeproj"; sourceTree = "<group>"; };
+		12DF89BE18B7337E0048E692 /* haplotype_phaser */ = {isa = PBXFileReference; lastKnownFileType = folder; name = haplotype_phaser; path = src/haplotype_phaser; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		12DF88F118B72EE20048E692 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		12DF894018B72F930048E692 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				12DF899418B730360048E692 /* libgtest.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		12AC9B5E18BC11710060E975 /* sam */ = {
+			isa = PBXGroup;
+			children = (
+				12DF892418B72F520048E692 /* SamRead.cpp */,
+				12DF892518B72F520048E692 /* SamRead.h */,
+				12DF890818B72F520048E692 /* CIGAR.h */,
+				12DF891218B72F520048E692 /* MD.h */,
+				12DF892918B72F520048E692 /* VariantFromSAM.cpp */,
+				12DF892A18B72F520048E692 /* VariantFromSAM.h */,
+			);
+			name = sam;
+			sourceTree = "<group>";
+		};
+		12AC9B5F18BC11830060E975 /* profile_hmm */ = {
+			isa = PBXGroup;
+			children = (
+				12DF890018B72F520048E692 /* Alignment.cpp */,
+				12DF891D18B72F520048E692 /* ProfileHMM.cpp */,
+				12DF891E18B72F520048E692 /* ProfileHMM.h */,
+				12DF892018B72F520048E692 /* ReadIndelErrorModel.hpp */,
+				12DF890118B72F520048E692 /* Alignment.h */,
+			);
+			name = profile_hmm;
+			sourceTree = "<group>";
+		};
+		12AC9B6018BC11DC0060E975 /* read */ = {
+			isa = PBXGroup;
+			children = (
+				122B029418D73E2E00C1D640 /* SingleRead.cpp */,
+				122B029718D73E4F00C1D640 /* src */,
+				122B029518D73E2F00C1D640 /* SingleRead.h */,
+				12DF892118B72F520048E692 /* ReadsProfile.cpp */,
+				12DF892718B72F520048E692 /* Variant.cpp */,
+				12DF892818B72F520048E692 /* Variant.h */,
+				12DF892218B72F520048E692 /* ReadsProfile.h */,
+				12DF890F18B72F520048E692 /* IRead.h */,
+				12DF891918B72F520048E692 /* PairedRead.cpp */,
+				12DF891A18B72F520048E692 /* PairedRead.h */,
+			);
+			name = read;
+			sourceTree = "<group>";
+		};
+		12AC9B6118BC11F70060E975 /* misc */ = {
+			isa = PBXGroup;
+			children = (
+				12DF890618B72F520048E692 /* CandidateWindow.cpp */,
+				12DF891818B72F520048E692 /* MyBam.hpp */,
+				12DF891B18B72F520048E692 /* Parameters.cpp */,
+				12DF891C18B72F520048E692 /* Parameters.h */,
+				12DF890718B72F520048E692 /* CandidateWindow.h */,
+				12DF890218B72F520048E692 /* BamReader.cpp */,
+				12DF891018B72F520048E692 /* log.h */,
+				12DF890318B72F520048E692 /* BamReader.h */,
+			);
+			name = misc;
+			sourceTree = "<group>";
+		};
+		12AC9B6218BC12030060E975 /* haplotype */ = {
+			isa = PBXGroup;
+			children = (
+				12DF890418B72F520048E692 /* BasicHaplotypeBuilder.cpp */,
+				12DF890518B72F520048E692 /* BasicHaplotypeBuilder.h */,
+			);
+			name = haplotype;
+			sourceTree = "<group>";
+		};
+		12AC9B7818BC149D0060E975 /* haplotype_phaser */ = {
+			isa = PBXGroup;
+			children = (
+				12AC9B6F18BC14970060E975 /* History.cpp */,
+				12AC9B7018BC14970060E975 /* OptimalDPPhaser.cpp */,
+				12AC9B7118BC14970060E975 /* Read.cpp */,
+			);
+			name = haplotype_phaser;
+			sourceTree = "<group>";
+		};
+		12DF88EB18B72EE20048E692 = {
+			isa = PBXGroup;
+			children = (
+				12DF897818B730200048E692 /* gtest.xcodeproj */,
+				12DF88F618B72EE20048E692 /* hapmuc */,
+				12DF88F518B72EE20048E692 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		12DF88F518B72EE20048E692 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				12DF88F418B72EE20048E692 /* hapmuc */,
+				12DF894318B72F930048E692 /* test */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		12DF88F618B72EE20048E692 /* hapmuc */ = {
+			isa = PBXGroup;
+			children = (
+				12AC9B7818BC149D0060E975 /* haplotype_phaser */,
+				12AC9B6218BC12030060E975 /* haplotype */,
+				12AC9B6118BC11F70060E975 /* misc */,
+				12AC9B5F18BC11830060E975 /* profile_hmm */,
+				12AC9B5E18BC11710060E975 /* sam */,
+				12DF89CB18B735F80048E692 /* utils */,
+				12DF893B18B72F6C0048E692 /* test */,
+				12DF89BE18B7337E0048E692 /* haplotype_phaser */,
+				12DF890918B72F520048E692 /* cmdline.h */,
+				12DF890B18B72F520048E692 /* Haplotype.hpp */,
+				12DF890C18B72F520048E692 /* HaplotypeBuilder.cpp */,
+				12DF890D18B72F520048E692 /* HaplotypeBuilder.h */,
+				12AC9B6018BC11DC0060E975 /* read */,
+				12DF891118B72F520048E692 /* main.cpp */,
+				12DF891318B72F520048E692 /* MutationCaller.cpp */,
+				12DF891418B72F520048E692 /* MutationCaller.h */,
+				12DF891518B72F520048E692 /* MutationCallResult.h */,
+				12DF891618B72F520048E692 /* MutationModel.cpp */,
+				12DF891718B72F520048E692 /* MutationModel.hpp */,
+			);
+			path = hapmuc;
+			sourceTree = "<group>";
+		};
+		12DF893B18B72F6C0048E692 /* test */ = {
+			isa = PBXGroup;
+			children = (
+				12AC9B6418BC13120060E975 /* real_test.h */,
+				12DF893C18B72F7D0048E692 /* main.cpp */,
+				12DF893D18B72F7D0048E692 /* sim_test.h */,
+			);
+			name = test;
+			sourceTree = "<group>";
+		};
+		12DF897918B730200048E692 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				12DF898518B730210048E692 /* gtest.framework */,
+				12DF898718B730210048E692 /* libgtest.a */,
+				12DF898918B730210048E692 /* libgtest_main.a */,
+				12DF898B18B730210048E692 /* gtest_unittest-framework */,
+				12DF898D18B730210048E692 /* gtest_unittest */,
+				12DF898F18B730210048E692 /* sample1_unittest-framework */,
+				12DF899118B730210048E692 /* sample1_unittest-static */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		12DF89CB18B735F80048E692 /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				12DF891F18B72F520048E692 /* ProfileHMMUtils.h */,
+				12DF890E18B72F520048E692 /* HaplotypePhaserUtils.h */,
+				12DF892B18B72F520048E692 /* VariantUtils.h */,
+				12DF892618B72F520048E692 /* Utils.h */,
+				12DF892318B72F520048E692 /* ReadUtils.h */,
+			);
+			name = utils;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		12DF88F318B72EE20048E692 /* hapmuc */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 12DF88FD18B72EE20048E692 /* Build configuration list for PBXNativeTarget "hapmuc" */;
+			buildPhases = (
+				12DF88F018B72EE20048E692 /* Sources */,
+				12DF88F118B72EE20048E692 /* Frameworks */,
+				12DF88F218B72EE20048E692 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = hapmuc;
+			productName = hapmuc;
+			productReference = 12DF88F418B72EE20048E692 /* hapmuc */;
+			productType = "com.apple.product-type.tool";
+		};
+		12DF894218B72F930048E692 /* test */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 12DF894918B72F930048E692 /* Build configuration list for PBXNativeTarget "test" */;
+			buildPhases = (
+				12DF893F18B72F930048E692 /* Sources */,
+				12DF894018B72F930048E692 /* Frameworks */,
+				12DF894118B72F930048E692 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				12DF899318B7302D0048E692 /* PBXTargetDependency */,
+			);
+			name = test;
+			productName = test;
+			productReference = 12DF894318B72F930048E692 /* test */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		12DF88EC18B72EE20048E692 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = "Univ. of Tokyo";
+			};
+			buildConfigurationList = 12DF88EF18B72EE20048E692 /* Build configuration list for PBXProject "hapmuc" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 12DF88EB18B72EE20048E692;
+			productRefGroup = 12DF88F518B72EE20048E692 /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 12DF897918B730200048E692 /* Products */;
+					ProjectRef = 12DF897818B730200048E692 /* gtest.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				12DF88F318B72EE20048E692 /* hapmuc */,
+				12DF894218B72F930048E692 /* test */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		12DF898518B730210048E692 /* gtest.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = gtest.framework;
+			remoteRef = 12DF898418B730210048E692 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		12DF898718B730210048E692 /* libgtest.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libgtest.a;
+			remoteRef = 12DF898618B730210048E692 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		12DF898918B730210048E692 /* libgtest_main.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libgtest_main.a;
+			remoteRef = 12DF898818B730210048E692 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		12DF898B18B730210048E692 /* gtest_unittest-framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = "gtest_unittest-framework";
+			remoteRef = 12DF898A18B730210048E692 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		12DF898D18B730210048E692 /* gtest_unittest */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = gtest_unittest;
+			remoteRef = 12DF898C18B730210048E692 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		12DF898F18B730210048E692 /* sample1_unittest-framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = "sample1_unittest-framework";
+			remoteRef = 12DF898E18B730210048E692 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		12DF899118B730210048E692 /* sample1_unittest-static */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = "sample1_unittest-static";
+			remoteRef = 12DF899018B730210048E692 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXSourcesBuildPhase section */
+		12DF88F018B72EE20048E692 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				12DF892C18B72F520048E692 /* Alignment.cpp in Sources */,
+				12DF892D18B72F520048E692 /* BamReader.cpp in Sources */,
+				12DF892E18B72F520048E692 /* BasicHaplotypeBuilder.cpp in Sources */,
+				12DF892F18B72F520048E692 /* CandidateWindow.cpp in Sources */,
+				12DF893018B72F520048E692 /* HaplotypeBuilder.cpp in Sources */,
+				12DF893118B72F520048E692 /* main.cpp in Sources */,
+				12DF893218B72F520048E692 /* MutationCaller.cpp in Sources */,
+				12DF893318B72F520048E692 /* MutationModel.cpp in Sources */,
+				12DF893418B72F520048E692 /* PairedRead.cpp in Sources */,
+				12DF893518B72F520048E692 /* Parameters.cpp in Sources */,
+				12DF893618B72F520048E692 /* ProfileHMM.cpp in Sources */,
+				12DF893718B72F520048E692 /* ReadsProfile.cpp in Sources */,
+				12DF893818B72F520048E692 /* SamRead.cpp in Sources */,
+				12DF893918B72F520048E692 /* Variant.cpp in Sources */,
+				12DF893A18B72F520048E692 /* VariantFromSAM.cpp in Sources */,
+				12DF893E18B72F7D0048E692 /* main.cpp in Sources */,
+				12AC9B7218BC14970060E975 /* History.cpp in Sources */,
+				12AC9B7418BC14970060E975 /* OptimalDPPhaser.cpp in Sources */,
+				12AC9B7618BC14970060E975 /* Read.cpp in Sources */,
+				122B029618D73E2F00C1D640 /* SingleRead.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		12DF893F18B72F930048E692 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				122B029818D73E6000C1D640 /* SingleRead.cpp in Sources */,
+				12DF895F18B72FCF0048E692 /* MutationCaller.cpp in Sources */,
+				12DF896218B72FCF0048E692 /* MutationModel.cpp in Sources */,
+				12DF896318B72FCF0048E692 /* MutationModel.hpp in Sources */,
+				12DF896518B72FCF0048E692 /* PairedRead.cpp in Sources */,
+				12DF896718B72FCF0048E692 /* Parameters.cpp in Sources */,
+				12DF896918B72FCF0048E692 /* ProfileHMM.cpp in Sources */,
+				12DF896D18B72FCF0048E692 /* ReadsProfile.cpp in Sources */,
+				12DF897018B72FCF0048E692 /* SamRead.cpp in Sources */,
+				12DF897318B72FCF0048E692 /* Variant.cpp in Sources */,
+				12DF897518B72FCF0048E692 /* VariantFromSAM.cpp in Sources */,
+				12DF894C18B72FC50048E692 /* main.cpp in Sources */,
+				12DF894E18B72FC50048E692 /* Alignment.cpp in Sources */,
+				12DF895018B72FC50048E692 /* BamReader.cpp in Sources */,
+				12DF895218B72FC50048E692 /* BasicHaplotypeBuilder.cpp in Sources */,
+				12DF895418B72FC50048E692 /* CandidateWindow.cpp in Sources */,
+				12DF895918B72FC50048E692 /* HaplotypeBuilder.cpp in Sources */,
+				12AC9B7318BC14970060E975 /* History.cpp in Sources */,
+				12AC9B7518BC14970060E975 /* OptimalDPPhaser.cpp in Sources */,
+				12AC9B7718BC14970060E975 /* Read.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		12DF899318B7302D0048E692 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "gtest-framework";
+			targetProxy = 12DF899218B7302D0048E692 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		12DF88FB18B72EE20048E692 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++98";
+				CLANG_CXX_LIBRARY = "libstdc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu89;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+					"LOGDEBUG=1",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"/Users/usuyama/codes/hapmuc/libs/samtools-0.1.19",
+					"/Users/usuyama/codes/hapmuc/libs/boost_1_45_0_subset/**",
+				);
+				LIBRARY_SEARCH_PATHS = "/Users/usuyama/codes/hapmuc/libs/samtools-0.1.19";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"-lz",
+					"-lbam",
+					"-lpthread",
+				);
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		12DF88FC18B72EE20048E692 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++98";
+				CLANG_CXX_LIBRARY = "libstdc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu89;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"/Users/usuyama/codes/hapmuc/libs/samtools-0.1.19",
+					"/Users/usuyama/codes/hapmuc/libs/boost_1_45_0_subset/**",
+				);
+				LIBRARY_SEARCH_PATHS = "/Users/usuyama/codes/hapmuc/libs/samtools-0.1.19";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				OTHER_LDFLAGS = (
+					"-lz",
+					"-lbam",
+					"-lpthread",
+				);
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		12DF88FE18B72EE20048E692 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		12DF88FF18B72EE20048E692 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		12DF894A18B72F930048E692 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		12DF894B18B72F930048E692 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		12DF88EF18B72EE20048E692 /* Build configuration list for PBXProject "hapmuc" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				12DF88FB18B72EE20048E692 /* Debug */,
+				12DF88FC18B72EE20048E692 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		12DF88FD18B72EE20048E692 /* Build configuration list for PBXNativeTarget "hapmuc" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				12DF88FE18B72EE20048E692 /* Debug */,
+				12DF88FF18B72EE20048E692 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		12DF894918B72F930048E692 /* Build configuration list for PBXNativeTarget "test" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				12DF894A18B72F930048E692 /* Debug */,
+				12DF894B18B72F930048E692 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 12DF88EC18B72EE20048E692 /* Project object */;
+}

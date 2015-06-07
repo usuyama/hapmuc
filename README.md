@@ -2,8 +2,6 @@ HapMuC
 ======================
 HapMuC is a **somatic mutation caller**, which can utilize the information of heterozygous germline variants near candidate mutations. It takes a tumor bam and a normal bam as inputs, and generates a list of candidate somatic mutations.
 
-[![Build Status](https://travis-ci.org/usuyama/hapmuc.png?branch=master)](https://travis-ci.org/usuyama/hapmuc)
-
 How to build
 ----------
 ### Preliminary ###

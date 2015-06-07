@@ -1,6 +1,0 @@
-language: cpp
-compiler: gcc
-before_install: make dependencies
-install:  make
-before_script: cd tests;make dependencies
-script: make test
